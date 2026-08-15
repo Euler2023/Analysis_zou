@@ -1,0 +1,60 @@
+{
+  "title": "数学分析（上册）",
+  "author": "邹应",
+  "language": "zh-CN",
+  "template": "Qbook",
+  "engine": "XeLaTeX",
+  "source_pdf": "../../input/Analysis_1_zou/Analysis_1_zou.pdf",
+  "source_markdown_dir": "work",
+  "source_markdown_files": [
+    "frontmatter.normalized.md",
+    "chapter01.normalized.md", "chapter02.normalized.md",
+    "chapter03.normalized.md", "chapter04.normalized.md",
+    "chapter05.normalized.md", "chapter06.normalized.md",
+    "chapter07.normalized.md", "chapter08.normalized.md",
+    "chapter09.normalized.md", "chapter10.normalized.md",
+    "symbol_index.normalized.md", "term_index.normalized.md"
+  ],
+  "source_markdown_count": 13,
+  "raw_source_markdown_dir": "../../input/Analysis_1_zou/split_md",
+  "raw_source_markdown_files": [
+    "frontmatter.md",
+    "chapter01.md", "chapter02.md", "chapter03.md", "chapter04.md",
+    "chapter05.md", "chapter06.md", "chapter07.md", "chapter08.md",
+    "chapter09.md", "chapter10.md", "symbol_index.md", "term_index.md"
+  ],
+  "source_images": 70,
+  "modules": [
+    "tex/frontmatter.tex", "tex/chapter01.tex", "tex/chapter02.tex",
+    "tex/chapter03.tex", "tex/chapter04.tex", "tex/chapter05.tex",
+    "tex/chapter06.tex", "tex/chapter07.tex", "tex/chapter08.tex",
+    "tex/chapter09.tex", "tex/chapter10.tex", "tex/symbol_index.tex",
+    "tex/term_index.tex"
+  ],
+  "driver": "main_driver.tex",
+  "output_pdf": "main_driver.pdf",
+  "output_pages": 592,
+  "observed_tex_counts": {
+    "chapter_section_commands": 279,
+    "semantic_boxes": 544,
+    "proof_environments": 200,
+    "exercise_environments": 41,
+    "figures": 70,
+    "display_math_blocks": 3103,
+    "labels": 0,
+    "citations": 0
+  },
+  "audit": {
+    "compiles": true,
+    "basic_fidelity_check_passed": true,
+    "strict_fidelity_passed": false,
+    "static_check_passed": true,
+    "overflow_check_passed": true,
+    "overflow_boxes_over_5pt": 0,
+    "missing_character_warnings": 0,
+    "source_pdf_internal_links": 0,
+    "generated_pdf_internal_links": 211,
+    "pdf_link_result": "not comparable"
+  },
+  "generated_at": "2026-07-17T00:30:34+08:00"
+}

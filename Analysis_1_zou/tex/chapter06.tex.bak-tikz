@@ -1,0 +1,2963 @@
+\chapter{一元实值函数的导数}
+
+这一章我们介绍一元实值函数的导数概念.研究了可导函数的基本性质及导数在函数的单调性、凸凹性研究及不定型极限计算中的应用.
+
+\section{导数的定义}
+
+\subsection{概念的引入}
+
+在物理学中，我们经常要研究质点的运动。假设一质点 \(M\) 在某一段时间 \(I\) 内的运动轨迹是一直线 \(l\)。在 \(l\) 上取定一点 \(O\) 作为原点。该质点在时刻 \(t\in I\) 时相对于 \(O\) 的位置记为 \(f(t)\)。于是我们得到一函数 \(f:I\to\R\)，显然它描述了此质点 \(M\) 在此直线 \(l\) 上的运动规律。
+
+假设 \(t_0,t\in I\)。则 \(\dfrac{f(t)-f(t_0)}{t-t_0}\) 就是质点 \(M\) 在 \(t_0\) 与 \(t\) 时间间隔之内的平均速度。当质点 \(M\) 不是作匀速运动时，\(\dfrac{f(t)-f(t_0)}{t-t_0}\) 就不是一个常值，因此它不能反映质点在时刻 \(t_0\) 时的瞬时速度。
+
+为了计算此质点在 \(t_0\) 时的瞬时速度，自然我们应该让 \(t\to t_0\)，即求下述形式的极限
+\[
+\lim_{t\to t_0}\frac{f(t)-f(t_0)}{t-t_0}.
+\]
+在自然科学的许多实际和理论问题中都涉及到类似这种形式的极限。这种形式的极限就是下面我们介绍的函数导数的概念。
+
+从历史上看，函数导数的概念本质上是由 Cauchy 在 1823 年首先提出来的。下面我们就来介绍 Cauchy 导数的定义。
+
+\subsection{有限导数}
+
+\begin{mydef*}{}
+
+	设 \(X\subset\R\) 是任一非空集合。\(a\in X\) 是 \(X\) 的一聚点。\(f:X\to\R\) 是任一函数。
+
+	\begin{enumerate}[label=\arabic*)]
+		\item 我们称函数 \(f\) 在 \(a\) 处可导，如果极限
+		\[
+		\lim_{x\to a}\frac{f(x)-f(a)}{x-a}
+		\]
+		存在并且有限。此极限称为 \(f\) 在 \(a\) 处的导数，记为 \(f'(a)\) 或 \(\dfrac{df(a)}{dx}\)。因此
+		\[
+		f'(a)=\frac{df(a)}{dx}=\lim_{x\to a}\frac{f(x)-f(a)}{x-a}.
+		\]
+
+		\item 我们称函数 \(f\) 在 \(a\) 处右可导，如果 \(a\) 是 \(X\) 的右侧聚点，并且右极限
+		\[
+		\lim_{x\to a^+}\frac{f(x)-f(a)}{x-a}
+		\]
+		存在且有限。此极限称为 \(f\) 在 \(a\) 处的右导数，记为 \(f'(a^+)\)。因此
+		\[
+		f'(a^+)=\lim_{x\to a^+}\frac{f(x)-f(a)}{x-a}.
+		\]
+
+		\item 我们称函数 \(f\) 在 \(a\) 处左可导，如果 \(a\) 是 \(X\) 的左侧聚点，并且左极限
+		\[
+		\lim_{x\to a^-}\frac{f(x)-f(a)}{x-a}
+		\]
+		存在且有限。此极限称为 \(f\) 在 \(a\) 处的左导数，记为 \(f'(a^-)\)。因此
+		\[
+		f'(a^-)=\lim_{x\to a^-}\frac{f(x)-f(a)}{x-a}.
+		\]
+	\end{enumerate}
+
+\end{mydef*}
+
+函数 \(f\) 在一点 \(a\) 处的导数 \(f'(a)\) 除了具有上述的物理意义外，还有它的明显的几何意义。
+
+\textbf{导数的几何意义}\quad 在平面直角坐标系 \(\{O;x,y\}\) 内，我们用 \(\Gamma\) 表示函数 \(f\) 的曲线。\(M_0(a,f(a))\) 是 \(\Gamma\) 上的一定点，\(M(x,f(x))\) 是 \(\Gamma\) 上的一动点。联结 \(M_0\) 与 \(M\) 的割线 \(M_0M\) 的斜率就是 \(\dfrac{f(x)-f(a)}{x-a}\)。因此函数 \(f\) 在 \(a\) 处可导，表示割线 \(M_0M\) 当点 \(M\) 沿 \(\Gamma\) 趋向于 \(M_0\) 时有极限直线 \(T\) 存在，并且此极限直线 \(T\) 的斜率等于 \(f'(a)\)。我们称 \(T\) 为 \(\Gamma\) 在 \(M_0\) 处的切线。
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[
+	width=.72\linewidth,
+	height=.72\textheight,
+	keepaspectratio
+	]{_page_270_Figure_1.jpeg}
+	\caption{}
+	\label{fig:6-1}
+\end{figure}
+
+如果 \(f\) 在 \(a\) 处右（左）可导，则我们称函数 \(f\) 的曲线 \(\Gamma\) 在 \(M_0(a,f(a))\) 处有右（左）切线 \(T\ (T')\)。
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[
+	width=.72\linewidth,
+	height=.72\textheight,
+	keepaspectratio
+	]{_page_270_Figure_4.jpeg}
+	\caption{}
+	\label{fig:6-2}
+\end{figure}
+
+若 \(f\) 在 \(a\) 处可导，并且 \(f'(a)=0\)，则曲线 \(\Gamma\) 在 \(M_0\) 处的切线 \(T\) 平行于 \(x\) 轴。
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[
+	width=.72\linewidth,
+	height=.72\textheight,
+	keepaspectratio
+	]{_page_271_Figure_0.jpeg}
+	\caption{}
+	\label{fig:6-3}
+\end{figure}
+
+关于函数的导数与单侧导数之间的联系，我们有下述定理。
+
+\begin{mythm}{}{derivative-one-sided-derivatives}
+
+	设 \(f:X\to\R\) 是任一函数，\(a\in X\) 是 \(X\) 的一个双侧聚点。\(f\) 在 \(a\) 处可导的充分必要条件是：\(f\) 在 \(a\) 处左、右可导，并且 \(f'(a^-)=f'(a^+)\)。这时
+	\[
+	f'(a^-)=f'(a^+)=f'(a).
+	\]
+
+\end{mythm}
+
+\begin{proof}
+
+	直接由\rthm{thm:limit-equals-one-sided-limits} 推出。
+
+\end{proof}
+
+\subsection{可导性的另一表示法}
+
+\begin{mythm}{}{caratheodory-derivative}
+
+	设 \(f:X\to\R\) 是任一函数，\(a\in X\) 是 \(X\) 的一聚点。\(f\) 在 \(a\) 处可导的充分必要条件是：存在一个函数 \(\varphi:X\to\R\) 使得
+
+	\begin{enumerate}[label=\arabic*)]
+		\item \(f(x)-f(a)=\varphi(x)(x-a),\ \forall\,x\in X\)；
+
+		\item \(\varphi\) 在 \(a\) 处连续，
+	\end{enumerate}
+
+	这时 \(f'(a)=\varphi(a)\)。
+
+\end{mythm}
+
+\begin{proof}
+
+	必要性 设 \(f\) 在 \(a\) 处可导，于是由定义，我们有
+	\[
+	f'(a)=\lim_{x\to a}\frac{f(x)-f(a)}{x-a}.
+	\]
+	令
+	\[
+	\varepsilon(x)=\frac{f(x)-f(a)}{x-a}-f'(a),\quad\forall\,x\in X-\{a\},
+	\]
+	则 \(\lim_{x\to a}\varepsilon(x)=0\)。我们定义函数 \(\varphi:X\to\R\) 如下：
+	\[
+	\varphi(x)=f'(a)+\varepsilon(x),\quad\forall\,x\in X-\{a\},\qquad\varphi(a)=f'(a).
+	\]
+	则 \(\varphi\) 在 \(a\) 处连续，并且
+	\[
+	f(x)-f(a)=\varphi(x)(x-a),\quad\forall\,x\in X,
+	\]
+	\[
+	f'(a)=\varphi(a).
+	\]
+	充分性 设存在满足定理条件 1) 与 2) 的函数 \(\varphi:X\to\R\)，那末
+	\[
+	\frac{f(x)-f(a)}{x-a}=\varphi(x),\quad\forall\,x\in X-\{a\}.
+	\]
+	由 \(\varphi\) 在 \(a\) 处的连续性推得
+	\[
+	\lim_{x\to a}\frac{f(x)-f(a)}{x-a}=\lim_{x\to a}\varphi(x)=\varphi(a).
+	\]
+	此即表明 \(f\) 在 \(a\) 处可导，并且 \(f'(a)=\varphi(a)\)。
+
+\end{proof}
+
+\begin{mycor*}{}
+
+	若函数 \(f:X\to\R\) 在 \(a\) 处可导，则 \(f\) 在 \(a\) 处连续。
+
+\end{mycor*}
+
+\begin{proof}
+
+	因为 \(f\) 在 \(a\) 处可导，故存在函数 \(\varphi:X\to\R\) 使得
+	\[
+	f(x)-f(a)=\varphi(x)(x-a),\quad\forall\,x\in X,\quad\varphi\ \text{在}\ a\ \text{处连续}.
+	\]
+	令 \(x\to a\) 立即得到
+	\[
+	\lim_{x\to a}f(x)=f(a),
+	\]
+	因此 \(f\) 在 \(a\) 处连续。
+
+\end{proof}
+
+\textbf{附注}\quad 我们可以把\rthm{thm:caratheodory-derivative} 当作函数 \(f\) 在 \(a\) 处可导的定义，Carathéodory 在他的著作（Theory of Functions of a Complex Variable, vol.1 Chelsera, New York, 1954）中就是这样定义函数可导及导数的。我们可以称他的定义为 Carathéodory 导数定义以区别于 Cauchy 导数定义。
+
+由于 \(\dfrac{f(x)-f(a)}{x-a}=\varphi(x)\) 正是联结函数 \(f\) 的曲线 \(\Gamma\) 上两点 \((a,f(a))\) 与 \((x,f(x))\) 的割线的斜率，故 Carathéodory 导数定义强调了此割线以连续方式接近 \(\Gamma\) 在 \((a,f(a))\) 处的切线。
+
+另一方面，Carathéodory 导数定义正像上述推论所指出的，深刻揭示了在一点可导的函数的重要内在性质——函数在可导点处连续。
+
+以后我们将看到，利用\rthm{thm:caratheodory-derivative} 或 Carathéodory 导数定义证明微分学的许多重要定理要比按 Cauchy 导数定义去证明更方便，论述更简洁。
+
+下面我们看几个可导函数的例子。
+
+\begin{sourceexample}{1}
+
+	证明：\(\forall\,n\in\N\)，幂函数 \(x\longmapsto f(x)=x^n\)，\(x\in\R\) 在任一点 \(a\in\R\) 处可导，并且
+	\[
+	f'(a)=na^{n-1}.
+	\]
+	事实上，由于 \(\forall\,x\in\R\)，
+	\[
+	x^n-a^n=(x-a)(x^{n-1}+x^{n-2}a+\cdots+xa^{n-2}+a^{n-1}).
+	\]
+	所以对 \(x\neq a\)，
+	\[
+	\frac{x^n-a^n}{x-a}=x^{n-1}+x^{n-2}a+\cdots+xa^{n-2}+a^{n-1}.
+	\]
+	从而
+	\[
+	\lim_{x\to a}\frac{x^n-a^n}{x-a}=\lim_{x\to a}(x^{n-1}+x^{n-2}a+\cdots+xa^{n-2}+a^{n-1})=na^{n-1}.
+	\]
+	因此 \(f\) 在 \(a\) 处可导，并且
+	\[
+	f'(a)=na^{n-1}.
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{2}
+
+	设函数 \(f:\R\to\R\) 定义如下：
+	\[
+	f(x)=\begin{cases} x^p\sin\dfrac1x, & x\neq0, \\ 0, & x=0 \end{cases}\quad(p>1).
+	\]
+	证明：\(f\) 在 \(x=0\) 处可导，并且 \(f'(0)=0\)。
+
+	事实上，\(\forall\,x\neq0\)，
+	\[
+	\lim_{x\to0}\frac{f(x)-f(0)}x=\lim_{x\to0}x^{p-1}\sin\frac1x=0.
+	\]
+	因此 \(f\) 在 \(x=0\) 处可导，并且
+	\[
+	f'(0)=0.
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{3}
+
+	证明：函数 \(x\longmapsto f(x)=|x|\)，\(x\in\R\) 在 \(x=0\) 处左、右可导，但在 \(x=0\) 处不可导。
+
+	事实上，这时我们有
+	\[
+	\lim_{x\to0^-}\frac{f(x)-f(0)}{x-0}=\lim_{x\to0^-}\frac{-x}{x}=-1,
+	\]
+	\[
+	\lim_{x\to0^+}\frac{f(x)-f(0)}{x-0}=\lim_{x\to0^+}\frac{x}{x}=1.
+	\]
+	故 \(f\) 在 \(x=0\) 处左、右可导，并且 \(f'(0^-)=-1\)，\(f'(0^+)=1\)。由于 \(f'(0^+)\neq f'(0^-)\)，故 \(f\) 在 \(x=0\) 处不可导。
+
+\end{sourceexample}
+
+\subsection{无穷大导数}
+
+\begin{mydef*}{}
+
+	设 \(f:X\to\R\) 是任一函数，\(a\in X\) 是 \(X\) 的一聚点，我们称 \(f\) 在 \(a\) 处有正（负）无穷大导数，记为 \(f'(a)=+\infty\ (-\infty)\)，如果
+	\[
+	\lim_{x\to a}\frac{f(x)-f(a)}{x-a}=+\infty\ (-\infty).
+	\]
+
+\end{mydef*}
+
+类似地，我们可以定义下述四种类型的正负无穷大导数：\(f'(a^+)=+\infty\)，\(f'(a^+)=-\infty\)，\(f'(a^-)=+\infty\)，\(f'(a^-)=-\infty\)。
+
+\begin{sourceexample}{4}
+
+	证明：对符号函数 \(x\longmapsto\operatorname{sgn}(x)\)，\(x\in\R\) 有
+	\[
+	\operatorname{sgn}'(0^+)=+\infty,\qquad\operatorname{sgn}'(0^-)=+\infty.
+	\]
+	事实上，
+	\[
+	\lim_{x\to0^+}\frac{\operatorname{sgn}(x)-\operatorname{sgn}(0)}{x-0}=\lim_{x\to0^+}\frac{1-0}{x}=+\infty,
+	\]
+	\[
+	\lim_{x\to0^-}\frac{\operatorname{sgn}(x)-\operatorname{sgn}(0)}{x-0}=\lim_{x\to0^-}\frac{-1-0}{x}=+\infty.
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{5}
+
+	证明：对函数 \(x\longmapsto f(x)=x^{\frac23}\)，\(x\in\R\) 有
+	\[
+	f'(0^+)=+\infty,\qquad f'(0^-)=-\infty.
+	\]
+	事实上
+	\[
+	\lim_{x\to0^+}\frac{f(x)-f(0)}{x-0}=\lim_{x\to0^+}\frac{x^{\frac23}}{x}=\lim_{x\to0^+}\frac1{x^{\frac13}}=+\infty,
+	\]
+	\[
+	\lim_{x\to0^-}\frac{f(x)-f(0)}{x-0}=\lim_{x\to0^-}\frac{x^{\frac23}}{x}=\lim_{x\to0^-}\frac1{x^{\frac13}}=-\infty.
+	\]
+	因此 \(f'(0^+)=+\infty\)，\(f'(0^-)=-\infty\)。
+
+\end{sourceexample}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[
+	width=.72\linewidth,
+	height=.72\textheight,
+	keepaspectratio
+	]{_page_275_Figure_1.jpeg}
+	\caption{}
+	\label{fig:6-4}
+\end{figure}
+
+\subsection{导函数与高阶导数}
+
+\begin{mydef*}{}
+
+	设 \(f:X\to\R\) 是任一函数，\(Y\subset X\) 且 \(Y\neq\varnothing\)。
+
+	\begin{enumerate}[label=\arabic*)]
+		\item 若 \(f\) 在 \(Y\) 的每一点 \(x\) 处可导，则我们称 \(f\) 在 \(Y\) 上可导。函数 \(f':Y\to\R\)，它定义为
+		\[
+		(f')(x)=f'(x),\quad\forall\,x\in Y,
+		\]
+		称为 \(f\) 在 \(Y\) 上的导函数。
+
+		\item 若 \(f\) 在 \(Y\) 上可导，并且导函数 \(f'\) 在 \(Y\) 上连续，则我们称 \(f\) 在 \(Y\) 上连续可导，或称 \(f\) 在 \(Y\) 上是 \(C^1\) 类的。
+	\end{enumerate}
+
+\end{mydef*}
+
+\begin{sourceexample}{6}
+
+	设 \(I\subset\R\) 是任一区间。\(f:I\to\R\) 是任一连续函数。\(a\in I\) 是一固定点。证明：\(f\) 的积分函数 \(x\longmapsto F(x)=\displaystyle\int_a^x f(t)dt\)，\(x\in I\) 在 \(I\) 上是 \(C^1\) 类的，并且
+	\[
+	F'(x)=f(x),\quad\forall\,x\in I.
+	\]
+	事实上，任取 \(x_0\in I\)。由第一积分中值公式
+	\[
+	F(x)-F(x_0)=\int_{x_0}^x f(t)dt=f(\xi_x)(x-x_0),\quad\forall\,x\in I,
+	\]
+	这里 \(\xi_x\) 介于 \(x_0\) 与 \(x\) 之间。于是 \(\xi_x\to x_0\ (x\to x_0)\)。
+
+	令 \(\varphi(x)=f(\xi_x)\)，\(x\in I\)，则函数 \(\varphi:I\to\R\) 在 \(x_0\) 处连续，\(\varphi(x_0)=f(\xi_{x_0})=f(x_0)\)。并且
+	\[
+	F(x)-F(x_0)=\varphi(x)(x-x_0),\quad\forall\,x\in I.
+	\]
+	因此 \(F\) 在 \(x_0\) 处可导，并且 \(F'(x_0)=f(x_0)\)。
+
+	由 \(x_0\) 的任意性知 \(F\) 在 \(I\) 上可导，并且 \(F\) 的导函数 \(F'=f\)。由于 \(f\) 在 \(I\) 上连续，故 \(F\) 在 \(I\) 上是 \(C^1\) 类的。
+
+\end{sourceexample}
+
+\begin{sourceexample}{7}
+
+	考虑自然对数函数
+	\[
+	x\longmapsto\log x=\int_1^x\frac1t\,dt,\quad x\in\R_*^+.
+	\]
+	由于函数 \(x\longmapsto\dfrac1x\)，\(x\in\R_*^+\) 在 \(\R_*^+\) 上连续，故由例 6 知，自然对数函数 \(\log\) 在 \(\R_*^+\) 上是 \(C^1\) 类的，并且
+	\[
+	\log'(x)=\frac1x,\quad\forall\,x\in\R_*^+.
+	\]
+
+\end{sourceexample}
+
+\begin{mydef*}{}
+
+	设 \(f:X\to\R\) 是任一函数，\(a\in X\)。
+
+	\begin{enumerate}[label=\arabic*)]
+		\item 若存在 \(\delta>0\)，使得 \(f\) 在 \(Y=X\cap B(a,\delta)\) 上可导，并且 \(f\) 在 \(Y\) 上的导函数 \(f':Y\to\R\) 在 \(a\) 处可导，则我们称函数 \(f\) 在 \(a\) 处二次可导，\(f'\) 在 \(a\) 处的导数称为 \(f\) 在 \(a\) 处的二阶导数，记为
+		\[
+		f''(a)\quad\text{或}\quad\frac{d^2f(a)}{dx^2}.
+		\]
+		现在假设 \(f\) 在 \(Y\) 上的每一点 \(x\) 处的 \(n-1\) 阶导数 \(f^{(n-1)}(x)\) 或 \(\dfrac{d^{\,n-1}f(x)}{dx^{\,n-1}}\) 已经定义，如果函数 \(x\longmapsto f^{(n-1)}(x)\)，\(x\in Y\)（称为 \(f\) 在 \(Y\) 上的 \(n-1\) 阶导函数，记为 \(f^{(n-1)}\)）在 \(a\) 处可导，则我们称 \(f\) 在 \(a\) 处 \(n\) 次可导，\(f^{(n-1)}\) 在 \(a\) 处的导数称为 \(f\) 在 \(a\) 处的 \(n\) 阶导数，记为
+		\[
+		f^{(n)}(a)\quad\text{或}\quad\frac{d^nf(a)}{dx^n}.
+		\]
+		于是
+		\[
+		f^{(n)}(a)=(f^{(n-1)})'(a).
+		\]
+
+		\item 若 \(f\) 在 \(X\) 的每一点 \(x\) 处 \(n\) 次可导，则我们称 \(f\) 在 \(X\) 上 \(n\) 次可导。
+
+		\item 若 \(f\) 在 \(X\) 上 \(n\) 次可导，并且 \(f\) 的 \(n\) 阶导函数 \(f^{(n)}\) 在 \(X\) 上连续，则我们称 \(f\) 在 \(X\) 上是 \(n\) 次连续可导的，或称 \(f\) 在 \(X\) 上是 \(C^n\) 类的。
+
+		\item 若 \(\forall\,n\in\N\)，函数 \(f\) 在 \(X\) 上是 \(C^n\) 类的，则我们称 \(f\) 在 \(X\) 上是 \(C^\infty\) 类的。
+	\end{enumerate}
+
+\end{mydef*}
+
+\begin{sourceexample}{8}
+
+	证明：对例 1 的幂函数 \(x\longmapsto f(x)=x^n\)，\(x\in\R\ (n\in\N)\) 有：
+
+	1) \(\forall\,k\le n\)，\(f^{(k)}(x)=n(n-1)\cdots(n-k+1)x^{n-k}\ (\forall\,x\in\R)\)；
+
+	2) \(\forall\,k>n\)，\(f^{(k)}(x)=0\ (\forall\,x\in\R)\)。
+
+	因此 \(f\) 在 \(\R\) 上是 \(C^\infty\) 类的。
+
+	事实上，当 \(k=1\) 时 \(f'(x)=nx^{n-1}\)，结论 1) 成立。
+
+	假设当 \(k<n\) 时结论 1) 正确，那末当 \(k+1\le n\) 时，我们有
+	\[
+	\frac{f^{(k)}(y)-f^{(k)}(x)}{y-x}=\frac{n(n-1)\cdots(n-k+1)(y^{n-k}-x^{n-k})}{y-x}
+	\]
+	\[
+	=n(n-1)\cdots(n-k+1)(y^{n-k-1}+y^{n-k-2}x+\cdots+x^{n-k-1}),
+	\]
+	\[
+	\lim_{y\to x}\frac{f^{(k)}(y)-f^{(k)}(x)}{y-x}=n(n-1)\cdots(n-k+1)\lim_{y\to x}(y^{n-k-1}+y^{n-k-2}x+\cdots+x^{n-k-1})
+	\]
+	\[
+	=n(n-1)\cdots(n-k+1)(n-k)x^{n-k-1}.
+	\]
+	此即表明 \(f^{(k+1)}(x)\) 存在，并且 \(f^{(k+1)}(x)=n(n-1)\cdots(n-k)x^{n-k-1}\)，因此结论 1) 成立。结论 2) 显然。因为 \(f^{(n)}(x)=n!\)，从而 \(\forall\,k>n\)，\(f^{(k)}(x)\equiv0\)。于是 \(f\) 在 \(\R\) 上是 \(C^\infty\) 类的。
+
+\end{sourceexample}
+
+作为这一节的结束，我们介绍一下一元复值函数的导数。
+
+\subsection{一元复值函数的导数}
+
+设 \(X\subset\R\)，\(f:X\to\mathbb{C}\) 是任一复值函数。令
+\[
+f(x)=f_1(x)+if_2(x),\quad\forall\,x\in X.
+\]
+于是 \(f_1,f_2:X\to\R\) 是两个一元实值函数。
+
+\begin{mydef*}{}
+
+	设 \(f,f_1,f_2\) 如上所述。
+
+	\begin{enumerate}[label=\arabic*)]
+		\item 我们称 \(f\) 在 \(x\in X\) 处可导，如果 \(f_1,f_2\) 在 \(x\) 处可导，并且这时 \(f\) 在 \(x\) 处的导数 \(f'(x)\)，定义为
+		\[
+		f'(x)=f_1'(x)+if_2'(x).
+		\]
+
+		\item 我们称 \(f\) 在 \(X\) 上可导，如果 \(f\) 在 \(X\) 上的每一点处可导。
+
+		\item 我们称 \(f\) 在 \(X\) 上是 \(C^n\) 类的 \((n\ge1)\)，如果 \(f_1,f_2\) 在 \(X\) 上是 \(C^n\) 类的。
+
+		\item 我们称 \(f\) 在 \(X\) 上是 \(C^\infty\) 类的，如果 \(\forall\,n\in\N\)，\(f\) 在 \(X\) 上是 \(C^n\) 类的。
+	\end{enumerate}
+
+\end{mydef*}
+
+由上述定义可知，若 \(f\) 在 \(X\) 上是 \(C^n\) 类的，则
+\[
+f^{(n)}(x)=f_1^{(n)}(x)+if_2^{(n)}(x),\quad\forall\,x\in X.
+\]
+
+\subsection*{习 题}
+
+\begin{exercise}
+	\item 考虑 Dirichlet 函数 \(x\longmapsto D(x)=\begin{cases} 1, & x\in\Q, \\ 0, & x\in\Q^c. \end{cases}\)
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：\(D\) 在 \(\R\) 的任一点 \(x\) 处都不可导。
+		\item 证明：函数 \(x\longmapsto g(x)=x^2D(x)\)，\(x\in\R\) 只在 \(x=0\) 处可导，并且 \(g'(0)=0\)。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(a\in\R\)，并且 \(a>0\)。证明：函数 \(x\longmapsto|x|^a\)，\(x\in\R\) 在 \(x=0\) 处可导的充分必要条件是 \(a>1\)。
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(f,g,h:X\to\R\) 在点 \(a\in X\) 处满足下述条件：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(f(a)=g(a)=h(a)\)，\(f'(a)=g'(a)\)；
+		\item \(f(x)\le h(x)\le g(x)\)，\(\forall\,x\in X\)。
+	\end{enumerate}
+	证明：\(h\) 在 \(a\) 处可导，并且 \(h'(a)=f'(a)=g'(a)\)。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(a,b\in\R\)，考虑函数
+	\[
+	x\longmapsto f(x)=\begin{cases} x^2, & x\ge x_0, \\ ax+b, & x<x_0. \end{cases}
+	\]
+	试选择常数 \(a\) 与 \(b\) 使得 \(f\) 在 \(x_0\) 处可导。
+\end{exercise}
+
+\begin{exercise}
+	\item 证明：函数
+	\[
+	x\longmapsto f(x)=\begin{cases} x^2\left|\sin\dfrac\pi x\right|, & x\neq0, \\ 0, & x=0, \end{cases}
+	\]
+	在 \(x=0\) 的任何邻域内都有不可导的点，但在 \(x=0\) 处可导，并且 \(f'(0)=0\)。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(I\subset\R\) 是一开区间，\(0\in I\)，\(f:I\to\R\) 在 \(x=0\) 处连续，并且 \(f(0)=0\)。
+
+	证明：若 \(\displaystyle\lim_{x\to0}\frac{f(2x)-f(x)}x=A\in\R\)，则 \(f\) 在 \(x=0\) 处可导，并且 \(f'(0)=A\)。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:I\to\R\) 是任一函数，\(a\in I\) 是一内点使得 \(B(a,\delta)\subset I\)。令 \(H=\{h\in\R\mid|h|<\delta\}\)。如果存在函数 \(\varphi:H\to\R\) 使得
+	\begin{enumerate}[label=\arabic*)]
+		\item \(f(a+h)-f(a-h)=\varphi(h)\,2h\quad\forall\,h\in H\)，
+		\item \(\varphi\) 在 \(h=0\) 处连续，
+	\end{enumerate}
+	则称 \(\varphi(0)\) 为函数 \(f\) 在 \(a\) 处的对称导数，记为 \(f'_s(a)=\varphi(0)\)。
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：若 \(f\) 在 \(a\) 处的左、右导数存在，则 \(f\) 在 \(a\) 处的对称导数存在。
+		\item 证明：函数
+		\[
+		x\longmapsto f(x)=\begin{cases} x\sin\dfrac1x, & x\neq0, \\ 0, & x=0 \end{cases}
+		\]
+		在 \(x=0\) 处有对称导数存在，但在 \(x=0\) 处的左、右导数都不存在。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(f:[a,b]\to\R\) 在 \([a,b[\) 的每一点 \(x\) 处有右导数 \(f'(x^+)\) 存在。
+
+	证明：存在一个开区间 \(]\alpha,\beta[\subset\ ]a,b[\)，使得 \(f\) 在 \(]\alpha,\beta[\) 上连续。
+\end{exercise}
+
+\begin{exercise}
+	\item 证明：函数 \(f:\R\to\R\)
+	\[
+	f(x)=\begin{cases} x^{2n}\sin\dfrac1x, & x\neq0, \\ 0, & x=0, \end{cases}
+	\]
+	在 \(x=0\) 处 \(f'(0),f''(0),\cdots,f^{(n)}(0)\) 存在，但 \(f^{(n+1)}(0)\) 不存在。
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(f:\R\to\R\) 定义如下：
+	\[
+	f(x)=\begin{cases} x^n, & x>0, \\ 0, & x\le0. \end{cases}
+	\]
+	证明：\(f\) 在 \(\R\) 上 \(n-1\) 次可导，但 \(f\) 在 \(x=0\) 处不是 \(n\) 次可导的。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:[a,b]\to\R\) 是任一 \(C^1\) 类函数，\(f(a)=0\)。试利用定积分的 Cauchy 积分不等式证明
+	\[
+	\int_a^b f^2(x)dx\le\frac{(b-a)^2}{2}\int_a^b[f'(x)]^2dx.
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(f:[a,b]\to\R\) 可导，导函数 \(f':[a,b]\to\R\) 在 \([a,b]\) 上可积，令
+	\[
+	S_n=\frac{b-a}{n}\sum_{k=1}^n f\left(a+(k-1)\frac{b-a}{n}\right)f'\left(a+k\frac{b-a}{n}\right).
+	\]
+	试计算极限 \(\displaystyle\lim_{n\to+\infty}S_n\)。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(\alpha,\beta\in\R\)，令
+	\[
+	E(\alpha,\beta)=\{f\in C^1([a,b],\R)\mid f(a)=\alpha,\ f(b)=\beta\}.
+	\]
+	\(f_0\) 是 \(E(\alpha,\beta)\) 中的仿射映射，即 \(f_0(x)=Ax+B\)。试对 \(f_0\) 与 \(f\in E(\alpha,\beta)\) 应用 Cauchy 积分不等式证明
+	\[
+	\forall\,f\in E(\alpha,\beta),\qquad\int_a^b[f'(x)]^2dx\ge\int_a^b[f_0'(x)]^2dx.
+	\]
+\end{exercise}
+
+\section{导数的计算}
+
+首先我们介绍导数计算的一般法则。
+
+\subsection{导数计算的一般法则}
+
+\begin{mythm}{}{derivative-arithmetic}
+
+	设函数 \(f,g:X\to\R\) 在 \(a\in X\) 处可导。则
+
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\forall\,\alpha,\beta\in\R\)，函数 \(\alpha f+\beta g:X\to\R\) 在 \(a\) 处可导，并且
+		\[
+		(\alpha f+\beta g)'(a)=\alpha f'(a)+\beta g'(a).
+		\]
+
+		\item 函数 \(fg:X\to\R\) 在 \(a\) 处可导，并且
+		\[
+		(fg)'(a)=f'(a)g(a)+f(a)g'(a).
+		\]
+
+		\item 当 \(g(a)\neq0\) 时，存在 \(\delta>0\) 使得函数 \(\dfrac fg:X\cap B(a,\delta)\to\R\) 在 \(a\) 处可导，并且
+		\[
+		\left(\frac fg\right)'(a)=\frac{f'(a)g(a)-f(a)g'(a)}{g^2(a)}.
+		\]
+	\end{enumerate}
+
+\end{mythm}
+
+\begin{proof}
+
+	因为 \(f,g\) 在 \(a\) 处可导，故根据\rthm{thm:caratheodory-derivative} 知，存在函数 \(\varphi,\psi:X\to\R\) 使得
+
+	i) \(f(x)-f(a)=\varphi(x)(x-a),\ g(x)-g(a)=\psi(x)(x-a),\ \forall\,x\in X\)；
+
+	ii) \(\varphi,\psi\) 在 \(a\) 处连续，\(\varphi(a)=f'(a),\ \psi(a)=g'(a)\)。
+
+	于是 \(\forall\,\alpha,\beta\in\R\)，\(\forall\,x\in X\) 我们有
+	\[
+	(\alpha f+\beta g)(x)-(\alpha f+\beta g)(a)=\alpha[f(x)-f(a)]+\beta[g(x)-g(a)]
+	\]
+	\[
+	=[\alpha\varphi(x)+\beta\psi(x)](x-a),
+	\]
+	\[
+	(fg)(x)-(fg)(a)=[f(x)-f(a)]g(x)+f(a)[g(x)-g(a)]
+	\]
+	\[
+	=[\varphi(x)g(x)+f(a)\psi(x)](x-a).
+	\]
+	若我们令：\(\forall\,x\in X\)
+	\[
+	h(x)=\alpha\varphi(x)+\beta\psi(x),\qquad k(x)=\varphi(x)g(x)+f(a)\psi(x),
+	\]
+	则函数 \(h,k:X\to\R\) 在 \(a\) 处连续，并且
+	\[
+	(\alpha f+\beta g)(x)-(\alpha f+\beta g)(a)=h(x)(x-a),\quad\forall\,x\in X,
+	\]
+	\[
+	(fg)(x)-(fg)(a)=k(x)(x-a),\quad\forall\,x\in X.
+	\]
+	因此根据\rthm{thm:caratheodory-derivative} 知，函数 \(\alpha f+\beta g\)，\(fg\) 在 \(a\) 处可导，并且
+	\[
+	(\alpha f+\beta g)'(a)=h(a)=\alpha\varphi(a)+\beta\psi(a)=\alpha f'(a)+\beta g'(a),
+	\]
+	\[
+	(fg)'(a)=k(a)=\varphi(a)g(a)+f(a)\psi(a)=f'(a)g(a)+f(a)g'(a).
+	\]
+	最后由于 \(g(a)\neq0\)，故由 \(g\) 在 \(a\) 处的连续性知，存在 \(\delta>0\)，使得 \(g(x)\neq0\)，\(\forall\,x\in X\cap B(a,\delta)\)。于是
+	\[
+	\frac fg(x)-\frac fg(a)=\frac{f(x)g(a)-f(a)g(x)}{g(a)g(x)}
+	\]
+	\[
+	=\frac{[f(x)-f(a)]g(a)-f(a)[g(x)-g(a)]}{g(a)g(x)}=\frac{\varphi(x)g(a)-f(a)\psi(x)}{g(a)g(x)}(x-a),
+	\]
+	\[
+	\forall\,x\in X\cap B(a,\delta).
+	\]
+	令 \(s(x)=\dfrac{\varphi(x)g(a)-f(a)\psi(x)}{g(a)g(x)}\)，\(\forall\,x\in X\cap B(a,\delta)\)，则函数 \(s:X\cap B(a,\delta)\to\R\) 在 \(a\) 处连续，并且
+	\[
+	\frac fg(x)-\frac fg(a)=s(x)(x-a),\quad\forall\,x\in X\cap B(a,\delta).
+	\]
+	因此函数 \(\dfrac fg:X\cap B(a,\delta)\to\R\) 在 \(a\) 处可导，并且
+	\[
+	\left(\frac fg\right)'(a)=s(a)=\frac{\varphi(a)g(a)-f(a)\psi(a)}{g^2(a)}=\frac{f'(a)g(a)-f(a)g'(a)}{g^2(a)}.
+	\]
+
+\end{proof}
+
+\begin{sourceexample}{1}
+
+	证明：对函数 \(x\longmapsto x^n\)，\(x\in\R-\{0\}\)，\((n\in\Z-\{0\})\)，
+	\[
+	(x^n)'=nx^{n-1}.
+	\]
+	事实上，若 \(n\in\N\)，则在 §1 例 1 中已证
+	\[
+	(x^n)'=nx^{n-1}.
+	\]
+	若 \(n\in-\N\)，则 \(-n\in\N\)，由上述定理知
+	\[
+	(x^n)'=\left(\frac1{x^{-n}}\right)'=\frac{1'\cdot x^{-n}-1\cdot(x^{-n})'}{x^{-2n}}=\frac{-(-n)x^{-n-1}}{x^{-2n}}=nx^{n-1}.
+	\]
+
+\end{sourceexample}
+
+\begin{mythm}{复合函数的导数}{chain-rule}
+
+	设函数 \(f:X\to\R\) 与函数 \(g:Y\to\R\) 满足下述条件：
+
+	1) \(a\) 是 \(Z=X\cap f^{-1}(Y)\) 的聚点。
+
+	2) \(f\) 在 \(a\in X\) 处可导，\(g\) 在 \(b\in Y\) 处可导，且 \(b=f(a)\)，则复合函数 \(g\circ f:Z\to\R\) 在 \(a\) 处可导，并且
+	\[
+	(g\circ f)'(a)=g'(b)\cdot f'(a).
+	\]
+
+\end{mythm}
+
+\begin{proof}
+
+	由于 \(f\) 在 \(a\) 处可导，\(g\) 在 \(b\) 处可导，故存在函数 \(\varphi:X\to\R\) 及函数 \(\psi:Y\to\R\) 使得
+
+	i) \(f(x)-f(a)=\varphi(x)(x-a)\ \forall\,x\in X\)；\(\varphi\) 在 \(a\) 处连续，\(\varphi(a)=f'(a)\)。
+
+	ii) \(g(y)-g(b)=\psi(y)(y-b)\)，\(\forall\,y\in Y\)；\(\psi\) 在 \(b\) 处连续，\(\psi(b)=g'(b)\)。
+
+	于是 \(\forall\,x\in Z=X\cap f^{-1}(Y)\)，
+	\[
+	g\circ f(x)-g\circ f(a)=g(f(x))-g(f(a))=\psi(f(x))[f(x)-f(a)]
+	\]
+	\[
+	=\psi(f(x))\varphi(x)(x-a)=(\psi\circ f)\cdot\varphi(x)(x-a).
+	\]
+	由于函数 \((\psi\circ f)\varphi:Z\to\R\) 在 \(a\) 处连续，故由\rthm{thm:caratheodory-derivative} 知 \(g\circ f\) 在 \(a\) 处可导，并且
+	\[
+	(g\circ f)'(a)=(\psi\circ f)\cdot\varphi(a)=\psi(f(a))\cdot\varphi(a)=g'(b)\cdot f'(a).
+	\]
+
+\end{proof}
+
+\begin{mythm}{反函数的导数}{inverse-function-derivative}
+
+	设 \(X,Y\subset\R\) 是两个非空集合，\(f:X\to Y\) 与 \(f^{-1}:Y\to X\) 互为反函数，\(a\in X\)，\(b=f(a)\in Y\)，此外还假设
+
+	1) \(f\) 在 \(a\) 处可导，并且 \(f'(a)\neq0\)；
+
+	2) \(f^{-1}\) 在 \(b\) 处连续，
+
+	则 \(f^{-1}\) 在 \(b\) 处可导，并且
+	\[
+	(f^{-1})'(b)=\frac1{f'(a)}.
+	\]
+
+\end{mythm}
+
+\begin{proof}
+
+	首先由于 \(f\) 是可逆的，并且 \(a\) 是 \(X\) 的聚点，故 \(b=f(a)\) 是 \(Y\) 的聚点。由假设 \(f\) 在 \(a\) 处可导知，存在函数 \(\varphi:X\to\R\) 使得
+
+	i) \(f(x)-f(a)=\varphi(x)(x-a)\)，\(\forall\,x\in X\)；
+
+	ii) \(\varphi\) 在 \(a\) 处连续，并且 \(\varphi(a)=f'(a)\)。
+
+	由于 \(\varphi(a)\neq0\)，不失一般性，我们可以假设 \(\forall\,x\in X\)，\(\varphi(x)\neq0\)。
+
+	现在令 \(x=f^{-1}(y)\ (\forall\,y\in Y)\)，则 \(\varphi(f^{-1}(y))\neq0\)，\(\forall\,y\in Y\)。并且
+	\[
+	f(f^{-1}(y))-f(f^{-1}(b))=\varphi(f^{-1}(y))[f^{-1}(y)-f^{-1}(b)]
+	\]
+	或
+	\[
+	f^{-1}(y)-f^{-1}(b)=\frac1{\varphi(f^{-1}(y))}(y-b),\quad\forall\,y\in Y.
+	\]
+	由于 \(f^{-1}\) 在 \(b\) 处连续，故函数 \(\varphi\circ f^{-1}:Y\to\R\) 在 \(b\) 处连续，根据\rthm{thm:caratheodory-derivative} 知，\(f^{-1}\) 在 \(b\) 处可导，并且
+	\[
+	(f^{-1})'(b)=\frac1{\varphi(f^{-1}(b))}=\frac1{\varphi(a)}=\frac1{f'(a)}.
+	\]
+
+\end{proof}
+
+\textbf{附注}\quad 如果我们预先知道 \(f\) 的反函数 \(f^{-1}\) 在 \(b=f(a)\) 处可导，那末由恒等式
+\[
+f^{-1}\circ f(x)=\operatorname{id}_X(x),\quad\forall\,x\in X,
+\]
+分别对等式两边的函数求在 \(a\) 处的导数，根据\rthm{thm:chain-rule}，我们得到
+\[
+(f^{-1})'(b)\cdot f'(a)=1.
+\]
+若 \(f'(a)\neq0\)，则 \((f^{-1})'(b)=\dfrac1{f'(a)}\)。
+
+\begin{mythm}{Leibniz公式}{leibniz-formula}
+
+	设函数 \(f,g:X\to\R\) 在 \(a\in X\) 处 \(n\) 次可导，则函数 \(fg:X\to\R\) 在 \(a\) 处 \(n\) 次可导，并且
+	\[
+	(fg)^{(n)}(a)=f^{(n)}(a)g(a)+C_n^1f^{(n-1)}(a)g'(a)+C_n^2f^{(n-2)}(a)g''(a)
+	\]
+	\[
+	+\cdots+C_n^kf^{(n-k)}(a)g^{(k)}(a)+\cdots+C_n^{n-1}f'(a)g^{(n-1)}(a)+f(a)g^{(n)}(a).
+	\]
+
+\end{mythm}
+
+\begin{proof}
+
+	我们对 \(n\) 用数学归纳法证明。
+
+	当 \(n=1\) 时，上述公式化为 \((fg)'(a)=f'(a)g(a)+f(a)g'(a)\)，这就是\rthm{thm:derivative-arithmetic} 的 2)。
+
+	现在假设当 \(n=m\) 时 Leibniz 公式成立，那末当 \(n=m+1\) 时，我们有
+	\[
+	(fg)^{(m+1)}(a)=[(fg)^{(m)}]'(a)
+	\]
+	\[
+	=(f^{(m)}g)'(a)+C_m^1(f^{(m-1)}g')'(a)+C_m^2(f^{(m-2)}g'')'(a)
+	\]
+	\[
+	+\cdots+C_m^{k-1}(f^{(m-k+1)}g^{(k-1)})'(a)+C_m^k(f^{(m-k)}g^{(k)})'(a)
+	\]
+	\[
+	+\cdots+(fg^{(m)})'(a)
+	\]
+	\[
+	=f^{(m+1)}(a)g(a)+f^{(m)}(a)g'(a)
+	\]
+	\[
+	+C_m^1f^{(m)}(a)g'(a)+C_m^1f^{(m-1)}(a)g''(a)
+	\]
+	\[
+	+C_m^2f^{(m-1)}(a)g''(a)+C_m^2f^{(m-2)}(a)g'''(a)+\cdots
+	\]
+	\[
+	+C_m^{k-1}f^{(m-k+2)}(a)g^{(k-1)}(a)+C_m^{k-1}f^{(m-k+1)}(a)g^{(k)}(a)
+	\]
+	\[
+	+C_m^kf^{(m-k+1)}(a)g^{(k)}(a)+C_m^kf^{(m-k)}(a)g^{(k+1)}(a)
+	\]
+	\[
+	+\cdots+f'(a)g^{(m)}(a)+f(a)g^{(m+1)}(a)
+	\]
+	\[
+	=f^{(m+1)}(a)g(a)+(C_m^0+C_m^1)f^{(m)}(a)g'(a)+(C_m^1+C_m^2)f^{(m-1)}(a)g''(a)
+	\]
+	\[
+	+\cdots+(C_m^{k-1}+C_m^k)f^{(m-k+1)}(a)g^{(k)}(a)+\cdots+f(a)g^{(m+1)}(a)
+	\]
+	\[
+	=f^{(m+1)}(a)g(a)+C_{m+1}^1f^{(m)}(a)g'(a)+C_{m+1}^2f^{(m-1)}(a)g''(a)
+	\]
+	\[
+	+\cdots+C_{m+1}^kf^{(m-k+1)}(a)g^{(k)}(a)+\cdots+f(a)g^{(m+1)}(a).
+	\]
+	（这里我们利用了组合公式 \(C_m^{k-1}+C_m^k=C_{m+1}^k\)，\(\forall\,k=1,\cdots,m\)）。此即表明 \(n=m+1\) 时，Leibniz 公式成立。由归纳法知，\(\forall\,n\in\N\)，Leibniz 公式成立。
+
+\end{proof}
+
+作为导数计算法则的应用，我们下面来计算基本初等函数的导数。
+
+\subsection{基本初等函数的导数}
+
+\subsubsection*{1) 三角函数的导数}
+
+\(x\longmapsto\sin x\)，\(x\in\R\) 的导数 \(\forall\,a\in\R\)，由于
+\[
+\sin x-\sin a=2\sin\frac{x-a}{2}\cos\frac{x+a}{2},\quad\forall\,x\in\R,
+\]
+故
+\[
+\lim_{x\to a}\frac{\sin x-\sin a}{x-a}=\lim_{x\to a}2\frac{\sin\dfrac{x-a}{2}}{x-a}\cos\frac{x+a}{2}
+\]
+\[
+=\lim_{x\to a}\frac{\sin\dfrac{x-a}{2}}{\dfrac{x-a}{2}}\lim_{x\to a}\cos\frac{x+a}{2}=\cos a.
+\]
+因此正弦函数 \(x\longmapsto\sin x\)，\(x\in\R\) 在 \(a\) 处可导，并且 \(\sin'(a)=\cos a\)。由 \(a\) 的任意性我们得到
+\[
+\boxed{\sin'x=\cos x,\quad\forall\,x\in\R.}
+\]
+\(x\longmapsto\cos x\)，\(x\in\R\) 的导数 由于
+\[
+\cos x=\sin\left(\frac\pi2-x\right),\quad\forall\,x\in\R.
+\]
+故由\rthm{thm:chain-rule} 知，余弦函数 \(x\longmapsto\cos x\)，\(x\in\R\) 在任一点 \(x\) 处可导，并且
+\[
+\cos'x=\sin'\left(\frac\pi2-x\right)\cdot\left(\frac\pi2-x\right)'=\cos\left(\frac\pi2-x\right)\cdot(-1)=-\sin x.
+\]
+因此
+\[
+\boxed{\cos'x=-\sin x,\quad\forall\,x\in\R.}
+\]
+\(x\longmapsto\operatorname{tg}x\)，\(x\in\R-\left\{k\pi+\dfrac\pi2 \mid k\in\Z\right\}\) 的导数 由于
+\[
+\operatorname{tg}x=\frac{\sin x}{\cos x},\quad\forall\,x\in\R-\left\{k\pi+\frac\pi2 \mid k\in\Z\right\},
+\]
+故由\rthm{thm:derivative-arithmetic} 知正切函数 \(x\longmapsto\operatorname{tg}x\) 在任一点处可导，并且
+\[
+\operatorname{tg}'x=\frac{\sin'x\cos x-\cos'x\sin x}{\cos^2x}=\frac{\cos^2x+\sin^2x}{\cos^2x}=\frac1{\cos^2x}.
+\]
+因此
+\[
+\boxed{\operatorname{tg}'x=\frac1{\cos^2x},\quad\forall\,x\in\R-\left\{k\pi+\frac\pi2 \mid k\in\Z\right\}.}
+\]
+\(x\longmapsto\operatorname{ctg}x\)，\(x\in\R-\{k\pi\mid k\in\Z\}\) 的导数 由于
+\[
+\operatorname{ctg}x=\frac{\cos x}{\sin x},\quad\forall\,x\in\R-\{k\pi\mid k\in\Z\},
+\]
+故由\rthm{thm:derivative-arithmetic} 知余切函数 \(x\longmapsto\operatorname{ctg}x\) 在任一点处可导，并且
+\[
+\operatorname{ctg}'x=\frac{\cos'x\sin x-\sin'x\cos x}{\sin^2x}=\frac{-\sin^2x-\cos^2x}{\sin^2x}=-\frac1{\sin^2x}.
+\]
+因此
+\[
+\boxed{\operatorname{ctg}'x=-\frac1{\sin^2x},\quad\forall\,x\in\R-\{k\pi\mid k\in\Z\}.}
+\]
+
+\subsubsection*{2) 反三角函数的导数}
+
+\(x\longmapsto\arcsin x\)，\(x\in[-1,1]\) 的导数 由于 \(\sin:\left[-\dfrac\pi2,\dfrac\pi2\right]\to[-1,1]\) 与 \(\arcsin:[-1,1]\to\left[-\dfrac\pi2,\dfrac\pi2\right]\) 互为反函数，并且 \(\forall\,y\in\left]-\dfrac\pi2,\dfrac\pi2\right[\)，\(\sin'y=\cos y>0\)，故由反函数求导法则知，反正弦函数 \(x\longmapsto\arcsin x\) 在任一点 \(x\in\ ]-1,1[\) 处可导，并且
+\[
+\arcsin'x=\frac1{\sin'(\arcsin x)}=\frac1{\cos(\arcsin x)}.
+\]
+另一方面，由于
+\[
+\cos(\arcsin x)=\sqrt{1-\sin^2(\arcsin x)}=\sqrt{1-x^2},
+\]
+因此
+\[
+\boxed{\arcsin'x=\frac1{\sqrt{1-x^2}},\quad\forall\,x\in\ ]-1,1[.}
+\]
+\(x\longmapsto\arccos x\)，\(x\in[-1,1]\) 的导数 由于
+\[
+\arccos x+\arcsin x=\frac\pi2,\quad\forall\,x\in[-1,1],
+\]
+因此反余弦函数 \(x\longmapsto\arccos x\) 在任一点 \(x\in\ ]-1,1[\) 处可导，并且
+\[
+\arccos'x+\arcsin'x=0.
+\]
+因此
+\[
+\boxed{\arccos'x=-\frac1{\sqrt{1-x^2}},\quad\forall\,x\in\ ]-1,1[.}
+\]
+\(x\longmapsto\operatorname{arctg}x\)，\(x\in\R\) 的导数 由于
+\[
+\operatorname{tg}:\left]-\frac\pi2,\frac\pi2\right[\to\R\quad\text{与}\quad\operatorname{arctg}:\R\to\left]-\frac\pi2,\frac\pi2\right[
+\]
+互为反函数，并且 \(\forall\,y\in\left]-\dfrac\pi2,\dfrac\pi2\right[\)，\(\operatorname{tg}'y=\dfrac1{\cos^2y}>0\)，故由反函数求导法则知，反正切函数 \(x\longmapsto\operatorname{arctg}x\) 在任一点 \(x\in\R\) 处可导，并且
+\[
+\operatorname{arctg}'x=\frac1{\operatorname{tg}'(\operatorname{arctg}x)}=\frac1{1/\cos^2(\operatorname{arctg}x)}=\frac1{1+\operatorname{tg}^2(\operatorname{arctg}x)}.
+\]
+因此
+\[
+\boxed{\operatorname{arctg}'x=\frac1{1+x^2},\quad\forall\,x\in\R.}
+\]
+\(x\longmapsto\operatorname{arcctg}x\)，\(x\in\R\) 的导数 由于
+\[
+\operatorname{arctg}x+\operatorname{arcctg}x=\frac\pi2,\quad\forall\,x\in\R,
+\]
+故反余切函数 \(x\longmapsto\operatorname{arcctg}x\) 在任一点 \(x\in\R\) 处可导，并且
+\[
+\operatorname{arctg}'x+\operatorname{arcctg}'x=0.
+\]
+因此
+\[
+\boxed{\operatorname{arcctg}'x=-\frac1{1+x^2},\quad\forall\,x\in\R.}
+\]
+
+\subsubsection*{3) 对数函数的导数}
+
+在 §1 例 7 中我们已经计算了自然对数函数 \(x\longmapsto\log x\)，\(x\in\R_*^+\) 在任一点 \(x\in\R_*^+\) 处的导数为
+\[
+\log'x=\frac1x.
+\]
+因此以 \(a\ (0<a\neq1)\) 为底的对数函数 \(x\longmapsto\log_a x\)，\(x\in\R_*^+\) 在任一点 \(x\in\R_*^+\) 处可导，并且其导数为
+\[
+\log_a'x=\frac1{\log a}\log'x=\frac1{x\log a}.
+\]
+因此
+\[
+\boxed{\log'x=\frac1x,\qquad\log_a'x=\frac1{x\log a},\quad\forall\,x\in\R_*^+.}
+\]
+
+\subsubsection*{4) 指数函数的导数}
+
+由于自然对数函数 \(y\longmapsto\log y\)，\(y\in\R_*^+\) 与以 \(e\) 为底的指数函数 \(x\longmapsto e^x\)，\(x\in\R\) 互为反函数，并且 \(\forall\,y\in\R_*^+\)，\(\log'y=\dfrac1y>0\)，故由反函数的求导法则知，指数函数 \(x\longmapsto e^x\) 在任一点 \(x\in\R\) 处可导，并且
+\[
+(e^x)'=\frac1{\log'(e^x)}=\frac1{1/e^x}=e^x.
+\]
+从而以 \(a\) 为底的指数函数 \(x\longmapsto a^x\) 在任一点 \(x\in\R\) 处也可导，并且
+\[
+(a^x)'=(e^{x\log a})'=e^{x\log a}\cdot(x\log a)'=a^x\log a.
+\]
+因此
+\[
+\boxed{(e^x)'=e^x,\qquad(a^x)'=a^x\log a,\quad\forall\,x\in\R.}
+\]
+
+\subsubsection*{5) 幂函数的导数}
+
+当 \(n\in\Z\) 时，我们在前面已经证明了
+
+i) \(n\in\N\) 时，\((x^n)'=nx^{n-1}\)，\(\forall\,x\in\R\)。
+
+ii) \(n\in-\N\) 时，\((x^n)'=nx^{n-1}\)，\(\forall\,x\in\R-\{0\}\)。
+
+iii) \(n=0\) 时，\((x^n)'=0\)，\(\forall\,x\in\R-\{0\}\)。
+
+当 \(\alpha\in\R-\Z\) 时，由幂函数 \(x\longmapsto x^\alpha\)，\(x\in\R_*\) 的定义可知，它在任一点 \(x\in\R_*\) 处可导，并且
+\[
+(x^\alpha)'=(e^{\alpha\log x})'=e^{\alpha\log x}\cdot(\alpha\log x)'=\alpha x^{\alpha-1}.
+\]
+因此
+\[
+\boxed{(x^\alpha)'=\alpha x^{\alpha-1},\quad\forall\,x\in\R_*.}
+\]
+
+\subsubsection*{6) 双曲函数的导数}
+
+根据双曲函数的定义及指数函数的求导公式，直接计算得到
+\[
+\operatorname{sh}'x=\operatorname{ch}x,\qquad\forall\,x\in\R.
+\]
+\[
+\operatorname{ch}'x=\operatorname{sh}x,\qquad\forall\,x\in\R.
+\]
+\[
+\operatorname{th}'x=\frac1{\operatorname{ch}^2x}=1-\operatorname{th}^2x,\qquad\forall\,x\in\R.
+\]
+\[
+\operatorname{cth}'x=-\frac1{\operatorname{sh}^2x}=1-\operatorname{cth}^2x,\qquad\forall\,x\in\R-\{0\}.
+\]
+
+\subsubsection*{7) 反双曲函数的导数}
+
+由于
+\[
+\operatorname{Arg}\operatorname{sh}x=\log\left(x+\sqrt{x^2+1}\right),\qquad\forall\,x\in\R,
+\]
+\[
+\operatorname{Arg}\operatorname{ch}x=\log\left(x+\sqrt{x^2-1}\right),\qquad\forall\,x\in[1,+\infty[,
+\]
+\[
+\operatorname{Arg}\operatorname{th}x=\frac12\log\frac{1+x}{1-x},\qquad\forall\,x\in\ ]-1,1[,
+\]
+\[
+\operatorname{Arg}\operatorname{cth}x=\frac12\log\frac{x+1}{x-1},\qquad\forall\,x\in\ ]-\infty,-1[\ \cup\ ]1,+\infty[,
+\]
+故直接计算得到
+\[
+\operatorname{Arg}\operatorname{sh}'x=\frac1{\sqrt{1+x^2}},\qquad\forall\,x\in\R.
+\]
+\[
+\operatorname{Arg}\operatorname{ch}'x=\frac1{\sqrt{x^2-1}},\qquad\forall\,x\in\ ]1,+\infty[.
+\]
+\[
+\operatorname{Arg}\operatorname{th}'x=\frac1{1-x^2},\qquad\forall\,x\in\ ]-1,1[.
+\]
+\[
+\operatorname{Arg}\operatorname{cth}'x=\frac1{1-x^2},\qquad\forall\,x\in\ ]-\infty,-1[\ \cup\ ]1,+\infty[.
+\]
+
+\textbf{附注}\quad 从上面各函数的导数公式可以看出，这七类基本初等函数在各自定义域上都是 \(C^\infty\) 类的。
+
+下面我们应用基本初等函数的导数公式及导数计算的一般法则来计算一些更复杂的初等函数的导数。
+
+\begin{sourceexample}{2}
+
+	计算函数 \(x\longmapsto f(x)=e^{2x}(x^2-x+2)\)，\(x\in\R\) 在任一点 \(x\in\R\) 处的导数。
+
+	事实上，我们有
+	\[
+	f'(x)=[e^{2x}(x^2-x+2)]'
+	\]
+	\[
+	=(e^{2x})'(x^2-x+2)+e^{2x}(x^2-x+2)'
+	\]
+	\[
+	=e^{2x}(2x)'(x^2-x+2)+e^{2x}(2x-1)
+	\]
+	\[
+	=e^{2x}(2x^2-2x+4)+e^{2x}(2x-1)=e^{2x}(2x^2+3).
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{3}
+
+	假设函数
+	\[
+	x\longmapsto f(x)=\arcsin(\sin x^2)+\arccos(\cos x^2),\quad x\in\R.
+	\]
+	1) 指出此函数在哪些 \(x\) 处可导。
+
+	2) 计算此函数在这些可导点处的导数。
+
+	首先由于公式
+	\[
+	\arcsin'y=\frac1{\sqrt{1-y^2}},\qquad\arccos'y=-\frac1{\sqrt{1-y^2}}
+	\]
+	只对 \(y\in\ ]-1,1[\) 成立，故下述两个等式
+	\[
+	\arcsin'(\sin x^2)=\frac1{\sqrt{1-(\sin x^2)^2}},\qquad
+	\arccos'(\cos x^2)=-\frac1{\sqrt{1-(\cos x^2)^2}}
+	\]
+	同时成立，当且仅当 \(x^2\neq\dfrac{k\pi}{2}\)，\(k=0,1,2,\cdots\)。
+
+	因此上述函数只在 \(x^2\neq\dfrac{k\pi}{2}\ (k=0,1,2,\cdots)\) 的 \(x\) 处可导，并且在这些 \(x\) 处
+	\[
+	f'(x)=[\arcsin(\sin x^2)+\arccos(\cos x^2)]'
+	\]
+	\[
+	=[\arcsin(\sin x^2)]'+[\arccos(\cos x^2)]'
+	\]
+	\[
+	=\arcsin'(\sin x^2)\cdot(\sin x^2)'+\arccos'(\cos x^2)\cdot(\cos x^2)'
+	\]
+	\[
+	=\frac1{\sqrt{1-(\sin x^2)^2}}\cdot\cos x^2\cdot(x^2)'-\frac1{\sqrt{1-(\cos x^2)^2}}\cdot(-\sin x^2)\cdot(x^2)'
+	\]
+	\[
+	=\frac{2x\cos x^2}{|\cos x^2|}+\frac{2x\sin x^2}{|\sin x^2|}=2x[\operatorname{sgn}(\cos x^2)+\operatorname{sgn}(\sin x^2)].
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{4}
+
+	计算函数 \(x\longmapsto f(x)=\operatorname{arctg}(\operatorname{th}x)\)，\(x\in\R\) 在任一点 \(x\in\R\) 处的导数。
+
+	事实上，此函数在 \(\R\) 的任一点 \(x\) 处可导，并且
+	\[
+	f'(x)=[\operatorname{arctg}(\operatorname{th}x)]'
+	\]
+	\[
+	=\operatorname{arctg}'(\operatorname{th}x)\cdot(\operatorname{th}x)'
+	\]
+	\[
+	=\frac1{1+\operatorname{th}^2x}\cdot(1-\operatorname{th}^2x)=\frac{1-\operatorname{th}^2x}{1+\operatorname{th}^2x}.
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{5}
+
+	假设函数 \(f:X\to\R\) 在 \(X\) 上可导，并且 \(\forall\,x\in X\)，\(f(x)\neq0\)，证明：
+	\[
+	(\log|f(x)|)'=\frac{f'(x)}{f(x)},\quad\forall\,x\in X.
+	\]
+	实数 \(\dfrac{f'(x)}{f(x)}\) 称为函数 \(f\) 在 \(x\) 处的对数导数。
+
+	事实上，我们首先证明函数 \(y\longmapsto\log|y|\)，\(y\in\R-\{0\}\) 在 \(\R-\{0\}\) 上可导，这是因为
+
+	在 \(\R_*^+\) 上，\(\log|y|=\log y\)，因此
+	\[
+	(\log|y|)'=\log'y=\frac1y.
+	\]
+	在 \(\R_*^-\) 上，\(\log|y|=\log(-y)\)，因此
+	\[
+	(\log|y|)'=(\log(-y))'=\frac1{-y}(-y)'=\frac1y.
+	\]
+	另一方面，\(f\) 在 \(X\) 上可导，并且 \(f\neq0\)，故由\rthm{thm:chain-rule} 知函数 \(x\longmapsto\log|f(x)|\)，\(x\in X\) 在 \(X\) 上可导，并且
+	\[
+	(\log|f(x)|)'=(\log|y|)'\cdot f'(x)\quad(y=f(x))=\frac{f'(x)}{f(x)}.
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{6}
+
+	设 \(u:X\to\R\)，\(v:X\to\R\) 是两个在 \(X\) 上可导的函数，并且 \(u>0\)。
+
+	1) 证明：幂指函数 \(x\longmapsto f(x)=u(x)^{v(x)}\)，\(x\in X\) 在 \(X\) 上可导。
+
+	2) 计算幂指函数 \(f\) 在任一点 \(x\in X\) 处的导数。
+
+	事实上，由于
+	\[
+	f(x)=e^{v(x)\log u(x)},\quad\forall\,x\in X,
+	\]
+	故由对数函数、指数函数的可导性及\rthm{thm:chain-rule} 知，幂指函数 \(f\) 在 \(X\) 上可导，并且
+	\[
+	f'(x)=(e^{v(x)\log u(x)})'
+	\]
+	\[
+	=e^{v(x)\log u(x)}\cdot[v(x)\log u(x)]'
+	\]
+	\[
+	=u(x)^{v(x)}\cdot\left[v'(x)\log u(x)+v(x)\cdot\frac{u'(x)}{u(x)}\right].
+	\]
+	例如，设 \(f(x)=x^{\cos x}\)，\(x\in\R_*^+\)。则
+	\[
+	f'(x)=(e^{\cos x\log x})'=e^{\cos x\log x}\cdot(\cos x\log x)'
+	\]
+	\[
+	=x^{\cos x}\left(-\sin x\log x+\frac{\cos x}{x}\right).
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{7}
+
+	证明下列各等式：
+
+	1) \((e^x)^{(n)}=e^x\)；
+
+	2) \(\sin^{(n)}x=\sin\left(x+\dfrac{n\pi}{2}\right)\)，\((\forall\,n\in\N,\ \forall\,x\in\R)\)；
+
+	3) \(\cos^{(n)}x=\cos\left(x+\dfrac{n\pi}{2}\right)\)。
+
+	事实上，由于 \((e^x)'=e^x\)，所以
+	\[
+	(e^x)^{(n)}=e^x,\quad\forall\,n\in\N,\ \forall\,x\in\R.
+	\]
+	其次，由于
+	\[
+	\sin'x=\cos x=\sin\left(x+\frac\pi2\right),
+	\]
+	\[
+	\sin''x=\left[\sin\left(x+\frac\pi2\right)\right]'=\cos\left(x+\frac\pi2\right)=\sin\left(x+\frac{2\pi}{2}\right).
+	\]
+	现在假设
+	\[
+	\sin^{(k)}x=\sin\left(x+\frac{k\pi}{2}\right),
+	\]
+	则
+	\[
+	\sin^{(k+1)}x=\left[\sin\left(x+\frac{k\pi}{2}\right)\right]'=\cos\left(x+\frac{k\pi}{2}\right)=\sin\left(x+\frac{(k+1)\pi}{2}\right).
+	\]
+	因此由数学归纳法知，\(\forall\,n\in\N\)，\(\sin^{(n)}x=\sin\left(x+\dfrac{n\pi}{2}\right)\)。
+
+	同理可证，\(\forall\,n\in\N\)，\(\cos^{(n)}x=\cos\left(x+\dfrac{n\pi}{2}\right)\)。
+
+\end{sourceexample}
+
+\begin{sourceexample}{8}
+
+	证明：函数
+	\[
+	x\longmapsto f(x)=\begin{cases} e^{-\frac1{x^2}}, & x\neq0, \\ 0, & x=0 \end{cases}
+	\]
+	在 \(\R\) 上是 \(C^\infty\) 类的，并且
+	\[
+	f^{(n)}(0)=0,\quad\forall\,n\in\N.
+	\]
+	为此，我们首先注意到幂函数 \(x\longmapsto-\dfrac1{x^2}\)，\(x\in\R-\{0\}\) 在 \(\R-\{0\}\) 上是 \(C^\infty\) 类的，指数函数 \(y\longmapsto e^y\)，\(y\in\R\) 在 \(\R\) 上是 \(C^\infty\) 类的，因此它们的复合函数在 \(\R-\{0\}\) 上也是 \(C^\infty\) 类的，从而上述函数 \(f\) 在 \(\R-\{0\}\) 上是 \(C^\infty\) 类的。并且 \(\forall\,x\in\R-\{0\}\)，
+	\[
+	\left(e^{-\frac1{x^2}}\right)'=e^{-\frac1{x^2}}\left(-\frac1{x^2}\right)'=e^{-\frac1{x^2}}\cdot\frac2{x^3},
+	\]
+	\[
+	\left(e^{-\frac1{x^2}}\right)''=\left(e^{-\frac1{x^2}}\cdot\frac2{x^3}\right)'=e^{-\frac1{x^2}}\left(\frac4{x^6}-\frac6{x^4}\right).
+	\]
+	由此不难由数学归纳法验证
+	\[
+	\left(e^{-\frac1{x^2}}\right)^{(n)}=e^{-\frac1{x^2}}P_{3n}\left(\frac1x\right),\quad\forall\,n\in\N.
+	\]
+	这里 \(P_{3n}(y)\) 是关于 \(y\) 的一个最高次数为 \(3n\) 的多项式。因此根据第 5 章 §4 例 4 的结论有
+	\[
+	\lim_{x\to0}\left(e^{-\frac1{x^2}}\right)^{(n)}=\lim_{x\to0}e^{-\frac1{x^2}}P_{3n}\left(\frac1x\right)=0,\quad\forall\,n\in\N.
+	\]
+	现在我们来计算 \(f'(0)\)。因为
+	\[
+	\lim_{x\to0}\frac{f(x)-f(0)}{x-0}=\lim_{x\to0}\frac{e^{-\frac1{x^2}}}{x}=0,
+	\]
+	所以 \(f\) 在 \(0\) 处可导，并且 \(f'(0)=0\)。因此 \(f'\) 在 \(x=0\) 处连续，从而 \(f\) 在 \(\R\) 上是 \(C^1\) 类的。
+
+	假设 \(f^{(2)}(0)=f^{(3)}(0)=\cdots=f^{(n-1)}(0)=0\)。于是 \(f\) 在 \(\R\) 上是 \(C^{n-1}\) 类的。从而
+	\[
+	\lim_{x\to0}\frac{f^{(n-1)}(x)-f^{(n-1)}(0)}{x-0}=\lim_{x\to0}\frac{e^{-\frac1{x^2}}P_{3(n-1)}\left(\dfrac1x\right)}{x}=0.
+	\]
+	此即表明 \(f\) 在 \(0\) 处 \(n\) 次可导，并且 \(f^{(n)}(0)=0\)。因此 \(f^{(n)}\) 在 \(x=0\) 处连续，从而 \(f\) 在 \(\R\) 上是 \(C^n\) 类的，这就证明了 \(f\) 在 \(\R\) 上是 \(C^\infty\) 类的，并且 \(f^{(n)}(0)=0,\ \forall\,n\in\N\)。
+
+\end{sourceexample}
+
+\subsection*{习 题}
+
+\begin{exercise}
+	\item 设 \(f:X\to\R\) 是任一可导函数。证明：
+	\begin{enumerate}[label=\arabic*)]
+		\item 若 \(f\) 是偶函数，则 \(f'\) 是奇函数；
+		\item 若 \(f\) 是奇函数，则 \(f'\) 是偶函数；
+		\item 若 \(f\) 是以 \(T\) 为周期的周期函数，则 \(f'\) 是以 \(T\) 为周期的周期函数。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:\R\to\R\) 是一可导函数，试计算复合函数 \(x\longmapsto F(x)=f\circ f\circ f(x)\)，\(x\in\R\) 的导数 \(F'(x)\)。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f,g:X\to\R\) 在 \(a\in X\) 处可导。
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：若 \(f(a)\neq0\)，则 \(|f|\) 在 \(a\) 处可导。
+		\item 证明：若 \(f(a)\neq g(a)\)，则函数 \(m,M:X\to\R\)
+		\[
+		m(x)=\min(f(x),g(x)),\qquad M(x)=\max(f(x),g(x)),\qquad x\in X
+		\]
+		在 \(a\) 处可导。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 计算下列各函数 \(f\) 的导数 \(f'(x)\)：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(f(x)=\log\dfrac{\sqrt{1+x^3}-1}{\sqrt{1+x^3}+1}\)；
+		\item \(f(x)=\arcsin(\cos x^2)+\arccos(\sin x^2)\)；
+		\item \(f(x)=\log(\operatorname{ch}x)+\dfrac1{2\operatorname{sh}^2x}\)；
+		\item \(f(x)=\operatorname{cth}x-\log\left(\operatorname{cth}\dfrac x2\right)\)；
+		\item \(f(x)=\operatorname{Arg}\operatorname{sh}\left(\operatorname{ch}\dfrac x2\right)\)；
+		\item \(f(x)=\sqrt[x]{x}\)；
+		\item \(f(x)=(\sin x)^{\cos x}+(\cos x)^{\sin x}\)；
+		\item \(f(x)=(\log x)^{x^a}+x^{a\log x}\)。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(x\longmapsto f(x)\)，\(x\in\R\) 定义为
+	\[
+	f(x)=\frac{\alpha x+\beta}{\sqrt{ax^2+bx+c}}\quad(\forall\,x\in\R),
+	\]
+	试选择常数 \(\alpha,\beta,a,b,c\) 使得 \(f'(x)\equiv0\)，\(\forall\,x\in\R\)。
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(f:X(\subset\R)\to\R\) 在 \(X\) 上可导且满足方程
+	\[
+	f(x)^x=x^{f(x)},\quad\forall\,x\in X.
+	\]
+	试计算 \(f'(x)\ (\forall\,x\in X)\)。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:X(\subset\R)\to\R\) 是任一可导函数，试计算
+	\[
+	\lim_{h\to0}\frac1h\left[f^2(x+3h)-f^2(x-h)\right].
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(I,J\subset\R\) 是两个非空区间，\(f:I\to J,\ g:J\to\R\) 是两个函数。\(x_0\in I,\ y_0=f(x_0)\in J\)。对下列各情形研究复合函数 \(g\circ f:I\to\R\) 在 \(x_0\) 处的可导性：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(f\) 在 \(x_0\) 处不可导，\(g\) 在 \(y_0\) 处可导；
+		\item \(f\) 在 \(x_0\) 处可导，\(g\) 在 \(y_0\) 处不可导；
+		\item \(f\) 在 \(x_0\) 处不可导，\(g\) 在 \(y_0\) 处不可导。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 证明：反正切函数 \(x\longmapsto\operatorname{arctg}x\)，\(x\in\R\) 在 \(x=0\) 处的 \(n\) 阶导数为：
+	\[
+	\operatorname{arctg}^{(n)}(0)=\begin{cases} 0, & n=2k, \\ (-1)^k(2k)!, & n=2k+1, \end{cases}\qquad(k=0,1,2,\cdots)
+	\]
+	这里我们规定 \(\operatorname{arctg}^{(0)}(0)=\operatorname{arctg}(0)\)。
+\end{exercise}
+
+\begin{exercise}
+	\item 证明：反正弦函数 \(x\longmapsto\arcsin x\)，\(x\in[-1,1]\) 在 \(x=0\) 处的 \(n\) 阶导数为
+	\[
+	\arcsin^{(n)}(0)=\begin{cases} 0, & \text{若}\ n=2k, \\ [(2k-1)(2k-3)\cdots3\cdot1]^2, & \text{若}\ n=2k+1. \end{cases}
+	\]
+	\[
+	(k=0,1,2,\cdots)
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 对 \((x-a)^n(x-b)^n\) 应用 Leibniz 求导公式证明
+	\[
+	(C_n^0)^2+(C_n^1)^2+\cdots+(C_n^n)^2=\frac{2n(2n-1)\cdots(n+1)}{n!}.
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 证明：函数
+	\[
+	x\longmapsto f(x)=\begin{cases} e^{\frac1{x^2-1}}, & \text{若}\ |x|<1, \\ 0, & \text{若}\ |x|\ge1 \end{cases}
+	\]
+	与函数
+	\[
+	x\longmapsto g(x)=\begin{cases} e^{\frac1{1-x^2}}, & \text{若}\ |x|>1, \\ 0, & \text{若}\ |x|\le1 \end{cases}
+	\]
+	在 \(\R\) 上都是 \(C^\infty\) 类的。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(P_n(x)=a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0\)，\(x\in\R\)。证明：\(\forall\,a\in\R\)，\(P_n(x)\) 可以表示成下述形式：
+	\[
+	P_n(x)=\frac{P_n^{(n)}(a)}{n!}(x-a)^n+\frac{P_n^{(n-1)}(a)}{(n-1)!}(x-a)^{n-1}+\cdots+\frac{P_n'(a)}{1!}(x-a)+P_n(a).
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 证明：Tchebycheff 多项式
+	\[
+	T_n(x)=\frac1{2^{n-1}}\cos(n\arccos x)
+	\]
+	满足方程
+	\[
+	(1-x^2)T_n''(x)-xT_n'(x)+n^2T_n(x)=0,\quad\forall\,x\in\ ]-1,1[.
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 证明：Legendre 多项式
+	\[
+	P_n(x)=\frac1{2^n n!}\left[(x^2-1)^n\right]^{(n)}
+	\]
+	满足方程
+	\[
+	(1-x^2)P_n''(x)-2xP_n'(x)+n(n+1)P_n(x)=0,\quad\forall\,x\in\R.
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 证明：Tchebycheff-Laguerre 多项式
+	\[
+	L_n(x)=e^x\left[x^n e^{-x}\right]^{(n)}
+	\]
+	满足方程
+	\[
+	xL_n''(x)+(1-x)L_n'(x)+nL_n(x)=0,\quad\forall\,x\in\R.
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 证明：Tchebycheff-Hermite 多项式
+	\[
+	H_n(x)=(-1)^n e^{x^2}\left(e^{-x^2}\right)^{(n)}
+	\]
+	满足方程
+	\[
+	H_n''(x)-2xH_n'(x)+2nH_n(x)=0,\quad\forall\,x\in\R.
+	\]
+\end{exercise}
+
+\section{可导函数的性质}
+
+关于可导函数的基本性质，我们主要介绍下面四个重要定理。
+
+\subsection{Rolle定理}
+
+\begin{mythm}{Rolle定理}{rolle-theorem}
+
+	设 \([a,b]\) 是任一有限闭区间，函数 \(f:[a,b]\to\R\) 满足下述条件：
+
+	1) \(f\) 在 \([a,b]\) 上连续，
+
+	2) \(f\) 在 \(]a,b[\) 上可导，
+
+	3) \(f(a)=f(b)\)，
+
+	则存在一点 \(\xi\in\ ]a,b[\) 使得 \(f'(\xi)=0\)。
+
+\end{mythm}
+
+\begin{proof}
+
+	若 \(\forall\,x\in[a,b]\)，\(f(x)=f(a)=f(b)\)，则 \(f'(x)=0\)，\(\forall\,x\in[a,b]\)，从而任取 \(\xi\in\ ]a,b[\)，都有 \(f'(\xi)=0\)。
+
+	因此我们假设 \(f\) 在 \([a,b]\) 上不是常值函数。
+
+	由于 \(f\) 在 \([a,b]\) 上连续，故根据\rthm{thm:weierstrass-theorem} 知 \(f\) 在 \([a,b]\) 上必取到它的上确界 \(M\) 与下确界 \(m\)。于是 \(M>m\)。因为 \(f(a)=f(b)\)，所以 \(f\) 不可能在 \(a\) 与 \(b\) 处同时取值 \(M\) 与 \(m\)。因此至少在开区间 \(]a,b[\) 上某一点 \(\xi\) 处取上确界 \(M\) 或下确界 \(m\)。
+
+	比如设 \(f(\xi)=M\)。于是 \(\forall\,x\in[a,b]\)，\(f(x)\le M\)。从而
+	\[
+	\frac{f(x)-f(\xi)}{x-\xi}\begin{cases} \ge0, & \forall\,x\in\ ]a,b[\ \text{且}\ x<\xi; \\ \le0, & \forall\,x\in\ ]a,b[\ \text{且}\ x>\xi. \end{cases}
+	\]
+	由于 \(f\) 在 \(\xi\) 处可导，故
+	\[
+	f'(\xi)=f'(\xi^+)=\lim_{x\to\xi^+}\frac{f(x)-f(\xi)}{x-\xi}\le0,
+	\]
+	\[
+	f'(\xi)=f'(\xi^-)=\lim_{x\to\xi^-}\frac{f(x)-f(\xi)}{x-\xi}\ge0.
+	\]
+	因此 \(f'(\xi)=0\)。
+
+\end{proof}
+
+\textbf{附注}\quad Rolle 定理中的三个条件：\(f\) 在 \([a,b]\) 上的连续性、\(f\) 在 \(]a,b[\) 上的可导性及 \(f(a)=f(b)\) 对保证结论成立都是十分重要的。否则，定理的结论可能不成立。
+
+\begin{sourceexample}{1}
+
+	考虑函数 \(x\longmapsto f(x)=x-[x]\)，\(x\in[0,1]\)。
+
+	
+
+	\(f\) 在 \(]0,1[\) 上可导，\(f(0)=f(1)=0\)，但是 \(\forall\,x\in\ ]0,1[\)，\(f'(x)=1\)。问题就在于 \(f\) 在 \(x=1\) 处不连续。
+
+\end{sourceexample}
+
+\begin{figure}[htbp]
+		\centering
+		\includegraphics[
+		width=.44\linewidth,
+		height=.5\textheight,
+		keepaspectratio
+		]{_page_299_Figure_10a.jpeg}
+		\caption{}
+		\label{fig:6-5}
+	\end{figure}
+
+
+\begin{sourceexample}{2}
+
+	考虑函数
+	\[
+	x\longmapsto f(x)=\begin{cases} x+1, & -1\le x\le0; \\ 1-x, & 0\le x\le1. \end{cases}
+	\]
+
+	
+
+	\(f\) 在 \([-1,1]\) 上连续，\(f(-1)=f(1)=0\)，但也不存在 \(\xi\in\ ]-1,1[\) 使得 \(f'(\xi)=0\)。原因是 \(f\) 在 \(x=0\) 处不可导。
+
+\end{sourceexample}
+
+\begin{figure}[htbp]
+		\centering
+		\includegraphics[
+		width=.44\linewidth,
+		height=.5\textheight,
+		keepaspectratio
+		]{_page_299_Figure_10b.jpeg}
+		\caption{}
+		\label{fig:6-6}
+	\end{figure}
+
+
+\begin{sourceexample}{3}
+
+	考虑函数 \(x\longmapsto f(x)=x\)，\(x\in[0,1]\)。\(f\) 在 \([0,1]\) 上连续，\(f\) 在 \(]0,1[\) 上可导，但同样不存在 \(\xi\in\ ]0,1[\) 使得 \(f'(\xi)=0\)，这是因为 \(f(0)\neq f(1)\)。
+
+\end{sourceexample}
+
+当然也有这样的函数 \(f:[a,b]\to\R\)，它不满足 Rolle 定理中的任一个条件，但 Rolle 定理的结论仍然成立。因此 Rolle 定理的条件是充分的而不是必要的。
+
+\begin{sourceexample}{4}
+
+	考虑函数
+	\[
+	x\longmapsto f(x)=\begin{cases} x, & 0\le x\le1; \\ 2, & 1<x\le2. \end{cases}
+	\]
+
+	
+
+	\(f\) 在 \(x=1\) 处不连续，当然 \(f\) 在 \(x=1\) 处不可导，并且 \(f(0)\neq f(2)\)。然而 \(\forall\,\xi\in\ ]1,2[\)，\(f'(\xi)=0\)。
+
+\end{sourceexample}
+
+\begin{figure}[htbp]
+		\centering
+		\includegraphics[
+		width=.72\linewidth,
+		height=.6\textheight,
+		keepaspectratio
+		]{_page_300_Figure_8.jpeg}
+		\caption{}
+		\label{fig:6-7}
+	\end{figure}
+
+
+Rolle 定理的几何意义十分明显。如果连续函数 \(f:[a,b]\to\R\) 在 \(]a,b[\) 上可导，并且 \(f(a)=f(b)\)，则在函数 \(f\) 所表示的曲线 \(\Gamma\) 上至少存在一点 \(M_0(\xi,f(\xi))\ (\xi\in\ ]a,b[)\)，使得 \(\Gamma\) 在点 \(M_0\) 处的切线 \(T\) 平行于 \(x\) 轴。
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[
+	width=.72\linewidth,
+	height=.6\textheight,
+	keepaspectratio
+	]{_page_301_Figure_1.jpeg}
+	\caption{}
+	\label{fig:6-8}
+\end{figure}
+
+\subsection{Lagrange中值定理}
+
+\begin{mythm}{Lagrange中值定理}{lagrange-mean-value}
+
+	设 \([a,b]\) 是任一有限闭区间，\(f:[a,b]\to\R\) 是任一函数，满足下述条件：
+
+	1) \(f\) 在 \([a,b]\) 上连续，
+
+	2) \(f\) 在 \(]a,b[\) 上可导，
+
+	则存在一点 \(\xi\in\ ]a,b[\) 使得
+	\[
+	f(b)-f(a)=f'(\xi)(b-a).
+	\]
+
+\end{mythm}
+
+\begin{proof}
+
+	考虑辅助函数 \(F:[a,b]\to\R\)
+	\[
+	F(x)=f(x)-\left[f(a)+\frac{f(b)-f(a)}{b-a}(x-a)\right],\quad x\in[a,b].
+	\]
+	显然 \(F\) 在 \([a,b]\) 上连续，在 \(]a,b[\) 上可导，并且 \(F(a)=F(b)\)。根据 Rolle 定理，存在一点 \(\xi\in\ ]a,b[\) 使得 \(F'(\xi)=0\)。此即为
+	\[
+	f'(\xi)=\frac{f(b)-f(a)}{b-a}\quad\text{或}\quad f(b)-f(a)=f'(\xi)(b-a).
+	\]
+
+\end{proof}
+
+Lagrange 中值定理的几何解释是：如果 \(\Gamma\) 是函数 \(f\) 所表示的曲线，则在 \(\Gamma\) 上存在一点 \(M_0(\xi,f(\xi))\)，它异于 \(\Gamma\) 的两个端点 \(A(a,f(a))\)、\(B(b,f(b))\)，使得 \(\Gamma\) 在点 \(M_0\) 处的切线平行于联结点 \(A\) 与 \(B\) 的直线。
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[
+	width=.72\linewidth,
+	height=.6\textheight,
+	keepaspectratio
+	]{_page_302_Figure_1.jpeg}
+	\caption{}
+	\label{fig:6-9}
+\end{figure}
+
+作为 Lagrange 中值定理的一个应用，我们来证明下述重要命题。
+
+\begin{myprop*}{}
+
+	假设 \(I\subset\R\) 是一区间，函数 \(f:I\to\R\) 在 \(I\) 上可导。则 \(f\) 在 \(I\) 上为常值函数的充分必要条件是：
+	\[
+	f'(x)=0,\quad\forall\,x\in I.
+	\]
+
+\end{myprop*}
+
+\begin{proof}
+
+	必要性 设 \(f=c\ (c\in\R)\)，则显然有 \(f'(x)=0\)，\(\forall\,x\in I\)。
+
+	充分性 设 \(f'(x)=0\)，\(\forall\,x\in I\)。我们证明 \(f\) 在 \(I\) 上为常值函数。为此只需证明
+	\[
+	\forall\,x_1,x_2\in I\ \text{且}\ x_1\neq x_2,\qquad f(x_1)=f(x_2).
+	\]
+	事实上，不妨假设 \(x_1<x_2\)，由于 \(f\) 在 \([x_1,x_2]\) 上可导，故由 Lagrange 中值定理知，存在 \(\xi\in\ ]x_1,x_2[\) 使得
+	\[
+	f(x_2)-f(x_1)=f'(\xi)(x_2-x_1).
+	\]
+	但 \(f'(\xi)=0\)，因此 \(f(x_2)-f(x_1)=0\)，即 \(f(x_1)=f(x_2)\)。
+
+\end{proof}
+
+\textbf{推论}\quad \(I\) 如上所述。\(f:I\to\R\) 与 \(g:I\to\R\) 是任意两个在 \(I\) 上可导的函数，并且满足
+\[
+f'(x)=g'(x),\quad\forall\,x\in I.
+\]
+则存在常数 \(c\) 使得
+\[
+f(x)-g(x)=c,\quad\forall\,x\in I.
+\]
+
+\textbf{证明}\quad 因为 \(f'(x)=g'(x)\)，\(\forall\,x\in I\)，所以 \([f(x)-g(x)]'=0\)，\(\forall\,x\in I\)，从而由上述命题知，存在常数 \(c\) 使得
+\[
+f(x)-g(x)=c,\quad\forall\,x\in I.
+\]
+
+\subsection{Cauchy中值定理}
+
+\begin{mythm}{Cauchy中值定理}{cauchy-mean-value}
+
+	设 \([a,b]\) 是任一有限闭区间。\(f,g:[a,b]\to\R\) 是任意两个函数，满足下述条件：
+
+	1) \(f,g\) 在 \([a,b]\) 上连续，
+
+	2) \(f,g\) 在 \(]a,b[\) 上可导，
+
+	3) \(g'(x)\neq0\)，\(\forall\,x\in\ ]a,b[\)。
+
+	则存在一点 \(\xi\in\ ]a,b[\) 使得
+	\[
+	\frac{f(b)-f(a)}{g(b)-g(a)}=\frac{f'(\xi)}{g'(\xi)}.
+	\]
+
+\end{mythm}
+
+\begin{proof}
+
+	首先我们注意到 \(g(b)-g(a)\neq0\)。因为若 \(g(b)-g(a)=0\)，则由 Rolle 定理知，存在 \(\bar x\in\ ]a,b[\)，使得 \(g'(\bar x)=0\)，这与条件 3) 相矛盾。
+
+	现在作辅助函数 \(F:[a,b]\to\R\)：
+	\[
+	F(x)=f(x)-\left[f(a)+\frac{f(b)-f(a)}{g(b)-g(a)}(g(x)-g(a))\right],
+	\]
+	\[
+	\forall\,x\in[a,b].
+	\]
+	则 \(F\) 在 \([a,b]\) 上连续，\(F\) 在 \(]a,b[\) 上可导，并且 \(F(a)=F(b)\)。因此由 Rolle 定理知，存在一点 \(\xi\in\ ]a,b[\) 使得 \(F'(\xi)=0\)，此即为
+	\[
+	0=f'(\xi)-\frac{f(b)-f(a)}{g(b)-g(a)}g'(\xi)\quad\text{或}\quad\frac{f(b)-f(a)}{g(b)-g(a)}=\frac{f'(\xi)}{g'(\xi)}.
+	\]
+
+\end{proof}
+
+关于 Cauchy 中值定理，我们作以下几点说明。
+
+\textbf{附注 1}\quad 若 \(g(x)=x\)，\(\forall\,x\in[a,b]\)，则 Cauchy 中值定理的结论化为
+\[
+\frac{f(b)-f(a)}{b-a}=f'(\xi),\quad\xi\in\ ]a,b[.
+\]
+这正是 Lagrange 中值定理的结论。因此 Cauchy 中值定理是 Lagrange 中值定理的推广。
+
+2) 若我们分别对函数 \(f,g\) 应用 Lagrange 中值定理，则我们只能得到下述形式的等式：
+\[
+\frac{f(b)-f(a)}{g(b)-g(a)}=\frac{f'(\xi_1)(b-a)}{g'(\xi_2)(b-a)}=\frac{f'(\xi_1)}{g'(\xi_2)},\quad\xi_1,\xi_2\in\ ]a,b[.
+\]
+这里 \(\xi_1,\xi_2\) 不一定相等。因此我们不能得到 Cauchy 中值定理中所要求的等式。
+
+3) 若我们在 Cauchy 中值定理中删去条件 3)，则有下述对称形式的等式成立：
+\[
+[f(b)-f(a)]g'(\xi)=[g(b)-g(a)]f'(\xi),\quad\xi\in\ ]a,b[.
+\]
+这是因为，若 \(g(b)-g(a)=0\)，则由 Rolle 定理知存在一点 \(\xi\in\ ]a,b[\)，使得 \(g'(\xi)=0\)，从而
+\[
+[f(b)-f(a)]g'(\xi)=0=[g(b)-g(a)]f'(\xi).
+\]
+若 \(g(b)-g(a)\neq0\)，则只需重复 Cauchy 中值定理的证明，由 \(0=f'(\xi)-\dfrac{f(b)-f(a)}{g(b)-g(a)}g'(\xi)\) 两边同乘以 \(g(b)-g(a)\) 即可。
+
+\subsection{Darboux定理}
+
+\begin{mythm}{Darboux定理}{darboux-theorem}
+
+	设 \(I\subset\R\) 是任一区间，\(f:I\to\R\) 是任一在 \(I\) 上可导的函数，则 \(f'(I)\subset\R\) 也是一区间。
+
+\end{mythm}
+
+\begin{proof}
+
+	为了证明 \(f'(I)\subset\R\) 是区间，我们只需证明：
+	\[
+	\forall\,y,z\in f'(I)\ \text{且}\ y<z\Longrightarrow\ ]y,z[\subset f'(I).
+	\]
+	为此设 \(a,b\in I\) 使得 \(f'(a)=y\)，\(f'(b)=z\)，不妨假设 \(a<b\)。任取 \(\omega\in\ ]y,z[\)，我们来证明至少存在一点 \(\xi\in\ ]a,b[\) 使得 \(f'(\xi)=\omega\)。
+
+	为了书写简单起见，我们就记 \(f\) 为 \(f\) 在区间 \([a,b]\) 上的限制 \(f|_{[a,b]}\)。考虑辅助函数
+	\[
+	F:[a,b]\to\R,\quad\forall\,x\in[a,b],\quad F(x)=f(x)-\omega x.
+	\]
+	函数 \(F\) 在 \([a,b]\) 上连续，并且可导。根据连续函数性质知，\(F\) 在 \([a,b]\) 上达到它的最小值。
+
+	显然 \(F\) 不可能在 \(a\) 与 \(b\) 处取到其最小值。否则
+	\[
+	F'(a)=\lim_{x\to a^+}\frac{F(x)-F(a)}{x-a}\ge0,\qquad
+	F'(b)=\lim_{x\to b^-}\frac{F(x)-F(b)}{x-b}\le0,
+	\]
+	这与 \(F'(a)=f'(a)-\omega<0\)，\(F'(b)=f'(b)-\omega>0\)，相矛盾。
+
+	因此存在一内点 \(\xi\in\ ]a,b[\) 使得 \(F(\xi)\) 为 \(F\) 在 \([a,b]\) 上的最小值。于是
+	\[
+	F'(\xi)=\lim_{x\to\xi^+}\frac{F(x)-F(\xi)}{x-\xi}\ge0,\qquad
+	F'(\xi)=\lim_{x\to\xi^-}\frac{F(x)-F(\xi)}{x-\xi}\le0.
+	\]
+	从而 \(F'(\xi)=0\) 即 \(f'(\xi)=\omega\) 或 \(\omega\in f'(I)\)。
+
+	由 \(\omega\in\ ]y,z[\) 的任意性知，\(]y,z[\subset f'(I)\)。因此 \(f'(I)\subset\R\) 是一区间。
+
+\end{proof}
+
+\textbf{推论}\quad 设 \(I\subset\R\) 是任一区间。若函数 \(f:I\to\R\) 在 \(I\) 上可导，并且 \(\forall\,x\in I,\ f'(x)\neq0\)，则
+\[
+\forall\,x\in I,\ f'(x)>0\ \text{或}\ \forall\,x\in I,\ f'(x)<0.
+\]
+
+\subsection*{习 题}
+
+\begin{exercise}
+	\item 设函数 \(f,g:[a,b]\to\R\) 满足下述条件：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(f,g\) 在 \([a,b]\) 上连续。
+		\item \(f,g\) 在 \(]a,b[\) 上可导，并且 \((f')^2+(g')^2\neq0\)。
+		\item \(g(a)\neq g(b)\)。
+	\end{enumerate}
+	证明：存在 \(\xi\in\ ]a,b[\) 使得
+	\[
+	\frac{f(b)-f(a)}{g(b)-g(a)}=\frac{f'(\xi)}{g'(\xi)}.
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(f,g:[a,b]\to\R\) 满足下述条件：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(f,g\) 在 \([a,b]\) 上连续，
+		\item \(f,g\) 在 \(]a,b[\) 上可导，并且 \(g'\neq0\)。
+	\end{enumerate}
+	证明：存在 \(\xi\in\ ]a,b[\) 使得
+	\[
+	\frac{f(\xi)-f(a)}{g(b)-g(\xi)}=\frac{f'(\xi)}{g'(\xi)}.
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(f,g,h:[a,b]\to\R\) 满足下述条件：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(f,g,h\) 在 \([a,b]\) 上连续，
+		\item \(f,g,h\) 在 \(]a,b[\) 上可导。
+	\end{enumerate}
+	证明：存在 \(\xi\in\ ]a,b[\) 使得
+	\[
+	\begin{vmatrix} f(a) & f(b) & f'(\xi) \\ g(a) & g(b) & g'(\xi) \\ h(a) & h(b) & h'(\xi) \end{vmatrix}=0.
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 证明：在 \(e^x\sin x=1\) 的两个实根中至少存在 \(e^x\cos x=-1\) 的一个实根。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:[a,b]\to\R\) 是任一函数。\(\alpha>0\)。我们称 \(f\) 是 \(\alpha\) 次 Lipschitz 函数，如果存在 \(k>0\) 使得
+	\[
+	|f(x)-f(y)|\le k|x-y|^\alpha,\quad\forall\,x,y\in[a,b].
+	\]
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：若 \(f\) 在 \([a,b]\) 上是连续可导的，则 \(f\) 是 1 次 Lipschitz 函数。
+		\item 证明：若 \(f\) 在 \([a,b]\) 上是可导的 1 次 Lipschitz 函数，则 \(f'\) 在 \([a,b]\) 上有界。
+		\item 证明：若 \(f\) 是 \(\alpha>1\) 次 Lipschitz 函数，则 \(f\) 在 \([a,b]\) 上为常值函数。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:\R\to\R\) 是任一在 \(\R\) 上可导的函数，并且 \(\lim_{x\to+\infty}f(x)=\lim_{x\to-\infty}f(x)\)（有限或正负无穷大）。证明：存在 \(\xi\in\R\) 使得 \(f'(\xi)=0\)。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(a\in\R\)，\(f:[a,+\infty[\) 是任一函数，满足条件：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(f\) 在 \([a,+\infty[\) 上连续，
+		\item \(f\) 在 \(]a,+\infty[\) 上可导，
+		\item \(\lim_{x\to+\infty}f(x)=f(a)\)。
+	\end{enumerate}
+	证明：存在 \(\xi\in\ ]a,+\infty[\) 使得 \(f'(\xi)=0\)。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \([a,b]\subset\R\)，\(f:[a,b]\to\R\) 满足下述条件：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(f\) 在 \([a,b]\) 上连续，
+		\item \(f\) 在 \(]a,b[\) 上可导，
+		\item \(\lim_{x\to a^+}f(x)=\lim_{x\to b^-}f(x)=+\infty\)。
+	\end{enumerate}
+	证明：\(\forall\,A\in\R\)，存在 \(\xi\in\ ]a,b[\) 使得 \(f'(\xi)=A\)。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(a\in\R\)，\(h>0\)，函数 \(f:[a,a+2h]\to\R\) 在 \([a,a+2h]\) 上 2 次可导。证明：存在 \(\theta\in\ ]0,1[\) 使得
+	\[
+	f(a)-2f(a+h)+f(a+2h)=h^2f''(a+2\theta h).
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(a,b\in\R\) 且 \(a<b\)，\(f:\ ]a,b[\to\R\) 是任一在 \(]a,b[\) 上可导的函数。假设 \(\lim_{x\to b^-}f(x)=+\infty\)。证明：若 \(f'\) 在 \(]a,b[\) 上单调上升，则 \(\lim_{x\to b^-}f'(x)=+\infty\)；若 \(f'\) 不是单调上升的，则 \(\lim_{x\to b^-}f'(x)=+\infty\) 可以不成立。
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(f:[a,b]\to\R\) 在 \([a,b]\) 上可导。证明：存在一点 \(\xi\in\ ]a,b[\) 使得
+	\[
+	f(\xi)-\xi f'(\xi)=\frac1{a-b}\begin{vmatrix} a & b \\ f(a) & f(b) \end{vmatrix}.
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(f:[-a,a]\to\R\) 在 \(]-a,a[\) 上 \(n\) 次可导，并且 \(f^{(k)}(0)=0\ (k=0,1,\cdots,n-1)\)。证明：\(\forall\,x\in\ ]-a,a[\) 且 \(x\neq0\)，存在 \(0<\theta<1\) 使得
+	\[
+	\frac{f(x)}{x^n}=\frac{f^{(n)}(\theta x)}{n!}.
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(f:[a,b]\to\R\) 在 \(]a,b[\) 上 \(n+1\) 次可导，并且 \(f^{(k)}(a)=f^{(k)}(b)=0\ (k=0,1,\cdots,n)\)。证明：存在 \(\xi\in\ ]a,b[\) 使得 \(f^{(n+1)}(\xi)=f(\xi)\)。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:\ ]a,b[\to\R\) 是任一在 \(]a,b[\) 上可导的函数。并且 \(f\) 的零点集至少有一个聚点 \(a_0\in\ ]a,b[\)。
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：\(f'(a_0)=0\)，并且 \(f'\) 的零点集也有聚点 \(a_0\)。
+		\item 若 \(f\) 在 \(]a,b[\) 上 \(p\) 次可导 \((p\ge1)\)，证明：\(f\) 的各阶导函数 \(f^{(k)}\ (k=1,2,\cdots,p)\) 都以 \(a_0\) 为其零点。
+		\item 证明：不存在任何的多项式函数使得它与函数 \(x\longmapsto e^x\) 在 \(\R\) 的任何无限点集 \(A\) 上取相同的值。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(-\infty<a_1<a_2<\cdots<a_n<+\infty\)，\(f:[a_1,a_n]\to\R\) 在 \([a_1,a_n]\) 上是 \(C^{n-1}\) 类的 \((n\ge2)\)，在 \(]a_1,a_n[\) 上有 \(n\) 阶导数，并且 \(f(a_i)=0\)，\(i=1,2,\cdots,n\)。证明：
+	\[
+	(\forall\,x\in[a_1,a_n])(\exists\,\xi\in\ ]a_1,a_n[)\ \text{使得}
+	\]
+	\[
+	f(x)=\frac{(x-a_1)(x-a_2)\cdots(x-a_n)}{n!}f^{(n)}(\xi).
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:[a,b]\to\R\) 在 \([a,b]\) 上可导，\(f':[a,b]\to\R\) 在 \([a,b]\) 上可积，令
+	\[
+	\delta_n=\int_a^b f(x)dx-\sum_{k=1}^n\frac{b-a}{n}f\left(a+k\frac{b-a}{n}\right),
+	\]
+	试计算极限 \(\displaystyle\lim_{n\to+\infty}n\delta_n\)。
+\end{exercise}
+
+\section{导数的应用}
+
+函数导数的应用是多方面的，下面我们介绍它的三个方面的应用。
+
+\subsection{函数单调性的研究}
+
+\begin{mythm}{}{derivative-monotonicity}
+
+	设 \(I\subset\R\) 是任一区间。\(f:I\to\R\) 是任一在 \(I\) 上可导的函数，则下述结论成立：
+
+	1) \(f\) 在 \(I\) 上单调上升（下降）\(\Longleftrightarrow\forall\,x\in I\)，\(f'(x)\ge0\ (\le0)\)。
+
+	2) \(f\) 在 \(I\) 上严格单调上升（下降），若 \(\forall\,x\in I\)，\(f'(x)>0\ (<0)\)。
+
+\end{mythm}
+
+\begin{proof}
+
+	我们只对上升情形进行证明。下降情形的证明完全类似。
+
+	设 \(x_1,x_2\in I\) 且 \(x_1<x_2\)。由 Lagrange 中值定理，我们有
+	\[
+	f(x_2)-f(x_1)=f'(\xi)(x_2-x_1),\quad\xi\in\ ]x_1,x_2[. \tag{*}
+	\]
+	1) 若 \(f\) 在 \(I\) 上单调上升，则 \(f(x_2)\ge f(x_1)\)。于是
+	\[
+	f'(x_1)=\lim_{x_2\to x_1^+}\frac{f(x_2)-f(x_1)}{x_2-x_1}\ge0.
+	\]
+	由 \(x_1\in I\) 的任意性知，\(\forall\,x\in I\)，\(f'(x)\ge0\)。
+
+	反之若 \(\forall\,x\in I\)，\(f'(x)\ge0\)，则由 \((*)\) 知，\(f(x_2)\ge f(x_1)\)，从而 \(f\) 在 \(I\) 上单调上升。
+
+	2) 若 \(\forall\,x\in I\)，\(f'(x)>0\)，则由 \((*)\) 式推出 \(f(x_2)>f(x_1)\)。因此 \(f\) 在 \(I\) 上严格单调上升。
+
+\end{proof}
+
+\textbf{注意}\quad 即使 \(f:I\to\R\) 在 \(I\) 上是严格单调上升的可导函数，也不一定有：\(\forall\,x\in I,\ f'(x)>0\)。
+
+为此，考虑函数 \(x\longmapsto f(x)=x^3\)，\(x\in\R\)。
+
+因为 \(f'(x)=3x^2>0\)，\(\forall\,x\in\R-\{0\}\)。所以 \(f\) 在 \(]-\infty,0[\) 与 \(]0,+\infty[\) 上是严格单调上升的。并且
+\[
+y^3<0<x^3,\quad\forall\,x\in\ ]0,+\infty[,\ \forall\,y\in\ ]-\infty,0[.
+\]
+故此函数 \(f\) 在 \(\R\) 上是严格单调上升的。然而，\(f'(0)=0\)。
+
+下面我们举几个应用\rthm{thm:derivative-monotonicity} 的例子。
+
+\begin{sourceexample}{1}
+
+	证明下述两个不等式成立：
+
+	1) \(x<\operatorname{tg}x\)，\(\forall\,x\in\left]0,\dfrac\pi2\right[\)，
+
+	2) \(\dfrac2\pi x<\sin x<x\)，\(\forall\,x\in\left]0,\dfrac\pi2\right[\)。
+
+	为此我们定义
+	\[
+	f(x)=\operatorname{tg}x-x,\quad\forall\,x\in\left[0,\frac\pi2\right[,
+	\]
+	\[
+	g(x)=x-\sin x,\quad\forall\,x\in\left[0,\frac\pi2\right[,
+	\]
+	\[
+	h(x)=\begin{cases} \dfrac{\sin x}{x}-\dfrac2\pi, & \forall\,x\in\left]0,\dfrac\pi2\right], \\[6pt] 1-\dfrac2\pi, & x=0. \end{cases}
+	\]
+	显然我们只需证明：\(f(x)>0,\ g(x)>0,\ h(x)>0\)，\(\forall\,x\in\left]0,\dfrac\pi2\right[\)。
+
+	对于 \(f\)：由于
+	\[
+	f'(x)=\frac1{\cos^2x}-1=\frac{1-\cos^2x}{\cos^2x}>0,\quad\forall\,x\in\left]0,\frac\pi2\right[,
+	\]
+	故 \(f\) 在 \(\left[0,\dfrac\pi2\right[\) 上是严格单调上升的。而 \(f(0)=0\)，因此 \(f(x)>0\)，\(\forall\,x\in\left]0,\dfrac\pi2\right[\)，此即表示 \(x<\operatorname{tg}x\)，\(\forall\,x\in\left]0,\dfrac\pi2\right[\)。
+
+	对于 \(g\)：由于 \(g'(x)=1-\cos x>0\)，\(\forall\,x\in\left]0,\dfrac\pi2\right[\)，故 \(g\) 在 \(\left]0,\dfrac\pi2\right[\) 上是严格单调上升的，而 \(g(0)=0\)，因此 \(g(x)>0\)，\(\forall\,x\in\left]0,\dfrac\pi2\right[\)，即 \(\sin x<x\)，\(\forall\,x\in\left]0,\dfrac\pi2\right[\)。
+
+	对于 \(h\)：由于
+	\[
+	h'(x)=\left(\frac{\sin x}{x}\right)'=\frac{\cos x(x-\operatorname{tg}x)}{x^2}<0,\quad\forall\,x\in\left]0,\frac\pi2\right[,
+	\]
+	故 \(h\) 在 \(\left]0,\dfrac\pi2\right[\) 上是严格单调下降的，而 \(h\left(\dfrac\pi2\right)=0\)，因此 \(h(x)>0\)，\(\forall\,x\in\left]0,\dfrac\pi2\right[\)，即
+	\[
+	\frac{\sin x}{x}-\frac2\pi>0\quad\text{或}\quad\frac2\pi x<\sin x,\quad\forall\,x\in\left]0,\frac\pi2\right[.
+	\]
+	结合对 \(g\) 与 \(h\) 的讨论，即证得
+	\[
+	\frac2\pi x<\sin x<x,\quad\forall\,x\in\left]0,\frac\pi2\right[.
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{2}
+
+	设函数 \(f:[a,+\infty[\to\R\ (a\in\R)\) 满足条件：
+
+	1) \(f\) 在 \([a,+\infty[\) 上可导且 \(f(a)<0\)，
+
+	2) 存在常数 \(k>0\) 使得 \(f'(x)>k\)，\(\forall\,x\in\ ]a,+\infty[\)。则方程 \(f(x)=0\) 在开区间 \(\left]a,a-\dfrac{f(a)}k\right[\) 上存在唯一的一个实根。
+
+	事实上，由 \(f'(x)>0\)，\(\forall\,x\in\ ]a,+\infty[\)，故 \(f\) 在 \(]a,+\infty[\) 上是严格单调上升的。由于 \(f(a)<0\)，若我们能证明 \(f\left(a-\dfrac{f(a)}k\right)>0\)，则由连续函数性质知，存在唯一的 \(\xi\in\left]a,a-\dfrac{f(a)}k\right[\) 使得 \(f(\xi)=0\)。
+
+	为此我们注意到 \(f\) 在 \(]a,+\infty[\) 上可导，故由 Lagrange 中值定理得到
+	\[
+	f\left(a-\frac{f(a)}k\right)-f(a)=f'(\xi)\left[a-\frac{f(a)}k-a\right]
+	\]
+	\[
+	=f'(\xi)\cdot\left(-\frac{f(a)}k\right)>k\cdot\left(\frac{-f(a)}k\right)=-f(a),
+	\]
+	因此 \(f\left(a-\dfrac{f(a)}k\right)>0\)。
+
+\end{sourceexample}
+
+\begin{sourceexample}{3}
+
+	设函数 \(f:[0,1]\to\R\) 在 \([0,1]\) 上连续，并且 \(|f(x)|<1\)，\(\forall\,x\in[0,1]\)。证明：方程 \(2x-\displaystyle\int_0^x f(t)dt=1\) 在 \([0,1]\) 上存在唯一的解。
+
+	令 \(F(x)=2x-\displaystyle\int_0^x f(t)dt-1\)，\(\forall\,x\in[0,1]\)。则函数 \(F:[0,1]\to\R\) 在 \([0,1]\) 上连续可导，并且
+	\[
+	F'(x)=2-f(x)>0,\quad\forall\,x\in[0,1].
+	\]
+	因此函数 \(F\) 在 \([0,1]\) 上严格单调上升。由于
+	\[
+	F(0)=-1<0,\qquad F(1)=2-\int_0^1 f(t)dt-1>0,
+	\]
+	故存在唯一的 \(\xi\in\ ]0,1[\) 使得 \(F(\xi)=0\)。此即表明方程 \(2x-\displaystyle\int_0^x f(t)dt=1\) 在 \([0,1]\) 上存在唯一的解。
+
+\end{sourceexample}
+
+\subsection{函数的凸凹性研究}
+
+\begin{mydef*}{}
+
+	设 \(E\subset\R^2\) 是任一非空集合，我们称 \(E\) 是凸的，若 \(A,B\in E\)，则连结 \(A,B\) 两点的线段 \(\overline{AB}\subset E\)。
+
+\end{mydef*}
+
+现在我们设 \(A=(x_1,y_1)\)，\(B=(x_2,y_2)\)。并规定：
+\[
+\forall\,\alpha,\beta\in\R,\quad\alpha A+\beta B\triangleq\alpha(x_1,y_1)+\beta(x_2,y_2)=(\alpha x_1+\beta x_2,\ \alpha y_1+\beta y_2),
+\]
+则连结 \(A,B\) 两点的线段
+\[
+\overline{AB}=\{\alpha A+\beta B\mid\alpha,\beta\in[0,1],\ \alpha+\beta=1\}
+\]
+\[
+=\{(1-t)A+tB\mid t\in[0,1]\}.
+\]
+因此
+\[
+E\ \text{是凸的}\Longleftrightarrow\forall\,A,B\in E,\ \forall\,\alpha,\beta\in[0,1],\ \alpha+\beta=1,\quad\alpha A+\beta B\in E
+\]
+\[
+\Longleftrightarrow\forall\,A,B\in E,\ \forall\,t\in[0,1],\quad(1-t)A+tB\in E.
+\]
+
+\begin{sourceexample}{4}
+
+	平面上的三角形、长方形、圆盘、椭圆盘都是平面凸集，而平面上的五角星不是平面凸集（图 6-10）。
+
+	
+
+	
+
+\end{sourceexample}
+
+\begin{figure}[htbp]
+		\centering
+		\includegraphics[
+		width=.72\linewidth,
+		height=.5\textheight,
+		keepaspectratio
+		]{_page_312_Picture_9.jpeg}
+		\caption{}
+		\label{fig:6-10}
+	\end{figure}
+
+\begin{figure}[htbp]
+		\centering
+		\includegraphics[
+		width=.72\linewidth,
+		height=.5\textheight,
+		keepaspectratio
+		]{_page_312_Figure_11.jpeg}
+		\caption{}
+		\label{fig:6-11}
+	\end{figure}
+
+
+设 \(I\subset\R\) 是任一区间，\(f:I\to\R\) 是任一函数。我们定义下述集合
+\[
+E=\{(x,y)\in\R^2\mid x\in I,\ y\ge f(x)\}.
+\]
+首先我们证明下述引理。
+
+\begin{mylemma*}{}
+
+	设 \(I\subset\R\) 是任一区间，\(f:I\to\R\) 是任一函数，集 \(E\) 如上所定义。则下述三个结论互相等价：
+
+	1) \(E\) 是凸集。
+
+	2) \(\forall\,x_1,x_2\in I,\ \forall\,\alpha_1,\alpha_2\in[0,1]\) 且 \(\alpha_1+\alpha_2=1\)，
+	\[
+	f(\alpha_1x_1+\alpha_2x_2)\le\alpha_1f(x_1)+\alpha_2f(x_2).
+	\]
+
+	3) \(\forall\,x_1,x_2,x\in I\) 且 \(x_1<x<x_2\)，
+	\[
+	\frac{f(x)-f(x_1)}{x-x_1}\le\frac{f(x_2)-f(x_1)}{x_2-x_1}\le\frac{f(x_2)-f(x)}{x_2-x}.
+	\]
+
+\end{mylemma*}
+
+\begin{proof}
+
+	1) \(\Longrightarrow\) 2) 设 \(E\) 是凸集。\(x_1,x_2\in I,\ x_1\le x_2,\ \alpha_1,\alpha_2\in[0,1]\) 且 \(\alpha_1+\alpha_2=1\)。那末 \(x_1\le\alpha_1x_1+\alpha_2x_2\le x_2\)。
+
+	令 \(M_1=(x_1,f(x_1)),\ M_2=(x_2,f(x_2))\)，则 \(M_1,M_2\) 是函数 \(f\) 所表示的曲线 \(\Gamma\) 上的两点。因此 \(M_1,M_2\in E\)。
+
+	连结 \(M_1\) 与 \(M_2\) 的直线段 \(L\) 的方程为
+	\[
+	y=f(x_1)+\frac{f(x_2)-f(x_1)}{x_2-x_1}(x-x_1),\quad x\in[x_1,x_2].
+	\]
+	直接计算可知，\(L\) 上对应于 \(x=\alpha_1x_1+\alpha_2x_2\) 的点 \(\overline M\) 为
+	\[
+	\overline M=(\alpha_1x_1+\alpha_2x_2,\ \alpha_1f(x_1)+\alpha_2f(x_2))
+	\]
+	\[
+	=\alpha_1(x_1,f(x_1))+\alpha_2(x_2,f(x_2))=\alpha_1M_1+\alpha_2M_2,
+	\]
+	由于 \(E\) 是凸的，故 \(\overline M\in E\)，此即表明
+	\[
+	f(\alpha_1x_1+\alpha_2x_2)\le\alpha_1f(x_1)+\alpha_2f(x_2).
+	\]
+	2) \(\Longrightarrow\) 3) 假设 2) 成立，并且 \(x_1,x_2,x\in I,\ x_1<x<x_2\)。于是存在 \(t\in\ ]0,1[\) 使得 \(x=(1-t)x_1+tx_2\)。由此得到 \(t=\dfrac{x-x_1}{x_2-x_1}\)。根据假设，我们有
+	\[
+	f(x)=f((1-t)x_1+tx_2)\le(1-t)f(x_1)+tf(x_2)
+	\]
+	\[
+	=\frac{x_2-x}{x_2-x_1}f(x_1)+\frac{x-x_1}{x_2-x_1}f(x_2),
+	\]
+	因此
+	\[
+	f(x)-f(x_1)\le\left(\frac{x_2-x}{x_2-x_1}-1\right)f(x_1)+\frac{x-x_1}{x_2-x_1}f(x_2)=\frac{x-x_1}{x_2-x_1}[f(x_2)-f(x_1)],
+	\]
+	\[
+	f(x_2)-f(x)\ge f(x_2)-\frac{x_2-x}{x_2-x_1}f(x_1)-\frac{x-x_1}{x_2-x_1}f(x_2)
+	\]
+	\[
+	=-\frac{x_2-x}{x_2-x_1}f(x_1)+\left(1-\frac{x-x_1}{x_2-x_1}\right)f(x_2)=\frac{x_2-x}{x_2-x_1}[f(x_2)-f(x_1)].
+	\]
+	由这两个不等式立即推得
+	\[
+	\frac{f(x)-f(x_1)}{x-x_1}\le\frac{f(x_2)-f(x_1)}{x_2-x_1}\le\frac{f(x_2)-f(x)}{x_2-x}.
+	\]
+	3) \(\Longrightarrow\) 1) 设 \(N_1=(x_1,y_1),\ N_2=(x_2,y_2)\in E\)。我们证明：连结 \(N_1,N_2\) 两点的直线段 \(l\) 位于 \(E\) 内。
+
+	由 \(E\) 的定义知，\(y_1\ge f(x_1),\ y_2\ge f(x_2)\)。因此连结点 \(M_1=(x_1,f(x_1))\) 与点 \(M_2=(x_2,f(x_2))\) 的直线段 \(L\) 位于直线段 \(l\) 的下方（如图 6-11 所示）。为了证明 \(l\) 位于 \(E\) 内，我们只需证明 \(L\) 位于 \(E\) 内即可。
+
+	事实上，由假设对 \(x_1,x_2,x\in I\) 且 \(x_1<x<x_2\) 成立不等式
+	\[
+	\frac{f(x)-f(x_1)}{x-x_1}\le\frac{f(x_2)-f(x_1)}{x_2-x_1}\le\frac{f(x_2)-f(x)}{x_2-x},
+	\]
+	故由左边不等式得到
+	\[
+	f(x_1)+\frac{f(x_2)-f(x_1)}{x_2-x_1}(x-x_1)\ge f(x),
+	\]
+	此即表明点 \(\left(x,\ f(x_1)+\dfrac{f(x_2)-f(x_1)}{x_2-x_1}(x-x_1)\right)\in E\)，而这一点正好是直线段 \(L\) 上的点，由 \(x\in\ ]x_1,x_2[\) 的任意性知，\(L\) 整个地位于 \(E\) 内。因此 \(E\) 是凸集。
+
+\end{proof}
+
+根据上述引理，现在我们可以给出关于凸函数的下述定义。
+
+\begin{mydef*}{}
+
+	设 \(I\subset\R\) 是任一区间，\(f:I\to\R\) 是任一函数。
+
+	1) 我们称 \(f\) 是凸的，如果
+	\[
+	\forall\,x_1,x_2\in I,\quad\forall\,\alpha_1,\alpha_2\in[0,1]\ \text{且}\ \alpha_1+\alpha_2=1
+	\]
+	\[
+	\Longrightarrow f(\alpha_1x_1+\alpha_2x_2)\le\alpha_1f(x_1)+\alpha_2f(x_2).
+	\]
+
+	2) 我们称 \(f\) 是凹的，如果函数 \(-f\) 是凸的。
+
+\end{mydef*}
+
+\begin{sourceexample}{5}
+
+	函数 \(x\longmapsto x^2\)，\(x\in\R\) 是凸的。
+
+	事实上，设 \(x_1,x_2\in\R\)，\(\alpha_1,\alpha_2\in[0,1]\) 且 \(\alpha_1+\alpha_2=1\)，则
+	\[
+	(\alpha_1x_1+\alpha_2x_2)^2=\alpha_1^2x_1^2+\alpha_2^2x_2^2+2\alpha_1\alpha_2x_1x_2
+	\]
+	\[
+	\le\alpha_1^2x_1^2+\alpha_2^2x_2^2+\alpha_1\alpha_2(x_1^2+x_2^2)
+	\]
+	\[
+	=(\alpha_1^2+\alpha_1\alpha_2)x_1^2+(\alpha_2^2+\alpha_1\alpha_2)x_2^2
+	\]
+	\[
+	=\alpha_1(\alpha_1+\alpha_2)x_1^2+\alpha_2(\alpha_1+\alpha_2)x_2^2=\alpha_1x_1^2+\alpha_2x_2^2.
+	\]
+	因此函数 \(x\longmapsto x^2\)，\(x\in\R\) 是凸的。
+
+\end{sourceexample}
+
+下面我们给出凸函数的另一个等价定义即 Jensen 不等式，它本身也有其重要的应用价值。
+
+\begin{mythm}{Jensen不等式}{jensen-inequality}
+
+	函数 \(f:I\to\R\) 是凸的，当且仅当：\(\forall\,x_i\in I\)，\(\forall\,\alpha_i\in[0,1]\ (i=1,2,\cdots,n)\) 且 \(\sum_{i=1}^n\alpha_i=1\) 有
+	\[
+	f(\alpha_1x_1+\alpha_2x_2+\cdots+\alpha_nx_n)\le\alpha_1f(x_1)+\alpha_2f(x_2)+\cdots+\alpha_nf(x_n). \tag{*}
+	\]
+
+\end{mythm}
+
+\begin{proof}
+
+	若不等式 \((*)\) 成立，则取 \(n=2\) 时表明 \(f\) 是凸的。
+
+	反之，设 \(f\) 是凸的。我们对 \(n\) 用数学归纳法证明。
+
+	当 \(n=2\) 时，不等式 \((*)\) 即为凸函数的定义。
+
+	现在假设 \(n=k\) 时不等式 \((*)\) 成立。我们来证明不等式 \((*)\) 对 \(n=k+1\) 也成立。
+
+	设 \(x_1,x_2,\cdots,x_k,x_{k+1}\in I\)，\(\alpha_1,\alpha_2,\cdots,\alpha_k,\alpha_{k+1}\in[0,1]\) 并且 \(\alpha_1+\alpha_2+\cdots+\alpha_k+\alpha_{k+1}=1\)。不失一般性，可以假设
+	\[
+	\alpha_1+\alpha_2+\cdots+\alpha_k\neq0.
+	\]
+	于是由归纳法假设我们有
+	\[
+	f\left(\frac{\alpha_1}{\alpha_1+\cdots+\alpha_k}x_1+\cdots+\frac{\alpha_k}{\alpha_1+\cdots+\alpha_k}x_k\right)
+	\]
+	\[
+	\le\sum_{i=1}^k\frac{\alpha_i}{\alpha_1+\cdots+\alpha_k}f(x_i),
+	\]
+	因此
+	\[
+	f(\alpha_1x_1+\cdots+\alpha_kx_k+\alpha_{k+1}x_{k+1})
+	\]
+	\[
+	=f\left[(\alpha_1+\cdots+\alpha_k)\left(\frac{\alpha_1}{\alpha_1+\cdots+\alpha_k}x_1+\cdots+\frac{\alpha_k}{\alpha_1+\cdots+\alpha_k}x_k\right)+\alpha_{k+1}x_{k+1}\right]
+	\]
+	\[
+	\le(\alpha_1+\cdots+\alpha_k)f\left(\frac{\alpha_1}{\alpha_1+\cdots+\alpha_k}x_1+\cdots+\frac{\alpha_k}{\alpha_1+\cdots+\alpha_k}x_k\right)+\alpha_{k+1}f(x_{k+1})
+	\]
+	\[
+	\le(\alpha_1+\cdots+\alpha_k)\left[\frac{\alpha_1}{\alpha_1+\cdots+\alpha_k}f(x_1)+\cdots+\frac{\alpha_k}{\alpha_1+\cdots+\alpha_k}f(x_k)\right]+\alpha_{k+1}f(x_{k+1})
+	\]
+	\[
+	=\alpha_1f(x_1)+\cdots+\alpha_kf(x_k)+\alpha_{k+1}f(x_{k+1}).
+	\]
+	此即表明不等式 \((*)\) 对 \(n=k+1\) 成立。因此由数学归纳法知不等式 \((*)\) 对任意的 \(n\in\N\) 都成立。
+
+\end{proof}
+
+作为 Jensen 不等式的应用，我们来证明下面几个重要不等式。
+
+\textbf{重要不等式}\quad 设 \(a_1,a_2,\cdots,a_n,b_1,b_2,\cdots,b_n\) 是任意 \(2n\) 个非零实数，\(p>0,q>0\)。
+
+1) 若 \(a_i>0\ (i=1,2,\cdots,n)\)，则
+\[
+\frac{n}{\dfrac1{a_1}+\dfrac1{a_2}+\cdots+\dfrac1{a_n}}\le\sqrt[n]{a_1a_2\cdots a_n}\le\frac{a_1+a_2+\cdots+a_n}{n},
+\]
+2) 若 \(\dfrac1p+\dfrac1q=1\)，则下述 Hölder 不等式成立：
+\[
+\sum_{i=1}^n|a_ib_i|\le\left(\sum_{i=1}^n|a_i|^p\right)^{\frac1p}\left(\sum_{i=1}^n|b_i|^q\right)^{\frac1q},
+\]
+3) 若 \(p>1\)，则下述 Minkowski 不等式成立：
+\[
+\left(\sum_{i=1}^n|a_i+b_i|^p\right)^{\frac1p}\le\left(\sum_{i=1}^n|a_i|^p\right)^{\frac1p}+\left(\sum_{i=1}^n|b_i|^p\right)^{\frac1p}.
+\]
+
+\textbf{证明}\quad 1) 因为自然对数函数 \(x\longmapsto\log x\)，\(x\in\R_*^+\) 是凹的\footnote{这里我们可以先从它们的几何图形看出它们的凸凹性，严格证明见例 6。}，故 \(\forall\,a_i>0\)，\(\alpha_i\ge0\ (i=1,2,\cdots,n)\) 且 \(\alpha_1+\alpha_2+\cdots+\alpha_n=1\)，由 Jensen 不等式我们有
+\[
+\alpha_1\log a_1+\alpha_2\log a_2+\cdots+\alpha_n\log a_n\le\log(\alpha_1a_1+\alpha_2a_2+\cdots+\alpha_na_n).
+\]
+此即为
+\[
+a_1^{\alpha_1}a_2^{\alpha_2}\cdots a_n^{\alpha_n}\le\alpha_1a_1+\alpha_2a_2+\cdots+\alpha_na_n.
+\]
+若特别取 \(\alpha_1=\alpha_2=\cdots=\alpha_n=\dfrac1n\)，则上述不等式就是
+\[
+\sqrt[n]{a_1a_2\cdots a_n}\le\frac{a_1+a_2+\cdots+a_n}{n}.
+\]
+利用此不等式我们得到
+\[
+\frac{n}{\dfrac1{a_1}+\dfrac1{a_2}+\cdots+\dfrac1{a_n}}=\frac1{\dfrac{\frac1{a_1}+\frac1{a_2}+\cdots+\frac1{a_n}}{n}}\le\frac1{\sqrt[n]{\dfrac1{a_1}\dfrac1{a_2}\cdots\dfrac1{a_n}}}=\sqrt[n]{a_1a_2\cdots a_n}.
+\]
+因此
+\[
+\frac{n}{\dfrac1{a_1}+\dfrac1{a_2}+\cdots+\dfrac1{a_n}}\le\sqrt[n]{a_1a_2\cdots a_n}\le\frac{a_1+a_2+\cdots+a_n}{n}.
+\]
+2) 因为 \(p>0,q>0\) 且 \(\dfrac1p+\dfrac1q=1\)，所以 \(p>1\)。由于幂函数 \(x\longmapsto x^p\)，\(x\in\R_*\) 是凸函数\footnote{这里我们可以先从它们的几何图形看出它们的凸凹性。严格证明见例 6。}，故 \(\forall\,x_i>0\)，\(\alpha_i\ge0\ (i=1,2,\cdots,n)\) 且 \(\alpha_1+\alpha_2+\cdots+\alpha_n=1\)，由 Jensen 不等式有
+\[
+\left(\sum_{i=1}^n\alpha_ix_i\right)^p\le\sum_{i=1}^n\alpha_ix_i^p.
+\]
+现在根据假设 \(\forall\,i=1,2,\cdots,n,\ a_i\neq0,\ b_i\neq0\)。我们可取
+\[
+x_i=\frac{|a_i|(|b_1|^q+|b_2|^q+\cdots+|b_n|^q)}{|b_i|^{\frac1{p-1}}},
+\]
+\[
+\alpha_i=\frac{|b_i|^q}{|b_1|^q+|b_2|^q+\cdots+|b_n|^q},
+\]
+\[
+(i=1,2,\cdots,n)
+\]
+由于 \(q=\dfrac{p}{p-1}\)，故我们得到
+\[
+\left(\sum_{i=1}^n|a_ib_i|\right)^p\le\sum_{i=1}^n|b_i|^{q-\frac p{p-1}}\cdot|a_i|^p\cdot\left(\sum_{i=1}^n|b_i|^q\right)^{p-1}
+\]
+\[
+=\left(\sum_{i=1}^n|a_i|^p\right)\cdot\left(\sum_{i=1}^n|b_i|^q\right)^{p-1},
+\]
+或
+\[
+\sum_{i=1}^n|a_ib_i|\le\left(\sum_{i=1}^n|a_i|^p\right)^{\frac1p}\cdot\left(\sum_{i=1}^n|b_i|^q\right)^{\frac1q}.
+\]
+3) 首先我们有恒等式
+\[
+\sum_{i=1}^n(|a_i|+|b_i|)^p=\sum_{i=1}^n|a_i|(|a_i|+|b_i|)^{p-1}+\sum_{i=1}^n|b_i|(|a_i|+|b_i|)^{p-1}.
+\]
+对右边两项分别应用 Hölder 不等式得到
+\[
+\sum_{i=1}^n|a_i|(|a_i|+|b_i|)^{p-1}\le\left(\sum_{i=1}^n|a_i|^p\right)^{\frac1p}\times\left(\sum_{i=1}^n(|a_i|+|b_i|)^{q(p-1)}\right)^{\frac1q},
+\]
+\[
+\sum_{i=1}^n|b_i|(|a_i|+|b_i|)^{p-1}\le\left(\sum_{i=1}^n|b_i|^p\right)^{\frac1p}\times\left(\sum_{i=1}^n(|a_i|+|b_i|)^{q(p-1)}\right)^{\frac1q}.
+\]
+将它们代入上述恒等式的右边得
+\[
+\sum_{i=1}^n(|a_i|+|b_i|)^p\le\left[\left(\sum_{i=1}^n|a_i|^p\right)^{\frac1p}+\left(\sum_{i=1}^n|b_i|^p\right)^{\frac1p}\right]\left(\sum_{i=1}^n(|a_i|+|b_i|)^p\right)^{\frac1q}.
+\]
+两边再除去 \(\left(\sum_{i=1}^n(|a_i|+|b_i|)^p\right)^{\frac1q}\) 即得到
+\[
+\left(\sum_{i=1}^n(|a_i|+|b_i|)^p\right)^{\frac1p}\le\left(\sum_{i=1}^n|a_i|^p\right)^{\frac1p}+\left(\sum_{i=1}^n|b_i|^p\right)^{\frac1p}.
+\]
+最后由于 \(|a_i+b_i|\le|a_i|+|b_i|\)，故我们有
+\[
+\left(\sum_{i=1}^n|a_i+b_i|^p\right)^{\frac1p}\le\left(\sum_{i=1}^n|a_i|^p\right)^{\frac1p}+\left(\sum_{i=1}^n|b_i|^p\right)^{\frac1p}.
+\]
+
+对于一个给定的函数 \(f\)，要从定义去判别它的凸凹性是比较困难的，下面我们给出几个用起来比较方便的判别法则。
+
+\textbf{函数凸凹性判别法则}
+
+首先我们介绍用导数判断函数凸凹性的定理。
+
+\begin{mythm}{}{convex-derivative-monotone}
+
+	设函数 \(f:I\to\R\) 在 \(I\) 可导，则 \(f\) 是凸（凹）的，当且仅当 \(f\) 的导函数 \(f':I\to\R\) 在 \(I\) 上是单调上升（下降）的。
+
+\end{mythm}
+
+\begin{proof}
+
+	根据凸函数定义，我们只需对凸函数进行证明。
+
+	设 \(f\) 是凸的，\(x_1,x_2\in I\) 且 \(x_1<x_2\)。根据上述引理，\(\forall\,x\in\ ]x_1,x_2[\)，有
+	\[
+	\frac{f(x)-f(x_1)}{x-x_1}\le\frac{f(x_2)-f(x_1)}{x_2-x_1}\le\frac{f(x_2)-f(x)}{x_2-x}.
+	\]
+	由于 \(f'(x_1)\) 与 \(f'(x_2)\) 存在，故在上述不等式左端与右端先后令 \(x\to x_1^+\) 与 \(x\to x_2^-\) 得到
+	\[
+	f'(x_1)=\lim_{x\to x_1^+}\frac{f(x)-f(x_1)}{x-x_1}\le\frac{f(x_2)-f(x_1)}{x_2-x_1}
+	\]
+	\[
+	\le\lim_{x\to x_2^-}\frac{f(x_2)-f(x)}{x_2-x}=f'(x_2),
+	\]
+	即
+	\[
+	f'(x_1)\le f'(x_2),
+	\]
+	因此 \(f'\) 在 \(I\) 上单调上升。
+
+	反之设 \(f'\) 在 \(I\) 上单调上升。\(x_1,x_2\in I,\ \alpha_1,\alpha_2\in[0,1]\) 且 \(\alpha_1+\alpha_2=1\)。我们来证明
+	\[
+	f(\alpha_1x_1+\alpha_2x_2)\le\alpha_1f(x_1)+\alpha_2f(x_2).
+	\]
+	不妨设 \(x_1\le x_2\)。由于 \(x_1\le\alpha_1x_1+\alpha_2x_2\le x_2\)，故由 Lagrange 中值定理有
+	\[
+	f(\alpha_1x_1+\alpha_2x_2)-f(x_1)=f'(\xi)(\alpha_1x_1+\alpha_2x_2-x_1)=\alpha_2f'(\xi)(x_2-x_1),
+	\]
+	\[
+	f(x_2)-f(\alpha_1x_1+\alpha_2x_2)=f'(\eta)(x_2-\alpha_1x_1-\alpha_2x_2)=\alpha_1f'(\eta)(x_2-x_1),
+	\]
+	这里 \(x_1\le\xi\le\alpha_1x_1+\alpha_2x_2\le\eta\le x_2\)。由 \(f'\) 的单调上升性，有 \(f'(\xi)\le f'(\eta)\)，从而
+	\[
+	\alpha_1[f(\alpha_1x_1+\alpha_2x_2)-f(x_1)]-\alpha_2[f(x_2)-f(\alpha_1x_1+\alpha_2x_2)]\le0,
+	\]
+	或
+	\[
+	f(\alpha_1x_1+\alpha_2x_2)\le\alpha_1f(x_1)+\alpha_2f(x_2).
+	\]
+	此即表明 \(f\) 是凸的。
+
+\end{proof}
+
+\textbf{推论}\quad 若函数 \(f:I\to\R\) 在 \(I\) 上 2 次可导，则 \(f\) 是凸（凹）的，当且仅当 \(f''\ge0\ (\le0)\)。
+
+\begin{sourceexample}{6}
+
+	证明：自然对数函数 \(x\longmapsto\log x\)，\(x\in\R_*^+\) 是凹的，而 \(\forall\,\alpha>1\)，幂函数 \(x\longmapsto x^\alpha\)，\(x\in\R_*^+\) 是凸的。
+
+	事实上，
+	\[
+	(\log x)''=-\frac1{x^2}<0,\qquad(x^\alpha)''=\alpha(\alpha-1)x^{\alpha-2}>0,\quad\forall\,x\in\R_*^+.
+	\]
+
+\end{sourceexample}
+
+下面介绍用曲线的切线判断函数凸凹性的定理。
+
+\begin{mythm}{}{convex-tangent}
+
+	设函数 \(f:I\to\R\) 在 \(I\) 上可导，则 \(f\) 是凸（凹）的，当且仅当函数 \(f\) 的曲线 \(\Gamma\) 不位于 \(\Gamma\) 上任意一点 \(M\) 的切线的下（上）方。
+
+\end{mythm}
+
+\begin{proof}
+
+	我们只对凸性进行证明。
+
+	必要性 设 \(f\) 是凸的。\(M_0=(x_0,f(x_0))\) 是 \(\Gamma\) 上任意固定一点。\(\Gamma\) 在 \(M_0\) 处的切线 \(T\) 的方程为
+	\[
+	y=y(x)=f(x_0)+f'(x_0)(x-x_0).
+	\]
+
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[
+		width=.72\linewidth,
+		height=.5\textheight,
+		keepaspectratio
+		]{_page_321_Figure_11.jpeg}
+		\caption{}
+		\label{fig:6-12}
+	\end{figure}
+
+	为了证明 \(\Gamma\) 上的任一点 \(M=(x,f(x))\) 不位于 \(T\) 的下方，我们只需证明
+	\[
+	f(x)-y(x)\ge0,\quad\forall\,x\in I.
+	\]
+	事实上，由 Lagrange 中值定理，我们有
+	\[
+	f(x)-y(x)=f(x)-f(x_0)-f'(x_0)(x-x_0)=[f'(\xi)-f'(x_0)](x-x_0),
+	\]
+	这里 \(\xi\) 介于 \(x_0\) 与 \(x\) 之间。由于 \(f\) 是凸的，根据\rthm{thm:convex-derivative-monotone} 知 \(f'\) 在 \(I\) 上单调上升，因此
+	\[
+	f'(\xi)-f'(x_0)\begin{cases} \ge0, & \text{若}\ x>x_0; \\ \le0, & \text{若}\ x<x_0. \end{cases}
+	\]
+	从而 \(f(x)-y(x)\ge0\)，\(\forall\,x\in I\)。
+
+	充分性 假设定理的条件成立。设 \(x_1,x_2\in I,\ \alpha_1,\alpha_2\in[0,1]\) 且 \(\alpha_1+\alpha_2=1\)。不妨令 \(x_1\le x_2\)。于是 \(x_1\le\alpha_1x_1+\alpha_2x_2\le x_2\)。并且曲线 \(\Gamma\) 不位于 \(\Gamma\) 过点 \(M=(\alpha_1x_1+\alpha_2x_2,\ f(\alpha_1x_1+\alpha_2x_2))\) 的切线 \(T\) 的下方，因此我们有
+	\[
+	f(x_1)-y(x_1)=f(x_1)-[f(\alpha_1x_1+\alpha_2x_2)+f'(\alpha_1x_1+\alpha_2x_2)(x_1-\alpha_1x_1-\alpha_2x_2)]\ge0,
+	\]
+	\[
+	f(x_2)-y(x_2)=f(x_2)-[f(\alpha_1x_1+\alpha_2x_2)+f'(\alpha_1x_1+\alpha_2x_2)(x_2-\alpha_1x_1-\alpha_2x_2)]\ge0.
+	\]
+	由此得到
+	\[
+	f(x_1)-f(\alpha_1x_1+\alpha_2x_2)\ge\alpha_2f'(\alpha_1x_1+\alpha_2x_2)(x_1-x_2),
+	\]
+	\[
+	f(x_2)-f(\alpha_1x_1+\alpha_2x_2)\ge\alpha_1f'(\alpha_1x_1+\alpha_2x_2)(x_2-x_1).
+	\]
+	将第一个不等式乘以 \(\alpha_1\)，第二个不等式乘以 \(\alpha_2\) 然后相加即得到
+	\[
+	f(\alpha_1x_1+\alpha_2x_2)\le\alpha_1f(x_1)+\alpha_2f(x_2).
+	\]
+	因此 \(f\) 是凸的。
+
+\end{proof}
+
+\begin{sourceexample}{7}
+
+	考虑函数 \(x\longmapsto f(x)=x^3\)，\(x\in\R\)。
+
+	从图形上可以看出 \(\forall\,x>0\)，函数 \(f\) 的曲线 \(\Gamma_1\) 位于过点 \(M(x,f(x))\) 的切线 \(T_1\) 的上方，而 \(\forall\,x<0\)，函数 \(f\) 的曲线 \(\Gamma_2\) 位于过点 \(M(x,f(x))\) 的切线 \(T_2\) 的下方。因此 \(f\) 在 \(]0,+\infty[\) 上是凸的，而 \(f\) 在 \(]-\infty,0[\) 上是凹的。
+
+	在原点 \((0,0)\) 处函数 \(f\) 的切线为 \(x\) 轴。因此 \(f\) 的曲线 \(\Gamma\) 穿过原点。
+
+	
+
+\end{sourceexample}
+
+\begin{figure}[htbp]
+		\centering
+		\includegraphics[
+		width=.72\linewidth,
+		height=.5\textheight,
+		keepaspectratio
+		]{_page_323_Figure_0.jpeg}
+		\caption{}
+		\label{fig:6-13}
+	\end{figure}
+
+
+点时，\(f\) 由凹变为凸。函数 \(f\) 的这种点值得我们注意，这就是下面介绍的拐点。
+
+\textbf{曲线的拐点}
+
+\begin{mydef*}{}
+
+	设 \(I\subset\R\) 是任一非空区间，\(f:I\to\R\) 是任一函数，\(a\in I\) 是一内点。我们称 \(a\) 是 \(f\) 的拐点，如果存在 \(\delta>0\)，使得
+
+	1) \(f\) 在 \(]a-\delta,a[\) 上的限制是凸（凹）的，
+
+	2) \(f\) 在 \(]a,a+\delta[\) 上的限制是凹（凸）的。
+
+\end{mydef*}
+
+通常我们称 \((a,f(a))\) 是函数 \(f\) 的曲线 \(\Gamma\) 的拐点。
+
+根据此定义知，函数 \(x\longmapsto f(x)=x^3\)，\(x\in\R\) 有唯一的拐点 \(0\)。
+
+\textbf{附注}\quad 从图 6-14 所示的在拐点 \(M_0\) 的邻域内函数 \(f\) 的图形看出，\(f\) 的曲线 \(\Gamma\) 从拐点 \(M_0\) 的切线的一侧穿到另一侧。但必须注意，曲线从某点的切线一侧穿到另一侧并不是拐点的充分条件。我们可以构造出这样的函数 \(f\)，虽然 \(f\) 的图形分别位于某点 \(M_0\) 的切线的两侧，但在两侧 \(f\) 并不保持确定的凸凹性。
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[
+	width=.40\linewidth,
+	height=.5\textheight,
+	keepaspectratio
+	]{_page_323_Figure_8.jpeg}\quad
+	\includegraphics[
+	width=.40\linewidth,
+	height=.5\textheight,
+	keepaspectratio
+	]{_page_323_Figure_9.jpeg}
+	\caption{}
+	\label{fig:6-14}
+\end{figure}
+
+\begin{sourceexample}{8}
+
+	考虑函数 \(f:\R\to\R\)，它定义为
+	\[
+	f(x)=\begin{cases} x^2\left|\sin\dfrac\pi x\right|, & x>0; \\ 0, & x=0; \\ -x^2\left|\sin\dfrac\pi x\right|, & x<0. \end{cases}
+	\]
+
+	
+
+	此函数的曲线 \(\Gamma\) 位于过原点的切线（即 \(x\) 轴）的两侧，但原点并不是 \(\Gamma\) 的拐点。因为 \(f\) 在 \(x=0\) 的任意右侧邻域与左侧邻域内都不保持凸凹性不变。
+
+\end{sourceexample}
+
+\begin{figure}[htbp]
+		\centering
+		\includegraphics[
+		width=.72\linewidth,
+		height=.5\textheight,
+		keepaspectratio
+		]{_page_324_Figure_4.jpeg}
+		\caption{}
+		\label{fig:6-15}
+	\end{figure}
+
+
+关于函数拐点的判别，我们有下面的定理。
+
+\begin{mythm}{}{inflection-point}
+
+	设 \(f:I\to\R\) 是任一函数，\(a\in I\) 是一内点。
+
+	1) 若 \(a\) 是 \(f\) 的拐点，并且 \(f''(a)\) 存在，则 \(f''(a)=0\)。
+
+	2) 若存在 \(\delta>0\)，使得 \(f\) 在 \(B(a,\delta)\) 上 2 次可导，且
+	\[
+	f''(x)\begin{cases} >0, & \forall\,x\in\mathring B_+(a,\delta), \\ <0, & \forall\,x\in\mathring B_-(a,\delta); \end{cases}
+	\]
+	\[
+	\text{或}\quad f''(x)\begin{cases} <0, & \forall\,x\in\mathring B_+(a,\delta), \\ >0, & \forall\,x\in\mathring B_-(a,\delta). \end{cases}
+	\]
+	则 \(a\) 是 \(f\) 的拐点。
+
+\end{mythm}
+
+\begin{proof}
+
+	1) 因为 \(f''(a)\) 存在，所以存在 \(\delta>0\)，使得 \(f'\) 在 \(]a-\delta,a+\delta[\) 上存在。
+
+	另一方面，由于 \(a\) 是 \(f\) 的拐点，故由定义知，只要 \(\delta>0\) 充分小，\(f\) 在 \(]a-\delta,a[\) 上是凸（凹）的，而在 \(]a,a+\delta[\) 上 \(f\) 是凹（凸）的。不妨设 \(f\) 在 \(]a-\delta,a[\) 上是凸的，而 \(f\) 在 \(]a,a+\delta[\) 上是凹的，于是根据\rthm{thm:convex-derivative-monotone}，\(f'\) 在 \(]a-\delta,a[\) 上单调上升，在 \(]a,a+\delta[\) 上 \(f'\) 单调下降，从而
+	\[
+	\forall\,x\in\ ]a-\delta,a[,\quad f'(x)\le f'(a),
+	\]
+	\[
+	\forall\,x\in\ ]a,a+\delta[,\quad f'(x)\le f'(a).
+	\]
+	由此推得
+	\[
+	f''(a)=f''(a^-)=\lim_{x\to a^-}\frac{f'(x)-f'(a)}{x-a}\ge0,
+	\]
+	\[
+	f''(a)=f''(a^+)=\lim_{x\to a^+}\frac{f'(x)-f'(a)}{x-a}\le0.
+	\]
+	因此 \(f''(a)=0\)。
+
+	2) 设 \(f\) 在 \(\mathring B(a,\delta)\) 上 2 次可导，并且假设 \(\forall\,x\in\mathring B_-(a,\delta)\)，\(f''(x)<0\)；\(\forall\,x\in\mathring B_+(a,\delta)\)，\(f''(x)>0\)。
+
+	根据\rthm{thm:convex-derivative-monotone} 的推论知，\(f\) 在 \(]a-\delta,a[\) 上是凹的，而在 \(]a,a+\delta[\) 上 \(f\) 是凸的，因此 \(a\) 是 \(f\) 的拐点。
+
+	对 \(f''(x)>0\)，\(\forall\,x\in\mathring B_-(a,\delta)\)；\(f''(x)<0\)，\(\forall\,x\in\mathring B_+(a,\delta)\) 的情形证明完全类似。定理证毕。
+
+\end{proof}
+
+这个定理表明，若 \(f:I\to\R\) 在 \(I\) 上 2 次可导，则 \(f\) 的拐点只可能存在于 \(f''\) 的零点之中。
+
+\begin{sourceexample}{9}
+
+	证明：正弦函数 \(x\longmapsto\sin x\)，\(x\in\R\) 的拐点为 \(x=n\pi\ (n\in\Z)\)。
+
+	因为正弦函数 \(x\longmapsto\sin x\)，\(x\in\R\) 在 \(\R\) 上是 2 次可导的，并且 \(\sin''x=-\sin x\ (\forall\,x\in\R)\)，所以
+	\[
+	\sin''x=0\Longleftrightarrow\sin x=0\Longleftrightarrow x=n\pi\ (n\in\Z).
+	\]
+	另一方面，由于
+	\[
+	f''(x)=-\sin x\begin{cases} <0, & \forall\,x\in\left]2k\pi,\ 2k\pi+\dfrac\pi2\right[, \\[6pt] >0, & \forall\,x\in\left]2k\pi-\dfrac\pi2,\ 2k\pi\right[, \end{cases}\qquad(k\in\Z)
+	\]
+	\[
+	f''(x)=-\sin x\begin{cases} >0, & \forall\,x\in\left](2k+1)\pi,\ (2k+1)\pi+\dfrac\pi2\right[, \\[6pt] <0, & \forall\,x\in\left](2k+1)\pi-\dfrac\pi2,\ (2k+1)\pi\right[, \end{cases}\qquad(k\in\Z)
+	\]
+	故由\rthm{thm:inflection-point} 知，\(x=n\pi\ (n\in\Z)\) 就是正弦函数 \(x\longmapsto\sin x\)，\(x\in\R\) 的全部拐点。
+
+	
+
+\end{sourceexample}
+
+\begin{figure}[htbp]
+		\centering
+		\includegraphics[
+		width=.72\linewidth,
+		height=.5\textheight,
+		keepaspectratio
+		]{_page_326_Figure_7.jpeg}
+		\caption{}
+		\label{fig:6-16}
+	\end{figure}
+
+
+\subsection{函数不定型极限的计算}
+
+导数的一个重要应用就是可用计算导数的方法求很大一类函数不定型极限，即下面的 L'Hospital 法则。
+
+\begin{mythm}{L'Hospital法则}{lhospital-rule}
+
+	设 \(]a,b[\) 是任一开区间 \((-\infty\le a<b\le+\infty)\)，\(f,g:\ ]a,b[\to\R\) 是任意两个函数，满足下述条件：
+
+	1) \(f,g\) 在 \(]a,b[\) 上可导，\(g'(x)\neq0\)，\(\forall\,x\in\ ]a,b[\)；
+
+	2) \(\lim_{x\to a^+}f(x)=\lim_{x\to a^+}g(x)=0\ \text{或}\ \pm\infty\)；
+
+	3) \(\lim_{x\to a^+}\dfrac{f'(x)}{g'(x)}=A\in\overline\R\)。
+
+	则我们也有
+	\[
+	\lim_{x\to a^+}\frac{f(x)}{g(x)}=A.
+	\]
+	当 \(x\to b^-\) 时也有类似的结论。
+
+\end{mythm}
+
+\begin{proof}
+
+	首先我们证明：存在 \(c\in\ ]a,b[\) 使得
+	\[
+	g(x)\neq0,\quad\forall\,x\in\ ]a,c[.
+	\]
+	事实上，由假设 \(g'(x)\neq0\)，\(\forall\,x\in\ ]a,b[\)，故由 Darboux 定理（\rthm{thm:darboux-theorem}）的推论知 \(g'(x)>0\)，\(\forall\,x\in\ ]a,b[\)，或 \(g'(x)<0\)，\(\forall\,x\in\ ]a,b[\)。从而 \(g\) 在 \(]a,b[\) 上是严格单调的，故不论 \(\lim_{x\to a^+}g(x)=0\) 或 \(\lim_{x\to a^+}g(x)=\pm\infty\)，我们总可以找到一个 \(c\in\ ]a,b[\)，使得 \(g(x)\neq0\)，\(\forall\,x\in\ ]a,c[\)。
+
+	下面我们对 \(A\) 分三种情况来讨论：
+
+	1) \(A<+\infty\)：任取 \(p,q\in\R\)，使得 \(A<p<q\)。
+
+	由于 \(\lim_{x\to a^+}\dfrac{f'(x)}{g'(x)}=A\)，故存在 \(c_1\in\ ]a,c[\) 使得
+	\[
+	\frac{f'(x)}{g'(x)}<p<q,\quad\forall\,x\in\ ]a,c_1[.
+	\]
+	于是 \(\forall\,x,y\in\ ]a,c_1[\) 且 \(x\neq y\)，由 Cauchy 中值定理有
+	\[
+	\frac{f(x)-f(y)}{g(x)-g(y)}=\frac{f'(\xi)}{g'(\xi)}\quad(\xi\ \text{介于}\ x\ \text{与}\ y\ \text{之间}).
+	\]
+	由此得到
+	\[
+	\frac{f(x)-f(y)}{g(x)-g(y)}<p<q,\quad\forall\,x,y\in\ ]a,c_1[. \tag{*}
+	\]
+	若 \(\lim_{x\to a^+}f(x)=\lim_{x\to a^+}g(x)=0\)，则在 \((*)\) 中固定 \(x\in\ ]a,c_1[\)，并令 \(y\to a^+\) 得到
+	\[
+	\frac{f(x)}{g(x)}<q,\qquad\forall\,x\in\ ]a,c_1[.
+	\]
+	若 \(\lim_{x\to a^+}f(x)=\lim_{x\to a^+}g(x)=\pm\infty\)，则由于 \(\lim_{x\to a^+}\dfrac{1-f(y)/f(x)}{1-g(y)/g(x)}=1\)（这里固定 \(y\in\ ]a,c_1[\)），故有 \(\dfrac{1-f(y)/f(x)}{1-g(y)/g(x)}=1+o(1)\ (x\to a^+)\)。从而由 \((*)\) 式得到
+	\[
+	\frac{f(x)\bigl[1-f(y)/f(x)\bigr]}{g(x)\bigl[1-g(y)/g(x)\bigr]}=\frac{f(x)}{g(x)}\bigl[1+o(1)\bigr]<p
+	\]
+	\[
+	\text{或}\quad\frac{f(x)}{g(x)}<\frac{p}{1+o(1)}\quad(x\to a^+).
+	\]
+	于是存在 \(c_2\in\ ]a,c_1[\) 使得 \(\dfrac{p}{1+o(1)}<q\)，或
+	\[
+	\frac{f(x)}{g(x)}<q,\quad\forall\,x\in\ ]a,c_2[.
+	\]
+	总之不论 \(\lim_{x\to a^+}f(x)=\lim_{x\to a^+}g(x)=0\) 或 \(\pm\infty\)，我们证明了下述结论：
+	\[
+	(\forall\,q>A)(\exists\,c_q>a)(\forall\,x\in\ ]a,c_q[)\Longrightarrow\frac{f(x)}{g(x)}<q. \tag{**}
+	\]
+	因此当 \(A=-\infty\) 时，\(\forall\,M>0\)，若取 \(q=-M\)，则 \((**)\) 式表明
+	\[
+	\lim_{x\to a^+}\frac{f(x)}{g(x)}=A=-\infty.
+	\]
+	2) \(A>-\infty\)：任取 \(\bar p,\bar q\in\R\) 使得 \(\bar q<\bar p<A\)。
+
+	这时我们可类似证明下述结论成立：
+	\[
+	(\forall\,\bar q<A)(\exists\,c_{\bar q}>a)(\forall\,x\in\ ]a,c_{\bar q}[)\Longrightarrow\frac{f(x)}{g(x)}>\bar q. \tag{***}
+	\]
+	因此当 \(A=+\infty\) 时，\(\forall\,M>0\)，若取 \(\bar q=M\)，则上述 \((***)\) 式表明
+	\[
+	\lim_{x\to a^+}\frac{f(x)}{g(x)}=A=+\infty.
+	\]
+	3) \(-\infty<A<+\infty\)：这时 \(\forall\,\varepsilon>0\)，若取 \(q=A+\varepsilon\)，\(\bar q=A-\varepsilon\)，则存在 \(d=\min(c_q,c_{\bar q})\) 使得
+	\[
+	\forall\,x\in\ ]a,d[\ \Longrightarrow\ A-\varepsilon<\frac{f(x)}{g(x)}<A+\varepsilon.
+	\]
+	此即表明
+	\[
+	\lim_{x\to a^+}\frac{f(x)}{g(x)}=A.
+	\]
+	对 \(x\to b^-\) 的情形可类似证明。
+
+\end{proof}
+
+\textbf{附注}\quad 上述 L'Hospital 法则解决了函数的 \(\dfrac00\) 与 \(\dfrac\infty\infty\) 不定型的极限计算问题。\(0\cdot\infty\) 与 \(\infty-\infty\) 不定型我们在第 4 章 §3 中已经证明了通过适当处理都可以化为 \(\dfrac00\) 或 \(\dfrac\infty\infty\) 不定型，至于函数的 \(1^\infty\)，\(0^0\)，\(\infty^0\) 不定型，通过先取自然对数的方法也可以把它们化为 \(0\cdot\infty\) 不定型。例如设 \(u(x)^{v(x)}\) 是 \(0^0\) 不定型，
+\[
+\log u(x)^{v(x)}=v(x)\log u(x)
+\]
+就是 \(0\cdot\infty\) 不定型。
+
+因此我们可以说，L'Hospital 法则原则上完全解决了函数的所有不定型极限的计算问题。
+
+下面举几个例子说明 L'Hospital 法则的应用。
+
+\begin{sourceexample}{10}
+
+	计算 \(\displaystyle\lim_{x\to0}\frac{e^x-e^{-x}}{\sin x}\)。
+
+	这是 \(\dfrac00\) 不定型。它满足 L'Hospital 法则的全部条件，并且
+	\[
+	\lim_{x\to0}\frac{(e^x-e^{-x})'}{(\sin x)'}=\lim_{x\to0}\frac{e^x+e^{-x}}{\cos x}=2.
+	\]
+	因此
+	\[
+	\lim_{x\to0}\frac{e^x-e^{-x}}{\sin x}=2.
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{11}
+
+	计算 \(\displaystyle\lim_{x\to1}\frac{x^x-x}{\log x-x+1}\)。
+
+	这是 \(\dfrac00\) 不定型。计算这个极限时，我们必须重复应用 L'Hospital 法则。
+	\[
+	\lim_{x\to1}\frac{x^x-x}{\log x-x+1}
+	=\lim_{x\to1}\frac{x^x(1+\log x)-1}{\dfrac1x-1}
+	\]
+	\[
+	=\lim_{x\to1}\frac{x^{x+1}(1+\log x)-x}{1-x}
+	=\lim_{x\to1}x\cdot\lim_{x\to1}\frac{x^x(1+\log x)-1}{1-x}
+	\]
+	\[
+	=\lim_{x\to1}\frac{x^x\left[(1+\log x)^2+\dfrac1x\right]}{-1}=-2.
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{12}
+
+	计算 \(\displaystyle\lim_{x\to+\infty}\frac{\log x}{x^\alpha}\)，\(\displaystyle\lim_{x\to+\infty}\frac{x^\alpha}{a^x}\quad(\alpha>0,\ a>1)\)。
+
+	它们都是 \(\dfrac\infty\infty\) 不定型。由 L'Hospital 法则得到
+	\[
+	\lim_{x\to+\infty}\frac{\log x}{x^\alpha}
+	=\lim_{x\to+\infty}\frac{\dfrac1x}{\alpha x^{\alpha-1}}
+	=\lim_{x\to+\infty}\frac1{\alpha x^\alpha}=0.
+	\]
+	对于 \(\dfrac{x^\alpha}{a^x}\)，由于 \(\alpha>0\) 是一定数，故存在 \(n\in\N\) 使得 \(\alpha-n\le0\)。因此对 \(\dfrac{x^\alpha}{a^x}\) 应用 \(n\) 次 L'Hospital 法则得到
+	\[
+	\lim_{x\to+\infty}\frac{x^\alpha}{a^x}
+	=\lim_{x\to+\infty}\frac{\alpha x^{\alpha-1}}{a^x\log a}
+	=\lim_{x\to+\infty}\frac{\alpha(\alpha-1)x^{\alpha-2}}{a^x(\log a)^2}
+	=\cdots
+	\]
+	\[
+	=\lim_{x\to+\infty}\frac{\alpha(\alpha-1)\cdots(\alpha-n+1)x^{\alpha-n}}{a^x(\log a)^n}=0.
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{13}
+
+	设 \(\alpha>0\)，计算 \(\displaystyle\lim_{x\to0^+}x^\alpha\log x\)。
+
+	这是 \(0\cdot\infty\) 不定型。我们把它化为 \(\dfrac\infty\infty\) 不定型。
+	\[
+	\lim_{x\to0^+}x^\alpha\log x=\lim_{x\to0^+}\frac{\log x}{x^{-\alpha}}=\lim_{x\to0^+}\frac{\dfrac1x}{(-\alpha)x^{-\alpha-1}}
+	\]
+	\[
+	=\lim_{x\to0^+}\frac{x^\alpha}{-\alpha}=0.
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{14}
+
+	计算 \(\displaystyle\lim_{x\to0^+}x^{\frac1{1+\log x}}\)。
+
+	这是 \(0^0\) 不定型。由 \(\log x^{\frac1{1+\log x}}=\dfrac{\log x}{1+\log x}\) 得到
+	\[
+	\lim_{x\to0^+}\log x^{\frac1{1+\log x}}=\lim_{x\to0^+}\frac{\log x}{1+\log x}=\lim_{x\to0^+}\frac{\dfrac1x}{\dfrac1x}=1.
+	\]
+	从而
+	\[
+	\lim_{x\to0^+}x^{\frac1{1+\log x}}=\lim_{x\to0^+}e^{\log x^{\frac1{1+\log x}}}=e.
+	\]
+
+\end{sourceexample}
+
+\subsection*{习 题}
+
+\begin{exercise}
+	\item 证明下述各不等式：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(x<\arcsin x<\dfrac{x}{\sqrt{1-x^2}}\quad(0<x<1)\)。
+		\item \(\log(1+x)>\dfrac{\operatorname{arctg}x}{1+x}\quad(x>0)\)。
+		\item \(\displaystyle\int_a^b\frac1{x\log x}dx<\frac{2b}{\log b}\quad(e^2<a<b)\)。
+		\item \(\displaystyle e^x<\frac1{1-x}\quad(x<1)\)。
+		\item \((x^\alpha+y^\alpha)^{\frac1\alpha}<(x^\beta+y^\beta)^{\frac1\beta}\quad(x>0,\ y>0,\ \beta>\alpha>0)\)。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 证明下述恒等式：
+	\[
+	\forall\,x\in\R,\quad\int_0^{\sin^2x}\arcsin\sqrt t\,dt+\int_0^{\cos^2x}\arccos\sqrt t\,dt=\frac\pi4.
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(f:[a,b]\to\R\) 在点 \(c\in\ ]a,b[\) 的邻域 \(B(c,\delta)\) 上可导，并且 \(f'\) 在 \(c\) 处连续，\(f'(c)\neq0\)。证明：存在 \(0<\eta\le\delta\)，使得 \(f\) 在 \(B(c,\eta)\) 上是单调的。
+
+	若 \(f'\) 在 \(c\) 处不连续，则上述结论可以不成立。试研究函数
+	\[
+	x\longmapsto f(x)=\begin{cases} \dfrac x2+x^2\sin\dfrac1x, & x\neq0, \\[6pt] 0, & x=0. \end{cases}
+	\]
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：函数
+		\[
+		x\longmapsto g(x)=\begin{cases} x^2\sin\dfrac1x, & x\neq0, \\[6pt] 0, & x=0 \end{cases}
+		\]
+		在 \(x=0\) 的任意邻域内既有 \(g'(x)=1\) 的 \(x\) 又有 \(g'(x)=-1\) 的 \(x\)。
+		\item 证明：在 \(x=0\) 的任意邻域内既有 \(f'(x)>0\) 的 \(x\) 又有 \(f'(x)<0\) 的 \(x\)。
+		\item 由此推出 \(f\) 在 \(x=0\) 的任意邻域内都不是单调的。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \([a,b]\subset\R\)，\(f:[a,b]\to\R\) 是任一函数，满足下述条件：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(f\) 在 \([a,b]\) 上连续；
+		\item \(\forall\,x\in\ ]a,b[\)，\(f'(x^+)\) 与 \(f'(x^-)\) 中至少有一个存在，并且非负（可以为 \(+\infty\)）。
+	\end{enumerate}
+	证明：\(f\) 在 \([a,b]\) 上是单调上升函数。为此，
+	\begin{enumerate}[label=\arabic*)]
+		\item 假设存在 \(\alpha,\beta\in[a,b]\)，\(\alpha<\beta\) 使得 \(f(\alpha)>f(\beta)\)。考虑直线 \(y_k(x)=-k(x-\alpha)+f(\alpha)\)，证明存在 \(k_0>0\) 使得 \(y_{k_0}(\beta)>f(\beta)\)。
+		\item 令 \(E=\{x\in[\alpha,\beta]\mid f(x)=y_{k_0}(x)\}\)，\(\xi=\sup E\)。证明：\(f'(\xi^+)<0\)，\(f'(\xi^-)<0\)。
+		\item 由此推出 \(f\) 在 \([a,b]\) 上单调上升。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(f:[a,b]\to\R\) 在 \([a,b]\) 上连续，并且 \(\forall\,x\in\ ]a,b[\)，\(f'(x^+)\) 与 \(f'(x^-)\) 中有一个存在，记它为 \(f'(x^\varepsilon)\ (\varepsilon=\pm)\)。试利用第 3 题的结论证明
+	\[
+	\inf_{x\in\ ]a,b[}f'(x^\varepsilon)\le\frac{f(b)-f(a)}{b-a}\le\sup_{x\in\ ]a,b[}f'(x^\varepsilon).
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 证明：函数 \(x\longmapsto\log\left(\dfrac{x}{\sin x}\right)\)，\(0<x<\dfrac\pi2\) 是凸的。
+\end{exercise}
+
+\begin{exercise}
+	\item 证明：函数
+	\[
+	x\longmapsto\begin{cases} (x-2)^2, & x\in[0,+\infty[, \\ (x+2)^2, & x\in\ ]-\infty,0] \end{cases}
+	\]
+	在 \(]-\infty,0]\) 与 \([0,+\infty[\) 是凸的，但 \(f\) 在 \(\R\) 上不是凸的。
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(f:I\to J\) 与 \(g:J\to\R\) 是凸函数，并且 \(g\) 是单调上升的，证明：\(g\circ f:I\to\R\) 也是凸函数。
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(f:I\to\R\) 满足条件（\(I\) 为一区间）：
+	\[
+	f\left(\frac{x+y}{2}\right)\le\frac12[f(x)+f(y)],\quad\forall\,x,y\in I.
+	\]
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：\(\forall\,k=\dfrac m{2^n}\in[0,1],\ f(kx+(1-k)y)\le kf(x)+(1-k)f(y)\)。
+		\item 证明：若 \(f\) 在 \(I\) 上连续，则 \(f\) 是凸的。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:I\to\R\) 是任一凸函数（\(I\) 是一有限闭区间）。
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：\(\forall\,\alpha,\beta\in\R\)，\(\alpha<\beta\)，并且 \([\alpha,\beta]\subset\mathring I\)，\(f\) 在 \([\alpha,\beta]\) 上是 Lipschitz 函数。
+		\item 证明：\(f\) 在 \(\mathring I\) 上连续。
+		\item 举例说明凸函数 \(f:I\to\R\) 在 \(I\) 上不一定连续。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:I\to\R\) 是任一凸函数。
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：\(\forall\,x\in I\)，\(f'(x^+)\) 与 \(f'(x^-)\) 存在并且 \(f'(x^-)\le f'(x^+)\)。
+		\item 证明：函数 \(x\longmapsto f'(x^-)\) 与 \(x\longmapsto f'(x^+)\)，\(x\in\mathring I\) 是单调上升的，并且
+		\[
+		\forall\,a,b\in\mathring I,\quad f'(a^+)\le\frac{f(b)-f(a)}{b-a}\le f'(b^-).
+		\]
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(I\) 是任一非空开区间，\(f:I\to\R\) 是任一函数。证明：\(f\) 是凸的充分必要条件是 \(f\) 在 \(I\) 上连续并且在 \(I\) 上有单调上升的左、右导函数存在。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(I\) 是任一开区间，\(f:I\to\R\) 是任一函数。
+	\begin{enumerate}[label=\arabic*)]
+		\item 设 \(a\in I\)，\(f\) 是凸的。证明：\(f\) 的图形 \(\Gamma\) 位于方程为 \(y=f(a)+m(x-a)\) 的直线的上方，当且仅当 \(f'(a^-)\le m\le f'(a^+)\)。
+		\item 设 \(f\) 在 \(I\) 上连续，右（或左）可导，且满足下述不等式：
+		\[
+		\forall\,a,x\in I,\quad f(x)\ge f(a)+f'(a^+)(x-a)
+		\]
+		\[
+		(f(x)\ge f(a)+f'(a^-)(x-a)).
+		\]
+		证明：\(f\) 是凸的。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:\ ]a,b[\to\R\) 是 \(C^1\) 类的，并且是严格凸的（即 \(\forall\,x_1,x_2\in\ ]a,b[\)，\(\forall\,\alpha_1,\alpha_2\in[0,1]\) 且 \(\alpha_1+\alpha_2=1\) 满足：
+	\[
+	f(\alpha_1x_1+\alpha_2x_2)<\alpha_1f(x_1)+\alpha_2f(x_2)).
+	\]
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：\(f\) 的图形 \(\Gamma\) 上的每一点的切线的斜率所组成的实数集合是一开区间 \(J\)。
+		\item 证明：\(f':\ ]a,b[\to J\) 是可逆的，记 \(k:J\to\ ]a,b[\) 为 \(f'\) 的反函数。
+		\item \(\forall\,\lambda\in J\)，定义函数 \(h_\lambda:\ ]a,b[\to\R\) 如下：
+		\[
+		h_\lambda(x)=\lambda x-f(x),\quad\forall\,x\in\ ]a,b[.
+		\]
+		证明：\(h_\lambda\) 在 \(]a,b[\) 上有唯一的极大值点，记它为 \(x_\lambda\)。
+		\item 定义函数 \(g:J\to\R\) 如下：
+		\[
+		g(\lambda)=h_\lambda(x_\lambda)=\sup_{x\in\ ]a,b[}(\lambda x-f(x)),\quad\forall\,\lambda\in J.
+		\]
+		试找出函数 \(f,k,g\) 所满足的关系式。
+		\item 证明：\(g\) 在 \(J\) 上连续。
+		\item 证明：\(g\) 在 \(J\) 上是凸函数。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(f:[a,b]\to\R\) 在 \([a,b]\) 上 2 次可导，证明：\(\forall\,x\in\ ]a,b[\)，
+	\[
+	f''(x)=\lim_{h\to0}\frac{f(x+h)+f(x-h)-2f(x)}{h^2}.
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 计算下列各极限值：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\displaystyle\lim_{x\to0}\frac{x-\operatorname{tg}x}{x^3}\)；
+		\item \(\displaystyle\lim_{x\to0}\frac{xe^x-\log(1+x)}{x^2}\)；
+		\item \(\displaystyle\lim_{x\to0}\sin x\log x\)；
+		\item \(\displaystyle\lim_{x\to1}\left(\frac1{\log x}-\frac1{x-1}\right)\)；
+		\item \(\displaystyle\lim_{x\to0}\left[\frac1{\log(x+\sqrt{1+x^2})}-\frac1{\log(1+x)}\right]\)；
+		\item \(\displaystyle\lim_{x\to1^-}(1-x^2)^{\frac1{\log(1-x)}}\)；
+		\item \(\displaystyle\lim_{x\to0}\left(\frac{\operatorname{tg}x}{x}\right)^{\frac1{x^2}}\)；
+		\item \(\displaystyle\lim_{x\to0}\left(\frac{\cos x}{\operatorname{ch}x}\right)^{-\frac1{x^2}}\)；
+		\item \(\displaystyle\lim_{x\to0^+}(\operatorname{ctg}x)^{\sin x}\)；
+		\item \(\displaystyle\lim_{x\to\frac\pi2}(\sin x)^{\operatorname{tg}x}\)。
+	\end{enumerate}
+\end{exercise}
+

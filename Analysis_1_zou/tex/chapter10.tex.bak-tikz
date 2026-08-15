@@ -1,0 +1,2768 @@
+\chapter{度量空间}
+
+这一章我们介绍一般度量空间的概念,主要是介绍四个基本空间: 赋范向量空间,完备度量空间、紧度量空间与连通度量空间,研究了度量空间上的点序列极限、映射的极限与连续性.这些内容是以下各章的理论基础.
+
+\section{度量空间的定义}
+
+\subsection{概念的引入}
+
+首先我们回顾一下，在第 2 章 §5 中我们特别指出过，$\R$ 上的绝对值 $|\cdot|$ 具有下面三个重要性质：
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item $\forall\,x,y\in\R,\ |x-y|\geqslant0$ 并且 $|x-y|=0\Longleftrightarrow x=y$；
+\item $\forall\,x,y\in\R,\ |x-y|=|y-x|$；
+\item $\forall\,x,y,z\in\R,\ |x-y|\leqslant|x-z|+|z-y|$。
+\end{enumerate}
+
+并称实数 $|x-y|$ 为 $\R$ 上 $x$ 与 $y$ 之间的度量或距离。实数集 $\R$ 连同这样一个度量称为一个实数空间。
+
+为了能把这三个性质推广到实数集 $\R$ 之外的一般集合上去，我们换一个角度来看一看上述绝对值的三个性质。
+
+我们在乘积集合 $\R\times\R$ 上定义映射 $d:\R\times\R\to\R^+$ 如下：
+
+$\forall\,(x,y)\in\R\times\R,\ d(x,y)=|x-y|$。
+
+显然上面所列的绝对值的三个性质就转化为非负实值函数 $d:\R\times\R\to\R^+$ 具有下述性质：
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item $\forall\,x,y\in\R,\ d(x,y)\geqslant0,\ \text{且 }d(x,y)=0\Longleftrightarrow x=y$；
+\item $\forall\,x,y\in\R,\ d(x,y)=d(y,x)$；
+\item $\forall\,x,y,z\in\R,\ d(x,y)\leqslant d(x,z)+d(z,y)$。
+\end{enumerate}
+
+这里我们利用映射 $d$ 的形式就完全摆脱了绝对值的具体含义，这是下面定义一般度量空间的基本构思。
+
+\begin{mydef*}{}
+
+设 $X$ 是任一非空集合，若存在一个映射 $d:X\times X\to\R$，它具有下述三个性质：
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item $\forall\,x,y\in X,\ d(x,y)\geqslant0,\ d(x,y)=0\Longleftrightarrow x=y$；
+\item $\forall\,x,y\in X,\ d(x,y)=d(y,x)$；
+\item $\forall\,x,y,z\in X,\ d(x,y)\leqslant d(x,z)+d(z,y)$，
+\end{enumerate}
+
+则我们称 $d$ 是 $X$ 上的一个\textbf{度量}，$(X,d)$ 称为一个\textbf{度量空间}。
+
+\end{mydef*}
+
+\subsection{几个度量空间的例子}
+
+\begin{sourceexample}{1}
+
+设 $X=\R^n\ (n\geqslant1)$。$\forall\,x,y\in\R^n$，令
+\[x=(x_1,x_2,\cdots,x_n),\ y=(y_1,y_2,\cdots,y_n).\]
+我们分别定义映射 $d_1,d_2,d_3:\R^n\times\R^n\to\R$ 如下：
+\[d_1(x,y)=\sqrt{(x_1-y_1)^2+(x_2-y_2)^2+\cdots+(x_n-y_n)^2},\]
+\[d_2(x,y)=|x_1-y_1|+|x_2-y_2|+\cdots+|x_n-y_n|,\]
+\[d_3(x,y)=\max\{|x_1-y_1|,|x_2-y_2|,\cdots,|x_n-y_n|\},\]
+则 $d_1,d_2,d_3$ 都是 $\R^n$ 上的度量，我们称这三个度量为 $\R^n$ 的\textbf{基本度量}（当 $n=1$ 时 $d_1=d_2=d_3$ 为绝对值度量）。
+
+由绝对值的性质验证 $d_2,d_3$ 为 $\R^n$ 的度量是容易的，我们来证明 $d_1$ 是 $\R^n$ 的度量。
+
+设 $n>1$，度量的前两个性质
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item $\forall\,x,y\in\R^n,\ d_1(x,y)\geqslant0,\ d_1(x,y)=0\Longleftrightarrow x=y$；
+\item $\forall\,x,y\in\R^n,\ d_1(x,y)=d_1(y,x)$
+\end{enumerate}
+
+是显然的。现证性质
+
+3) $\forall\,x,y,z\in\R^n,\ d_1(x,y)\leqslant d_1(x,z)+d_1(z,y)$。此即等价于证明：
+\[\left[\sum_{i=1}^{n}(x_i-y_i)^2\right]^{\frac12}\leqslant\left[\sum_{i=1}^{n}(x_i-z_i)^2\right]^{\frac12}+\left[\sum_{i=1}^{n}(z_i-y_i)^2\right]^{\frac12}.\]
+这就是第 6 章 §4 的 Minkowski 不等式。
+
+\end{sourceexample}
+
+\begin{sourceexample}{2}
+
+设 $X=\C$。定义映射 $d:\C\times\C\to\R$ 如下：
+\[\forall\,z,z_1\in\C,\quad d(z,z_1)=|z-z_1|\ \text{（复数模）}.\]
+则 $d$ 是 $\C$ 上的一个度量，因此 $(\C,d)$ 是一个度量空间。
+
+这可由复数模的性质推出，显然这里所定义的 $d(z,z_1)$ 就是通常复平面上两点 $z$ 与 $z_1$ 之间的距离。
+
+\end{sourceexample}
+
+\begin{sourceexample}{3}
+
+设 $X=\{z\in\C\mid|z|=1\}\triangleq S^1$。
+
+于是 $z\in S^1$ 当且仅当 $z$ 可表示成下述形式：
+\[z=e^{i\alpha},\ \alpha\in\R.\]
+我们定义映射 $d:S^1\times S^1\to\R$ 为：
+\[\forall\,e^{i\alpha},e^{i\beta}\in S^1,\quad d(e^{i\alpha},e^{i\beta})=\inf_{k\in\Z}|\beta-\alpha+2k\pi|,\]
+则 $d$ 是 $S^1$ 上的一个度量。
+
+事实上，
+
+1) $\forall\,e^{i\alpha},e^{i\beta}\in S^1,\ d(e^{i\alpha},e^{i\beta})\geqslant0$，并且
+\[d(e^{i\alpha},e^{i\beta})=0\Longleftrightarrow\inf_{k\in\Z}|\beta-\alpha+2k\pi|=0\Longleftrightarrow\beta-\alpha=2k_0\pi\]
+\[(k_0\in\Z)\Longleftrightarrow e^{i\alpha}=e^{i\beta}.\]
+2) $\forall\,e^{i\alpha},e^{i\beta}\in S^1,\ d(e^{i\alpha},e^{i\beta})=\inf_{k\in\Z}|\beta-\alpha+2k\pi|$
+\[=\inf_{k\in\Z}|\alpha-\beta+2k\pi|=d(e^{i\beta},e^{i\alpha}).\]
+3) $\forall\,e^{i\alpha},e^{i\beta},e^{i\gamma}\in S^1$，
+\[d(e^{i\alpha},e^{i\beta})=\inf_{k\in\Z}|\beta-\alpha+2k\pi|\leqslant\inf_{k\in\Z}|\beta-\alpha+2k\pi|\]
+\[\leqslant\inf_{k\in\Z}|\beta-\gamma+2k\pi|+\inf_{k\in\Z}|\gamma-\alpha+2k\pi|\]
+\[=d(e^{i\beta},e^{i\gamma})+d(e^{i\gamma},e^{i\alpha})\]
+\[=d(e^{i\alpha},e^{i\gamma})+d(e^{i\gamma},e^{i\beta}).\]
+从几何上来看，$d(e^{i\alpha},e^{i\beta})$ 就是连结复平面的单位圆 $S^1$ 上两点 $e^{i\alpha}$ 与 $e^{i\beta}$ 的最短弧长。
+
+如果我们将例 2 的复平面 $\C$ 上的度量 $d$ 限制在 $S^1\times S^1$ 上，则 $d:S^1\times S^1\to\R$ 也是 $S^1$ 上的一个度量，我们记 $S^1$ 上的这个度量为 $\bar d$，于是 $\bar d(e^{i\alpha},e^{i\beta})$ 就是连结单位圆周 $S^1$ 上两点 $e^{i\alpha}$ 与 $e^{i\beta}$ 的直线距离。
+
+\end{sourceexample}
+
+\begin{center}
+\includegraphics[width=.6\linewidth,height=.5\textheight,keepaspectratio]{_page_488_Picture_1.jpeg}
+
+图 10-1
+\end{center}
+
+由上面例 1 与例 3 知，$\R^n$ 与 $S^1$ 上有不止一个度量，实际上，如果集合 $X$ 有度量 $d$，则 $X$ 上的度量就不是唯一的，因为 $\forall\,\lambda>0$，$\lambda d$ 也是 $X$ 上的一个度量，下面我们介绍度量之间关系的一个概念，即度量的等价。
+
+\subsection{度量的等价}
+
+\begin{mydef*}{}
+
+设 $d$ 与 $d'$ 是 $X$ 上的任意两个度量。我们称 $d$ 与 $d'$ 是\textbf{等价的}，如果存在常数 $A>0,\ B>0$ 使得
+\[\forall\,x,y\in X,\quad Ad(x,y)\leqslant d'(x,y)\leqslant Bd(x,y).\]
+
+\end{mydef*}
+
+\begin{mythm}{}{metric-equivalence}
+
+$\R^n\ (n>1)$ 上的三个基本度量 $d_1,d_2,d_3$ 是互相等价的，并且成立下述不等式：
+\[\forall\,x,y\in\R^n,\quad d_3(x,y)\leqslant d_1(x,y)\leqslant d_2(x,y)\leqslant nd_3(x,y).\]
+
+\end{mythm}
+
+\begin{proof}
+
+$\forall\,x,y\in\R^n$，我们有
+\[d_3(x,y)=\max\{|x_1-y_1|,|x_2-y_2|,\cdots,|x_n-y_n|\}\]
+\[=|x_k-y_k|\ (\text{对某一个 }k=1,2,\cdots,n)\]
+\[\leqslant\sqrt{(x_1-y_1)^2+(x_2-y_2)^2+\cdots+(x_n-y_n)^2}\]
+\[=d_1(x,y),\]
+\[d_1(x,y)=\sqrt{(x_1-y_1)^2+(x_2-y_2)^2+\cdots+(x_n-y_n)^2}\]
+\[\leqslant|x_1-y_1|+|x_2-y_2|+\cdots+|x_n-y_n|\]
+\[=d_2(x,y),\]
+\[d_2(x,y)=|x_1-y_1|+|x_2-y_2|+\cdots+|x_n-y_n|\]
+\[\leqslant\max_{1\leqslant i\leqslant n}|x_i-y_i|+\max_{1\leqslant i\leqslant n}|x_i-y_i|+\cdots+\max_{1\leqslant i\leqslant n}|x_i-y_i|\]
+\[=nd_3(x,y),\]
+因此
+\[d_3(x,y)\leqslant d_1(x,y)\leqslant d_2(x,y)\leqslant nd_3(x,y),\quad\forall\,x,y\in\R^n.\]
+由此不等式即可推知 $d_1,d_2,d_3$ 是 $\R^n$ 上的三个互相等价的度量。
+
+\end{proof}
+
+下面我们介绍一个特殊的度量空间。
+
+\subsection{赋范向量空间}
+
+\begin{mydef*}{}
+
+设 $K=\R$ 或 $\C$，$E$ 是任一 $K$--向量空间，若存在一个映射 $\|\cdot\|:E\to\R$，它具有下述三个性质：
+\begin{enumerate}[label=\arabic{enumi})]
+\item $\forall\,x\in E,\quad\|x\|\geqslant0,\quad\|x\|=0\Longleftrightarrow x=0$；
+\item $\forall\,x\in E,\ \forall\,\lambda\in K,\quad\|\lambda x\|=|\lambda|\cdot\|x\|$；
+\item $\forall\,x,y\in E,\quad\|x+y\|\leqslant\|x\|+\|y\|$。
+\end{enumerate}
+则我们称 $\|\cdot\|$ 是 $E$ 上的一个\textbf{范数}，$(E,\|\cdot\|)$ 称为一个\textbf{赋范向量空间}，或简称为\textbf{赋范空间}。
+
+\end{mydef*}
+
+我们说赋范向量空间 $(E,\|\cdot\|)$ 是一个特殊的度量空间，是因为：
+
+若我们定义映射 $d:E\times E\to\R$ 如下：
+\[\forall\,x,y\in E,\quad d(x,y)=\|x-y\|.\]
+则 $d$ 是 $E$ 上的一个度量。事实上，由范数 $\|\cdot\|$ 的性质推知
+
+i) $\forall\,x,y\in E,\ d(x,y)=\|x-y\|\geqslant0$，且 $\|x-y\|=0$，当且仅当 $x-y=0$ 即 $x=y$。
+
+ii) $\forall\,x,y\in E,\ d(x,y)=\|x-y\|=\|-(y-x)\|=|-1|\,\|y-x\|=\|y-x\|=d(y,x)$。
+
+iii) $\forall\,x,y,z\in E$，
+\[d(x,y)=\|x-y\|\leqslant\|x-z\|+\|z-y\|=d(x,z)+d(z,y).\]
+
+这个度量 $d$ 称为由 $E$ 的范数 $\|\cdot\|$ 诱导出来的度量，因此 $(E,d)$ 是一个度量空间。
+
+\textbf{注意}\quad 由赋范空间 $(E,\|\cdot\|)$ 所诱导的度量空间 $(E,d)$ 与一般度量空间 $(X,d)$ 不同之处在于：$E$ 不是一般的非空集合，而是一个向量空间，它的元素可以进行加、减、数乘运算，而一般度量空间 $(X,d)$ 中 $X$ 的元素未必能定义这些运算。
+
+如果 $E$ 上可以定义范数，那末 $E$ 上的范数就不是唯一的，像在度量空间中一样，也可以定义范数的等价概念。
+
+\textbf{定义}\quad 设 $\|\cdot\|$ 与 $\|\cdot\|'$ 是 $E$ 上的任意两个范数，我们称 $\|\cdot\|$ 与 $\|\cdot\|'$ 是\textbf{等价的}，如果存在常数 $A>0,\ B>0$ 使得
+\[\forall\,x\in E,\quad A\|x\|\leqslant\|x\|'\leqslant B\|x\|.\]
+
+最简单的赋范向量空间是下面两个例子。
+
+\begin{sourceexample}{4}
+
+设 $E=\C$，$\forall\,z\in\C$，令
+\[\|z\|=|z|\ (\text{复数 }z\text{ 的模}).\]
+容易验证如此定义的 $\|\cdot\|$ 是 $\C$ 上的一个范数。因此 $(\C,\|\cdot\|)$ 是一个赋范向量空间。
+
+\end{sourceexample}
+
+\begin{sourceexample}{5}
+
+设 $E=\R^n\ (n\geqslant1)$，$\forall\,x=(x_1,x_2,\cdots,x_n)\in\R^n$，令
+\[\|x\|_1=\sqrt{x_1^2+x_2^2+\cdots+x_n^2},\]
+\[\|x\|_2=|x_1|+|x_2|+\cdots+|x_n|,\]
+\[\|x\|_3=\max\{|x_1|,|x_2|,\cdots,|x_n|\},\]
+则 $\|\cdot\|_i\ (i=1,2,3)$ 是 $\R^n$ 上的范数，因此 $(\R^n,\|\cdot\|_i)$ 是赋范向量空间，并且成立下述不等式：
+\[\forall\,x\in\R^n,\quad\|x\|_3\leqslant\|x\|_1\leqslant\|x\|_2<n\|x\|_3.\]
+从而 $\|\cdot\|_1,\|\cdot\|_2,\|\cdot\|_3$ 是 $\R^n$ 上的三个互相等价的范数，我们称这三个范数为 $\R^n$ 上的基本范数。
+
+上述结论的证明是容易的，我们留给读者。
+
+\end{sourceexample}
+
+下面我们再举两个今后常见的赋范向量空间的例子。
+
+\begin{sourceexample}{6}
+
+设 $C^0([a,b],\C)$ 为所有定义在有限闭区间 $[a,b]$ 上的连续复值函数的集合。
+
+我们定义映射 $\|\cdot\|_{\infty}:C^0([a,b],\C)\to\R$ 如下：
+\[\forall\,f\in C^0([a,b],\C),\quad\|f\|_{\infty}=\sup_{x\in[a,b]}|f(x)|.\]
+则 $\|\cdot\|_{\infty}$ 是 $C^0([a,b],\C)$ 上的一个范数，因此 $(C^0([a,b],\C),\|\cdot\|_{\infty})$ 是一个赋范向量空间。
+
+首先我们证明映射 $\|\cdot\|_{\infty}$ 是有定义的，这是因为 $\forall\,f\in C^0([a,b],\C)$ 由 $f$ 的连续性及 $[a,b]$ 的有限、闭性知，$\displaystyle\sup_{x\in[a,b]}|f(x)|<+\infty$，故 $\|f\|_{\infty}<+\infty$。
+
+其次，若在 $C^0([a,b],\C)$ 上定义加法与数乘运算为：$\forall\,f,g\in C^0([a,b],\C)$，$\forall\,\lambda\in\C$，
+\[\forall\,x\in[a,b],\ (f+g)(x)=f(x)+g(x),\ (\lambda f)(x)=\lambda f(x),\]
+则 $C^0([a,b],\C)$ 关于这两个运算形成一个 $\C$--向量空间。
+
+下面我们来验证 $\|\cdot\|_{\infty}$ 是 $C^0([a,b],\C)$ 上的范数。
+
+1) $\forall\,f\in C^0([a,b],\C)$，$\|f\|_{\infty}\geqslant0$，并且 $\|f\|_{\infty}=0\Longleftrightarrow\displaystyle\sup_{x\in[a,b]}|f(x)|=0\Longleftrightarrow\forall\,x\in[a,b],\ |f(x)|=0\Longleftrightarrow f=0$。
+
+2) $\forall\,f\in C^0([a,b],\C)$，$\forall\,\lambda\in\C$，
+\[\|\lambda f\|_{\infty}=\sup_{x\in[a,b]}|\lambda f(x)|=|\lambda|\sup_{x\in[a,b]}|f(x)|=|\lambda|\,\|f\|_{\infty}.\]
+3) $\forall\,f,g\in C^0([a,b],\C)$，
+\[\|f+g\|_{\infty}=\sup_{x\in[a,b]}|f(x)+g(x)|\leqslant\sup_{x\in[a,b]}|f(x)|+\sup_{x\in[a,b]}|g(x)|\]
+\[=\|f\|_{\infty}+\|g\|_{\infty}.\]
+因此 $\|\cdot\|_{\infty}$ 的确是 $C^0([a,b],\C)$ 上的一个范数；这个范数也称为 $C^0([a,b],\C)$ 上的一致收敛范数，为什么称 $\|\cdot\|_{\infty}$ 为一致收敛范数，我们将在第 12 章进行解释。
+
+\end{sourceexample}
+
+\begin{sourceexample}{7}
+
+设 $\mathscr{L}(\R^n,\R^m)$ 是所有从 $\R^n$ 到 $\R^m$ 的线性映射的集合，在 $\R^n$ 与 $\R^m$ 上各自取定三个基本范数中的一个。
+
+我们定义映射 $\|\cdot\|:\mathscr{L}(\R^n,\R^m)\to\R$ 如下：
+\[\forall\,T\in\mathscr{L}(\R^n,\R^m),\ \|T\|=\sup_{x\in\R^n,\ \|x\|=1}\|T(x)\|.\]
+则 $\|\cdot\|$ 是 $\mathscr{L}(\R^n,\R^m)$ 上的一个范数，因此 $(\mathscr{L}(\R^n,\R^m),\|\cdot\|)$ 是一个赋范向量空间。
+
+为方便起见，我们在 $\R^n$ 中取基本范数 $\|\cdot\|_2$。
+
+首先我们容易验证 $\mathscr{L}(\R^n,\R^m)$ 是一个 $\R$--向量空间。
+
+其次，我们证明映射 $\|\cdot\|$ 有定义，也即
+\[\forall\,T\in\mathscr{L}(\R^n,\R^m),\ \|T\|=\sup_{x\in\R^n;\ \|x\|_2=1}\|T(x)\|<+\infty.\]
+事实上，设 $(e_1,e_2,\cdots,e_n)$ 是 $\R^n$ 的标准基底。则 $\forall\,x=(x_1,x_2,\cdots,x_n)\in\R^n$，我们有
+\[x=x_1e_1+x_2e_2+\cdots+x_ne_n.\]
+若 $\|x\|_2=1$，则 $|x_1|+|x_2|+\cdots+|x_n|=1$，从而由 $T$ 的线性性及范数的性质，我们有
+\[\|T(x)\|=\|T(x_1e_1+x_2e_2+\cdots+x_ne_n)\|\]
+\[=\|x_1T(e_1)+x_2T(e_2)+\cdots+x_nT(e_n)\|\]
+\[\leqslant|x_1|\,\|T(e_1)\|+|x_2|\,\|T(e_2)\|+\cdots+|x_n|\,\|T(e_n)\|.\]
+令 $M=\max\{\|T(e_1)\|,\|T(e_2)\|,\cdots,\|T(e_n)\|\}$，则 $M<+\infty$，并且
+\[\|T(x)\|\leqslant M(|x_1|+|x_2|+\cdots+|x_n|)=M.\]
+最后我们来验证 $\|\cdot\|$ 满足范数的三个条件。
+
+1) $\forall\,T\in\mathscr{L}(\R^n,\R^m)$，$\|T\|\geqslant0$ 显然，下证 $\|T\|=0\Longleftrightarrow T=0$。
+
+设 $T=0$，由 $\|T\|$ 的定义知 $\|T\|=0$。
+
+反之设 $\|T\|=0$，那末
+\[\sup_{x\in\R^n;\ \|x\|=1}\|T(x)\|=0\Longleftrightarrow\forall\,x\in\R^n,\ \|x\|=1,\ \|T(x)\|=0.\]
+现任取 $x\in\R^n$ 且 $x\neq0$，则 $\dfrac{x}{\|x\|}\in\R^n$，$\left\|\dfrac{x}{\|x\|}\right\|=1$，于是
+\[\left\|T\left(\frac{x}{\|x\|}\right)\right\|=0,\text{ 从而 }\|T(x)\|=0\cdot\|x\|=0.\]
+若 $x\in\R^n$ 且 $x=0$，则显然有 $\|T(x)\|=0$。
+
+因此 $\forall\,x\in\R^n$，$\|T(x)\|=0$，此即表明 $T(x)=0$ 或 $T=0$。
+
+2) $\forall\,T\in\mathscr{L}(\R^n,\R^m)$，$\forall\,\lambda\in\R$，$\|\lambda T\|=|\lambda|\,\|T\|$。
+
+这可由 $\|T\|$ 的定义直接推出。
+
+3) $\forall\,T,S\in\mathscr{L}(\R^n,\R^m)$，$\|T+S\|\leqslant\|T\|+\|S\|$。
+
+这是因为
+\[\|T+S\|=\sup_{x\in\R^n;\ \|x\|=1}\|(T+S)(x)\|\]
+\[\leqslant\sup_{x\in\R^n;\ \|x\|=1}\|T(x)\|+\sup_{x\in\R^n;\ \|x\|=1}\|S(x)\|\]
+\[=\|T\|+\|S\|.\]
+因此上述定义的 $\|\cdot\|$ 是 $\mathscr{L}(\R^n,\R^m)$ 上的一个范数。
+
+由范数的定义，我们得到下述不等式。
+
+\textbf{重要不等式}\quad $\forall\,T\in\mathscr{L}(\R^n,\R^m)$，$\forall\,x\in\R^n$，
+\[\|T(x)\|\leqslant\|T\|\cdot\|x\|.\]
+注意这个不等式左、右两边的三个 $\|\cdot\|$ 代表三个不同空间中的范数。
+
+此不等式的证明简单。$\forall\,x\in\R^n$，且 $x\neq0$，我们有
+\[\left\|T\left(\frac{x}{\|x\|}\right)\right\|\leqslant\|T\|,\text{ 从而 }\|T(x)\|\leqslant\|T\|\cdot\|x\|.\]
+若 $x\in\R^n$ 且 $x=0$，则 $\|T(x)\|=0=\|T\|\cdot\|x\|$。因此
+\[\forall\,x\in\R^n,\quad\|T(x)\|\leqslant\|T\|\cdot\|x\|.\]
+
+\end{sourceexample}
+
+\subsection*{习 题}
+
+\begin{exercise}
+	\item 设 $X$ 是任一非空集合，定义映射 $d:X\times X\to\R$ 如下：
+	\[d(x,y)=\begin{cases} 0, & \text{若 }x=y,\\ 1, & \text{若 }x\neq y. \end{cases}\]
+	证明：$d$ 是 $X$ 上的一个度量。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $X$ 是任一非空集合，$f:X\to\R$ 是任一单射。证明：映射 $d:X\times X\to\R$
+	\[\forall\,x,y\in X,\ d(x,y)=|f(x)-f(y)|\]
+	是 $X$ 上的一个度量。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 是任一度量空间。令
+	\[\bar d(x,y)=\min(d(x,y),1),\quad\forall\,x,y\in X,\]
+	证明：$\bar d$ 是 $X$ 上的一个度量。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $C^2([0,1],\R)$ 表示所有定义在 $[0,1]$ 上的 $2$ 次连续可导函数的集合。
+	\begin{enumerate}[label=\arabic*)]
+		\item $\forall\,f,g\in C^2([0,1],\R)$，我们令
+		\[d_1(f,g)=\sup_{x\in[0,1]}|f(x)-g(x)|,\]
+		\[d_2(f,g)=\sup_{x\in[0,1]}|f'(x)-g'(x)|+|f(0)-g(0)|,\]
+		\[d_3(f,g)=\sup_{x\in[0,1]}|f''(x)-g''(x)|+|f'(0)-g'(0)|+|f(0)-g(0)|,\]
+		证明：$d_1,d_2,d_3$ 是 $C^2([0,1],\R)$ 上的度量。
+		\item 证明：$\forall\,f,g\in C^2([0,1],\R)$
+		\[d_1(f,g)\leqslant d_2(f,g)\leqslant d_3(f,g).\]
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $G$ 是任一交换群。$p:G\to\R^+$ 是任一映射，它满足下述条件：
+	\[p(x)=0\Longleftrightarrow x=0,\quad p(-x)=p(x),\quad p(x+y)\leqslant p(x)+p(y).\]
+	证明：$d:G\times G\to\R$
+	\[d(x,y)=p(x-y),\quad\forall\,(x,y)\in G\times G\]
+	是 $G$ 上的一个度量。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 是任一度量空间。
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：$d'=\dfrac{d}{1+d}$ 是 $X$ 上的一个度量。
+		\item 证明：$d'$ 与第 3 题中的度量 $\bar d$ 是等价度量，并且满足不等式 $d'\leqslant\bar d\leqslant2d'$。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $p\geqslant1$，在 $\R^n$ 上定义映射 $N_p:\R^n\to\R^+$ 如下：
+	\[\forall\,x=(x_1,x_2,\cdots,x_n)\in\R^n,\ N_p(x)=(|x_1|^p+|x_2|^p+\cdots+|x_n|^p)^{\frac1p}.\]
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：$N_p$ 是 $\R^n$ 上的一个范数，称为 $l_p$ 范数。
+		\item 证明：范数 $N_p$ 与 $\R^n$ 的三个基本范数等价。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $\|\cdot\|$ 是 $\R^n$ 上的任一范数，$x,y\in\R^n$，若
+	\[\|x+y\|=\|x\|+\|y\|,\]
+	则 $x$ 与 $y$ 应满足什么关系？
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $N$ 与 $N'$ 分别是 $\R^n$ 与 $\R^m$ 的任一范数，在 $\R^{n+m}=\R^n\times\R^m$ 上分别定义映射 $N_1,N_2,N_3:\R^{n+m}\to\R^+$ 如下：
+	\[\forall\,(x,y)\in\R^n\times\R^m=\R^{n+m},\quad N_1(x,y)=\sqrt{(N(x))^2+(N'(y))^2},\]
+	\[N_2(x,y)=N(x)+N'(y),\]
+	\[N_3(x,y)=\max\{N(x),N'(y)\}.\]
+	证明：$N_1,N_2,N_3$ 是 $\R^{n+m}$ 上的三个范数。
+\end{exercise}
+
+\begin{exercise}
+	\item 在 $C^0([a,b],\R)$ 上定义映射 $N_1,N_2:C^0([a,b],\R)\to\R^+$ 如下：
+	\[\forall\,f\in C^0([a,b],\R),\quad N_1(f)=\int_a^b|f(x)|\,dx,\]
+	\[N_2(f)=\left(\int_a^bf^2(x)\,dx\right)^{\frac12}.\]
+	证明：$N_1$ 与 $N_2$ 是 $C^0([a,b],\R)$ 上的两个范数，它们是等价范数吗？
+\end{exercise}
+
+\begin{exercise}
+	\item 在 $C^1([a,b],\R)$ 上定义映射 $N_1,N_2:C^1([a,b],\R)\to\R^+$ 如下：
+	\[\forall\,f\in C^1([a,b],\R),\quad N_1(f)=\sup_{x\in[a,b]}|f(x)|+\sup_{x\in[a,b]}|f'(x)|,\]
+	\[N_2(f)=\sup_{x\in[a,b]}\bigl(|f(x)|+|f'(x)|\bigr).\]
+	证明：$N_1$ 与 $N_2$ 是 $C^1([a,b],\R)$ 上的两个等价范数。
+\end{exercise}
+
+\begin{exercise}
+	\item 证明：
+	\begin{enumerate}[label=\arabic*)]
+		\item 对 $id_{\R^n}\in\mathscr{L}(\R^n,\R^n)$，$\|id_{\R^n}\|=1$；
+		\item $\forall\,T\in\mathscr{L}(\R^n,\R^m),\ \forall\,S\in\mathscr{L}(\R^m,\R^k)$，$\|S\circ T\|\leqslant\|S\|\cdot\|T\|$。
+	\end{enumerate}
+\end{exercise}
+
+\section{度量空间的开集、闭集}
+
+为了进一步认识度量空间，我们来介绍度量空间的开集、闭集及其基本性质。
+
+\subsection{开球、闭球及球面}
+
+\begin{mydef*}{}
+
+设 $(X,d)$ 是任一度量空间，$\forall\,a\in X,\ \forall\,\delta\geqslant0$，我们令
+\[B(a,\delta)\triangleq\{x\in X\mid d(a,x)<\delta\},\]
+\[\bar{B}(a,\delta)=\{x\in X\mid d(a,x)\leqslant\delta\},\]
+\[S(a,\delta)=\{x\in X\mid d(a,x)=\delta\},\]
+并分别称 $B(a,\delta)$、$\bar{B}(a,\delta)$ 及 $S(a,\delta)$ 为 $X$ 的以 $a$ 为中心，以 $\delta$ 为半径的开球、闭球及球面。
+
+有时为了指明度量 $d$，我们也采用记号 $B_d(a,\delta)$，$\bar B_d(a,\delta)$，$S_d(a,\delta)$。
+
+\end{mydef*}
+
+在赋范向量空间 $(E,\|\cdot\|)$ 中，相应地我们有
+\[B(a,\delta)=\{x\in E\mid\|x-a\|<\delta\},\]
+\[\bar{B}(a,\delta)=\{x\in E\mid\|x-a\|\leqslant\delta\},\]
+\[S(a,\delta)=\{x\in E\mid\|x-a\|=\delta\}.\]
+
+\textbf{注意}\quad 若 $\delta=0$，则 $B(a,\delta)=\varnothing$，$\bar{B}(a,\delta)=S(a,\delta)=\{a\}$。若 $\delta>0$，则 $a\in B(a,\delta)\subset\bar{B}(a,\delta)$，并且
+\[B(a,\delta)\cup S(a,\delta)=\bar{B}(a,\delta).\]
+
+\begin{sourceexample}{1}
+
+设 $X=\R$，$d(x,y)=|x-y|$ 为绝对值度量，于是
+\[B(a,\delta)=]a-\delta,a+\delta[,\quad\bar{B}(a,\delta)=[a-\delta,a+\delta],\]
+\[S(a,\delta)=\{a-\delta,a+\delta\}.\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{2}
+
+设 $X=\R^2$。我们来考虑在 $\R^2$ 的三个基本度量 $d_1,d_2,d_3$ 下的 $B(a,\delta)$，$\bar{B}(a,\delta)$ 与 $S(a,\delta)$。
+
+记 $a=(a_1,a_2),\ x=(x_1,x_2)$。
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item 对度量 $d_1$：
+\[B(a,\delta)=\{x\in\R^2\mid\sqrt{(x_1-a_1)^2+(x_2-a_2)^2}<\delta\},\]
+\[\bar{B}(a,\delta)=\{x\in\R^2\mid\sqrt{(x_1-a_1)^2+(x_2-a_2)^2}\leqslant\delta\},\]
+\[S(a,\delta)=\{x\in\R^2\mid\sqrt{(x_1-a_1)^2+(x_2-a_2)^2}=\delta\}.\]
+这里 $B(a,\delta)$，$\bar{B}(a,\delta)$，$S(a,\delta)$ 就是平面上通常所说的以 $a$ 为中心 $\delta$ 为半径的开圆盘、闭圆盘、圆周。
+\item 对度量 $d_2$：
+\[B(a,\delta)=\{x\in\R^2\mid|x_1-a_1|+|x_2-a_2|<\delta\},\]
+\[\bar{B}(a,\delta)=\{x\in\R^2\mid|x_1-a_1|+|x_2-a_2|\leqslant\delta\},\]
+\[S(a,\delta)=\{x\in\R^2\mid|x_1-a_1|+|x_2-a_2|=\delta\}.\]
+这时 $B(a,\delta)$，$\bar{B}(a,\delta)$，$S(a,\delta)$ 是平面上以 $a$ 为中心，两条对角线分别平行于 $x_1$ 轴与 $x_2$ 轴而长为 $2\delta$ 的开菱形、闭菱形、四条菱边。
+
+\begin{center}
+\includegraphics[width=.6\linewidth,height=.5\textheight,keepaspectratio]{_page_497_Picture_1.jpeg}
+
+图 10-2
+\end{center}
+\item 对度量 $d_3$：
+\[B(a,\delta)=\{x\in\R^2\mid\max\{|x_1-a_1|,|x_2-a_2|\}<\delta\},\]
+\[\bar B(a,\delta)=\{x\in\R^2\mid\max\{|x_1-a_1|,|x_2-a_2|\}\leqslant\delta\},\]
+\[S(a,\delta)=\{x\in\R^2\mid\max\{|x_1-a_1|,|x_2-a_2|\}=\delta\}.\]
+显然这里 $B(a,\delta)$，$\bar B(a,\delta)$，$S(a,\delta)$ 是平面上以 $a$ 为中心、两对边分别平行于 $x_1$ 轴与 $x_2$ 轴而长为 $2\delta$ 的开正方形、闭正方形、正方形四条边。
+
+\begin{center}
+\includegraphics[width=.6\linewidth,height=.5\textheight,keepaspectratio]{_page_497_Picture_6.jpeg}
+
+图 10-3
+\end{center}
+\end{enumerate}
+
+\end{sourceexample}
+
+由此可知，在同一 $X$ 上，对不同的度量 $d$，$B(a,\delta)$，$\bar B(a,\delta)$ 与 $S(a,\delta)$ 可以有不同的几何形状。
+
+\subsection{开集、闭集、邻域}
+
+\begin{mydef*}{}
+
+设 $(X,d)$ 是任一度量空间，$U\subset X$ 是任一集合。$a\in X$。
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item 我们称 $U$ 是 $X$ 的\textbf{开集}，如果
+\[(\forall\,x\in U)\,(\exists\,\delta>0)\text{ 使得 }B(x,\delta)\subset U.\]
+\item 我们称 $U$ 是 $X$ 的\textbf{闭集}，如果 $X-U$ 是 $X$ 的开集。
+\item 我们称 $U$ 是 $a$ 的一个\textbf{邻域}，如果 $U$ 是包含 $a$ 的开集。我们用 $\mathscr{N}(a)$ 表示 $a$ 的所有邻域组成的集族，称为 $a$ 的\textbf{邻域系}。
+\end{enumerate}
+
+\end{mydef*}
+
+由上述定义可知：空集 $\varnothing$ 与 $X$ 本身既是开集又是闭集。
+
+当然，在度量空间中，一般说来存在既非开又非闭的集合。因此当 $A$ 不是 $(X,d)$ 中的开（闭）集时，我们不能断定 $A$ 就一定是 $(X,d)$ 的闭（开）集。
+
+例如熟知的半闭半开的区间 $[a,b[$，$]a,b]$（$a,b\in\R$，$a\neq b$）就是 $(\R,|\cdot|)$ 中的既非开又非闭的集合。
+
+\subsection*{最简单的开集、闭集}
+
+\begin{myprop*}{}
+
+设 $(X,d)$ 是任一度量空间。则
+\begin{enumerate}[label=\arabic{enumi})]
+\item $X$ 的任一单点集 $\{a\}$ 是闭集，
+\item $X$ 的任一开球 $B(a,\delta)$ 是开集，
+\item $X$ 的任一闭球 $\bar B(a,\delta)$ 是闭集。
+\end{enumerate}
+
+\end{myprop*}
+
+\begin{proof}
+
+1) 为了证明 $\{a\}$ 是闭集，只需证明 $X-\{a\}$ 是开集。
+
+事实上，$\forall\,x\in X-\{a\}$，$d(x,a)>0$，若取 $\delta=\dfrac12d(x,a)$，则 $\delta>0$，$B(x,\delta)\subset X-\{a\}$。因此 $X-\{a\}$ 是 $X$ 的开集。
+
+2) 对开球 $B(a,\delta)$：若 $\delta=0$，则 $B(a,\delta)=\varnothing$，它是开集。现假设 $\delta>0$，为了证明 $B(a,\delta)$ 是开集，我们来证明：
+\[(\forall\,x\in B(a,\delta))\,(\exists\,\delta_x>0)\text{ 使得 }B(x,\delta_x)\subset B(a,\delta).\]
+事实上，由于 $x\in B(a,\delta)$，故 $d(x,a)<\delta$。令 $\delta_x=\delta-d(x,a)$，则 $\delta_x>0$。
+
+现在设 $y\in B(x,\delta_x)$，于是
+\[d(a,y)\leqslant d(a,x)+d(x,y)<d(a,x)+\delta_x\]
+\[=d(a,x)+\delta-d(x,a)=\delta.\]
+此即表明 $y\in B(a,\delta)$，从而 $B(x,\delta_x)\subset B(a,\delta)$。
+
+3) 对闭球 $\bar B(a,\delta)$：若 $\delta=0$，则 $\bar B(a,\delta)=\{a\}$，是闭集，现假设 $\delta>0$。为了证明 $\bar B(a,\delta)$ 为闭集，我们证明 $X-\bar B(a,\delta)$ 为开集，即等价地证明：
+\[(\forall\,x\in X-\bar B(a,\delta))\,(\exists\,\delta_x>0)\text{ 使得 }B(x,\delta_x)\subset X-\bar B(a,\delta).\]
+事实上，由于 $x\notin\bar B(a,\delta)$，故 $d(x,a)>\delta$。令 $\delta_x=d(x,a)-\delta$，则 $\delta_x>0$。于是 $\forall\,y\in B(x,\delta_x)$，
+\[d(y,a)\geqslant d(x,a)-d(y,x)>d(x,a)-d(x,a)+\delta=\delta.\]
+此即表明 $y\notin\bar B(a,\delta)$，因此 $y\in X-\bar B(a,\delta)$，即 $B(x,\delta_x)\subset X-\bar B(a,\delta)$。
+
+\end{proof}
+
+度量空间的一个重要性质就是它的 Hausdorff 分离性。
+
+\begin{mythm}{Hausdorff分离性}{metric-hausdorff}
+
+设 $(X,d)$ 是任一度量空间，$a,b\in X$ 且 $a\neq b$。则存在 $U\in\mathscr{N}(a)$，$V\in\mathscr{N}(b)$ 使得
+\[U\cap V=\varnothing.\]
+
+\end{mythm}
+
+\begin{proof}
+
+因为 $a\neq b$，故 $d(a,b)>0$，取 $\delta=\dfrac12d(a,b)$，则 $B(a,\delta)\in\mathscr{N}(a)$，$B(b,\delta)\in\mathscr{N}(b)$，并且
+\[B(a,\delta)\cap B(b,\delta)=\varnothing.\]
+最后令 $U=B(a,\delta)$，$V=B(b,\delta)$ 即可。
+
+\end{proof}
+
+\subsection*{开集、闭集的性质}
+
+\begin{mythm}{}{open-set-properties}
+
+设 $(X,d)$ 是任一度量空间，则
+\begin{enumerate}[label=\arabic{enumi})]
+\item $X$ 的有限个开集的交是 $X$ 的开集，
+\item $X$ 的任意一族开集的并是 $X$ 的开集。
+\end{enumerate}
+
+\end{mythm}
+
+\begin{proof}
+
+1) 设 $U_i\ (i=1,2,\cdots,m)$ 是 $X$ 的任意 $m$ 个开集，若 $\displaystyle\bigcap_{i=1}^mU_i=\varnothing$，则它是开集，因此不妨设 $\displaystyle\bigcap_{i=1}^mU_i\neq\varnothing$，
+\[\forall\,x\in\bigcap_{i=1}^mU_i,\ \text{由 }x\in U_i\text{ 知，存在 }\delta_i>0\text{ 使得}\]
+\[B(x,\delta_i)\subset U_i\ (i=1,2,\cdots,m).\]
+令 $\delta=\min\{\delta_1,\delta_2,\cdots,\delta_m\}$，则 $\delta>0$，$B(x,\delta)\subset B(x,\delta_i)\subset U_i\ (i=1,2,\cdots,m)$，从而 $B(x,\delta)\subset\displaystyle\bigcap_{i=1}^mU_i$，因此 $\displaystyle\bigcap_{i=1}^mU_i$ 是 $X$ 的开集。
+
+2) 设 $\{U_{\lambda}\}_{\lambda\in\Lambda}$ 是 $X$ 的任一开集族。于是 $\forall\,x\in\displaystyle\bigcup_{\lambda\in\Lambda}U_{\lambda}$，存在 $\lambda_0\in\Lambda$，存在 $\delta>0$，使得 $B(x,\delta)\subset U_{\lambda_0}$，从而 $B(x,\delta)\subset\displaystyle\bigcup_{\lambda\in\Lambda}U_{\lambda}$。因此 $\displaystyle\bigcup_{\lambda\in\Lambda}U_{\lambda}$ 是 $X$ 的开集。
+
+\end{proof}
+
+\begin{mythm}{}{closed-set-properties}
+
+设 $(X,d)$ 是任一度量空间，则
+\begin{enumerate}[label=\arabic{enumi})]
+\item $X$ 的有限个闭集的并是 $X$ 的闭集，
+\item $X$ 的任意一族闭集的交是 $X$ 的闭集。
+\end{enumerate}
+
+\end{mythm}
+
+\begin{proof}
+
+1) 设 $F_i\ (i=1,2,\cdots,m)$ 是 $X$ 的任意 $m$ 个闭集。于是 $X-F_i\ (i=1,2,\cdots,m)$ 是 $X$ 的开集，从而由 De Morgan 公式
+\[X-\bigcup_{i=1}^{m}F_i=\bigcap_{i=1}^{m}(X-F_i)\]
+及\rthm{thm:open-set-properties}知 $X-\displaystyle\bigcup_{i=1}^{m}F_i$ 是 $X$ 的开集，因此 $\displaystyle\bigcup_{i=1}^{m}F_i$ 是 $X$ 的闭集。
+
+2) 现设 $\{F_{\lambda}\}_{\lambda\in\Lambda}$ 是 $X$ 的任意一闭集族，由于 $\forall\,\lambda\in\Lambda$，$X-F_{\lambda}$ 为 $X$ 的开集，故由 De Morgan 公式
+\[X-\bigcap_{\lambda\in\Lambda}F_{\lambda}=\bigcup_{\lambda\in\Lambda}(X-F_{\lambda})\]
+及\rthm{thm:open-set-properties}知 $X-\displaystyle\bigcap_{\lambda\in\Lambda}F_{\lambda}$ 是 $X$ 的开集，从而交集 $\displaystyle\bigcap_{\lambda\in\Lambda}F_{\lambda}$ 是 $X$ 的闭集。
+
+\end{proof}
+
+现在我们用 $\tau$ 表示度量空间 $(X,d)$ 的所有开集组成的集族，由前面的讨论可知，$\tau$ 具有下述三个重要性质：
+
+i) $\varnothing,X\in\tau$；
+
+ii) 若 $U,V\in\tau$，则 $U\cap V\in\tau$；
+
+iii) 若 $U_{\lambda}\in\tau\ (\lambda\in\Lambda)$，则 $\displaystyle\bigcup_{\lambda\in\Lambda}U_{\lambda}\in\tau$。
+
+我们称此开集族 $\tau$ 是由 $X$ 的度量 $d$ 诱导出来的一个拓扑（Topology）。
+
+如果我们在一个集合 $X$ 上直接地给出满足上述 i)、ii)、iii) 三个条件的 $X$ 上的一个集族 $\tau$，则我们称 $\tau$ 是 $X$ 上的一个拓扑，$U\in\tau$ 称为开集，$(X,\tau)$ 称为一个拓扑空间，若这个拓扑是由 $X$ 上的某一个度量 $d$ 所诱导的，则称 $(X,\tau)$ 是可度量化拓扑空间。这方面的内容属于专门的拓扑学的研究范畴，已超出本书的范围，我们就不在此多叙述。
+
+\subsection{集合的闭包、内部、边界}
+
+\begin{mydef*}{}
+
+设 $(X,d)$ 是任一度量空间，$A\subset X$ 是任一集合，$a\in X$。
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item 我们称 $a$ 是集合 $A$ 的\textbf{聚点}，如果
+\[\forall\,U\in\mathscr{N}(a),\ U\cap(A-\{a\})\neq\varnothing.\]
+$A$ 的所有聚点组成的集与 $A$ 的并记为 $\bar A$，并称为 $A$ 的\textbf{闭包}，$\bar A$ 的每一元素称为 $A$ 的闭包点。
+\item 我们称 $a$ 是集合 $A$ 的\textbf{孤立点}，如果
+\[\exists\,U\in\mathscr{N}(a),\ U\cap A=\{a\}.\]
+\item 我们称 $a$ 是集合 $A$ 的\textbf{内点}，如果
+\[\exists\,U\in\mathscr{N}(a),\ U\subset A.\]
+$A$ 的所有内点组成的集合记为 $\overset{\circ}{A}$，称为 $A$ 的\textbf{内部}。
+\item 我们称 $a$ 是集合 $A$ 的\textbf{边界点}，如果
+\[\forall\,U\in\mathscr{N}(a),\ U\cap A\neq\varnothing,\ U\cap(X-A)\neq\varnothing.\]
+$A$ 的所有边界点组成的集合记为 $\partial A$，称为 $A$ 的\textbf{边界}。
+\end{enumerate}
+
+\end{mydef*}
+
+\begin{sourceexample}{3}
+
+考虑实数空间 $(\R,|\cdot|)$ 中的有理数集 $\Q$ 与无理数集 $\Q^c$。我们有：
+\[\bar{\Q}=\R,\quad\overset{\circ}{\Q}=\varnothing,\quad\partial\Q=\R,\]
+\[\overline{\Q^c}=\R,\quad\overset{\circ}{\Q^c}=\varnothing,\quad\partial\Q^c=\R.\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{4}
+
+对任一度量空间 $(X,d)$，$\forall\,a\in X,\ \forall\,\delta>0$，我们有：
+\[\overline{B(a,\delta)}=\bar B(a,\delta),\quad\overset{\circ}{B}(a,\delta)=B(a,\delta),\]
+\[\partial B(a,\delta)=\partial\bar B(a,\delta)=S(a,\delta),\]
+\[\overline{S(a,\delta)}=\partial S(a,\delta)=S(a,\delta),\quad\overset{\circ}{S}(a,\delta)=\varnothing.\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{5}
+
+设 $a,b\in\R,\ a<b$。$\varphi,\psi:[a,b]\to\R$ 是任意两个连续函数，并且 $\varphi\leqslant\psi$。令
+\[A=\{(x,y)\in\R^2\mid x\in[a,b],\ \varphi(x)\leqslant y\leqslant\psi(x)\}.\]
+则
+\[\overset{\circ}{A}=\{(x,y)\in\R^2\mid x\in\ ]a,b[,\ \varphi(x)<y<\psi(x)\},\]
+\[\partial A=\{(a,y)\in\R^2\mid\varphi(a)\leqslant y\leqslant\psi(a)\}\cup\{(b,y)\in\R^2\mid\varphi(b)\leqslant y\leqslant\psi(b)\}\]
+\[\cup\mathrm{Gr}(\varphi)\cup\mathrm{Gr}(\psi).\]
+
+\end{sourceexample}
+
+\begin{center}
+\includegraphics[width=.6\linewidth,height=.5\textheight,keepaspectratio]{_page_503_Picture_1.jpeg}
+
+图 10-4
+\end{center}
+
+\begin{mythm}{}{closure-interior-boundary}
+
+设 $A$ 是度量空间 $(X,d)$ 的任一非空集合，则
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item $\overset{\circ}{A}$ 是开集，$\bar A$ 是闭集；
+\item $\partial A$ 是闭集，并且 $\partial A=\bar A\cap(\overline{X-A})$。
+\end{enumerate}
+
+\end{mythm}
+
+\begin{proof}
+
+1) 由开集及 $\overset{\circ}{A}$ 的定义知 $\overset{\circ}{A}$ 是 $X$ 的开集，为了证明 $\bar A$ 是闭集，我们证明 $X-\bar A$ 是开集。
+
+首先不难证明下述结论成立：
+\[x\in\bar A\Longleftrightarrow\forall\,U\in\mathscr{N}(x),\ U\cap A\neq\varnothing.\qquad(*)\]
+现任取 $x\in X-\bar A$。由于 $x\notin\bar A$，故存在 $U\in\mathscr{N}(x)$ 使得 $U\cap A=\varnothing$。下面证明 $U\subset X-\bar A$。
+
+事实上，$\forall\,y\in U,\ U\in\mathscr{N}(y)$。由于 $U\cap A=\varnothing$，故 $y\notin\bar A$，从而 $y\in X-\bar A$ 即 $U\subset X-\bar A$，由 $x\in X-\bar A$ 的任意性推知 $X-\bar A$ 是 $X$ 的开集，于是 $\bar A$ 是 $X$ 的闭集。
+
+2) 由 $\partial A$ 的定义
+\[\partial A=\{x\in X\mid\forall\,U\in\mathscr{N}(x),\ U\cap A\neq\varnothing,\ U\cap(X-A)\neq\varnothing\}.\]
+故由上述 $(*)$ 式即知 $\partial A=\bar A\cap(\overline{X-A})$。由于 $\bar A$ 与 $(\overline{X-A})$ 都是闭集，所以 $\partial A$ 是 $X$ 的闭集。
+
+\end{proof}
+
+\begin{sourceexample}{6}
+
+$\forall\,a\in(X,d),\ \forall\,\delta>0,\ S(a,\delta)$ 是闭集。因为
+\[S(a,\delta)=\partial\bar B(a,\delta).\]
+
+\end{sourceexample}
+
+\subsection{度量空间的子空间}
+
+设 $(X,d)$ 是任一度量空间，$Y\subset X$ 是任一非空集合，我们用 $d_Y$ 表示 $d$ 在 $Y\times Y$ 上的限制，直接由度量的定义可知，$d_Y$ 是 $Y$ 上的一个度量。于是 $(Y,d_Y)$ 形成一个度量空间。
+
+\begin{mydef*}{}
+
+度量空间 $(Y,d_Y)$ 称为度量空间 $(X,d)$ 的\textbf{子空间}。
+
+\end{mydef*}
+
+下面我们来研究度量空间 $(X,d)$ 与子空间 $(Y,d_Y)$ 的开集之间的关系。
+
+首先我们证明下述引理。
+
+\begin{mylemma*}{}
+
+若 $(Y,d_Y)$ 是 $(X,d)$ 的子空间，则
+\[\forall\,x\in Y,\quad\forall\,\delta\geqslant0,\quad B_{d_Y}(x,\delta)=B_d(x,\delta)\cap Y.\]
+
+\end{mylemma*}
+
+\begin{proof}
+
+这可由 $d_Y$ 的定义直接推出：
+\[B_{d_Y}(x,\delta)=\{y\in Y\mid d_Y(y,x)<\delta\}\]
+\[=\{y\in Y\mid d(y,x)<\delta\}\]
+\[=B_d(x,\delta)\cap Y.\quad\blacksquare\]
+
+\end{proof}
+
+\begin{center}
+\includegraphics[width=.6\linewidth,height=.5\textheight,keepaspectratio]{_page_504_Picture_8.jpeg}
+
+图 10-5
+\end{center}
+
+\begin{mythm}{}{subspace-open}
+
+$A\subset Y$ 是 $Y$ 的开集，当且仅当存在 $X$ 中的开集 $U$ 使得 $A=U\cap Y$。
+
+\end{mythm}
+
+\begin{proof}
+
+设 $A\subset Y$ 是 $Y$ 的开集，则
+\[\forall\,x\in A,\quad\exists\,\delta_x>0\Longrightarrow B_{d_Y}(x,\delta_x)\subset A\Longrightarrow A=\bigcup_{x\in A}B_{d_Y}(x,\delta_x),\]
+令 $U=\displaystyle\bigcup_{x\in A}B_d(x,\delta_x)$，由\rthm{thm:open-set-properties}知 $U$ 是 $X$ 的开集，由引理 $B_{d_Y}(x,\delta_x)=B_d(x,\delta_x)\cap Y$，故
+\[A=\bigcup_{x\in A}B_{d_Y}(x,\delta_x)=\bigcup_{x\in A}(B_d(x,\delta_x)\cap Y)\]
+\[=\left(\bigcup_{x\in A}B_d(x,\delta_x)\right)\cap Y=U\cap Y.\]
+反之，设存在 $X$ 中的开集 $U$ 使得 $A=U\cap Y$。那末 $\forall\,x\in A$，存在 $\delta_x>0$ 使得 $B_d(x,\delta_x)\subset U$，再由引理 $B_{d_Y}(x,\delta_x)=B_d(x,\delta_x)\cap Y$ 推得
+\[A=\left(\bigcup_{x\in A}B_d(x,\delta_x)\right)\cap Y=\bigcup_{x\in A}(B_d(x,\delta_x)\cap Y)\]
+\[=\bigcup_{x\in A}B_{d_Y}(x,\delta_x).\]
+因此 $A$ 是 $Y$ 中的开集。
+
+\end{proof}
+
+\begin{mycor*}{}
+
+若 $A\subset Y$ 是 $X$ 的开集，则 $A$ 也是 $Y$ 的开集。
+
+\end{mycor*}
+
+\begin{proof}
+
+因为 $A=A\cap Y$。
+
+\end{proof}
+
+此推论的逆不成立，即 $Y$ 的开集不一定是 $X$ 的开集。
+
+\begin{sourceexample}{7}
+
+考虑实数空间 $(\R,|\cdot|)$ 的子空间 $([0,1],|\cdot|_{[0,1]})$。$\forall\,a,b\in[0,1]$ 且 $a<b$，下述各集合
+\[]a,b[,\ [0,b[,\ ]a,1],\ \varnothing,\ [0,1]\]
+都是 $[0,1]$ 的开集，但 $[0,b[$，$]a,1]$，$[0,1]$ 不是 $\R$ 的开集（这里 $b\neq0$，$a\neq1$），而 $]a,b[$ 仍是 $\R$ 中的开集。
+
+\end{sourceexample}
+
+\begin{sourceexample}{8}
+
+考虑度量空间 $(\R^n,d_1)\ (n>1)$，令
+\[H=\{(x_1,x_2,\dots,x_n)\in\R^n\mid x_n\geqslant0\},\]
+则 $(H,d_{1H})$ 是 $(\R^n,d_1)$ 的子空间。设 $A,B,C$ 是 $(H,d_{1H})$ 中如下图所示的三个集合。
+
+显然 $A$ 是 $H$ 的开集，也是 $\R^n$ 的开集，因为 $A=B_{d_1}(a,r)\subset H$；
+
+$B$ 是 $H$ 的开集，因为 $B=B_{d_1}(b,r)\cap H$，但 $B$ 不是 $\R^n$ 的开集；$C$ 不是 $H$ 的开集，当然也不是 $\R^n$ 的开集。
+
+\end{sourceexample}
+
+\begin{center}
+\includegraphics[width=.6\linewidth,height=.5\textheight,keepaspectratio]{_page_506_Figure_0.jpeg}
+
+图 10-6
+\end{center}
+
+\begin{mythm}{}{subspace-closed}
+
+$A\subset Y$ 是 $Y$ 的闭集，当且仅当存在 $X$ 中的闭集 $V$ 使得 $A=V\cap Y$。
+
+\end{mythm}
+
+\begin{proof}
+
+设 $A\subset Y$ 是 $Y$ 的闭集。那末 $Y-A$ 是 $Y$ 的开集，从而由\rthm{thm:subspace-open}知存在 $X$ 中的开集 $U$ 使得 $Y-A=U\cap Y$，于是
+\[A=Y-(Y-A)=Y-(U\cap Y)=Y-U=(X-U)\cap Y\]
+\[=V\cap Y,\]
+这里 $V=X-U$ 是 $X$ 中的闭集。
+
+反之设 $A=V\cap Y$，这里 $V$ 是 $X$ 的闭集。那末 $X-V$ 是 $X$ 的开集，从而由\rthm{thm:subspace-open}知，$(X-V)\cap Y$ 是 $Y$ 的开集，而
+\[(X-V)\cap Y=X\cap Y-V\cap Y=Y-A,\]
+故 $A$ 是 $Y$ 的闭集。
+
+\end{proof}
+
+\begin{mycor*}{}
+
+若 $A\subset Y$ 是 $X$ 的闭集，则 $A$ 也是 $Y$ 的闭集。
+
+\end{mycor*}
+
+\begin{proof}
+
+因为 $A=A\cap Y$。
+
+\end{proof}
+
+注意，此推论的逆也是不成立的，即 $Y$ 的闭集不一定是 $X$ 的闭集。
+
+\subsection*{习 题}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 是任一度量空间，$a\in X$。证明：
+	\begin{enumerate}[label=\arabic*)]
+		\item $\forall\,U_i\in\mathscr{N}(a)\ (i=1,2,\cdots,n)$，$\displaystyle\bigcap_{i=1}^nU_i\in\mathscr{N}(a)$；
+		\item $\displaystyle\bigcap_{U\in\mathscr{N}(a)}U=\{a\}$。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 是任一度量空间，$a\in X$。$\mathscr{B}$ 是 $\mathscr{N}(a)$ 的一子集，我们称 $\mathscr{B}$ 是 $a$ 的一个\textbf{邻域基}，如果
+	\[\forall\,U\in\mathscr{N}(a),\ \exists\,V\in\mathscr{B},\Longrightarrow V\subset U.\]
+	证明：$(X,d)$ 的每一点 $a$ 都有一个可数下降的邻域基 $\mathscr{B}=\{V_n\in\mathscr{N}(a)\mid V_{n+1}\subset V_n,\ n\in\N\}$。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 是任一度量空间，$A\subset X$ 是任一非空集合，$a\in X$。
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：若 $a$ 是 $A$ 的聚点，则 $a$ 是 $A$ 的闭包点，反之则不然。
+		\item 设 $\mathscr{B}$ 是 $a$ 的一邻域基。证明：
+
+		$a$ 是 $A$ 的闭包点 $\Longleftrightarrow\forall\,V\in\mathscr{B},\ V\cap A\neq\varnothing$，
+
+		$a$ 是 $A$ 的聚点 $\Longleftrightarrow\forall\,V\in\mathscr{B},\ V\cap(A-\{a\})\neq\varnothing$。
+		\item 证明：$A$ 是 $X$ 的闭集，当且仅当 $A=\bar A$。
+		\item 证明：$\overline{\bar A}=\bar A$。
+		\item 证明：若 $A\subset B\subset X$，则 $\bar A\subset\bar B$。
+		\item 证明：$\overline{A\cup B}=\bar A\cup\bar B$。举例说明 $\overline{A\cap B}=\bar A\cap\bar B$ 不成立。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 是任一度量空间，$A\subset X$ 是任一非空集合。
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：$A$ 是 $X$ 的开集，当且仅当 $A=\overset{\circ}{A}$。
+		\item 证明：$\overset{\circ}{\bar A}=\overset{\circ}{A}$。
+		\item 证明：若 $A\subset B\subset X$，则 $\overset{\circ}{A}\subset\overset{\circ}{B}$。
+		\item 证明：$(A\cap B)^{\circ}=\overset{\circ}{A}\cap\overset{\circ}{B}$。举例说明 $(A\cup B)^{\circ}=\overset{\circ}{A}\cup\overset{\circ}{B}$ 不成立。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 是任一度量空间，$A\subset X$ 是任一非空集合。证明：
+	\begin{enumerate}[label=\arabic*)]
+		\item $\partial A=\bar A-\overset{\circ}{A}$，由此推得 $\partial A$ 是 $X$ 的闭集。
+		\item $\partial\bar A\subset\partial A,\ \partial\overset{\circ}{A}\subset\partial A,\ \partial(A\cup B)\subset\partial A\cup\partial B$。
+		\item 若 $\bar A\cap\bar B=\varnothing$，则 $\partial(A\cup B)=\partial A\cup\partial B$。
+		\item $A$ 是开集当且仅当 $\partial A=\bar A-A$。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 是任一度量空间，$E,F\subset X$ 是两个不相交的闭集。证明：
+	\begin{enumerate}[label=\arabic*)]
+		\item $\forall\,x\in E,\ d(x,F)=\displaystyle\inf_{y\in F}d(x,y)>0$。（$d(x,F)$ 称为 $x$ 与 $F$ 的距离）
+		\item 存在两个开集 $U$ 与 $V$ 使得 $E\subset U,\ F\subset V$ 并且 $U\cap V=\varnothing$。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 是任一度量空间，$Y\subset X$ 是一非空集合。证明：若 $A\subset Y$ 是 $Y$ 的开（闭）集，$Y$ 是 $X$ 的开（闭）集，则 $A$ 是 $X$ 的开（闭）集。
+\end{exercise}
+
+\begin{exercise}
+	\item 写出图 10-6 中集合 $A$、$B$、$C$ 分别在 $(\R^2,d_1)$ 与 $(H,d_{1H})$ 中的闭包、内部与边界。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $\mathscr{F}$ 是如下定义的 $\R$ 的子集族：
+	\[\mathscr{F}=\{U\subset\R\mid U=\varnothing\text{ 或 }\R-U\text{ 是可数集}\}.\]
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：$\mathscr{F}$ 是 $\R$ 的一个拓扑。
+		\item 证明：若 $U_n\in\mathscr{F}\ (n\in\N)$，则 $\displaystyle\bigcap_{n=1}^{+\infty}U_n\in\mathscr{F}$。
+		\item 证明：$\mathscr{F}$ 不具有 Hausdorff 分离性，即“$\forall\,x,y\in\R$ 且 $x\neq y$，存在 $U,V\in\mathscr{F}$ 使得 $x\in U$，$y\in V$ 且 $U\cap V=\varnothing$”不成立。
+		\item 若改 $\mathscr{F}$ 为 $\mathscr{F}'$：
+		\[\mathscr{F}'=\{U\subset\R\mid U=\varnothing\text{ 或 }\R-U\text{ 为有限集}\}.\]
+		试问上述 1)、2)、3) 的结论仍然成立吗？
+	\end{enumerate}
+\end{exercise}
+
+\section{度量空间的点序列极限，映射的极限与连续性}
+
+\subsection{度量空间的点序列极限}
+
+\begin{mydef*}{}
+
+设 $X$ 是任一非空集合。从 $\N$ 到 $X$ 的任一映射 $x:\N\to X$ 称为 $X$ 的一个点序列，简记为 $\langle x_n\rangle$。$x_n\ (n\in\N)$ 称为此序列的第 $n$ 项或通项。
+
+\end{mydef*}
+
+\begin{sourceexample}{1}
+
+设 $\langle x_{ni}\rangle\ (i=1,2,\cdots,k)$ 是 $k$ 个实数序列，令
+\[x_n=(x_{n1},x_{n2},\cdots,x_{nk})\quad(\forall\,n\in\N),\]
+则 $\langle x_n\rangle$ 是 $\R^k$ 的一个点序列。
+
+\end{sourceexample}
+
+\begin{sourceexample}{2}
+
+设 $\langle x_n\rangle$ 与 $\langle y_n\rangle$ 是两个实数序列，令
+\[z_n=x_n+iy_n\quad(\forall\,n\in\N),\]
+则 $\langle z_n\rangle$ 是 $\C$ 的一个复数序列。
+
+\end{sourceexample}
+
+\begin{sourceexample}{3}
+
+设 $f_n\in C^0([a,b],\R)\ (\forall\,n\in\N)$，则 $\langle f_n\rangle$ 是 $C^0([a,b],\R)$ 的一个连续函数序列。
+
+\end{sourceexample}
+
+\begin{mydef*}{}
+
+设 $(X,d)$ 是任一度量空间，$\langle x_n\rangle$ 是 $X$ 的任一点序列。
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item 我们称 $\langle x_n\rangle$ 收敛，如果存在 $x\in X$，它具有下述性质：
+\[(\forall\,\varepsilon>0)(\exists\,N\in\N)(\forall\,n\in\N,\ n\geqslant N)\Longrightarrow d(x_n,x)<\varepsilon.\]
+这时我们也称点序列 $\langle x_n\rangle$ 当 $n\to+\infty$ 时收敛于 $x$ 或以 $x$ 为极限，记为
+\[\lim_{n\to+\infty}x_n=x\ \text{或}\ x_n\to x\ (n\to+\infty).\]
+\item 我们称 $\langle x_n\rangle$ 发散，如果 $\langle x_n\rangle$ 不收敛。
+\end{enumerate}
+
+\end{mydef*}
+
+下面我们对度量空间点序列的收敛性作两点说明。
+
+第一：由度量空间 $(X,d)$ 的 Hausdorff 分离性推知，若 $X$ 的点序列 $\langle x_n\rangle$ 有极限 $x$，则此极限是唯一的。
+
+第二：点序列 $\langle x_n\rangle$ 的收敛性是依赖于 $X$ 上所选择的度量 $d$ 的。也就是说，$X$ 的同一点序列 $\langle x_n\rangle$ 对度量 $d_1$ 收敛，但对度量 $d_2$ 可能发散。
+
+然而若 $d_1,d_2$ 是 $X$ 上的两个等价度量，则
+\[\lim_{n\to+\infty}x_n\stackrel{d_1}{=}x\ \text{当且仅当}\ \lim_{n\to+\infty}x_n\stackrel{d_2}{=}x.\]
+事实上，由于 $d_1$ 与 $d_2$ 等价，故存在常数 $A>0,\ B>0$ 使得
+\[Ad_1(x,y)\leqslant d_2(x,y)\leqslant Bd_1(x,y),\quad\forall\,x,y\in X.\]
+从而
+\[Ad_1(x_n,x)\leqslant d_2(x_n,x)\leqslant Bd_1(x_n,x)\quad(\forall\,n\in\N).\]
+由此即可推得我们的结论。
+
+特别地，当 $X=\R^k$ 时，由于 $\R^k$ 上的三个基本度量 $d_1,d_2,d_3$ 互相等价，因此在 $\R^k$ 中考虑它的点序列的极限时，我们可以取这三个度量中的任何一个而不会影响点序列的收敛性。
+
+现在我们来研究 $\R^k$ 的点序列与 $\C$ 的复数序列的收敛性。
+
+\begin{mythm}{}{Rk-sequence-limit}
+
+设 $\langle x_n\rangle$ 是 $\R^k\ (k>1)$ 中的任一点序列，$x\in\R^k$。令
+\[x_n=(x_{n1},x_{n2},\cdots,x_{nk})\quad(n\in\N),\quad x=(\xi_1,\xi_2,\cdots,\xi_k),\]
+则
+\[\lim_{n\to+\infty}x_n=x\Longleftrightarrow\lim_{n\to+\infty}x_{ni}=\xi_i\ (i=1,2,\cdots,k).\]
+
+\end{mythm}
+
+\begin{proof}
+
+在 $\R^k$ 中取基本度量 $d_3$。则
+\[\lim_{n\to+\infty}x_n\stackrel{d_3}{=}x\Longleftrightarrow(\forall\,\varepsilon>0)(\exists\,N\in\N)(\forall\,n\in\N,n\geqslant N)\Longrightarrow d_3(x_n,x)<\varepsilon\]
+\[\Longleftrightarrow(\forall\,\varepsilon>0)(\exists\,N\in\N)(\forall\,n\in\N,n\geqslant N)\Longrightarrow\max_{1\leqslant i\leqslant k}|x_{ni}-\xi_i|<\varepsilon\]
+\[\Longleftrightarrow(\forall\,\varepsilon>0)(\exists\,N\in\N)(\forall\,n\in\N,n\geqslant N)\Longrightarrow|x_{ni}-\xi_i|<\varepsilon\ (i=1,2,\cdots,k)\]
+\[\Longleftrightarrow\lim_{n\to+\infty}x_{ni}=\xi_i\ (i=1,2,\cdots,k).\quad\blacksquare\]
+
+\end{proof}
+
+此定理表明在 $\R^k$ 中求点序列 $\langle x_n\rangle$ 的极限可化为求 $\langle x_n\rangle$ 的各相应分量组成的实数序列 $\langle x_{ni}\rangle\ (i=1,2,\cdots,k)$ 的极限。
+
+\begin{mythm}{}{complex-sequence-limit}
+
+设 $\langle z_n\rangle=\langle x_n+iy_n\rangle$ 是 $\C$ 的任一复数序列，$z=x+iy\in\C$，则
+\[\lim_{n\to+\infty}z_n=z\Longleftrightarrow\lim_{n\to+\infty}x_n=x,\ \lim_{n\to+\infty}y_n=y.\]
+
+\end{mythm}
+
+\begin{proof}
+
+根据复数模的定义，
+\[|z_n-z|=|(x_n-x)+i(y_n-y)|=\sqrt{(x_n-x)^2+(y_n-y)^2}.\]
+由此立即推得
+\[\lim_{n\to+\infty}z_n=z\Longleftrightarrow\lim_{n\to+\infty}|z_n-z|=0\]
+\[\Longleftrightarrow\lim_{n\to+\infty}(x_n-x)=0,\ \lim_{n\to+\infty}(y_n-y)=0\]
+\[\Longleftrightarrow\lim_{n\to+\infty}x_n=x,\ \lim_{n\to+\infty}y_n=y.\quad\blacksquare\]
+
+\end{proof}
+
+这个定理表明求复数序列 $\langle z_n\rangle$ 的极限可化为分别求 $z_n\ (n\in\N)$ 的实部与虚部系数组成的实数序列 $\langle x_n\rangle$ 与 $\langle y_n\rangle$ 的极限。
+
+附注\quad 关于例 3 中 $C^0([a,b],\R)$ 的连续函数序列 $\langle f_n\rangle$ 的收敛性，也是相对它的某一个度量而言的。
+
+例如在 $C^0([a,b],\R)$ 中取由它的一致收敛范数 $\|\cdot\|_{\infty}$ 所诱导的度量 $d$（称为一致度量），即
+\[\forall\,f,g\in C^0([a,b],\R),\quad d(f,g)=\|f-g\|_{\infty}.\]
+若 $f,f_n\in C^0([a,b],\R)\ (n\in\N)$，则序列 $\langle f_n\rangle$ 关于此度量 $d$ 收敛于 $f$ 也称为 $\langle f_n\rangle$ 在 $[a,b]$ 上一致收敛于 $f$。
+
+关于函数序列的一致收敛性问题，我们将在第 12 章中进行专门研究。
+
+作为点序列极限的应用，我们来证明下述定理。
+
+\begin{mythm}{}{closed-set-sequence}
+
+设 $(X,d)$ 是任一度量空间，则 $A\subset X$ 是闭集的充分必要条件是：
+
+若 $x_n\in A\ (n\in\N)$ 且 $x_n\to x\ (n\to+\infty)$，则 $x\in A$。
+
+\end{mythm}
+
+\begin{proof}
+
+\textbf{必要性}\quad 设 $A\subset X$ 是闭集，$x_n\in A\ (n\in\N)$ 并且 $x_n\to x\ (n\to+\infty)$。我们证明 $x\in A$。
+
+用反证法。假设 $x\notin A$，则 $x\in X-A$；由于 $X-A$ 是开集，故存在 $\delta>0$ 使得 $B(x,\delta)\subset X-A$。因为 $x_n\to x\ (n\to+\infty)$，故存在 $N\in\N$ 使得
+\[\forall\,n\in\N,\ n\geqslant N,\ x_n\in B(x,\delta)\Longrightarrow x_n\in X-A.\]
+这与 $x_n\in A\ (n\in\N)$ 矛盾。因此 $x\in A$。
+
+\textbf{充分性}\quad 设定理的条件成立，我们来证明 $A$ 是闭集。
+
+为此只需证明 $X-A$ 是开集。仍然用反证法。假设 $X-A$ 不是开集。于是由开集定义知
+\[(\exists\,x_0\in X-A)(\forall\,n\in\N)\left(\exists\,x_n\in B\left(x_0,\frac{1}{n}\right)\right)\Longrightarrow x_n\notin X-A.\]
+由此得到 $X$ 的一点序列 $\langle x_n\rangle$ 使得
+\[x_n\in A\ (n\in\N),\ x_n\to x_0\ (n\to+\infty).\]
+由已知条件知，$x_0\in A$，这与 $x_0\in X-A$ 矛盾，因此 $X-A$ 为开集，即 $A$ 为闭集。
+
+\end{proof}
+
+此定理是用序列的极限来刻划度量空间的闭集的，应用它去判断集合的闭性十分方便。
+
+\begin{sourceexample}{4}
+
+利用\rthm{thm:closed-set-sequence}证明：对任意集合 $A\subset X$，$\overline{A}$ 是闭集。
+
+事实上，若 $A=\varnothing$，则 $\overline{A}=\varnothing$ 为闭集。若 $A\neq\varnothing$，则任取 $\overline{A}$ 中的点序列 $\langle x_n\rangle$ 使得 $x_n\to x\ (n\to+\infty)$，我们来证明 $x\in\bar A$。
+
+若存在 $n_0\in\N$ 使得 $x_{n_0}=x$，则 $x\in\bar A$，因此不妨设 $\forall\,n\in\N$，$x_n\neq x$。由于 $\forall\,n\in\N$，$x_n\in\bar A$，故存在 $y_n\in A$ 使得 $d(x_n,y_n)<\dfrac1n$，$y_n\neq x$。由此得到 $A$ 的点序列 $\langle y_n\rangle$。由不等式
+\[d(y_n,x)\leqslant d(y_n,x_n)+d(x_n,x)<\frac1n+d(x_n,x)\]
+知，$y_n\to x\ (n\to+\infty)$。
+
+现任取 $U\in\mathscr{N}(x)$。于是存在 $n\in\N$ 使得
+\[y_n\in U\cap(A-\{x\}).\]
+此即表明 $x\in\bar A$，因此 $\bar A$ 是闭集。
+
+\end{sourceexample}
+
+\subsection{度量空间上的映射的极限与连续性}
+
+\begin{mydef*}{}
+
+设 $(X,d)$ 与 $(Y,D)$ 是两个度量空间，$A\subset X$ 是任一非空集合，$f:A\to Y$ 是任一映射。$a\in X$，$l\in Y$。
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item 我们称映射 $f$ 当 $x$ 趋于 $a$ 时以 $l$ 为极限，如果 $a$ 是 $A$ 的聚点，并且下述性质成立：
+\[(\forall\,\varepsilon>0)(\exists\,\delta>0)(\forall\,x\in A,\ 0<d(a,x)<\delta)\Longrightarrow D(f(x),l)<\varepsilon.\]
+这时记为
+\[\lim_{x\to a}f(x)=l\quad\text{或}\quad f(x)\to l\ (x\to a).\]
+\item 我们称映射 $f$ 在 $a$ 处连续，如果 $a\in A$ 并且下述性质成立：
+\[(\forall\,\varepsilon>0)(\exists\,\delta>0)(\forall\,x\in A,\ d(a,x)<\delta)\Longrightarrow D(f(x),f(a))<\varepsilon.\]
+\item 我们称映射 $f$ 在 $A$ 上连续，如果 $f$ 在 $A$ 的每一点 $x$ 处连续。
+\end{enumerate}
+
+\end{mydef*}
+
+附注\quad 1) 由上述定义可知，当 $X=Y=\R$，并且 $d(x,y)=D(x,y)=|x-y|$ 时，上面的定义就是我们在第 4 章中研究过的一元实值函数的极限与连续性定义。
+
+2) 现在设 $d'$ 是 $X$ 上的另一度量，$D'$ 是 $Y$ 上的另一度量，并且 $d'$ 与 $d$ 等价，$D'$ 与 $D$ 等价，则容易验证
+\[\lim_{x\to a}f(x)\stackrel{d,D}{=}l\ \text{当且仅当}\ \lim_{x\to a}f(x)\stackrel{d',D'}{=}l.\]
+换句话说，映射 $f:A(\subset X)\to Y$ 的极限与连续性定义跟 $X$ 中的等价度量及 $Y$ 中的等价度量的选择无关。
+
+因此，特别地，若我们考虑映射 $f:A(\subset\R^k)\to\R^m$，则可以在 $\R^k$ 与 $\R^m$ 中任取各自的基本度量而不影响 $f$ 的极限存在与连续性。
+
+下面我们列出两类常用映射的极限与连续性定义，以加深印象。
+
+\subsection*{1) $k$ 元实值函数的极限与连续性定义}
+
+取 $X=\R^k\ (k\geqslant1)$，$d$ 为 $\R^k$ 中任一基本度量，如 $d_1$；
+\[Y=\R,\quad D\text{ 为 }\R\text{ 上的绝对值度量 }|\cdot|;\]
+\[x=(x_1,x_2,\cdots,x_k),\quad a=(a_1,a_2,\cdots,a_k)\in\R^k,\]
+则映射 $f:A(\subset\R^k)\to\R$ 称为 $k$ 元实值函数，这时
+
+1) 映射 $f:A(\subset\R^k)\to\R$ 当 $x\to a$ 时以 $l$ 为极限，当且仅当
+\[(\forall\,\varepsilon>0)(\exists\,\delta>0)\left(\forall\,x\in A,\ 0<\sqrt{\sum_{i=1}^{k}(x_i-a_i)^2}<\delta\right)\]
+\[\Longrightarrow|f(x)-l|<\varepsilon.\]
+2) 映射 $f:A(\subset\R^k)\to\R$ 在 $a$ 处连续，当且仅当
+\[(\forall\,\varepsilon>0)(\exists\,\delta>0)\left(\forall\,x\in A,\ \sqrt{\sum_{i=1}^{k}(x_i-a_i)^2}<\delta\right)\]
+\[\Longrightarrow|f(x)-f(a)|<\varepsilon.\]
+
+\begin{sourceexample}{5}
+
+证明：二元函数 $f:\R^2\to\R$
+\[f(x,y)=\begin{cases} \dfrac{x^2y}{x^2+y^2}, & \text{若 }(x,y)\neq(0,0)\\[1ex] 0, & \text{若 }(x,y)=(0,0) \end{cases}\]
+在 $(0,0)$ 处连续。
+
+事实上，$\forall\,(x,y)\neq(0,0)$，我们有
+\[|f(x,y)-f(0,0)|=\left|\frac{x^2y}{x^2+y^2}\right|\leqslant|y|\leqslant\sqrt{x^2+y^2}.\]
+若在 $\R^2$ 中取基本度量 $d_1$，则
+\[(\forall\,\varepsilon>0)(\exists\,\delta=\varepsilon>0)(\forall\,(x,y)\in\R^2,\ 0<\sqrt{(x-0)^2+(y-0)^2}<\delta)\]
+\[\Longrightarrow|f(x,y)-f(0,0)|<\varepsilon.\]
+因此 $\displaystyle\lim_{(x,y)\to(0,0)}f(x,y)=f(0,0)$，从而 $f$ 在 $(0,0)$ 处连续。
+
+\end{sourceexample}
+
+\begin{sourceexample}{6}
+
+设二元函数 $f:\R^2\to\R$ 定义如下：
+\[f(x,y)=\begin{cases} \dfrac{xy}{x^2+y^2}, & \text{若 }(x,y)\neq(0,0);\\[1ex] 0, & \text{若 }(x,y)=(0,0). \end{cases}\]
+证明：$f$ 当 $(x,y)\to(0,0)$ 时极限不存在。
+
+事实上，若令 $y=kx\ (k\in\R)$，则 $\forall\,x\neq0$，
+\[f(x,kx)=\frac{kx^2}{x^2+k^2x^2}=\frac{k}{1+k^2}.\]
+于是 $\displaystyle\lim_{x\to0}f(x,kx)=\frac{k}{1+k^2}$。此极限依赖于 $k$，故 $f$ 当 $(x,y)\to(0,0)$ 时不可能有极限存在。
+
+\end{sourceexample}
+
+对于 $k$ 元实值函数的极限与连续性的运算性质。可综合为下述定理。
+
+\begin{mythm}{}{k-variable-limit-arithmetic}
+
+设 $f,g:A(\subset\R^k)\to\R$ 是任意两个 $k$ 元实值函数，并且当 $x\to a$ 时有极限存在，则 $f+g,\ fg$ 与 $\dfrac{f}{g}:A\to\R$ 当 $x\to a$ 时也有极限存在 $\left(\text{对 }\dfrac{f}{g},\ \displaystyle\lim_{x\to a}g(x)\neq0\right)$，并且
+\[\lim_{x\to a}(f+g)(x)=\lim_{x\to a}f(x)+\lim_{x\to a}g(x),\]
+\[\lim_{x\to a}(fg)(x)=\lim_{x\to a}f(x)\cdot\lim_{x\to a}g(x),\]
+\[\lim_{x\to a}\left(\frac{f}{g}\right)(x)=\lim_{x\to a}f(x)\Big/\lim_{x\to a}g(x).\]
+
+\end{mythm}
+
+此定理的证明留给读者作为练习。
+
+\begin{sourceexample}{7}
+
+证明：如下定义的映射 $\varphi:[0,+\infty[\times[0,2\pi]\times[0,\pi]\to\R$：
+\[\forall\,(r,\theta,\alpha)\in[0,+\infty[\times[0,2\pi]\times[0,\pi],\ \varphi(r,\theta,\alpha)=r\sin\theta\cos\alpha\]
+在 $[0,+\infty[\times[0,2\pi]\times[0,\pi]$ 上连续。
+
+为此我们可以令 $\varphi_1,\varphi_2,\varphi_3:[0,+\infty[\times[0,2\pi]\times[0,\pi]\to\R$ 为：
+\[\forall\,(r,\theta,\alpha)\in[0,+\infty[\times[0,2\pi]\times[0,\pi],\]
+\[\varphi_1(r,\theta,\alpha)=r,\ \varphi_2(r,\theta,\alpha)=\sin\theta,\ \varphi_3(r,\theta,\alpha)=\cos\alpha.\]
+显然 $\varphi_1,\varphi_2,\varphi_3$ 在 $[0,+\infty[\times[0,2\pi]\times[0,\pi]$ 上连续，于是根据\rthm{thm:k-variable-limit-arithmetic}知，$\varphi=\varphi_1\cdot\varphi_2\cdot\varphi_3$ 在 $[0,+\infty[\times[0,2\pi]\times[0,\pi]$ 上连续。
+
+\end{sourceexample}
+
+\begin{sourceexample}{8}
+
+计算 $\displaystyle\lim_{(x,y)\to(0,0)}(x^2+y^2)^{x^2y^2}$。
+
+令 $f(x,y)=(x^2+y^2)^{x^2y^2}$，$(x,y)\neq(0,0)$。两边取自然对数得
+\[\log f(x,y)=x^2y^2\log(x^2+y^2)=\frac{x^2y^2}{x^2+y^2}\cdot(x^2+y^2)\log(x^2+y^2).\]
+由于
+\[0\leqslant\frac{x^2y^2}{x^2+y^2}\leqslant\frac12|xy|\leqslant\frac14(x^2+y^2),\]
+\[(x^2+y^2)\log(x^2+y^2)=z\log z\quad(z=x^2+y^2),\]
+故
+\[\lim_{(x,y)\to(0,0)}\frac{x^2y^2}{x^2+y^2}=0,\]
+\[\lim_{(x,y)\to(0,0)}(x^2+y^2)\log(x^2+y^2)=\lim_{z\to0}z\log z=0.\]
+因此由\rthm{thm:k-variable-limit-arithmetic}得到
+\[\lim_{(x,y)\to(0,0)}\log f(x,y)=\lim_{(x,y)\to(0,0)}\frac{x^2y^2}{x^2+y^2}\times\lim_{(x,y)\to(0,0)}(x^2+y^2)\log(x^2+y^2)=0.\]
+由此推得
+\[\lim_{(x,y)\to(0,0)}(x^2+y^2)^{x^2y^2}=1.\]
+
+\end{sourceexample}
+
+\subsection*{2) $k$ 元向量值函数的极限与连续性定义}
+
+取 $X=\R^k\ (k\geqslant1)$，$d$ 为 $\R^k$ 中的任一基本度量，如 $d_3$；
+\[Y=\R^m\ (m>1),\ D\text{ 为 }\R^m\text{ 中的任一基本度量如 }d_3;\]
+\[x=(x_1,x_2,\cdots,x_k),\ a=(a_1,a_2,\cdots,a_k)\in\R^k;\]
+\[l=(l_1,l_2,\cdots,l_m),\]
+\[f(x)=(f_1(x),f_2(x),\cdots,f_m(x))\in\R^m,\]
+则映射 $f:A(\subset\R^k)\to\R^m$ 称为 $k$ 元向量值函数，$\forall\,i=1,2,\cdots,m$，映射 $f_i:A(\subset\R^k)\to\R$ 称为 $f$ 的分量函数，它是 $k$ 元实值函数，这时
+
+1) 映射 $f:A(\subset\R^k)\to\R^m$ 当 $x\to a$ 时以 $l$ 为极限当且仅当
+\[(\forall\,\varepsilon>0)(\exists\,\delta>0)(\forall\,x\in A,\ 0<\sum_{i=1}^{k}|x_i-a_i|<\delta)\]
+\[\Longrightarrow\max_{1\leqslant i\leqslant m}|f_i(x)-l_i|<\varepsilon\Longleftrightarrow|f_i(x)-l_i|<\varepsilon\ (\forall\,i=1,2,\cdots,m).\]
+因此
+\[\lim_{x\to a}f(x)=l\Longleftrightarrow\lim_{x\to a}f_i(x)=l_i\ (i=1,2,\cdots,m).\]
+2) 映射 $f:A(\subset\R^k)\to\R^m$ 在 $a$ 处连续当且仅当
+\[(\forall\,\varepsilon>0)(\exists\,\delta>0)(\forall\,x\in A,\ \sum_{i=1}^{k}|x_i-a_i|<\delta)\]
+\[\Longrightarrow\max_{1\leqslant i\leqslant m}|f_i(x)-f_i(a)|<\varepsilon\]
+\[\Longleftrightarrow|f_i(x)-f_i(a)|<\varepsilon\ (\forall\,i=1,2,\cdots,m).\]
+因此
+\[f\text{ 在 }a\text{ 处连续}\Longleftrightarrow f_i\text{ 在 }a\text{ 处连续}\ (i=1,2,\cdots,m).\]
+特别地，当 $a$ 是 $A$ 的聚点时，
+\[f\text{ 在 }a\text{ 处连续}\Longleftrightarrow\lim_{x\to a}f(x)=f(a)\]
+\[\Longleftrightarrow\lim_{x\to a}f_i(x)=f_i(a)\ (i=1,2,\cdots,m).\]
+上述分析表明，对 $k$ 元向量值函数的极限与连续性的研究可化为对它的各分量函数的极限与连续性的研究。
+
+\begin{sourceexample}{9}
+
+考虑如下定义的映射 $f:[0,+\infty[\times[0,2\pi]\to\R^2$，
+\[g:[0,+\infty[\times[0,2\pi]\times[0,\pi]\to\R^3,\]
+\[h:[0,+\infty[\times[0,2\pi]\times]-\infty,+\infty[\to\R^3;\]
+\[\forall\,(r,\theta)\in[0,+\infty[\times[0,2\pi],\ f(r,\theta)=(r\cos\theta,r\sin\theta),\]
+\[\forall\,(r,\theta,\alpha)\in[0,+\infty[\times[0,2\pi]\times[0,\pi],\]
+\[g(r,\theta,\alpha)=(r\sin\alpha\cos\theta,r\sin\alpha\sin\theta,r\cos\alpha),\]
+\[\forall\,(r,\theta,z)\in[0,+\infty[\times[0,2\pi]\times]-\infty,+\infty[,\]
+\[h(r,\theta,z)=(r\cos\theta,r\sin\theta,z).\]
+根据\rthm{thm:k-variable-limit-arithmetic}知，映射 $f,g,h$ 的各分量函数 $f_1,f_2,g_1,g_2,g_3,h_1,h_2,h_3$ 在各自定义域上连续，因此映射 $f,g,h$ 在各自定义域上连续。
+
+$f$ 称为\textbf{平面极坐标变换映射}。
+
+$g$ 称为\textbf{空间球面坐标变换映射}。
+
+$h$ 称为\textbf{空间柱面坐标变换映射}。
+
+这三个映射今后我们还要对它们进行研究，它们在重积分计算中起着重要的作用。
+
+\end{sourceexample}
+
+关于 $k$ 元向量值函数的极限与连续性的运算性质，我们有下述定理。
+
+\begin{mythm}{}{k-vector-limit-arithmetic}
+
+设 $f,g:A(\subset\R^k)\to\R^m$ 是任意两个 $k$ 元向量值函数，并且当 $x\to a$ 时极限存在，$\lambda:A(\subset\R^k)\to\R$ 是任一 $k$ 元实值函数，当 $x\to a$ 时也有极限存在，则 $f+g:A\to\R^m,\ \lambda f:A\to\R^m$ 当 $x\to a$ 时极限存在，并且
+\[\lim_{x\to a}(f+g)(x)=\lim_{x\to a}f(x)+\lim_{x\to a}g(x),\]
+\[\lim_{x\to a}(\lambda f)(x)=\lim_{x\to a}\lambda(x)\cdot\lim_{x\to a}f(x).\]
+
+\end{mythm}
+
+此定理的证明我们也留给读者作为练习。
+
+下面一个定理是关于一般度量空间中复合映射的连续性的。
+
+\begin{mythm}{}{composition-continuity}
+
+设 $(X,d)$，$(Y,D)$ 与 $(Z,\rho)$ 是任意三个度量空间，$A\subset X$，$B\subset Y$ 是两个非空集合，$f:A\to Y$ 与 $g:B\to Z$ 是任意两个映射，假设
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item $E=\operatorname{Dom}(g\circ f)\neq\varnothing$，
+\item $x_0\in E$，$f$ 在 $x_0$ 处连续，$g$ 在 $y_0=f(x_0)\in B$ 处连续，
+\end{enumerate}
+
+则复合映射 $g\circ f:E\to Z$ 在 $x_0$ 处连续。
+
+\end{mythm}
+
+\begin{proof}
+
+重复\rthm{thm:composite-continuity}的证明过程，并对个别记号稍作修改即可。
+
+\end{proof}
+
+\begin{mycor*}{}
+
+若映射 $f:A\to Y$ 在 $A$ 上连续，映射 $g:B\to Z$ 在 $B$ 上连续，并且 $E=\operatorname{Dom}(g\circ f)\neq\varnothing$，则复合映射 $g\circ f:E\to Z$ 在 $E$ 上连续。
+
+\end{mycor*}
+
+作为这一段的结束，我们来证明连续映射的一个等价定义，即下面定理。
+
+\begin{mythm}{}{continuity-open-preimage}
+
+设 $(X,d)$ 与 $(Y,D)$ 是任意两个度量空间，$A\subset X$ 是任一非空集合，则映射 $f:A\to Y$ 在 $A$ 上连续的充分必要条件是：
+
+若 $U$ 是 $Y$ 的任一开集，则 $f^{-1}(U)$ 是 $A$ 的开集。
+
+\end{mythm}
+
+\begin{proof}
+
+\textbf{必要性}\quad 设 $f$ 在 $A$ 上连续，$U$ 是 $Y$ 的任一开集。
+
+若 $f^{-1}(U)=\varnothing$，则 $f^{-1}(U)$ 是 $A$ 的开集。
+
+若 $f^{-1}(U)\neq\varnothing$，任取 $a\in f^{-1}(U)$，我们证明存在 $\delta_a>0$ 使得 $A\cap B_d(a,\delta_a)\subset f^{-1}(U)$。
+
+事实上，由于 $U$ 是开集，并且 $f(a)\in U$，故存在 $\varepsilon>0$ 使得 $B_D(f(a),\varepsilon)\subset U$，又因为 $f$ 在 $a$ 处连续，所以存在 $\delta_a>0$ 使得
+\[\forall\,x\in A,\ d(a,x)<\delta_a\Longrightarrow D(f(x),f(a))<\varepsilon.\]
+此等价于
+\[A\cap B_d(a,\delta_a)\subset f^{-1}(B_D(f(a),\varepsilon))\subset f^{-1}(U).\]
+因为 $A\cap B_d(a,\delta_a)=B_{d_A}(a,\delta_a)$ 是 $A$ 的以 $a$ 为心以 $\delta_a$ 为半径的开球，故由 $a$ 的任意性推知，$f^{-1}(U)$ 是 $A$ 的开集。
+
+\textbf{充分性}\quad 设对 $Y$ 的任一开集 $U$，$f^{-1}(U)$ 是 $A$ 的开集，任取 $a\in A$，于是 $\forall\,\varepsilon>0$，$B_D(f(a),\varepsilon)$ 是 $Y$ 的开集，从而由假设知 $f^{-1}(B_D(f(a),\varepsilon))$ 是 $A$ 的开集，由于 $a\in f^{-1}(B_D(f(a),\varepsilon))$，故存在 $\delta_a>0$ 使得
+\[B_{d_A}(a,\delta_a)=A\cap B_d(a,\delta_a)\subset f^{-1}(B_D(f(a),\varepsilon)),\]
+或
+\[f(A\cap B_d(a,\delta_a))\subset B_D(f(a),\varepsilon).\]
+此即等价于
+\[\forall\,x\in A,\ d(a,x)<\delta_a\Longrightarrow D(f(x),f(a))<\varepsilon.\]
+因此 $f$ 在 $a$ 处连续。由 $a$ 的任意性知，$f$ 在 $A$ 上连续。
+
+\end{proof}
+
+下面我们介绍映射的一致连续性。
+
+\subsection{映射的一致连续性}
+
+\begin{mydef*}{}
+
+设 $(X,d)$ 与 $(Y,D)$ 是任意两个度量空间，$A\subset X$ 是任一非空集合，$f:A\to Y$ 是任一映射，我们称 $f$ 在 $A$ 上\textbf{一致连续}，如果它具有下述性质：
+\[(\forall\,\varepsilon>0)(\exists\,\delta>0)(\forall\,x,x'\in A,\ d(x,x')<\delta)\Longrightarrow D(f(x),f(x'))<\varepsilon.\]
+
+\end{mydef*}
+
+由这个定义可知，若 $f$ 在 $A$ 上一致连续，则 $f$ 在 $A$ 上连续，但反之则不然。
+
+\begin{sourceexample}{10}
+
+设二元函数 $f:\R^2\to\R$ 定义如下：
+\[\forall\,(x,y)\in\R^2,\ f(x,y)=\sin x\sin y.\]
+证明：$f$ 在 $\R^2$ 上一致连续。
+
+事实上，$\forall\,(x,y),(x',y')\in\R^2$，我们有
+\[|f(x,y)-f(x',y')|=|\sin x\sin y-\sin x'\sin y'|\]
+\[\leqslant|\sin x(\sin y-\sin y')|+|\sin y'(\sin x-\sin x')|\]
+\[\leqslant|\sin y-\sin y'|+|\sin x-\sin x'|\]
+\[\leqslant|x-x'|+|y-y'|.\]
+若在 $\R^2$ 中取基本度量 $d_2$，则
+\[(\forall\,\varepsilon>0)(\exists\,\delta=\varepsilon>0)(\forall\,(x,y),(x',y')\in\R^2,\ |x-x'|+|y-y'|<\delta)\]
+\[\Longrightarrow|f(x,y)-f(x',y')|<|x-x'|+|y-y'|<\varepsilon.\]
+故 $f$ 在 $\R^2$ 上一致连续。
+
+\end{sourceexample}
+
+\begin{sourceexample}{11}
+
+设 $(X,\|\cdot\|)$ 是任一赋范向量空间，则范数映射 $x\longmapsto\|x\|$，$x\in X$ 在 $X$ 上一致连续。
+
+为此设 $x,x'\in X$，则我们有不等式
+\[\bigl|\|x\|-\|x'\|\bigr|\leqslant\|x-x'\|.\]
+于是
+\[(\forall\,\varepsilon>0)(\exists\,\delta=\varepsilon>0)(\forall\,x,x'\in X,\ \|x-x'\|<\delta)\]
+\[\Longrightarrow\bigl|\|x\|-\|x'\|\bigr|\leqslant\|x-x'\|<\varepsilon.\]
+因此范数映射 $x\longmapsto\|x\|$，$x\in X$ 在 $X$ 上一致连续。
+
+\end{sourceexample}
+
+\begin{sourceexample}{12}
+
+设映射 $T:C^0([a,b],\R)\to C^0([a,b],\R)$ 定义如下：
+\[\forall\,f\in C^0([a,b],\R),\quad (Tf)(x)=\int_a^xf(t)\,dt,\quad\forall\,x\in[a,b].\]
+证明：$T$ 在 $C^0([a,b],\R)$ 上关于一致收敛范数一致连续。
+
+事实上，$\forall\,f,g\in C^0([a,b],\R)$，我们有
+\[\|Tf-Tg\|_{\infty}=\sup_{x\in[a,b]}|(Tf)(x)-(Tg)(x)|\]
+\[=\sup_{x\in[a,b]}\left|\int_a^xf(t)\,dt-\int_a^xg(t)\,dt\right|\]
+\[\leqslant(b-a)\,\|f-g\|_{\infty}.\]
+于是
+\[(\forall\,\varepsilon>0)\left(\exists\,\delta=\frac{\varepsilon}{b-a}>0\right)(\forall\,f,g\in C^0([a,b],\R),\ \|f-g\|_{\infty}<\delta)\]
+\[\Longrightarrow\|Tf-Tg\|_{\infty}\leqslant(b-a)\,\|f-g\|_{\infty}<\varepsilon,\]
+因此映射 $T$ 在 $C^0([a,b],\R)$ 上一致连续。
+
+\end{sourceexample}
+
+\subsection{度量空间的同胚映射}
+
+\begin{mydef*}{}
+
+设 $(X,d)$ 与 $(Y,D)$ 是任意两个度量空间，$f:X\to Y$ 是任一映射，若 $f$ 具有下述性质：
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item $f$ 是一一映射；
+\item $f$ 与 $f^{-1}:Y\to X$ 都是连续映射。
+\end{enumerate}
+
+则我们称 $f$ 是一个\textbf{同胚映射}（也可简称\textbf{同胚}），并称 $X$ 与 $Y$ \textbf{同胚}。
+
+由定义可知，若 $f:X\to Y$ 与 $g:Y\to Z$（$(Z,\rho)$ 是一度量空间）都是同胚，则 $g\circ f:X\to Z$ 也是同胚。
+
+\end{mydef*}
+
+\begin{sourceexample}{13}
+
+考虑映射 $f:\ ]-1,1[\to\R$：
+\[\forall\,x\in\ ]-1,1[,\quad f(x)=\operatorname{tg}\frac{\pi}{2}x.\]
+则 $f$ 是一个同胚映射，从而 $]-1,1[$ 与 $\R$ 同胚。
+
+事实上，$f$ 是连续一一映射，其逆 $f^{-1}:\R\to\ ]-1,1[$ 为
+\[\forall\,y\in\R,\quad f^{-1}(y)=\frac{2}{\pi}\operatorname{arctg}y.\]
+显然 $f^{-1}$ 连续。故 $f$ 是一个同胚映射，从而 $]-1,1[$ 与 $\R$ 同胚。
+
+\end{sourceexample}
+
+\begin{sourceexample}{14}
+
+考虑 $\R^3$ 的单位球面 $S^2$：
+\[S^2=\{(x,y,z)\in\R^3\mid x^2+y^2+z^2=1\}.\]
+设 $M(x,y,z)$（$M'$）是此球面上异于北极点 $N(0,0,1)$（南极点 $S(0,0,-1)$）的任意一点，联结点 $N$（$S$）与 $M$（$M'$）的直线交 $xOy$ 平面 $\pi$ 上唯一一点 $P(t,s,0)$（$Q(u,v,0)$）（如下图所示）。由于 $\pi$ 平面上每一点的第 3 坐标为 0，故可以认为 $(t,s,0)=(t,s)$，从而可恒等 $\pi$ 与 $\R^2$。
+
+\begin{center}
+\includegraphics[width=.6\linewidth,height=.5\textheight,keepaspectratio]{_page_522_Picture_1.jpeg}
+
+图 10-7
+\end{center}
+
+由此我们得到两个映射 $\Phi:S^2-\{N\}\to\R^2$ 与 $\Psi:S^2-\{S\}\to\R^2$，它们分别定义如下：
+\[\forall\,M\in S^2-\{N\},\ \Phi(M)=P,\]
+\[\forall\,M'\in S^2-\{S\},\ \Psi(M')=Q.\]
+映射 $\Phi$ 与 $\Psi$ 分别称为单位球面 $S^2$ 关于北极点 $N$ 与南极点 $S$ 的球极投影。
+
+下面我们来推导映射 $\Phi$ 的解析表达式。
+
+由上图可得到下述明显比例关系式：
+\[\frac{1-z}{1}=\frac{\overline{AM}}{\overline{OP}}=\frac{x}{t}=\frac{y}{s}\quad(P\neq0).\]
+于是
+\[\begin{cases} t=\Phi_1(x,y,z)=\dfrac{x}{1-z},\\[1ex] s=\Phi_2(x,y,z)=\dfrac{y}{1-z}, \end{cases}\qquad\forall\,(x,y,z)\in S^2-\{N\}.\]
+显然映射 $\Phi$ 在 $S^2-\{N\}$ 上连续并且是一一映射。
+
+我们记 $\Phi$ 的逆映射为 $\varphi:\R^2\to S^2-\{N\}$，下面我们来推导 $\varphi$ 的解析表达式。由
+\[t^2+s^2=\frac{x^2+y^2}{(1-z)^2}=\frac{1-z^2}{(1-z)^2}=\frac{1+z}{1-z}\]
+解得
+\[z=\frac{t^2+s^2-1}{1+t^2+s^2}.\]
+将它代入 $t$，$s$ 的表达式中得到
+\[x=\frac{2t}{1+t^2+s^2},\quad y=\frac{2s}{1+t^2+s^2}.\]
+因此 $\varphi:\R^2\to S^2-\{N\}$ 的解析表达式为
+\[\varphi(t,s)=\left(\frac{2t}{1+t^2+s^2},\frac{2s}{1+t^2+s^2},\frac{t^2+s^2-1}{1+t^2+s^2}\right),\]
+$\forall\,(t,s)\in\R^2$。
+
+由此可知，映射 $\varphi$ 在 $\R^2$ 上也是连续的，故 $\Phi:S^2-\{N\}\to\R^2$ 是一个同胚映射，从而 $S^2-\{N\}$ 与 $\R^2$ 同胚。
+
+同理可证，映射 $\Psi:S^2-\{S\}\to\R^2$ 也是同胚映射。从而 $S^2-\{S\}$ 与 $\R^2$ 同胚，并且 $\Psi$ 与它的逆映射 $\psi:\R^2\to S^2-\{S\}$ 的解析表达式为：
+\[\begin{cases} u=\Psi_1(x,y,z)=\dfrac{x}{1+z},\\[1ex] v=\Psi_2(x,y,z)=\dfrac{y}{1+z}, \end{cases}\quad\forall\,(x,y,z)\in S^2-\{S\},\]
+与
+\[\psi(u,v)=\left(\frac{2u}{1+u^2+v^2},\frac{2v}{1+u^2+v^2},\frac{1-u^2-v^2}{1+u^2+v^2}\right),\]
+\[\forall\,(u,v)\in\R^2.\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{15}
+
+设 $S^1$ 是平面上的单位圆周：
+\[S^1=\{(x,y)\in\R^2\mid x^2+y^2=1\},\]
+映射 $f:[0,1[\to S^1$ 定义为
+\[\forall\,t\in[0,1[,\ f(t)=(\cos2\pi t,\sin2\pi t).\]
+容易证明 $f$ 是连续的一一映射，但 $f$ 的逆映射 $f^{-1}$ 不是连续映射（见习题第 14 题），因此 $f$ 不是同胚映射。能否由此断定 $[0,1[$ 与 $S^1$ 不同胚？为什么？
+
+\end{sourceexample}
+
+\subsection*{习 题}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 是任一度量空间，$\langle x_n\rangle$ 是 $X$ 的任一点序列，$a\in X$ 称为 $\langle x_n\rangle$ 的\textbf{极限点}，如果
+	\[(\forall\,U\in\mathscr{N}(a))(\forall\,k\in\N)(\exists\,n\in\N,\ n\geqslant k)\Longrightarrow x_n\in U.\]
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：$a$ 是 $\langle x_n\rangle$ 的极限点当且仅当 $\langle x_n\rangle$ 有收敛于 $a$ 的子序列 $\langle x_{i_n}\rangle$。
+		\item 证明：若 $\displaystyle\lim_{n\to+\infty}x_n=a$，则 $a$ 是 $\langle x_n\rangle$ 的唯一极限点。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $M$ 是所有 $k\times k$ 实矩阵的集合，$\forall\,A\in M$ 令
+	\[A=\begin{pmatrix} a_{11}&a_{12}&\cdots&a_{1k}\\ a_{21}&a_{22}&\cdots&a_{2k}\\ \cdots&\cdots&\cdots&\cdots\\ a_{k1}&a_{k2}&\cdots&a_{kk} \end{pmatrix},\qquad\|A\|=\sum_{i=1}^{k}\sum_{j=1}^{k}|a_{ij}|.\]
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：如此定义的映射 $\|\cdot\|:M\to\R^+$ 是 $M$ 上的一个范数，因此 $(M,\|\cdot\|)$ 是一赋范空间。
+		\item 证明：若 $\langle A_n\rangle$ 收敛于 $A$，$\langle B_n\rangle$ 收敛于 $B$，则 $\langle A_nB_n\rangle$ 收敛于 $AB$。
+		\item 设 $\langle A_n\rangle$ 是 $M$ 的可逆矩阵序列，并且 $\langle A_n\rangle$ 收敛于不可逆矩阵 $A$。证明：$\displaystyle\lim_{n\to+\infty}\|A_n^{-1}\|=+\infty$。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 是任一度量空间，$A\subset X$ 是任一非空集合，$a\in X$，我们称实数
+	\[d(a,A)=\inf_{x\in A}d(a,x)\]
+	为 $a$ 与 $A$ 的距离。
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：$a\in\overline A\Longleftrightarrow d(a,A)=0$。
+		\item 证明：映射 $x\longmapsto d(x,A)$，$x\in X$，是 Lipschitz 系数为 $1$ 的 Lipschitz 映射，即
+		\[\forall\,x,y\in X,\quad|d(x,A)-d(y,A)|\leqslant d(x,y).\]
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 是任一度量空间，$A\subset X$ 是任一非空集合。我们称实数
+	\[d(A)=\sup_{x,y\in A}d(x,y)\]
+	为集合 $A$ 的直径，在 $X^2\times X^2$ 上定义映射 $\rho$ 如下：
+	\[\forall\,(x,y),(x',y')\in X^2,\quad\rho((x,y),(x',y'))=d(x,x')+d(y,y').\]
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：$(X^2,\rho)$ 是一个度量空间。
+		\item 证明：映射 $(x,y)\mapsto d(x,y)$，$(x,y)\in X^2$，在 $X^2$ 上连续。
+		\item 证明：$d(A)=d(\bar A)$。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 是任一度量空间，$\mathscr{F}$ 是 $X$ 的所有有界闭集的集合，我们在 $\mathscr{F}$ 上定义 Hausdorff 度量 $\Delta$。为此，$\forall\,A,B\in\mathscr{F}$，令
+	\[\lambda(A,B)=\sup_{x\in A}d(x,B),\quad\Delta(A,B)=\max(\lambda(A,B),\lambda(B,A)).\]
+	证明：
+	\begin{enumerate}[label=\arabic*)]
+		\item $\lambda(A,B)=0\Longleftrightarrow A\subset B$；
+		\item $\forall\,A,B,C\in\mathscr{F}$，$\lambda(A,C)\leqslant\lambda(A,B)+\lambda(B,C)$；
+		\item $\Delta$ 是 $\mathscr{F}$ 上的一个度量；
+		\item 映射 $\delta:\mathscr{F}\to\R$（$\forall\,A\in\mathscr{F},\ \delta(A)=d(A)$）连续。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 与 $(Y,D)$ 是两个度量空间，$f:X\to Y$ 是任一映射，则下述结论等价：
+	\begin{enumerate}[label=\arabic*)]
+		\item $f$ 在 $X$ 上连续；
+		\item 对 $(Y,D)$ 中任一闭集 $F$，$f^{-1}(F)$ 是 $(X,d)$ 中的闭集；
+		\item 对任一集合 $A\subset X$，$f(\bar A)\subset\overline{f(A)}$。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $A\subset\R^2$ 是任一开集，$f:A\to\R$ 满足下述条件：
+	\begin{enumerate}[label=\arabic*)]
+		\item $f$ 分别关于 $x$ 与 $y$ 连续，
+		\item $f$ 对其中一个变元是单调的。
+	\end{enumerate}
+	证明 $f$ 在 $A$ 上连续。
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 $f:\R^2\to\R$ 定义如下：
+	\[f(x,y)=\begin{cases} \dfrac{|xy|^{\lambda}}{x^2+y^2}, & \text{若 }(x,y)\neq(0,0),\ (\lambda\in\R);\\[1ex] 0, & \text{若 }(x,y)=(0,0). \end{cases}\]
+	研究 $f$ 在 $(0,0)$ 处的连续性。
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 $f:\R^3\to\R$ 定义如下：
+	\[f(x,y,z)=\begin{cases} \dfrac{x^3+y^3+z^3}{\sqrt{x^2+y^2+z^2}}, & \text{若 }(x,y,z)\neq(0,0,0);\\[1ex] 0, & \text{若 }(x,y,z)=(0,0,0). \end{cases}\]
+	研究 $f$ 在 $(0,0,0)$ 处的连续性。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $D\subset\R^2$ 是任一开集，$(a,b)\in D$，$f:D\to\R$ 是任一函数，我们称
+	\[\lim_{(x,y)\to(a,b)}f(x,y)\]
+	为\textbf{全面极限}，而 $\displaystyle\lim_{y\to b}\left(\lim_{x\to a}f(x,y)\right)$ 与 $\displaystyle\lim_{x\to a}\left(\lim_{y\to b}f(x,y)\right)$ 为\textbf{累次极限}。证明：若
+	\begin{enumerate}[label=\arabic*)]
+		\item $\displaystyle\lim_{(x,y)\to(a,b)}f(x,y)=A$ 存在，
+		\item $\forall\,y,\ \displaystyle\lim_{x\to a}f(x,y)=h(y)$ 存在，
+	\end{enumerate}
+	则累次极限 $\displaystyle\lim_{y\to b}\left(\lim_{x\to a}f(x,y)\right)$ 存在，并且
+	\[\lim_{(x,y)\to(a,b)}f(x,y)=\lim_{y\to b}\left(\lim_{x\to a}f(x,y)\right)=A.\]
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 $f:\R^2\to\R$ 定义如下：
+	\[f(x,y)=\begin{cases} \dfrac{x^2y^2}{x^2y^2+(x-y)^2}, & (x,y)\neq(0,0),\\[1ex] 0, & (x,y)=(0,0). \end{cases}\]
+	证明：累次极限 $\displaystyle\lim_{x\to0}\left(\lim_{y\to0}f(x,y)\right)=\lim_{y\to0}\left(\lim_{x\to0}f(x,y)\right)=0$，但全面极限 $\displaystyle\lim_{(x,y)\to(0,0)}f(x,y)$ 不存在。
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 $f:\R^2\to\R$ 定义如下：
+	\[f(x,y)=\begin{cases} (x+y)\sin\dfrac{1}{x}\sin\dfrac{1}{y}, & x\neq0,\ y\neq0,\\[1ex] 0, & x=0\text{ 或 }y=0. \end{cases}\]
+	证明：累次极限 $\displaystyle\lim_{x\to0}\left(\lim_{y\to0}f(x,y)\right)$ 与 $\displaystyle\lim_{y\to0}\left(\lim_{x\to0}f(x,y)\right)$ 不存在，但全面极限 $\displaystyle\lim_{(x,y)\to(0,0)}f(x,y)$ 存在。
+\end{exercise}
+
+\begin{exercise}
+	\item 计算下列各极限：
+	\begin{enumerate}[label=\arabic*)]
+		\item $\displaystyle\lim_{x\to0}\frac{\sin xy}{x}$；
+		\item $\displaystyle\lim_{(x,y)\to(0,0)}y^{2}\log(x^{2}+y^{2})$；
+		\item $\displaystyle\lim_{(x,y)\to(0,0)}\frac{\log(1+xy)-xy}{x^{2}y^{2}}$；
+		\item $\displaystyle\lim_{(x,y)\to(0,0)}\frac{x(x+y)^{p}}{(x^{2}+y^{2})^{3/2}}\cos\frac{1}{\sqrt{x^{2}+y^{2}}}\quad(p\geqslant2)$；
+		\item $\displaystyle\lim_{(x,y)\to(+\infty,+\infty)}\left(\frac{xy}{x^{2}+y^{2}}\right)^{x^{2}}$；
+		\item $\displaystyle\lim_{(x,y)\to(-\infty,0)}\left(1+\frac{1}{x}\right)^{\frac{x^{2}}{x+y}}$。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 证明：例 15 的映射 $f$ 的逆映射 $f^{-1}$ 不是连续映射。
+\end{exercise}
+
+\begin{exercise}
+	\item 证明：$\R$ 中所有非空开区间都是同胚的。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 与 $(Y,D)$ 是两个度量空间，$f:X\to Y$ 是任一映射。我们称 $f$ 是开（闭）映射，如果 $A$ 是 $X$ 中的开（闭）集，则 $f(A)$ 是 $Y$ 中的开（闭）集。
+
+	现设 $f:X\to Y$ 是一一映射。证明下述结论互相等价：
+	\begin{enumerate}[label=\arabic*)]
+		\item $f$ 是同胚映射；
+		\item $f$ 是连续的开映射；
+		\item $f$ 是连续的闭映射。
+	\end{enumerate}
+\end{exercise}
+
+\section{完备度量空间}
+
+在第 3 章 §4 中我们定义了 Cauchy 实数序列，利用它研究了实数集 $\R$ 的完备性。对一般度量空间 $(X,d)$ 也可以引进 Cauchy 序列的概念，并利用它来研究 $(X,d)$ 的完备性。
+
+\subsection{Cauchy序列}
+
+\begin{mydef*}{}
+
+设 $(X,d)$ 是任一度量空间，$\langle x_n\rangle$ 是 $X$ 的任一点序列，我们称 $\langle x_n\rangle$ 是\textbf{Cauchy 序列}，如果
+\[(\forall\,\varepsilon>0)(\exists\,N\in\N)(\forall\,n,k\in\N,\ n\geqslant N)\Longrightarrow d(x_{n+k},x_n)<\varepsilon.\]
+
+\end{mydef*}
+
+显然，若点序列 $\langle x_n\rangle$ 收敛，则 $\langle x_n\rangle$ 是 Cauchy 序列。反之则不然。但如果我们考虑的度量空间是 $(\R^k,d_i)$，则另当别论，即成立下面的定理。
+
+\begin{mythm}{}{Rk-cauchy}
+
+（$\R^k$ 中的 Cauchy 收敛准则）$(\R^k,d_i)$ 中的点序列 $\langle x_n\rangle$ 收敛的充分必要条件是：$\langle x_n\rangle$ 为 Cauchy 序列。
+
+\end{mythm}
+
+\begin{proof}
+
+$k=1$ 时，结论已经证明了。以下设 $k>1$。
+
+\textbf{必要性}\quad 显然。
+
+\textbf{充分性}\quad 设 $\langle x_n\rangle$ 是 $(\R^k,d_i)$ 的任一 Cauchy 序列，不失一般性，我们可以取 $d_2$。于是
+\[(\forall\,\varepsilon>0)(\exists\,N\in\N)(\forall\,n,m\in\N,\ n\geqslant N)\Longrightarrow d_2(x_{n+m},x_n)<\varepsilon.\]
+令
+\[x_n=(x_{n1},x_{n2},\cdots,x_{nk})\quad(\forall\,n\in\N).\]
+则由 $d_2(x_{n+m},x_n)<\varepsilon$ 推知
+\[\forall\,n,m\in\N,\ n\geqslant N\Longrightarrow\begin{cases} |x_{n+m,1}-x_{n1}|<\varepsilon,\\ |x_{n+m,2}-x_{n2}|<\varepsilon,\\ \cdots\cdots\cdots\cdots\cdots\\ |x_{n+m,k}-x_{nk}|<\varepsilon. \end{cases}\]
+此即表明 $\forall\,i=1,2,\cdots,k$，实数序列 $\langle x_{ni}\rangle$ 是 $\R$ 的 Cauchy 序列。根据 $\R$ 的 Cauchy 收敛准则知，每一个序列 $\langle x_{ni}\rangle$ 收敛。令
+\[\lim_{n\to+\infty}x_{ni}=\xi_i\quad(i=1,2,\cdots,k).\]
+根据\rthm{thm:Rk-sequence-limit}，$\R^k$ 中的点序列 $\langle x_n\rangle$ 收敛于 $\xi=(\xi_1,\xi_2,\cdots,\xi_k)\in\R^k$。
+
+\end{proof}
+
+\begin{mycor*}{}
+
+复数空间 $(\C,|\cdot|)$ 的点序列 $\langle z_n\rangle$ 收敛的充分必要条件是 $\langle z_n\rangle$ 为 Cauchy 序列。
+
+\end{mycor*}
+
+\begin{proof}
+
+令 $z_n=x_n+iy_n$，则 $\langle z_n\rangle$ 是 Cauchy 序列当且仅当 $\langle x_n\rangle$ 与 $\langle y_n\rangle$ 是 Cauchy 实数序列，因此推论成立。
+
+\end{proof}
+
+下面我们研究的是除了 $(\R^k,d_i)$ 与 $(\C,|\cdot|)$ 外还有哪些一般度量空间具有“Cauchy 序列均收敛”这一好性质的。为此引入下述概念。
+
+\subsection{完备度量空间}
+
+\begin{mydef*}{}
+
+设 $(X,d)$ 是任一度量空间。我们称它是\textbf{完备的}，如果它的任一 Cauchy 序列都是收敛的。
+
+\end{mydef*}
+
+根据这一定义及\rthm{thm:Rk-cauchy}知，$\forall\,k\in\N,\ (\R^k,d_i),\ (\C,|\cdot|)$ 都是完备的度量空间。
+
+下面是另一个典型的完备度量空间的例子。
+
+\begin{sourceexample}{1}
+
+在 $C^0([a,b],\C)$ 上取一度量 $d$：
+\[\forall\,f,g\in C^0([a,b],\C),\ d(f,g)=\sup_{x\in[a,b]}|f(x)-g(x)|,\]
+则 $(C^0([a,b],\C),d)$ 是完备度量空间。
+
+为此设 $\langle f_n\rangle$ 是 $(C^0([a,b],\C),d)$ 的任一 Cauchy 序列。于是
+\[(\forall\,\varepsilon>0)(\exists\,N\in\N)(\forall\,n,k\in\N,\ n\geqslant N)\]
+\[\Longrightarrow d(f_{n+k},f_n)=\sup_{x\in[a,b]}|f_{n+k}(x)-f_n(x)|<\varepsilon.\]
+由此推得
+\[(\forall\,n,k\in\N,\ n\geqslant N)(\forall\,x\in[a,b])\Longrightarrow|f_{n+k}(x)-f_n(x)|<\varepsilon.\qquad(*)\]
+此即表明 $\forall\,x\in[a,b]$，复数序列 $\langle f_n(x)\rangle$ 是 $\C$ 中的 Cauchy 序列，由 $(\C,|\cdot|)$ 的完备性知 $\langle f_n(x)\rangle$ 收敛，于是我们可定义函数 $f:[a,b]\to\C$ 如下：
+\[\forall\,x\in[a,b],\ f(x)=\lim_{n\to+\infty}f_n(x).\]
+现在在 $(*)$ 式中固定 $n\geqslant N$，令 $k\to+\infty$ 得到
+\[(\forall\,n\in\N,\ n\geqslant N)(\forall\,x\in[a,b])\Longrightarrow|f(x)-f_n(x)|\leqslant\varepsilon.\qquad(**)\]
+下面首先证明 $f\in C^0([a,b],\C)$。
+
+任取 $x_0\in[a,b]$。由于上述 $(**)$，$\forall\,x\in[a,b]$ 我们有：
+\[|f(x)-f(x_0)|\leqslant|f(x)-f_N(x)|+|f_N(x)-f_N(x_0)|+|f_N(x_0)-f(x_0)|\]
+\[<\varepsilon+|f_N(x)-f_N(x_0)|+\varepsilon=2\varepsilon+|f_N(x)-f_N(x_0)|.\]
+因为 $f_N\in C^0([a,b],\C)$，故
+\[(\forall\,\varepsilon>0)(\exists\,\delta>0)(\forall\,x\in[a,b]\cap B(x_0,\delta))\]
+\[\Longrightarrow|f_N(x)-f_N(x_0)|<\varepsilon\Longrightarrow|f(x)-f(x_0)|<3\varepsilon.\]
+因此 $f$ 在 $x_0$ 处连续。由 $x_0$ 的任意性知 $f\in C^0([a,b],\C)$。
+
+最后证明 $d(f_n,f)\to0\ (n\to+\infty)$。
+
+事实上，由于
+\[d(f_n,f)=\sup_{x\in[a,b]}|f_n(x)-f(x)|,\]
+故由 $(**)$ 式知，$\forall\,n\in\N,\ n\geqslant N,\ d(f_n,f)\leqslant\varepsilon$。此即表明 $d(f_n,f)\to0\ (n\to+\infty)$。
+
+综合上述所证，Cauchy 序列 $\langle f_n\rangle$ 收敛于 $f$。因此 $(C^0([a,b],\C),d)$ 是完备的度量空间。
+
+\end{sourceexample}
+
+附注\quad 我们说度量空间 $(X,d)$ 是完备的，是相对于度量 $d$ 而言，因此可能出现这种情形：同一基本集合 $X$，对度量 $d$，$(X,d)$ 是完备的，而对另一度量 $D$，$(X,D)$ 又不是完备的。例如在同一 $C^0([a,b],\C)$ 上，我们定义度量 $D$ 为：
+\[\forall\,f,g\in C^0([a,b],\C),\quad D(f,g)=\int_a^b|f(x)-g(x)|\,dx,\]
+可以证明 $(C^0([a,b],\C),D)$ 不是完备的（见习题第 4 题）。
+
+但如果 $d$ 与 $D$ 是等价度量，则
+\[(X,d)\text{ 是完备的}\Longleftrightarrow(X,D)\text{ 是完备的}.\]
+非完备度量空间的最简单例子就是熟知的实数空间 $(\R,|\cdot|)$ 的有理数子空间 $(\Q,|\cdot|_{\Q})$。
+
+\subsection{完备度量空间的不动点定理}
+
+\begin{mythm}{Banach不动点定理}{banach-fixed-point}
+
+设 $(X,d)$ 是一完备度量空间，$f:X\to X$ 是一压缩映射，即
+\[\forall\,x,y\in X,\ d(f(x),f(y))\leqslant\lambda d(x,y)\quad(0\leqslant\lambda<1),\]
+则存在唯一的 $a\in X$，使得 $f(a)=a$。
+
+\end{mythm}
+
+\begin{proof}
+
+任取 $x_0\in X$，令
+\[x_1=f(x_0),\ x_2=f(x_1),\ \cdots,\ x_{n+1}=f(x_n),\ \cdots\]
+于是我们得到 $X$ 的点序列 $\langle x_n\rangle$。
+
+下面证明 $\langle x_n\rangle$ 是 $(X,d)$ 的 Cauchy 序列。
+
+首先，由 $f$ 的压缩性，我们有：$\forall\,n\in\N$，
+\[d(x_n,x_{n+1})=d(f(x_{n-1}),f(x_n))\leqslant\lambda d(x_{n-1},x_n)\]
+\[\leqslant\cdots\leqslant\lambda^nd(x_0,x_1).\]
+因此 $\forall\,k\in\N$，
+\[d(x_n,x_{n+k})\leqslant d(x_n,x_{n+1})+d(x_{n+1},x_{n+2})+\cdots+d(x_{n+k-1},x_{n+k})\]
+\[\leqslant(\lambda^n+\lambda^{n+1}+\cdots+\lambda^{n+k-1})\,d(x_0,x_1)\]
+\[<\frac{\lambda^n}{1-\lambda}d(x_0,x_1).\]
+若 $d(x_0,x_1)=0$，则 $x_0=f(x_0)$。
+
+若 $d(x_0,x_1)\neq0$，则 $\forall\,\varepsilon>0$，由 $\dfrac{\lambda^n}{1-\lambda}d(x_0,x_1)<\varepsilon$ 得到 $n>\log\left(\dfrac{\varepsilon(1-\lambda)}{d(x_0,x_1)}\right)\Big/\log\lambda$。令
+\[N=1+\left[\log\left(\frac{\varepsilon(1-\lambda)}{d(x_0,x_1)}\right)\Big/\log\lambda\right],\]
+则
+\[\forall\,n,k\in\N,\ n\geqslant N\Longrightarrow d(x_n,x_{n+k})<\frac{\lambda^n}{1-\lambda}d(x_0,x_1)<\varepsilon.\]
+此即表明 $\langle x_n\rangle$ 是 $(X,d)$ 的 Cauchy 序列。
+
+因为 $(X,d)$ 是完备的，所以 $\langle x_n\rangle$ 在 $X$ 中收敛，令 $\displaystyle\lim_{n\to+\infty}x_n=a$，则 $a\in X$。
+
+再证 $a$ 是 $f$ 的不动点，即 $a=f(a)$。
+
+由 $f$ 的压缩性知，$f$ 在 $X$ 上连续（实际上还是一致连续的）。在 $x_{n+1}=f(x_n)$ 的两边令 $n\to+\infty$ 取极限得到 $a=f(a)$。
+
+最后证明不动点的唯一性。
+
+假设存在 $b\in X$ 使得 $b=f(b)$ 且 $b\neq a$，那末
+\[d(a,b)=d(f(a),f(b))\leqslant\lambda d(a,b),\]
+由于 $0\leqslant\lambda<1$，故必有 $d(a,b)=0$ 或 $a=b$，矛盾。因此 $a$ 是 $f$ 的唯一不动点。
+
+\end{proof}
+
+附注\quad 从定理的证明过程可知，若 $Y$ 是完备度量空间 $(X,d)$ 的闭集，$f:Y\to Y$ 是一压缩映射，则存在 $f$ 的唯一不动点 $a\in Y$。
+
+Banach 不动点定理是一个非常重要的定理，它在微分方程、代数方程的求解，计算数学的数值计算等许多数学研究领域中有着广泛的应用。
+
+\subsection*{习 题}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 是任一度量空间，$\langle x_n\rangle$，$\langle y_n\rangle$ 是 $X$ 的两个点序列。证明：
+	\begin{enumerate}[label=\arabic*)]
+		\item 若 $\langle x_n\rangle$，$\langle y_n\rangle$ 为 Cauchy 序列，则 $\langle d(x_n,y_n)\rangle$ 收敛。
+		\item 若 $\langle x_n\rangle$ 是 Cauchy 序列，$d(x_n,y_n)\to0\ (n\to+\infty)$，则 $\langle y_n\rangle$ 也是 Cauchy 序列。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 是任一度量空间，$Y\subset X$ 是任一非空集合。证明：$(X,d)$ 的子空间 $(Y,d_Y)$ 是完备的充分必要条件是 $Y$ 为 $X$ 的闭集。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 是任一度量空间，$A\subset X$ 且 $A\neq\varnothing$，
+	\[d(A)=\sup_{x,y\in A}d(x,y)\]
+	为集合 $A$ 的直径。证明：$(X,d)$ 是完备的充分必要条件是：对 $X$ 的任一列闭集 $\langle A_n\rangle$，若
+	\[A_{n+1}\subset A_n,\quad\lim_{n\to+\infty}d(A_n)=0,\]
+	则 $\displaystyle\bigcap_{n=1}^{+\infty}A_n$ 是单点集。
+\end{exercise}
+
+\begin{exercise}
+	\item 在 $C^0([0,1],\C)$ 上定义度量 $D$ 如下：
+	\[\forall\,f,g\in C^0([0,1],\C),\quad D(f,g)=\int_0^1|f(x)-g(x)|\,dx.\]
+	\begin{enumerate}[label=\arabic*)]
+		\item $\forall\,n\in\N$，定义函数 $f_n:[0,1]\to\C$ 为
+		\[f_n(x)=\begin{cases} 1, & 0\leqslant x\leqslant\dfrac{1}{2};\\[1ex] 0, & \dfrac{1}{2}+\dfrac{1}{n}\leqslant x\leqslant1;\\[1ex] 1-n\left(x-\dfrac{1}{2}\right), & \dfrac{1}{2}\leqslant x\leqslant\dfrac{1}{2}+\dfrac{1}{n}. \end{cases}\]
+		证明：$f_n\in C^0([0,1],\C)$，且 $D$ 是 $C^0([0,1],\C)$ 的度量。
+		\item 证明：$\langle f_n\rangle$ 是 $(C^0([0,1],\C),D)$ 的一 Cauchy 序列，但 $\langle f_n\rangle$ 在 $(C^0([0,1],\C),D)$ 中不收敛。因此 $(C^0([0,1],\C),D)$ 不是完备度量空间。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 与 $(Y,D)$ 是两个度量空间，其中 $(Y,D)$ 是完备的，$A\subset X$ 是 $X$ 的一稠密集 $(\overline{A}=X)$。
+
+	证明：若 $f:A\to Y$ 是任一连续映射，则存在唯一的映射 $\widetilde{f}:X\to Y$ 使得
+
+	1) $\widetilde{f}$ 在 $X$ 上一致连续，2) $\widetilde{f}|_A=f$。
+
+	此结论称为\textbf{连续延拓定理}，$\widetilde{f}$ 称为 $f$ 的延拓。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$，$(Y,D)$ 是两个度量空间，$f:X\to Y$ 是一致连续映射。
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：若 $\langle x_n\rangle$ 是 $(X,d)$ 的 Cauchy 序列，则 $\langle f(x_n)\rangle$ 是 $(Y,D)$ 的 Cauchy 序列。
+		\item 证明：若 $f$ 是一一映射，$f^{-1}$ 是一致连续的，则 $(X,d)$ 是完备的当且仅当 $(Y,D)$ 是完备的。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 是完备度量空间，$f:X\to X$ 是一映射，
+	\[f^0=id_X,\quad f^{n+1}=f\circ f^n\quad(\forall\,n\in\N).\]
+	证明：若存在 $m\in\N$ 使得 $f^m:X\to X$ 是压缩映射，则 $f$ 存在唯一的不动点 $a\in X$ 使得
+	\[\forall\,x_0\in X,\quad a=\lim_{n\to+\infty}f^n(x_0).\]
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$、$(Y,D)$ 是两个度量空间，$(X,d)$ 是完备的，映射 $f:X\times Y\to X$ 满足下述两个条件：
+	\begin{enumerate}[label=\arabic*)]
+		\item 存在 $0\leqslant\lambda<1$ 使得 $\forall\,t\in Y$，映射 $f_t:x\longmapsto f(x,t)$，$x\in X$ 是压缩系数为 $\lambda$ 的压缩映射，即
+		\[\forall\,x,y\in X,\quad d(f_t(x),f_t(y))\leqslant\lambda\,d(x,y);\]
+		\item $\forall\,x\in X$，映射 $t\longmapsto f(x,t)$，$t\in Y$ 是连续的。
+	\end{enumerate}
+	证明：如果 $a_t$ 是 $f_t$ 的唯一不动点，则映射 $t\longmapsto a_t$，$t\in Y$ 在 $Y$ 上连续。
+\end{exercise}
+
+\section{紧度量空间}
+
+从第 3 章 §4 的 Cantor 有限覆盖定理（\rthm{thm:cantor-finite-cover}）知道，$\R$ 的有限闭区间的一个重要性质就是它具有有限开覆盖性。现在我们在一般度量空间中研究这种有限开覆盖性，这就是下面介绍的紧集概念。
+
+\subsection{紧度量空间与紧集概念}
+
+\begin{mydef*}{}
+
+设 $(X,d)$ 是任一度量空间，$A\subset X$ 是任一非空集合，$\{U_{\lambda}\}_{\lambda\in\Lambda}$ 是 $X$ 的一族开集。
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item 若 $A\subset\displaystyle\bigcup_{\lambda\in\Lambda}U_{\lambda}$，则我们称 $\{U_{\lambda}\}_{\lambda\in\Lambda}$ 是 $A$ 的一个\textbf{开覆盖}。
+\item 设 $\{U_{\lambda}\}_{\lambda\in\Lambda}$ 是 $A$ 的开覆盖，若存在有限个 $U_{\lambda_1},U_{\lambda_2},\cdots,U_{\lambda_m}$ 使得 $A\subset\displaystyle\bigcup_{i=1}^{m}U_{\lambda_i}$，则我们称 $\{U_{\lambda}\}_{\lambda\in\Lambda}$ 有\textbf{有限的开子覆盖} $\{U_{\lambda_1},U_{\lambda_2},\cdots,U_{\lambda_m}\}$。
+\end{enumerate}
+
+\end{mydef*}
+
+\begin{mydef*}{}
+
+设 $(X,d)$ 是任一度量空间。
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item 我们称 $(X,d)$ 是\textbf{紧度量空间}，如果 $X$ 的任一开覆盖都有一个有限的开子覆盖。
+\item 设 $Y\subset X$ 是任一非空集合，我们称 $Y$ 是\textbf{紧集}，如果子空间 $(Y,d_Y)$ 是紧的。
+\end{enumerate}
+
+\end{mydef*}
+
+\subsection{紧度量空间的性质}
+
+首先我们给出紧度量空间与完备度量空间关系的下述性质。
+
+\begin{mythm}{}{compact-complete}
+
+若 $(X,d)$ 是紧度量空间，则 $(X,d)$ 是完备的。
+
+\end{mythm}
+
+\begin{proof}
+
+用反证法证明。假设 $(X,d)$ 不是完备的。于是存在 $(X,d)$ 的一个 Cauchy 序列 $\langle x_n\rangle$ 使得它在 $X$ 中不收敛。
+
+因此 $\forall\,y\in X$，$\langle x_n\rangle$ 不收敛于 $y$。从而存在 $\varepsilon_y>0$ 使得
+\[(\forall\,n\in\N)(\exists\,k_n\in\N,\ k_n\geqslant n)\Longrightarrow d(x_{k_n},y)>2\varepsilon_y.\]
+由于 $\langle x_n\rangle$ 是 Cauchy 序列，故
+\[(\exists\,N\in\N)(\forall\,n,m\in\N,\ n,m\geqslant N)\Longrightarrow d(x_n,x_m)<\varepsilon_y.\]
+取 $m=k_N$，则 $\forall\,n\in\N,\ n\geqslant N$ 有
+\[d(x_n,y)\geqslant d(x_{k_N},y)-d(x_n,x_{k_N})>2\varepsilon_y-\varepsilon_y=\varepsilon_y.\]
+由此可知，在开球 $B(y,\varepsilon_y)$ 中最多只包含 $\langle x_n\rangle$ 的有限多项。
+
+现在由 $y$ 的任意性，$X=\displaystyle\bigcup_{y\in X}B(y,\varepsilon_y)$。因为 $(X,d)$ 是紧的，所以存在有限多个 $y_1,y_2,\cdots,y_m\in X$ 使得 $X=\displaystyle\bigcup_{i=1}^{m}B(y_i,\varepsilon_{y_i})$。由于每一个 $B(y_i,\varepsilon_{y_i})$ 最多只包含 $\langle x_n\rangle$ 的有限多项，故 $\langle x_n\rangle$ 就不是一个无穷点序列。此矛盾说明 $(X,d)$ 必是完备的。
+
+\end{proof}
+
+这个定理的逆显然是不成立。例如实数空间 $(\R,|\cdot|)$ 是完备的，但它不是紧的。然而对定理再附加某些条件，仍可以保证其紧性成立（见习题第 2 题）。
+
+下面定理所述的性质可以作为紧度量空间的一个等价定义。
+
+\begin{mythm}{}{compact-sequentially-compact}
+
+度量空间 $(X,d)$ 是紧的充分必要条件是 $X$ 的每一个点序列 $\langle x_n\rangle$ 都有收敛的子序列。
+
+\end{mythm}
+
+\begin{proof}
+
+\textbf{必要性。}设 $(X,d)$ 是紧的。$\langle x_n\rangle$ 是 $X$ 的任一点序列。为了证明 $\langle x_n\rangle$ 有收敛子序列，我们来证明下述结论成立。
+\[(\exists\,\bar x\in X)(\forall\,r>0)(\exists\,x_{n(r)}\in X)\Longrightarrow x_{n(r)}\in B(\bar x,r).\]
+用反证法。假设此结论不成立，那末
+\[(\forall\,y\in X)(\exists\,r_y>0)\text{ 使得 }\forall\,n\in\N,\ x_n\notin B(y,r_y).\]
+于是 $X=\displaystyle\bigcup_{y\in X}B(y,r_y)$。由 $(X,d)$ 的紧性知，存在有限多个 $y_1,y_2,\cdots,y_m\in X$ 使得 $X=\displaystyle\bigcup_{i=1}^{m}B(y_i,r_{y_i})$。
+
+然而这不可能，因为每一个 $B(y_i,r_{y_i})$ 中不包含任一 $x_n$。此矛盾说明上述结论成立。
+
+取 $r=\dfrac{1}{k}\ (k\in\N)$，于是存在 $x_{n_k}$ 使得 $x_{n_k}\in B\left(\bar x,\dfrac{1}{k}\right)$。我们可以假设 $n_k<n_{k+1}$，于是我们得到 $\langle x_n\rangle$ 的一个子序列 $\langle x_{n_k}\rangle$，它显然收敛于 $\bar x$。
+
+为了证明充分性，我们先来证明一个可作为独立结论的命题。
+
+\end{proof}
+
+\begin{myprop*}{}
+
+若度量空间 $(X,d)$ 的每一个点序列都有收敛的子序列，则对 $X$ 的任一开覆盖 $\{U_{\lambda}\}_{\lambda\in\Lambda}$，存在正数 $\beta$（称为 Lebesgue 数），它具有下述性质：
+\[(\forall\,x\in X)(\exists\,\lambda\in\Lambda)\Longrightarrow B(x,\beta)\subset U_{\lambda}.\]
+
+\end{myprop*}
+
+\begin{proof}
+
+用反证法证明。假设对 $X$ 的某一个开覆盖 $\{U_{\lambda}\}_{\lambda\in\Lambda}$，不存在具有上述性质的正数 $\beta$。那末
+\[(\forall\,n\in\N)(\exists\,x_n\in X)(\forall\,\lambda\in\Lambda)\Longrightarrow B\left(x_n,\frac{1}{n}\right)\not\subset U_{\lambda}.\]
+由此得到 $X$ 的一点序列 $\langle x_n\rangle$。根据已知条件，$\langle x_n\rangle$ 有收敛子序列 $\langle x_{n_k}\rangle$，令 $\bar x=\displaystyle\lim_{k\to+\infty}x_{n_k}$。于是存在 $\lambda_0\in\Lambda$ 使得 $\bar x\in U_{\lambda_0}$。由于 $U_{\lambda_0}$ 是开集，故存在 $r>0$，使得 $B(\bar x,r)\subset U_{\lambda_0}$。
+
+另一方面，由于 $x_{n_k}\to\bar x\ (k\to+\infty)$，故存在 $N\in\N$，使得 $x_{n_N}\in B\left(\bar x,\dfrac{r}{2}\right)$，并且 $\dfrac{1}{n_N}<\dfrac{r}{2}$，于是
+\[\forall\,y\in B\left(x_{n_N},\frac{1}{n_N}\right),\ d(y,\bar x)\leqslant d(y,x_{n_N})+d(x_{n_N},\bar x)<\frac{1}{n_N}+\frac{r}{2}<r.\]
+此即表明 $B\left(x_{n_N},\dfrac{1}{n_N}\right)\subset B(\bar x,r)\subset U_{\lambda_0}$，这与前面的结论 $B\left(x_{n_N},\dfrac{1}{n_N}\right)\not\subset U_{\lambda}\ (\forall\,\lambda\in\Lambda)$ 相矛盾，故命题得证。
+
+\end{proof}
+
+现在我们可以来证明定理的充分性。
+
+\textbf{充分性}\quad 假设 $X$ 的任一点序列都有收敛子序列，$\{U_{\lambda}\}_{\lambda\in\Lambda}$ 是 $X$ 的任一开覆盖。
+
+根据上述命题，存在与 $\{U_{\lambda}\}_{\lambda\in\Lambda}$ 相对应的 Lebesgue 数 $\beta$。如果我们能证明：
+
+存在 $x_1,x_2,\cdots,x_m\in X,\ X=\displaystyle\bigcup_{i=1}^mB(x_i,\beta)$，
+
+则由数 $\beta$ 的性质知，对每一个 $i=1,2,\cdots,m$，存在 $U_{\lambda_i}$ 使得 $B(x_i,\beta)\subset U_{\lambda_i}$，于是 $X=\displaystyle\bigcup_{i=1}^mU_{\lambda_i}$。从而 $X$ 的开覆盖 $\{U_{\lambda}\}_{\lambda\in\Lambda}$ 有有限的开子覆盖 $\{U_{\lambda_1},U_{\lambda_2},\cdots,U_{\lambda_m}\}$。
+
+为此任取 $x_1\in X$。若 $B(x_1,\beta)=X$，则结论证毕。否则存在 $x_2\in X-B(x_1,\beta)$，于是 $d(x_2,x_1)>\beta$。若 $B(x_1,\beta)\cup B(x_2,\beta)=X$，则结论证毕。否则存在 $x_3\in X-(B(x_1,\beta)\cup B(x_2,\beta))$，于是 $d(x_3,x_1)>\beta,\ d(x_3,x_2)>\beta$。
+
+如果上述过程经有限 $m$ 次后结束，即存在 $x_1,x_2,\cdots,x_m\in X$ 使得 $X=\displaystyle\bigcup_{i=1}^mB(x_i,\beta)$，则结论成立。因此不妨假设此过程可无限继续下去，从而得到一无穷点序列 $\langle x_n\rangle$ 使得
+\[d(x_n,x_m)>\beta,\quad\forall\,n,m\in\N\text{ 且 }n\neq m.\]
+显然此点序列 $\langle x_n\rangle$ 不可能有任何收敛子序列。这与充分性的假设相矛盾。定理证毕。
+
+\begin{sourceexample}{1}
+
+实数空间 $(\R,|\cdot|)$ 不是紧的。
+
+因为自然数序列 $\langle n\rangle$ 没有收敛的子序列。
+
+\end{sourceexample}
+
+我们知道，对实数空间 $(\R,|\cdot|)$，有理数集 $\Q$ 在 $\R$ 中稠密，这个性质可以推广到一般紧度量空间上去，即成立下述定理。
+
+\begin{mythm}{}{compact-separable}
+
+任一紧度量空间 $(X,d)$ 都有可数稠密集存在，即存在 $X$ 的一点序列 $\langle x_n\rangle$，使得
+\[\forall\,x\in X,\ \forall\,\varepsilon>0\quad\exists\,x_n\in B(x,\varepsilon).\]
+（我们也称紧度量空间具有可分性）。
+
+\end{mythm}
+
+\begin{proof}
+
+$\forall\,n\in\N$，$X$ 有开覆盖 $\left\{B\left(x,\dfrac1n\right)\right\}_{x\in X}$。由于 $(X,d)$ 是紧的，故存在 $X$ 的一有限集 $F_n$ 使得 $X=\displaystyle\bigcup_{x\in F_n}B\left(x,\dfrac1n\right)$。
+
+令 $F=\displaystyle\bigcup_{n=1}^{\infty}F_n$，则 $F$ 是可数集。
+
+下面我们来证明 $F$ 是 $X$ 的稠密集。
+
+事实上，设 $F=\{x_1,x_2,\cdots,x_n,\cdots\}$。$\forall\,\varepsilon>0$，取 $N\in\N$ 使得 $\dfrac1N<\varepsilon$。
+
+由于 $X=\displaystyle\bigcup_{y\in F_N}B\left(y,\dfrac1N\right)$，故 $\forall\,x\in X$，存在 $x_i\in F_N$ 使得 $x\in B\left(x_i,\dfrac1N\right)$。由此推得
+\[x_i\in B\left(x,\dfrac1N\right)\subset B(x,\varepsilon).\]
+因此 $F$ 是 $X$ 的稠密集。
+
+\end{proof}
+
+下面我们来研究度量空间的紧集。
+
+\subsection{紧集的性质}
+
+直接按紧集的定义去判断度量空间的集合的紧性不方便，下面几个定理刻划了紧集的特征性质，利用它们去证明集合的紧性是行之有效的。
+
+\begin{mythm}{}{compact-subset-cover}
+
+设 $(X,d)$ 是任一度量空间，$Y\subset X$ 是任一非空集合，则 $Y$ 是紧的充分必要条件是：$Y$ 的任一 $X$ 的开集族覆盖有有限开子覆盖。
+
+\end{mythm}
+
+\begin{proof}
+
+\textbf{必要性}\quad 设 $Y$ 是紧集。$\{U_{\lambda}\}_{\lambda\in\Lambda}$ 是 $Y$ 的任一 $X$ 的开集族覆盖。于是 $Y\subset\displaystyle\bigcup_{\lambda\in\Lambda}U_{\lambda}$。
+
+$\forall\,\lambda\in\Lambda$，令 $V_{\lambda}=U_{\lambda}\cap Y$，则 $V_{\lambda}$ 是 $Y$ 的开集并且
+\[Y\subset\left(\bigcup_{\lambda\in\Lambda}U_{\lambda}\right)\cap Y=\bigcup_{\lambda\in\Lambda}(U_{\lambda}\cap Y)=\bigcup_{\lambda\in\Lambda}V_{\lambda}.\]
+此即表明 $\{V_{\lambda}\}_{\lambda\in\Lambda}$ 是由 $Y$ 的开集组成的 $Y$ 的一个开覆盖。由 $Y$ 的紧性假设，存在开子覆盖 $\{V_{\lambda_1},V_{\lambda_2},\cdots,V_{\lambda_m}\}$。因此
+\[Y\subset\bigcup_{i=1}^mV_{\lambda_i}\subset\bigcup_{i=1}^mU_{\lambda_i}.\]
+
+\textbf{充分性}\quad 设 $\{V_{\lambda}\}_{\lambda\in\Lambda}$ 是 $Y$ 的任一 $Y$ 的开集覆盖。于是 $\forall\,\lambda\in\Lambda$，存在 $X$ 的开集 $U_{\lambda}$ 使得 $V_{\lambda}=U_{\lambda}\cap Y$。
+
+由于
+\[Y=\bigcup_{\lambda\in\Lambda}V_{\lambda}=\bigcup_{\lambda\in\Lambda}(U_{\lambda}\cap Y)\subset\bigcup_{\lambda\in\Lambda}U_{\lambda},\]
+故 $\{U_{\lambda}\}_{\lambda\in\Lambda}$ 是 $Y$ 的一个 $X$ 的开集覆盖，由充分性假设知，$\{U_{\lambda}\}_{\lambda\in\Lambda}$ 有有限的开子覆盖 $\{U_{\lambda_1},U_{\lambda_2},\cdots,U_{\lambda_m}\}$ 于是
+\[Y=Y\cap Y\subset\left(\bigcup_{i=1}^mU_{\lambda_i}\right)\cap Y=\bigcup_{i=1}^mV_{\lambda_i}.\]
+此即表明 $\{V_{\lambda}\}_{\lambda\in\Lambda}$ 有有限开子覆盖 $\{V_{\lambda_1},V_{\lambda_2},\cdots,V_{\lambda_m}\}$。因此 $Y$ 是紧的。
+
+\end{proof}
+
+\begin{mythm}{}{compact-subset-sequence}
+
+设 $(X,d)$ 是任一度量空间，$Y\subset X$ 是任一非空集合，则 $Y$ 是紧集的充分必要条件是：$Y$ 的任一点序列有在 $Y$ 中收敛的子序列。
+
+\end{mythm}
+
+\begin{proof}
+
+直接由紧集的定义及\rthm{thm:compact-sequentially-compact}推出。
+
+\end{proof}
+
+\begin{mycor*}{}
+
+设 $(X,d)$ 是任一度量空间，$A\subset X$ 是任一紧集，则
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item $A$ 是 $X$ 的闭集。
+\item 若 $B\subset A$ 是闭集，则 $B$ 也是紧集。
+\end{enumerate}
+
+\end{mycor*}
+
+\begin{proof}
+
+1) 设 $\langle x_n\rangle$ 是 $A$ 的任一点序列使得 $x_n\to x\ (n\to+\infty)$。我们来证明 $x\in A$。
+
+事实上，由 $A$ 的紧性知，$\langle x_n\rangle$ 有在 $A$ 中收敛的子序列 $\langle x_{k_n}\rangle$。从而
+\[\lim_{n\to+\infty}x_{k_n}=\lim_{n\to+\infty}x_n=x\in A.\]
+由\rthm{thm:closed-set-sequence}知 $A$ 是闭集。
+
+2) 设 $B\subset A$ 是任一闭集，$\langle x_n\rangle$ 是 $B$ 的任一点序列。由于 $\langle x_n\rangle$ 也是紧集 $A$ 的点序列，故 $\langle x_n\rangle$ 有在 $A$ 中收敛的子序列 $\langle x_{k_n}\rangle$。令 $\displaystyle\lim_{n\to+\infty}x_{k_n}=x$，于是 $x\in A$。
+
+另一方面，因为 $B$ 是闭集，故 $x\in B$。此即表明 $\langle x_n\rangle$ 有在 $B$ 中收敛的子序列 $\langle x_{k_n}\rangle$。因此 $B$ 是紧的。
+
+\end{proof}
+
+\begin{sourceexample}{2}
+
+实数空间 $(\R,|\cdot|)$ 的下述各集合都不是紧的：
+
+1) 自然数集 $\N$，整数集 $\Z$，
+
+2) 有理数集 $\Q$，无理数集 $\Q^c$。
+
+3) $]a,b[$，$]a,b]$，$[a,b[$，$(a<b)$。
+
+\end{sourceexample}
+
+\textbf{注意}\quad 度量空间的闭集不一定是紧集。例如对实数空间 $(\R,|\cdot|)$，$\R$ 是闭的，但它不是紧的。下面定理是关于度量空间 $(\R^k,d_i)$ 的紧集的判别准则。
+
+\begin{mythm}{}{Rm-compact-bounded-closed}
+
+设 $A\subset\R^m$ 是任一非空集合，则 $A$ 是 $(\R^m,d_i)$ 的紧集的充分必要条件是：$A$ 为有界闭集。
+
+（我们称度量空间 $(X,d)$ 的集合 $A$ 是有界的，如果存在一开球 $B(a,r)$ 使得 $A\subset B(a,r)$。）
+
+\end{mythm}
+
+\begin{proof}
+
+\textbf{必要性}\quad 设 $A$ 为紧集，由上述推论知，$A$ 是闭集，下证 $A$ 是有界集。
+
+考虑 $\R^m$ 的开覆盖 $\{B(0,n)\}_{n\in\N}$，由于 $A\subset\displaystyle\bigcup_{n\in\N}B(0,n)$，故由\rthm{thm:compact-subset-cover}知，$A$ 包含在有限个开球 $B(0,n_i)\ (i=1,2,\cdots,l)$ 的并内，于是存在 $N\in\N$ 使得 $A\subset B(0,N)$ 因此 $A$ 是有界集。
+
+\textbf{充分性}\quad 设 $A$ 是有界闭集。$\langle x_n\rangle$ 是 $A$ 的任一点序列。我们来证明 $\langle x_n\rangle$ 有在 $A$ 中收敛的子序列。为此令
+\[x_n=(x_{n1},x_{n2},\cdots,x_{nm})\quad(n\in\N).\]
+由于 $A$ 有界，故 $\forall\,i=1,2,\cdots,m$，$\langle x_{ni}\rangle$ 是有界实数序列。
+
+对 $\langle x_{n1}\rangle$，由 Bolzano-Weierstrass 定理，存在收敛的子序列 $\langle x_{k_n^{(1)}1}\rangle$，令
+\[\lim_{n\to+\infty}x_{k_n^{(1)}1}=\xi_1\in\R\quad(n\to+\infty).\]
+对 $\langle x_{n2}\rangle$ 的子序列 $\langle x_{k_n^{(1)}2}\rangle$。同理有收敛子序列 $\langle x_{k_n^{(2)}2}\rangle$，令 $\displaystyle\lim_{n\to+\infty}x_{k_n^{(2)}2}=\xi_2\in\R$，于是
+\[x_{k_n^{(2)}1}\to\xi_1,\quad x_{k_n^{(2)}2}\to\xi_2\quad(n\to+\infty).\]
+如此继续 $m$ 次后，我们得到自然数序列 $\langle n\rangle$ 的一个子序列 $\langle k_n^{(m)}\rangle$，使得
+\[x_{k_n^{(m)}1}\to\xi_1,\ x_{k_n^{(m)}2}\to\xi_2,\ \cdots,\ x_{k_n^{(m)}m}\to\xi_m\quad(n\to+\infty).\]
+由于
+\[x_{k_n^{(m)}}=(x_{k_n^{(m)}1},x_{k_n^{(m)}2},\cdots,x_{k_n^{(m)}m})\quad(\forall\,n\in\N),\]
+故 $\displaystyle\lim_{n\to+\infty}x_{k_n^{(m)}}=(\xi_1,\xi_2,\cdots,\xi_m)$。因为 $A$ 是闭的，所以 $(\xi_1,\xi_2,\cdots,\xi_m)\in A$。此即表明 $\langle x_n\rangle$ 有在 $A$ 中收敛的子序列 $\langle x_{k_n^{(m)}}\rangle$，从而 $A$ 是紧集。$\blacksquare$
+
+\end{proof}
+
+\begin{sourceexample}{3}
+
+$(\R^n,d_i)$ 中的任一闭球 $\bar B(a,r)$ 及
+\[P=\{(x_1,x_2,\cdots,x_n)\in\R^n\mid a_i\leqslant x_i\leqslant b_i,\ i=1,2,\cdots,n\}\]
+都是紧集。因为它们是 $(\R^n,d_i)$ 中的有界闭集。
+
+\end{sourceexample}
+
+\textbf{注意}\quad \rthm{thm:Rm-compact-bounded-closed}不能推广到一般度量空间中去。例如，在无穷维赋范向量空间 $(X,\|\cdot\|)$ 中，单位球 $V=\{x\in X\mid\|x\|\leqslant1\}$ 就不是紧集。可以证明一个赋范空间 $(X,\|\cdot\|)$ 的单位球 $V$ 是紧的当且仅当 $X$ 是有限维的。
+
+下面关于紧集的一个性质类似于实数空间中的闭区间套定理。
+
+\begin{mythm}{}{compact-nested}
+
+设 $(X,d)$ 是任一度量空间，$F_n\subset X\ (n\in\N)$ 是任一紧集序列，使得 $F_{n+1}\subset F_n\ (\forall\,n\in\N)$，则
+\[\bigcap_{n=1}^{\infty}F_n\neq\varnothing.\]
+如果 $F_n$ 的直径 $d(F_n)=\displaystyle\sup_{x,y\in F_n}d(x,y)\to0\ (n\to+\infty)$，则 $\displaystyle\bigcap_{n=1}^{\infty}F_n$ 是一单点集。
+
+\end{mythm}
+
+\begin{proof}
+
+$\forall\,n\in\N$，任取 $x_n\in F_n$。由此得到 $F_1$ 的一点序列 $\langle x_n\rangle$。由 $F_1$ 的紧性知 $\langle x_n\rangle$ 有在 $F_1$ 中收敛的子序列 $\langle x_{k_n}\rangle$。令 $\displaystyle\lim_{n\to+\infty}x_{k_n}=\bar x\in F_1$。我们来证明
+\[\bar x\in\bigcap_{n=1}^{\infty}F_n.\]
+$\forall\,n\in\N\ (n\geqslant2)$，$\langle x_{k_{n+m}}\rangle$ 是 $F_n$ 的点序列，由 $F_n$ 的紧性知，$\langle x_{k_{n+m}}\rangle$ 有在 $F_n$ 中收敛的子序列，不失一般性，可以假设 $\displaystyle\lim_{m\to+\infty}x_{k_{n+m}}=x'\in F_n$。显然 $x'=\bar x$。因此 $\bar x\in F_n$，从而
+\[\bar x\in\bigcap_{n=1}^{\infty}F_n.\]
+若 $d(F_n)\to0\ (n\to+\infty)$，并且 $x^*\in\displaystyle\bigcap_{n=1}^{\infty}F_n$，则
+\[d(\bar x,x^*)\leqslant d(F_n)\quad\forall\,n\in\N,\]
+从而 $d(\bar x,x^*)=0$，即 $x^*=\bar x$，故 $\displaystyle\bigcap_{n=1}^{\infty}F_n=\{\bar x\}$。
+
+\end{proof}
+
+\subsection{紧集上连续映射的性质}
+
+\begin{mythm}{}{continuous-image-compact}
+
+设 $(X,d)$ 与 $(Y,D)$ 是两个度量空间，$A\subset X$ 是任一非空集合，$f:A\to Y$ 是任一连续映射，若 $A$ 是紧集，则 $f(A)$ 是 $Y$ 的紧集。
+
+\end{mythm}
+
+\begin{proof}
+
+设 $\langle y_n\rangle$ 是 $f(A)$ 的任一点序列，令 $x_n\in A$ 使得 $f(x_n)=y_n\ (n\in\N)$。
+
+由 $A$ 的紧性知，$\langle x_n\rangle$ 有在 $A$ 中收敛的子序列 $\langle x_{k_n}\rangle$。令 $\displaystyle\lim_{n\to+\infty}x_{k_n}=x$，则 $x\in A$。于是由 $f$ 的连续性推得
+\[\lim_{n\to+\infty}y_{k_n}=\lim_{n\to+\infty}f(x_{k_n})=f(x)\in f(A).\]
+此即表明 $\langle y_n\rangle$ 有在 $f(A)$ 中收敛的子序列 $\langle y_{k_n}\rangle$。因此 $f(A)$ 是 $Y$ 的紧集。
+
+\end{proof}
+
+\begin{sourceexample}{4}
+
+证明：$\forall\,a,b\in\R$，$a<b$，$]a,b[$ 与 $[a,b]$ 不同胚。
+
+同理 §3 例 15 中的 $[0,1[$ 与 $S^1$ 不同胚。
+
+事实上，若 $]a,b[$ 与 $[a,b]$ 同胚，则存在同胚映射 $f:[a,b]\to]a,b[$。由于 $[a,b]$ 是 $\R$ 中的紧集，故 $f([a,b])=]a,b[$ 也是 $\R$ 中的紧集，这不可能，因 $]a,b[$ 不是闭集。
+
+同理，若 $[0,1[$ 与 $S^1$ 同胚，则推出 $[0,1[$ 是 $\R$ 中的紧集的矛盾。
+
+\end{sourceexample}
+
+\rthm{thm:continuous-image-compact}表明集合的紧性是连续映射下的一个不变性质。在下一节我们将研究度量空间的其他的不变性质。
+
+\begin{mythm}{}{compact-max-min}
+
+设 $(X,d)$ 是任一度量空间，$A\subset X$ 是任一紧集，$f:A\to\R$ 是任一连续函数。则
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item $f$ 在 $A$ 上是有界的。
+\item 存在 $x^*,x_*\in A$ 使得 $f$ 在这两点处分别达到它的最大值与最小值，即
+\[f(x^*)=\sup_{x\in A}f(x),\quad f(x_*)=\inf_{x\in A}f(x).\]
+\end{enumerate}
+
+\end{mythm}
+
+\begin{proof}
+
+首先由于 $A$ 是紧集，$f$ 连续，故 $f(A)$ 是 $\R$ 的紧集，从而是 $\R$ 的有界闭集，因此 $f(A)$ 的上、下确界存在，令
+\[y^*=\sup_{x\in A}f(x),\quad y_*=\inf_{x\in A}f(x),\]
+则 $y^*,y_*\in f(A)$。于是存在 $x^*,x_*\in A$ 使得
+\[y^*=f(x^*),\quad y_*=f(x_*).\]
+此定理是我们在第 4 章中研究过的一元实值函数 Weierstrass 定理（\rthm{thm:weierstrass-theorem}）的推广。
+
+\end{proof}
+
+\begin{mythm}{}{compact-uniform-continuity}
+
+设 $(X,d)$ 与 $(Y,D)$ 是两个度量空间，$A\subset X$ 是任一紧集，$f:A\to Y$ 是任一映射，若 $f$ 在 $A$ 上连续，则 $f$ 在 $A$ 上一致连续。
+
+\end{mythm}
+
+\begin{proof}
+
+因为 $f$ 在 $A$ 上连续，所以
+\[(\forall\,x\in A)(\forall\,\varepsilon>0)(\exists\,\delta_x>0)(\forall\,y\in B(x,\delta_x)\cap A)\]
+\[\Longrightarrow D(f(y),f(x))<\varepsilon/2.\]
+由此得到 $A$ 的一个开覆盖 $\{B(x,\delta_x)\cap A\}_{x\in A}$。令 $\beta$ 为与之对应的 Lebesgue 数。则
+\[(\forall\,y,y'\in A,\ d(y,y')<\beta)(\exists\,x_0\in A)\Longrightarrow y,y'\in B(x_0,\delta_{x_0})\cap A.\]
+于是
+\[D(f(y),f(y'))\leqslant D(f(y),f(x_0))+D(f(x_0),f(y'))<\varepsilon/2+\varepsilon/2=\varepsilon.\]
+因此 $f$ 在 $A$ 上一致连续。
+
+这个定理是定义在有界闭区间上一元实值连续函数一致连续性定理 \rthm{thm:closed-bounded-uniform-continuity} 的推广。
+
+\end{proof}
+
+\subsection*{习 题}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 是任一紧度量空间，$A\subset X$ 是任一非空集合。证明 $A$ 是紧集的充分必要条件是 $A$ 为闭集。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 是任一度量空间，我们称它是\textbf{全有界的}，如果 $\forall\,\varepsilon>0$，存在有限集 $F$ 使得 $X=\displaystyle\bigcup_{x\in F}B(x,\varepsilon)$。（$F$ 称为 $(X,d)$ 的有限 $\varepsilon$--网）。证明若 $(X,d)$ 是完备及全有界的，则 $(X,d)$ 是紧的。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 是任一度量空间，$A\subset X$ 是一紧集，$B\subset X$ 是一闭集使得 $A\cap B=\varnothing$。证明：$A$ 与 $B$ 之间的距离
+	\[d(A,B)=\inf_{(x,y)\in A\times B}d(x,y)>0.\]
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 是任一度量空间，$A,B\subset X$ 是任意两个紧子集。证明：存在 $(a,b)\in A\times B$ 使得
+	\[d(a,b)=d(A,B).\]
+	如果 $X=\R^n$，则当 $A\subset\R^n$ 为紧集，$B\subset\R^n$ 为闭集时上述结论仍然成立。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 是任一紧度量空间，$f:X\to X$ 满足条件：
+	\[\forall\,x,y\in X,\ \text{且 }x\neq y,\ d(f(x),f(y))<d(x,y).\]
+	证明：$f$ 有唯一的不动点（试考虑 $\displaystyle\inf_{x\in X}d(x,f(x))$）。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 是任一紧度量空间，$f:X\to X$ 满足条件：
+	\[\forall\,x,y\in X,\ d(f(x),f(y))\geqslant d(x,y).\]
+	\begin{enumerate}[label=\arabic*)]
+		\item 设 $(a,b)\in X\times X$。$\langle a_n\rangle,\ \langle b_n\rangle$ 是如下定义的 $X$ 的两个点序列：
+		\[a_0=a,\ a_{n+1}=f(a_n),\ b_0=b,\ b_{n+1}=f(b_n),\ \forall\,n\in\N.\]
+		证明：$\forall\,\varepsilon>0,\ \exists\,n\in\N$ 使得 $d(a,a_n)\leqslant\varepsilon,\ d(b,b_n)\leqslant\varepsilon$。
+		\item 由此推得 $d(a,b)=d(a_1,b_1)$ 及 $\overline{f(X)}=X$。
+		\item 证明：$f$ 是从 $X$ 到 $X$ 上的等距映射（即 $f$ 是满射，并且 $d(f(x),f(y))=d(x,y),\ \forall\,x,y\in X$）。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 与 $(Y,D)$ 是两个度量空间，$f:X\to Y$ 是一映射，满足下述条件：
+	\begin{enumerate}[label=\arabic*)]
+		\item $(Y,D)$ 是紧的，
+		\item $\forall\,y\in Y,\ f^{-1}(y)\subset X$ 是紧集。
+	\end{enumerate}
+	证明：若 $A\subset X$ 是闭集，则 $f(A)\subset Y$ 也是闭集，即 $f$ 是闭映射。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$，$(Y,D)$ 是两个度量空间并且 $(X,d)$ 是紧空间，$f:X\to Y$ 是一一映射。证明：若 $f$ 连续，则 $f^{-1}$ 也是连续的。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 是任一紧度量空间，$\mathscr{F}$ 是 $X$ 的所有非空有界闭子集的集合，$\Delta$ 是 $\mathscr{F}$ 上的 Hausdorff 度量（见 §3 习题第 5 题）。证明 $(\mathscr{F},\Delta)$ 是紧的。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 是一紧度量空间，$f:X\to X$ 是任一连续满射。我们引入下列定义：
+
+	1) 设 $x,y\in X,\ \varepsilon>0$。我们称有限序列 $\langle x_0,x_1,\cdots,x_n\rangle$ 是从 $x$ 到 $y$ 的 $\varepsilon$--有限链，如果
+	\[x_0=x,\ x_n=y,\ d(f(x_{i-1}),x_i)<\varepsilon\ (\forall\,i=1,2,\cdots,n).\]
+
+	2) $x\stackrel{\varepsilon}{\sim}y$，如果存在从 $x$ 到 $y$ 的一个 $\varepsilon$--有限链及从 $y$ 到 $x$ 的一个 $\varepsilon$--有限链。
+
+	3) $x\sim y$，如果 $\forall\,\varepsilon>0,\ x\stackrel{\varepsilon}{\sim}y$。
+
+	4) $x$ 称为链回复点，如果 $x\sim x$。$R(f)=\{x\in X\mid x\sim x\}$ 称为 $f$ 的链回复集。
+
+	5) 我们称 $f$ 是链传递的，如果 $\forall\,x,y\in X,\ x\sim y$。$X$ 的一个闭子集 $Y$ 称为链传递的，如果 $f(Y)=Y$ 并且 $f|_Y$ 是链传递的。
+
+	证明下述各结论：
+
+	1) 证明：关系“$\stackrel{\varepsilon}{\sim}$”满足对称性，传递性。“$\sim$”是 $X$ 上的等价关系吗？
+
+	2) 证明：$R(f)$ 是闭集。
+
+	3) 证明：$f(R(f))\subset R(f)$。
+
+	4) 我们承认 $f(R(f))=R(f)$。证明：“$\sim$”是 $R(f)$ 上的一个等价关系。
+
+	5) 设 $F$ 是 $R(f)/\!\!\sim$ 的任一等价类——称为 $f$ 的链分支。证明：$f(F)\subset F$，由此并利用 $f(R(f))=R(f)$ 的结论推出 $f(F)=F$。
+
+	6) 证明：若 $F$ 是 $f$ 的链分支，则 $F$ 是链传递的。
+\end{exercise}
+
+\section{连通度量空间}
+
+从几何直观上我们知道，一条平面或空间直线 $l$ 挖去一点后就成为两条不连接的半直线。又平面上一条圆周曲线 $\Gamma$ 的内部与外部形成分离的两部分。这种几何直观的“不连接”与“分离”的数学抽象就是下面我们要介绍的度量空间的“非连通性”概念。
+
+\subsection{连通空间与连通子集}
+
+\begin{mydef*}{}
+
+设 $(X,d)$ 是任一度量空间。
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item 若 $A,B\subset X$ 是两个非空开集，并且满足
+\[A\cup B=X,\quad A\cap B=\varnothing,\]
+则我们称 $(A,B)$ 是 $X$ 的一个\textbf{分裂}。
+\item 若 $X$ 存在一个分裂 $(A,B)$，则我们称度量空间 $(X,d)$ 是\textbf{不连通的}，否则，我们称 $(X,d)$ 是\textbf{连通的}度量空间。
+\item 设 $Y\subset X$。若子空间 $(Y,d_Y)$ 是连通的或不连通的，则我们称 $Y$ 是 $X$ 的\textbf{连通}或\textbf{不连通子集}。
+\end{enumerate}
+
+\end{mydef*}
+
+\begin{sourceexample}{1}
+
+实数空间 $(\R,|\cdot|)$ 是连通的。
+
+事实上，若 $(\R,|\cdot|)$ 是不连通的，则存在 $\R$ 的一个分裂 $(A,B)$。
+
+任取一点 $x\in B$，于是 $A\cap]-\infty,x]$ 与 $A\cap[x,+\infty[$ 中至少有一个非空，不妨设 $D=A\cap[x,+\infty[\neq\varnothing$。
+
+因为 $[x,+\infty[$ 是闭集，$A=X-B$ 也是闭集，故 $D$ 是闭集。从而 $m=\inf D\in D$。
+
+另一方面，$x\notin A$，所以 $D=A\cap]x,+\infty[$，而 $A$ 与 $]x,+\infty[$ 都是开集，故 $D$ 又是开集。从而存在 $\delta>0$，使得 $]m-\delta,m+\delta[\subset D$。于是 $\inf D\leqslant m-\delta$。这不可能。因此 $(\R,|\cdot|)$ 是连通的。
+
+\end{sourceexample}
+
+\subsection{连通空间与连通集的等价定义}
+
+\begin{mythm}{}{connected-equivalence}
+
+设 $(X,d)$ 是任一度量空间。则下述结论等价：
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item $(X,d)$ 是连通的。
+\item 不存在 $X$ 的两个非空闭集 $C,D$ 使得
+\[C\cup D=X,\quad C\cap D=\varnothing.\]
+\item 不存在 $X$ 的既开又闭的非空真子集。
+\end{enumerate}
+
+\end{mythm}
+
+\begin{proof}
+
+1) $\Longrightarrow$ 2)。假设存在 $X$ 的两个非空闭集 $C$ 与 $D$ 使得 $C\cup D=X,\ C\cap D=\varnothing$。
+
+因为 $C=X-D,\ D=X-C$ 又是 $X$ 的两个非空开集，故 $(C,D)$ 是 $X$ 的一个分裂。从而 $(X,d)$ 是不连通的，这与假设相矛盾。
+
+2) $\Longrightarrow$ 3)。假设存在 $X$ 的一个既开又闭的非空真子集 $A$，则 $B=X-A$ 是 $X$ 的非空闭集。并且满足
+\[A\cup B=X,\quad A\cap B=\varnothing.\]
+这与 2) 的假设相矛盾。
+
+3) $\Longrightarrow$ 1)。假设 $(X,d)$ 不连通，那末存在 $X$ 的一个分裂 $(A,B)$。于是 $A$ 是 $X$ 的既开又闭的非空真子集。这与 3) 的假设相矛盾。因此 $(X,d)$ 是连通的。
+
+\end{proof}
+
+\begin{mythm}{}{connected-subset-equivalence}
+
+设 $(X,d)$ 是任一度量空间，$Y\subset X$。则下述结论等价：
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item $Y$ 是连通子集。
+\item 不存在 $Y$ 的两个非空子集 $A$ 与 $B$ 使得
+\[A\cup B=Y,\quad\bar A\cap B=\varnothing,\quad A\cap\bar B=\varnothing.\]
+（这里 $\bar A$ 与 $\bar B$ 表示 $A$ 与 $B$ 在 $X$ 中的闭包）。
+\end{enumerate}
+
+\end{mythm}
+
+\begin{proof}
+
+1) $\Longrightarrow$ 2)。若存在 $Y$ 的非空子集 $A$ 与 $B$ 使得 $A\cup B=Y,\ \bar A\cap B=\varnothing,\ A\cap\bar B=\varnothing$，则
+\[A=\bar A\cap Y,\quad B=\bar B\cap Y.\]
+事实上，由已知条件我们有
+\[\bar{A}\cap Y=\bar{A}\cap(A\cup B)=(\bar{A}\cap A)\cup(\bar{A}\cap B)\]
+\[=(\bar{A}\cap A)\cup\varnothing=\bar{A}\cap A=A,\]
+\[\bar{B}\cap Y=\bar{B}\cap(A\cup B)=(\bar{B}\cap A)\cup(\bar{B}\cap B)\]
+\[=\varnothing\cup(\bar{B}\cap B)=\bar{B}\cap B=B.\]
+由于 $\bar{A}$ 与 $\bar{B}$ 是 $X$ 中的闭集，故由\rthm{thm:subspace-closed}知 $A$ 与 $B$ 是 $Y$ 中的闭集，并且 $A\cap B=\varnothing$，由\rthm{thm:connected-equivalence}，$Y$ 不连通，这与 $(Y,d_Y)$ 连通相矛盾。
+
+2) $\Longrightarrow$ 1)。若 $(Y,d_Y)$ 不连通，则由\rthm{thm:connected-equivalence}知存在 $Y$ 中的非空闭集 $A$，$B$ 使得 $A\cup B=Y$，$A\cap B=\varnothing$。现在我们用 $\bar{A}_Y$ 表示 $A$ 在 $Y$ 中的闭包，则我们有
+\[\bar{A}_Y=\bigcap_{\substack{A\subset G\cap Y\\ G\text{ 在 }X\text{ 中闭}}}(G\cap Y)=\left(\bigcap_{\substack{A\subset G\\ G\text{ 在 }X\text{ 中闭}}}G\right)\cap Y=\bar{A}\cap Y.\]
+因 $A$ 是 $Y$ 中的闭集，所以 $A=\bar{A}_Y$，又 $B\subset Y$，故
+\[\bar{A}\cap B=\bar{A}\cap Y\cap B=\bar{A}_Y\cap B=A\cap B=\varnothing.\]
+同理可证 $A\cap\bar{B}=\varnothing$，这与 2) 的假设矛盾，故 $(Y,d_Y)$ 连通。
+
+\end{proof}
+
+\begin{sourceexample}{2}
+
+$\forall\,a\in\R$，$\R-\{a\}$ 是 $\R$ 的不连通子集。
+
+为此我们令
+\[A=]-\infty,a[,\qquad B=]a,+\infty[,\]
+则 $A\neq\varnothing$，$B\neq\varnothing$，$A\cup B=\R-\{a\}$，$\bar{A}\cap B=A\cap\bar{B}=\varnothing$，由\rthm{thm:connected-subset-equivalence}知，$\R-\{a\}$ 不连通。
+
+\end{sourceexample}
+
+\begin{sourceexample}{3}
+
+有理数集 $\Q$ 与无理数集 $\Q^c$ 都是不连通集。
+
+事实上，对 $\Q$：取 $a\in\Q^c$，则
+\[A=\Q\cap]-\infty,a[\neq\varnothing,\qquad B=\Q\cap]a,+\infty[\neq\varnothing,\]
+\[A\cup B=\Q,\quad \bar{A}\cap B=\varnothing,\quad A\cap\bar{B}=\varnothing,\]
+因此 $\Q$ 是不连通集。
+
+对 $\Q^c$：取 $a\in\Q$，则
+\[C=\Q^c\cap]-\infty,a[\neq\varnothing,\qquad D=\Q^c\cap]a,+\infty[\neq\varnothing,\]
+\[C\cup D=\Q^c,\quad C\cap D=\varnothing,\quad C\cap\bar{D}=\varnothing,\]
+故 $\Q^c$ 也是不连通集。
+
+\end{sourceexample}
+
+\subsection{连通集的性质}
+
+\begin{mythm}{}{connected-closure}
+
+设 $(X,d)$ 是任一度量空间，$A,B\subset X$ 并且 $A\subset B\subset\bar{A}$。若 $A$ 连通，则 $B$ 与 $\bar{A}$ 都是连通集。
+
+\end{mythm}
+
+\begin{proof}
+
+由于可以取 $B=\bar{A}$，故我们只需证明 $B$ 连通即可。用反证法，假设 $B$ 不是连通集，则存在 $B$ 的非空子集 $C,D$ 使得 $C\cup D=B$，$\bar{C}\cap D=\varnothing$，$C\cap\bar{D}=\varnothing$。令 $C_1=C\cap A$，$D_1=D\cap A$，则
+\[A=C_1\cup D_1,\quad C_1\cap D_1=\varnothing.\]
+下面证明 $C_1\neq\varnothing$，$D_1\neq\varnothing$。
+
+若 $C_1=\varnothing$，则 $A=D_1$，于是 $A\subset D$。由 $A\subset D\subset\bar{A}$ 知 $\bar{A}=\bar{D}$。
+
+另一方面，由于 $\bar{A}=\overline{C\cup D}=\bar{C}\cup\bar{D}$，故
+\[\bar{C}=\varnothing\text{ 或 }\bar{C}\subset\bar{D}.\]
+这与 $C\neq\varnothing$，$\bar{D}\cap C=\varnothing$ 矛盾，因此 $C_1\neq\varnothing$。
+
+同理可证 $D_1\neq\varnothing$。
+
+最后证明 $\bar{C}_1\cap D_1=\varnothing$，$C_1\cap\bar{D}_1=\varnothing$。
+
+若存在 $x\in\bar{C}_1\cap D_1$，则 $x\in\bar{C}_1$，$x\in D_1$，于是
+\[x\in\overline{C\cap A}\subset\bar{C}\cap\bar{A},\quad x\in D\cap A\Longrightarrow x\in\bar{C}\cap D.\]
+这与 $\bar{C}\cap D=\varnothing$ 矛盾，故 $\bar{C}_1\cap D_1=\varnothing$。
+
+同理可证 $C_1\cap\bar{D}_1=\varnothing$。
+
+上述分析表明，$A$ 是不连通子集，这与 $A$ 为连通集假设矛盾，故 $B$ 连通，从而 $\bar{A}$ 连通。
+
+\end{proof}
+
+\begin{mythm}{}{continuous-image-connected}
+
+设 $(X,d)$ 与 $(Y,\rho)$ 是两个度量空间，$A\subset X$ 是任一非空集合，$f:A\to Y$ 是任一连续映射。若 $A$ 连通，则 $f(A)$ 是 $Y$ 的连通集。
+
+\end{mythm}
+
+\begin{proof}
+
+用反证法。假设 $f(A)$ 不连通，则存在 $f(A)$ 的两个非空开集 $C$ 与 $D$ 使得
+\[C\cup D=f(A),\quad C\cap D=\varnothing.\]
+由于 $f$ 连续，故 $f^{-1}(C)$ 与 $f^{-1}(D)$ 是 $A$ 的两个非空开集，并且
+\[f^{-1}(C)\cup f^{-1}(D)=A,\qquad f^{-1}(C)\cap f^{-1}(D)=\varnothing.\]
+此即表明 $(f^{-1}(C),f^{-1}(D))$ 是集 $A$ 的一个分裂。从而 $A$ 不连通，这与假设 $A$ 为连通集矛盾。因此 $f(A)$ 连通。
+
+这个定理表明集合的连通性是连续映射下的一个不变性质。
+
+\end{proof}
+
+利用连通性是连续映射下的不变性，可以证明许多集合的连通性。
+
+\begin{sourceexample}{4}
+
+$\R$ 的任一区间是连通集。
+
+因为 $\R$ 的区间只有下列三种类型：
+\begin{enumerate}[label=$n^{\circ}$.,leftmargin=2.2em]
+\item $]a,b[$，$]a,b]$，$[a,b[$，$[a,b]$ $(a,b\in\R)$；
+\item $]-\infty,b[$，$]-\infty,b]$，$]a,+\infty[$，$[a,+\infty[$ $(a,b\in\R)$；
+\item $]-\infty,+\infty[$。
+\end{enumerate}
+而 $]-\infty,+\infty[=\R$ 已证是连通的，$]a,b[\subset]a,b]$，$[a,b[\subset[a,b]$，$]-\infty,b[\subset]-\infty,b]$，$]a,+\infty[\subset[a,+\infty[$。
+
+故只需证明
+\[]a,b[,\quad]-\infty,b[,\quad]a,+\infty[\]
+是连通集。
+
+考虑映射 $f:\R\to]a,b[$ 如下：
+\[\forall\,x\in\R,\ f(x)=\frac{a+b}{2}+\frac{b-a}{\pi}\operatorname{arctg}x.\]
+由于 $f$ 连续，故由\rthm{thm:continuous-image-connected}推知 $f(\R)=]a,b[$ 是连通的。
+
+$]-\infty,b[$ 及 $]a,+\infty[$ 的连通性证明留给读者。
+
+\end{sourceexample}
+
+\begin{sourceexample}{5}
+
+利用连通性的不变性证明一元实值连续函数的介值定理：
+
+设 $I\subset\R$ 是任一非空区间，$f:I\to\R$ 是任意一个连续函数，则 $f(I)\subset\R$ 是一区间。
+
+为此我们只需证明 $\forall\,y_1,y_2\in f(I)$，$]y_1,y_2[\subset f(I)$。
+
+假设 $\exists\,\mu\in]y_1,y_2[$，$\mu\notin f(I)$。
+
+令 $x_1,x_2\in I$ 使得 $f(x_1)=y_1,\ f(x_2)=y_2$，不妨设 $x_1<x_2$。于是 $\forall\,x\in]x_1,x_2[$，$f(x)\neq\mu$。令
+\[A=f([x_1,x_2])\cap]-\infty,\mu[,\quad B=f([x_1,x_2])\cap]\mu,+\infty[\]
+则 $A$ 与 $B$ 是 $f([x_1,x_2])$ 的两个非空开集（因 $f(x_1)\in A$，$f(x_2)\in B$），并且
+\[A\cup B=f([x_1,x_2]),\quad A\cap B=\varnothing.\]
+这表明 $(A,B)$ 是 $f([x_1,x_2])$ 的一个分裂，于是集 $f([x_1,x_2])$ 不连通。这不可能，因为 $[x_1,x_2]$ 连通，$f$ 连续，故 $f([x_1,x_2])$ 必连通。因此 $\forall\,\mu\in]y_1,y_2[$，存在 $\xi\in I$ 使得 $f(\xi)=\mu$。
+
+\end{sourceexample}
+
+\begin{mythm}{}{connected-split}
+
+设 $(X,d)$ 是任一度量空间，$(A,B)$ 是 $X$ 的任一分裂。若 $Y\subset X$ 是连通集，则
+\[Y\subset A\ \text{或}\ Y\subset B.\]
+
+\end{mythm}
+
+\begin{proof}
+
+若 $C=A\cap Y\neq\varnothing$，$D=B\cap Y\neq\varnothing$，则 $C$、$D$ 是 $Y$ 的两个非空开集，并且
+\[C\cup D=Y,\quad C\cap D=\varnothing.\]
+因此 $(C,D)$ 是 $Y$ 的一个分裂，这与 $Y$ 是连通集矛盾。
+
+\end{proof}
+
+\begin{mythm}{}{connected-union}
+
+设 $\{Y_{\lambda}\}_{\lambda\in\Lambda}$ 是度量空间 $(X,d)$ 的一连通集族，并且 $\displaystyle\bigcap_{\lambda\in\Lambda}Y_{\lambda}\neq\varnothing$，则 $\displaystyle\bigcup_{\lambda\in\Lambda}Y_{\lambda}$ 是连通集。
+
+\end{mythm}
+
+\begin{proof}
+
+假设 $\displaystyle\bigcup_{\lambda\in\Lambda}Y_{\lambda}$ 不连通。于是存在 $\displaystyle\bigcup_{\lambda\in\Lambda}Y_{\lambda}$ 的一个分裂 $(A,B)$，取 $a\in\displaystyle\bigcap_{\lambda\in\Lambda}Y_{\lambda}$。则 $a\in A$ 或 $a\in B$，不妨令 $a\in A$。
+
+$\forall\,\lambda\in\Lambda$，$Y_{\lambda}$ 是连通集，并且 $a\in A\cap Y_{\lambda}$。故由\rthm{thm:connected-split}知，$Y_{\lambda}\subset A$。从而 $\displaystyle\bigcup_{\lambda\in\Lambda}Y_{\lambda}\subset A$，由此推知 $B=\varnothing$。这与 $(A,B)$ 为分裂相矛盾，因此 $\displaystyle\bigcup_{\lambda\in\Lambda}Y_{\lambda}$ 是连通集。
+
+\end{proof}
+
+\begin{sourceexample}{6}
+
+$\forall\,n\in\N$，$(\R^n,d_i)$ 是连通的。
+
+当 $n=1$ 时，我们已证 $(\R,|\cdot|)$ 是连通的。
+
+假设 $n\geqslant2$，$\forall\,x\in\R^n$。令
+\[Y_x=\{y\in\R^n\mid y=tx,\ t\in\R\},\]
+则
+\[\bigcap_{x\in\R^n}Y_x=\{0\},\qquad\bigcup_{x\in\R^n}Y_x=\R^n.\]
+若能证明 $\forall\,x\in\R^n$，$Y_x$ 是 $\R^n$ 的连通集，则由上述\rthm{thm:connected-union}知，$\displaystyle\bigcup_{x\in\R^n}Y_x=\R^n$ 是连通的。
+
+为此考虑映射 $f:\R\to\R^n$ 如下：
+\[\forall\,t\in\R,\ f(t)=tx\quad(x\in\R^n).\]
+显然 $f$ 连续，并且 $f(\R)=Y_x$。由于 $\R$ 连通，故由\rthm{thm:continuous-image-connected}知，$Y_x$ 是 $\R^n$ 的连通集。
+
+\end{sourceexample}
+
+\subsection{道路连通空间}
+
+\begin{mydef*}{}
+
+设 $(X,d)$ 是任一度量空间。
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item 设 $x,y\in X$，若存在连续映射 $\varphi:[a,b]\to X$ 使得 $\varphi(a)=x$，$\varphi(b)=y$，则我们称 $\varphi$ 是联结 $x$ 与 $y$ 的一条\textbf{道路}。
+\item 若 $\forall\,x,y\in X$，都有联结 $x$ 与 $y$ 的一条道路，则我们称 $(X,d)$ 是\textbf{道路连通的}。
+\item 设 $Y\subset X$ 是任一非空集合，若子空间 $(Y,d_Y)$ 是道路连通的，则我们称 $Y$ 是\textbf{道路连通集}。
+\end{enumerate}
+
+\end{mydef*}
+
+\begin{sourceexample}{7}
+
+度量空间 $(X,d)$ 的任一凸集 $Y$ 是道路连通的。（$Y\subset X$ 称为\textbf{凸集}，若 $\forall\,x,y\in X$，联结 $x$ 与 $y$ 的线段 $\{z\in X\mid z=tx+(1-t)y,\ t\in[0,1]\}\subset Y$。）
+
+事实上，映射 $\varphi:[0,1]\to Y$
+\[\varphi(t)=tx+(1-t)y,\quad\forall\,t\in[0,1]\]
+连续，并且 $\varphi(0)=y$，$\varphi(1)=x$，故 $\varphi$ 是 $Y$ 的联结 $x$ 与 $y$ 的一条道路，从而 $Y$ 是道路连通的。
+
+特别地，$(X,d)$ 的任一开球 $B(a,r)$ 与闭球 $\bar B(a,r)$ 都是道路连通的，因为它们都是凸集。
+
+\end{sourceexample}
+
+\begin{sourceexample}{8}
+
+若 $n>1$，则 $\forall\,a\in\R^n$，$\R^n-\{a\}$ 是道路连通的；若 $n=1$，则 $\R-\{a\}$ 不是道路连通的。
+
+因为 $n>1$，$\forall\,x,y\in\R^n-\{a\}$，存在一点 $b\in\R^n-\{a\}$，使得联结 $x$ 与 $b$ 的线段与联结 $b$ 与 $y$ 的线段都不经过点 $a$，由此可得 $\R^n-\{a\}$ 中联结 $x$ 与 $y$ 的一条道路。故 $\R^n-\{a\}$ 是道路连通的。
+
+若 $n=1$，则由连通不变性知，$\forall\,x\in]-\infty,a[$，$\forall\,y\in]a,+\infty[$，不可能存在 $\R-\{a\}$ 中联结 $x$ 与 $y$ 的任何道路，故 $\R-\{a\}$ 不是道路连通的。
+
+\end{sourceexample}
+
+附注\quad 按照我们的定义，度量空间 $(X,d)$ 中联结 $x$ 与 $y$ 的一条道路是一个连续映射 $\varphi:[a,b]\to X$，而不是指象集 $\varphi([a,b])$，因此若 $\psi:[\alpha,\beta]\to X$ 是另一连续映射，即使
+\[\psi(\alpha)=x,\quad\psi(\beta)=y,\quad\psi([\alpha,\beta])=\varphi([a,b]),\]
+则 $\varphi$ 与 $\psi$ 应该看作联结 $x$ 与 $y$ 的两条不同的道路。
+
+\subsection{道路连通的性质}
+
+\begin{mythm}{}{path-connected-image}
+
+设 $(X,d)$，$(Y,D)$ 是两个度量空间，$A\subset X$ 是任一非空集合，$f:A\to Y$ 是任一连续映射，若 $A$ 是道路连通的，则 $f(A)$ 也是道路连通的。
+
+\end{mythm}
+
+\begin{proof}
+
+任取两点 $y,y'\in f(A)$。令 $x,x'\in A$ 使得 $f(x)=y$，$f(x')=y'$。由于 $A$ 是道路连通的，故存在联结 $x$ 与 $x'$ 的道路 $\varphi:[a,b]\to A$。
+
+令 $\psi=f\circ\varphi$，则 $\psi:[a,b]\to f(A)$ 就是联结 $y$ 与 $y'$ 的一条道路，因此 $f(A)$ 是道路连通的。
+
+这个定理表明道路连通性是在连续映射下的一个不变性质。
+
+\end{proof}
+
+\begin{sourceexample}{9}
+
+设 $P$ 是 $\R^3$ 中单位球面 $S^2$ 上任一点，则 $S^2-\{P\}$ 是道路连通的。
+
+不失一般性，我们可以假设 $P$ 就是 $S^2$ 的北极点 $N$，考虑 $S^2$ 关于北极点的球极投影映射
+\[\Phi:S^2-\{N\}\to\R^2.\]
+由于 $\Phi$ 是同胚，故 $\varphi:\R^2\to S^2-\{N\}$ 连续，而 $\R^2$ 是道路连通的，因此 $\varphi(\R^2)=S^2-\{N\}$ 是道路连通的。
+
+类似可证，若 $P\in S^{n-1}$，则 $S^{n-1}-\{P\}$ 也是道路连通的。
+
+\end{sourceexample}
+
+\begin{mythm}{}{path-connected-implies-connected}
+
+若度量空间 $(X,d)$ 是道路连通的，则它也是连通的。
+
+\end{mythm}
+
+\begin{proof}
+
+假设 $(X,d)$ 是不连通的，那末存在 $X$ 的一个分裂 $(A,B)$。
+
+任取 $x\in A,\ y\in B$。由于 $(X,d)$ 是道路连通的，故存在联结 $x$ 与 $y$ 的道路 $\varphi:[a,b]\to X$。
+
+另一方面，因为 $[a,b]$ 连通，故由 $\varphi$ 的连续性知，$\varphi([a,b])$ 也是连通的，从而 $\varphi([a,b])\subset A$ 或 $\varphi([a,b])\subset B$。这显然不可能，因为 $\varphi(a)=x\in A,\ \varphi(b)=y\in B,\ A\cap B=\varnothing$。此矛盾说明 $(X,d)$ 连通。
+
+\end{proof}
+
+这个定理的逆不成立。
+
+\begin{sourceexample}{10}
+
+考虑下述集合
+\[A=\left\{(x,y)\in\R^2\mid y=\sin\frac{1}{x},\ x\in\ ]0,1]\right\}.\]
+
+\begin{center}
+\includegraphics[width=.5\linewidth,height=.45\textheight,keepaspectratio]{_page_555_Figure_10.jpeg}
+
+图 10-8
+\end{center}
+
+定义映射 $f:\ ]0,1]\to\R^2$ 如下：
+\[\forall\,x\in\ ]0,1],\ f(x)=\left(x,\sin\frac{1}{x}\right),\]
+则映射 $f$ 连续。由于 $]0,1]$ 连通，故 $f(]0,1])=A$ 是 $\R^2$ 的连通集，从而 $\bar{A}$ 也是连通的。
+
+下面我们证明 $A$ 是道路连通的，而 $\bar{A}$ 不是道路连通的。
+
+为此设 $P(x,y),\ Q(x',y')\in A$，不妨设 $x<x'$。则
+\[f(x)=P,\ f(x')=Q.\]
+$f$ 在 $[x,x']$ 上的限制 $f|_{[x,x']}$ 是连续映射，因此它是 $A$ 的联结 $P$ 与 $Q$ 的一条道路，故 $A$ 是道路连通集。
+
+现在设 $P(x,y)\in A,\ Q(0,y')$ 为 $\bar{A}$ 在 $y$ 轴上的任意一点（如图 10-8 所示）。我们来证明不可能存在 $\bar{A}$ 中联结 $P$ 与 $Q$ 的任何道路。
+
+假设存在这样的一条道路 $\varphi:[a,b]\to\bar{A}$，使得 $\varphi(a)=Q(0,y')$，$\varphi(b)=P(x,y)$。记 $\varphi(t)=(\varphi_1(t),\varphi_2(t))$，则 $\varphi_1(a)=0$，$\varphi_1(b)=x>0$。令
+\[t_0=\inf\{t\in[a,b]\mid\varphi_1(t)>0\}.\]
+由 $\varphi_1$ 的连续性及 $t_0$ 的定义知，$t_0<b$ 且 $\varphi_1(t_0)=0$。于是存在 $t_n>t_0$，且 $t_n\to t_0$，使 $\varphi_1(t_n)>0$，$\displaystyle\lim_{n\to+\infty}\varphi_1(t_n)=0$。由此推得 $\varphi_2(t_0)=\displaystyle\lim_{n\to+\infty}\sin\dfrac{1}{\varphi_1(t_n)}$，这不可能，因该极限不存在。故 $\bar{A}$ 非道路连通。
+
+\end{sourceexample}
+
+附注\quad 虽然\rthm{thm:path-connected-implies-connected}的逆不成立，但对 $\R^n$ 中的开集来说，连通与道路连通是等价的。因为道路连通开集必是连通的，故我们只需证明 $\R^n$ 的连通开集是道路连通的。实际上我们可以证明所谓的“折线连通性”，为此我们首先介绍 $\R^n$ 中的折线与“折线连通”的概念。
+
+\begin{mydef*}{}
+
+设 $U\subset\R^n$ 是任一非空集合。
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item 一条道路 $\varphi:[a,b]\to U$ 称为\textbf{折线}，如果像集 $\varphi([a,b])$ 是有限条线段的并。
+\item $U$ 称为是\textbf{折线连通的}，如果 $U$ 中任意两点 $x$ 与 $y$ 都可以用 $U$ 中的一条折线联结。
+\end{enumerate}
+
+\end{mydef*}
+
+\begin{mythm}{}{Rn-connected-open-polygonal}
+
+$\R^n$ 的任一连通开集是折线连通的。
+
+\end{mythm}
+
+\begin{proof}
+
+设 $U$ 是 $\R^n$ 的任一连通开集，$x_0\in U$。定义集合 $A$ 与 $B$ 如下：
+\[A=\{x\in U\mid\text{可用 }U\text{ 中的一折线联结 }x_0\text{ 与 }x\},\]
+\[B=U-A,\]
+于是
+\[A\cap B=\varnothing,\quad A\cup B=U.\]
+下面我们来证明 $A$ 与 $B$ 是 $\R^n$ 中的两个开集。
+
+因为 $x_0\in A$，故 $A\neq\varnothing$。任取 $x\in A$。由于 $x\in U$，故存在 $\delta>0$ 使得 $B(x,\delta)\subset U$。$\forall\,y\in B(x,\delta)$，$x$ 与 $y$ 可用一折线 $l_1$ 联结，而 $x_0$ 与 $x$ 可用折线 $l_2$ 联结，故 $x_0$ 与 $y$ 可用折线 $l_2\cup l_1$ 联结，从而 $y\in A$，即 $B(x,\delta)\subset A$，因此 $A$ 是 $\R^n$ 的非空开集。
+
+如果 $B=\varnothing$，则 $U=A$ 为折线连通集。
+
+假设 $B\neq\varnothing$，下面我们来证明 $B$ 也是 $\R^n$ 的开集。设 $b\in B$，由于 $b\in U$，故存在 $\eta>0$ 使得 $B(b,\eta)\subset U$。如果存在 $y\in B(b,\eta)$，使得 $x_0$ 与 $y$ 可用折线 $L_1$ 联结，则由于 $y$ 与 $b$ 可用折线 $L_2$ 联结知，$x_0$ 与 $b$ 可用折线 $L_1\cup L_2$ 联结，从而 $b\in A$，这与 $b\in B$ 矛盾。故 $B(b,\eta)\subset B$，即 $B$ 为 $\R^n$ 的开集。这时 $(A,B)$ 形成 $U$ 的一个分裂，这与 $U$ 的连通性假设矛盾，故必有 $B=\varnothing$，定理证毕。
+
+\end{proof}
+
+\begin{sourceexample}{11}
+
+例 10 中的集合 $A$ 虽然是道路连通的，但不是折线连通的。
+
+\end{sourceexample}
+
+\subsection*{习 题}
+
+\begin{exercise}
+	\item 证明：$]-\infty,b[$ 与 $]a,+\infty[$ 是 $\R$ 的连通集。
+\end{exercise}
+
+\begin{exercise}
+	\item 证明：$\R^2$ 的下述集合
+	\[A=\{(x,y)\in\R^2\mid y=0\}\cup\left\{(x,y)\in\R^2\mid x>0,\ y=\frac1x\right\}\]
+	是非连通的。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $I\subset\R$ 是任一连通集，它至少包含两个点。证明：$I$ 是 $\R$ 的一个区间。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 是任一度量空间。证明：$(X,d)$ 是非连通的，当且仅当存在一个连续映射 $f:X\to\R$ 及点 $a,b\in\R$ 使得 $f(X)=\{a,b\}\ (a\neq b)$。
+\end{exercise}
+
+\begin{exercise}
+	\item 证明：若度量空间 $(X,d)$ 连通并且至少包含两个点，则存在连续映射 $f:X\to[0,1]$ 使得 $f(X)=[0,1]$。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $\langle A_n\rangle$ 是度量空间 $(X,d)$ 的一列连通子集，使得 $\forall\,n\in\N,\ A_n\cap A_{n+1}\neq\varnothing$，证明 $\displaystyle\bigcup_{n=1}^{\infty}A_n$ 也是连通集。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $\{A_{\lambda}\}_{\lambda\in\Lambda}$ 是度量空间 $(X,d)$ 的任一连通集族，$A$ 是 $(X,d)$ 的连通子集，使得 $\forall\,\lambda\in\Lambda,\ A\cap A_{\lambda}\neq\varnothing$，证明 $A\cup\left(\displaystyle\bigcup_{\lambda\in\Lambda}A_{\lambda}\right)$ 也是连通集。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $D=\left\{\dfrac{1}{n}\ \middle|\ n\in\N\right\}$，定义 $\R^2$ 中的两个集合 $A,B$ 如下：
+	\[A=([0,1]\times\{0\})\cup(D\times[0,1])\cup(\{0\}\times[0,1]),\]
+	\[B=([0,1]\times\{0\})\cup(D\times[0,1])\cup\{(0,1)\}.\]
+	$A$ 称为梳空间，$B$ 称为缺边梳空间。
+
+	\begin{enumerate}[label=\arabic*)]
+		\item 画出 $A$ 与 $B$ 的图形。
+		\item 证明：$A$ 是道路连通的及折线连通的。
+		\item 证明：$B$ 是连通的，但不是道路连通的。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 证明下述各结论：
+	\begin{enumerate}[label=\arabic*)]
+		\item $\forall\,n>1,\ \R^n$ 与 $\R$ 不同胚，$S^{n-1}$ 与 $S^1$ 不同胚。
+		\item $\forall\,n>1,\ \R^n$ 的全体有理点（即它的 $n$ 个坐标全为有理数）的集合是不连通的；$\R^n$ 的非有理点（即它的 $n$ 个坐标中至少有一个是无理数）的集合是折线连通的。
+		\item 设 $D$ 是 $\R^n$ 的任一可数集 $(n>1)$，则 $\R^n-D$ 是道路连通的。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 证明：函数 $f:\R\to\R$ 是单调的充分必要条件是：$\forall\,y\in\R,\ f^{-1}(y)$ 是 $\R$ 的连通子集。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $a>0,\ f:\R^n\to\R^n$ 是任一连续映射，它满足下述条件：
+	\[\forall\,x,y\in\R^n,\ d(f(x),f(y))\geqslant a\,d(x,y).\]
+	证明：$f(\R^n)=\R^n$。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d),\ (Y,D)$ 是两个度量空间，$f:X\to Y$ 是任一连续满射使得 $\forall\,y\in Y,\ f^{-1}(y)$ 是连通集。证明：若 $B\subset Y$ 是连通集，则 $f^{-1}(B)$ 也是连通集。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $(X,d)$ 是任一度量空间，$x,y\in X,\ \varepsilon>0$。我们称 $X$ 的一个有限点序列 $\langle x_1,x_2,\cdots,x_n\rangle$ 是从 $x$ 到 $y$ 的一个 $\varepsilon$--有限链，如果下述性质成立：
+	\[x=x_1,\ y=x_n,\ d(x_i,x_{i+1})<\varepsilon\quad\forall\,i=1,2,\cdots,n-1.\]
+	证明：
+	\begin{enumerate}[label=\arabic*)]
+		\item 若 $(X,d)$ 连通，则 $\forall\,x,y\in X,\ \forall\,\varepsilon>0$，存在从 $x$ 到 $y$ 的 $\varepsilon$--有限链。
+		\item 若 $(X,d)$ 是紧的，并且 $\forall\,x,y\in X,\ \forall\,\varepsilon>0$，存在从 $x$ 到 $y$ 的 $\varepsilon$--有限链，则 $(X,d)$ 是连通的。
+	\end{enumerate}
+\end{exercise}

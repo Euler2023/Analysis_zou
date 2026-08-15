@@ -1,0 +1,3416 @@
+\chapter{一元实值函数的极限}
+
+这一章我们介绍一元实值函数的极限概念及其性质，特别研究了一类重要函数——连续函数的若干特性。
+
+\section{函数极限的定义}
+
+设 \(f\) 是任一映射。若
+\[
+\operatorname{Dom}(f)=X\subset\R,\qquad \operatorname{Ran}(f)\subset\R,
+\]
+则今后我们称 \(f:X\to\R\) 为一元实值函数，或简称为一元函数或函数。
+
+\subsection{\texorpdfstring{\((a,A)\) 型函数极限}{(a,A) 型函数极限}}
+	\label{sec:4-1-1}
+
+\begin{mydef*}{}
+
+	设 \(f:X\to\R\) 是任一函数，\(a\in\R\) 是 \(X\) 的一个聚点，\(A\in\R\) 是一定数。
+
+	\begin{enumerate}[label=\arabic*)]
+		\item 我们称函数 \(f\) 当 \(x\) 趋于 \(a\) 时极限存在并以 \(A\) 为极限，如果下述性质成立：
+		\[
+		(\forall\,\varepsilon>0)\,(\exists\,\delta>0)\,(\forall\,x\in X\cap\mathring{B}(a,\delta))\Longrightarrow |f(x)-A|<\varepsilon.
+		\]
+		这时，记为
+		\[
+		\lim_{x\to a}f(x)=A \quad\text{或}\quad f(x)\to A\ (x\to a).
+		\]
+
+		\item 我们称函数 \(f\) 当 \(x>a\) 且趋于 \(a\) 时右极限存在并以 \(A\) 为右极限，如果 \(a\) 是右侧聚点，并且下述性质成立：
+		\[
+		(\forall\,\varepsilon>0)\,(\exists\,\delta>0)\,(\forall\,x\in X\cap\mathring{B}_+(a,\delta))\Longrightarrow |f(x)-A|<\varepsilon.
+		\]
+		这时，记为
+		\[
+		\lim_{x\to a^+}f(x)=A=f(a^+) \quad\text{或}\quad f(x)\to A=f(a^+)\ (x\to a^+).
+		\]
+
+		\item 我们称函数 \(f\) 当 \(x<a\) 且趋于 \(a\) 时左极限存在并以 \(A\) 为左极限，如果 \(a\) 是左侧聚点，并且下述性质成立：
+		\[
+		(\forall\,\varepsilon>0)\,(\exists\,\delta>0)\,(\forall\,x\in X\cap\mathring{B}_-(a,\delta))\Longrightarrow |f(x)-A|<\varepsilon.
+		\]
+		这时，记为
+		\[
+		\lim_{x\to a^-}f(x)=A=f(a^-) \quad\text{或}\quad f(x)\to A=f(a^-)\ (x\to a^-).
+		\]
+	\end{enumerate}
+
+\end{mydef*}
+
+\textbf{附注}\quad 1) 由于 \(|f(x)-A|<\varepsilon\) 等价于 \(f(x)\in B(A,\varepsilon)\)，故上述三个极限定义可表示为下面的形式：
+\[
+\lim_{x\to a}f(x)=A \Longleftrightarrow (\forall\,\varepsilon>0)(\exists\,\delta>0)\Longrightarrow f(X\cap\mathring{B}(a,\delta))\subset B(A,\varepsilon),
+\]
+\[
+\lim_{x\to a^+}f(x)=A \Longleftrightarrow (\forall\,\varepsilon>0)(\exists\,\delta>0)\Longrightarrow f(X\cap\mathring{B}_+(a,\delta))\subset B(A,\varepsilon),
+\]
+\[
+\lim_{x\to a^-}f(x)=A \Longleftrightarrow (\forall\,\varepsilon>0)(\exists\,\delta>0)\Longrightarrow f(X\cap\mathring{B}_-(a,\delta))\subset B(A,\varepsilon).
+\]
+
+2) 从上面的三个极限定义可以看出，极限 \(\lim_{x\to a}f(x)=A\)（\(\lim_{x\to a^+}f(x)=A\)，\(\lim_{x\to a^-}f(x)=A\)）反映的是函数 \(f\) 当 \(x\to a\)（\(x\to a^+\) 或 \(x\to a^-\)）时的变化趋势。因此 \(a\) 是否属于 \(X\) 无关紧要，即使 \(a\in X\)，函数 \(f\) 当 \(x\to a\)（\(a^+\) 或 \(a^-\)）时也不一定有向 \(f(a)\) 变化的趋势。
+
+3) 从几何意义上来看，\(\lim_{x\to a}f(x)=A\) 表示 \(\forall\,\varepsilon>0\)，总能找到一个 \(\delta>0\)，使得函数 \(f\) 在集合 \(X\cap\mathring{B}(a,\delta)\) 上的限制 \(f|_{X\cap\mathring{B}(a,\delta)}\) 的图形包含在平面长方形区域 \([a-\delta,a+\delta]\times[A-\varepsilon,A+\varepsilon]\) 的内部，即
+\[
+\{(x,y)\in\R^2 \mid x\in X\cap\mathring{B}(a,\delta),\ y=f(x)\}\subset\ ]a-\delta,a+\delta[\ \times\ ]A-\varepsilon,A+\varepsilon[.
+\]
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}
+\begin{axis}[
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-0.3, xmax=2.3,
+    ymin=-0.3, ymax=1.6,
+    xtick={0.5,1,1.5},
+    xticklabels={\footnotesize$a-\delta$,\footnotesize$a$,\footnotesize$a+\delta$},
+    ytick={0.3,0.7,1.1},
+    yticklabels={\footnotesize$A-\varepsilon$,\footnotesize$A$,\footnotesize$A+\varepsilon$},
+    axis line style={->},
+    clip=false,
+    width=10cm,
+    height=6.5cm,
+]
+% 阴影填充区域（矩形）
+\fill[pattern=north east lines, pattern color=gray] 
+    (axis cs:0.5,0.3) rectangle (axis cs:1.5,1.1);
+% 函数曲线
+\addplot[domain=0.2:2, samples=150, thick] {0.35 + 0.55*exp(-2*(x-0.9)^2)};
+% 标注 f
+\node[font=\footnotesize] at (axis cs:1.85,0.55) {$f$};
+% 空心点（函数在 x=a 处不连续/可去）
+\addplot[only marks, mark=*, mark options={fill=white, draw=black, thick}] coordinates {(1,0.9)};
+% 实心点（函数在 x=a 处的极限值）
+\addplot[only marks, mark=*, mark options={fill=black}] coordinates {(1,0.7)};
+% 坐标轴原点 O
+\node[font=\footnotesize, anchor=north east] at (axis cs:0,0) {$O$};
+\end{axis}
+\end{tikzpicture}
+	\caption{}
+	\label{fig:4-1}
+\end{figure}
+
+下面我们来看几个函数极限的例子。
+
+\begin{sourceexample}{1}
+
+	考虑如下定义的函数 \(f:\R-\{0\}\to\R\) 与函数 \(g:\R\to\R\)：
+	\[
+	f(x)=\begin{cases} x, & \forall\,x>0, \\ -x, & \forall\,x<0, \end{cases}
+	\qquad
+	g(x)=\begin{cases} x, & \forall\,x>0, \\ 1, & x=0, \\ -x, & \forall\,x<0. \end{cases}
+	\]
+
+	由于 \(\forall\,x\in\R-\{0\},\ |f(x)-0|=|g(x)-0|=|x|\)。故
+	\[
+	(\forall\,\varepsilon>0)(\exists\,\delta=\varepsilon>0)(\forall\,x\in\mathring{B}(0,\delta))\Longrightarrow
+	\begin{cases} |f(x)-0|<\varepsilon, \\ |g(x)-0|<\varepsilon. \end{cases}
+	\]
+	因此
+	\[
+	\lim_{x\to0}f(x)=0,\qquad \lim_{x\to0}g(x)=0.
+	\]
+	这里 \(0\notin\operatorname{Dom}(f),\,0\in\operatorname{Dom}(g)\)，但 \(0\neq g(0)\)。
+
+\end{sourceexample}
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}
+\begin{axis}[
+  width=5.8cm,height=4.2cm,
+  axis lines=middle,
+  xlabel=$x$,ylabel=$y$,
+  xmin=-2.5,xmax=2.5,
+  ymin=-0.5,ymax=2.5,
+  xtick=\empty,ytick=\empty,
+  domain=-2.2:2.2,
+  samples=101,
+  every axis plot/.append style={thick},
+  label style={font=\footnotesize},
+  tick label style={font=\footnotesize},
+]
+\addplot {abs(x)};
+\draw[fill=white,thick] (axis cs:0,0) circle (1.8pt);
+\node[font=\footnotesize] at (axis cs:0.25,-0.35) {$O$};
+\end{axis}
+\end{tikzpicture}
+\quad
+\begin{tikzpicture}
+\begin{axis}[
+  width=5.8cm,height=4.2cm,
+  axis lines=middle,
+  xlabel=$x$,ylabel=$y$,
+  xmin=-2.5,xmax=2.5,
+  ymin=-0.5,ymax=2.5,
+  xtick=\empty,ytick={1},
+  yticklabels={$1$},
+  domain=-2.2:2.2,
+  samples=101,
+  every axis plot/.append style={thick},
+  label style={font=\footnotesize},
+  tick label style={font=\footnotesize},
+]
+\addplot {abs(x)};
+\draw[fill=white,thick] (axis cs:0,0) circle (1.8pt);
+\fill (axis cs:0,1) circle (1.5pt);
+\node[font=\footnotesize] at (axis cs:0.25,-0.35) {$O$};
+\end{axis}
+\end{tikzpicture}
+	\caption{}
+	\label{fig:4-2}
+\end{figure}
+
+\begin{sourceexample}{2}
+
+	考虑函数 \(x\mapsto x^p\sin\dfrac{1}{x},\ x\in\R-\{0\},\ (p>0)\) 证明：
+	\[
+	\lim_{x\to0}x^p\sin\frac{1}{x}=0.
+	\]
+
+	事实上，\(\forall\,x\in\R-\{0\}\)，我们有
+	\[
+	\left|x^p\sin\frac{1}{x}-0\right|\le|x|^p.
+	\]
+	\(\forall\,\varepsilon>0\)，由 \(|x|^p<\varepsilon\) 得到 \(|x|<\sqrt[p]{\varepsilon}\)，令 \(\delta=\sqrt[p]{\varepsilon}\)，则
+	\[
+	\forall\,x\in\mathring{B}(0,\delta)\Longrightarrow \left|x^p\sin\frac{1}{x}-0\right|\le|x|^p<\varepsilon.
+	\]
+	因此 \(\lim_{x\to0}x^p\sin\dfrac{1}{x}=0\)。
+
+\end{sourceexample}
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}
+\begin{axis}[
+  width=5.8cm,height=5cm,
+  axis lines=middle,
+  xlabel=$x$,ylabel=$y$,
+  xmin=-2.5,xmax=2.5,ymin=-2.5,ymax=2.5,
+  xtick={-2,-1,1,2},ytick={-2,-1,1,2},
+  tick label style={font=\footnotesize},
+  label style={font=\footnotesize},
+  every axis plot/.append style={thick},
+  samples=400,
+]
+% envelope y = +- |x|
+\addplot[dashed,domain=-2:2] {abs(x)};
+\addplot[dashed,domain=-2:2] {-abs(x)};
+% oscillating curve y = x sin(1/x)
+\addplot[domain=-2:-0.015,samples=800] {x*sin(deg(1/x))};
+\addplot[domain=0.015:2,samples=800] {x*sin(deg(1/x))};
+\node[font=\footnotesize] at (axis cs:0,-2.2) {$p=1$};
+\end{axis}
+\end{tikzpicture}
+\quad
+\begin{tikzpicture}
+\begin{axis}[
+  width=5.8cm,height=5cm,
+  axis lines=middle,
+  xlabel=$x$,ylabel=$y$,
+  xmin=-2.5,xmax=2.5,ymin=-1.3,ymax=2.5,
+  xtick={-2,-1,1,2},ytick={1,2},
+  tick label style={font=\footnotesize},
+  label style={font=\footnotesize},
+  every axis plot/.append style={thick},
+  samples=400,
+]
+% envelope y = +- x^2
+\addplot[dashed,domain=-2:2] {x^2};
+\addplot[dashed,domain=-2:2] {-x^2};
+% oscillating curve y = x^2 sin(1/x)
+\addplot[domain=-2:-0.015,samples=800] {x^2*sin(deg(1/x))};
+\addplot[domain=0.015:2,samples=800] {x^2*sin(deg(1/x))};
+\node[font=\footnotesize] at (axis cs:0,-1.05) {$p=2$};
+\end{axis}
+\end{tikzpicture}
+	\caption{}
+	\label{fig:4-3}
+\end{figure}
+
+\begin{sourceexample}{3}
+
+	考虑符号函数
+	\[
+	x\mapsto\operatorname{sgn}(x)=\begin{cases} 1, & \forall\,x>0, \\ 0, & x=0, \\ -1, & \forall\,x<0. \end{cases}
+	\]
+
+	证明：普通极限 \(\lim_{x\to0}\operatorname{sgn}(x)\) 不存在，而
+	\[
+	\lim_{x\to0^+}\operatorname{sgn}(x)=1,\qquad \lim_{x\to0^-}\operatorname{sgn}(x)=-1.
+	\]
+	事实上，若 \(\lim_{x\to0}\operatorname{sgn}(x)=A\)，则
+	\[
+	(\forall\,0<\varepsilon<1)(\exists\,\delta>0)(\forall\,x\in\mathring{B}(0,\delta))\Longrightarrow|\operatorname{sgn}(x)-A|<\varepsilon
+	\]
+	\[
+	\Longrightarrow 2\le|1-A|+|A-(-1)|<2\varepsilon
+	\]
+	\[
+	\Longrightarrow \varepsilon>1,
+	\]
+	这与 \(\varepsilon<1\) 的假设相矛盾，因此 \(\lim_{x\to0}\operatorname{sgn}(x)\) 不存在。
+
+	但是由于 \(\forall\,x>0,\ \operatorname{sgn}(x)=1\)；\(\forall\,x<0,\ \operatorname{sgn}(x)=-1\)，故
+	\[
+	(\forall\,\varepsilon>0)(\exists\,\delta=\varepsilon>0)\begin{cases}
+	(\forall\,x\in\mathring{B}_+(0,\delta))\Longrightarrow|\operatorname{sgn}(x)-1|=0<\varepsilon, \\
+	(\forall\,x\in\mathring{B}_-(0,\delta))\Longrightarrow|\operatorname{sgn}(x)-(-1)|=0<\varepsilon.
+	\end{cases}
+	\]
+	因此 \(\lim_{x\to0^+}\operatorname{sgn}(x)=1,\ \lim_{x\to0^-}\operatorname{sgn}(x)=-1\)。
+
+\end{sourceexample}
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}
+\begin{axis}[
+  width=8cm,
+  height=6cm,
+  axis lines=middle,
+  xlabel={$x$},
+  ylabel={$y$},
+  xmin=-3,
+  xmax=3,
+  ymin=-1.5,
+  ymax=1.5,
+  xtick=\empty,
+  ytick={-1,1},
+  yticklabels={$-1$,$1$},
+  tick label style={font=\footnotesize},
+  label style={font=\footnotesize},
+  every axis plot/.append style={thick},
+  samples=2,
+  domain=-3:3,
+]
+% y = 1 for x > 0
+\addplot[thick,domain=0.05:3] {1};
+% y = -1 for x < 0
+\addplot[thick,domain=-3:-0.05] {-1};
+% open circle at (0,1)
+\addplot[only marks,mark=*,mark options={fill=white,draw=black,thick}] coordinates {(0,1)};
+% open circle at (0,-1)
+\addplot[only marks,mark=*,mark options={fill=white,draw=black,thick}] coordinates {(0,-1)};
+% filled circle at (0,0)
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0,0)};
+\end{axis}
+\end{tikzpicture}
+	\caption{}
+	\label{fig:4-4}
+\end{figure}
+
+例 3 实际上揭示了下面的一般结论，即
+
+\begin{mythm}{}{limit-equals-one-sided-limits}
+
+	设 \(f:X\to\R\) 是任一函数，\(a\in\R\) 是 \(X\) 的一个双侧聚点，那末
+	\[
+	\lim_{x\to a}f(x)=A \Longleftrightarrow \lim_{x\to a^+}f(x)=\lim_{x\to a^-}f(x)=A.
+	\]
+
+\end{mythm}
+
+\begin{proof}
+
+	必要性\quad 设 \(\lim_{x\to a}f(x)=A\)。那末由定义
+	\[
+	(\forall\,\varepsilon>0)(\exists\,\delta>0)(\forall\,x\in X\cap\mathring{B}(a,\delta))\Longrightarrow |f(x)-A|<\varepsilon.
+	\]
+	特别地
+	\[
+	\forall\,x\in X\cap\mathring{B}_+(a,\delta)\Longrightarrow |f(x)-A|<\varepsilon,
+	\]
+	\[
+	\forall\,x\in X\cap\mathring{B}_-(a,\delta)\Longrightarrow |f(x)-A|<\varepsilon.
+	\]
+	因此 \(\lim_{x\to a^+}f(x)=A,\ \lim_{x\to a^-}f(x)=A\)。
+
+	充分性\quad 设 \(\lim_{x\to a^+}f(x)=\lim_{x\to a^-}f(x)=A\)，由定义有
+	\[
+	(\forall\,\varepsilon>0)\begin{cases}
+	(\exists\,\delta_1>0)(\forall\,x\in X\cap\mathring{B}_+(a,\delta_1))\Longrightarrow |f(x)-A|<\varepsilon, \\
+	(\exists\,\delta_2>0)(\forall\,x\in X\cap\mathring{B}_-(a,\delta_2))\Longrightarrow |f(x)-A|<\varepsilon.
+	\end{cases}
+	\]
+	令 \(\delta=\min(\delta_1,\delta_2)\)，则 \(\delta>0\)，并且
+	\[
+	\forall\,x\in X\cap\mathring{B}(a,\delta)\Longrightarrow |f(x)-A|<\varepsilon.
+	\]
+	因此 \(\lim_{x\to a}f(x)=A\)。
+
+\end{proof}
+
+为了进一步理解函数的 \((a,A)\) 型极限的定义，我们再考虑下面两个例子。
+
+\begin{sourceexample}{4}
+
+	考虑所谓的 Dirichlet 函数
+	\[
+	x\longmapsto D(x)=\begin{cases} 1, & x\in\Q, \\ 0, & x\in\Q^c. \end{cases}
+	\]
+
+	证明：\(\forall\,a\in\R,\ \lim_{x\to a}D(x)\) 不存在。
+
+	事实上，若存在 \(a_0\in\R\) 使得 \(\lim_{x\to a_0}D(x)=l\in\R\)，则
+	\[
+	\left(\forall\,0<\varepsilon<\frac12\right)(\exists\,\delta>0)(\forall\,x\in\mathring{B}(a_0,\delta)\Longrightarrow|D(x)-l|<\varepsilon.
+	\]
+	于是特别有
+	\[
+	\forall\,x\in\mathring{B}(a_0,\delta)\cap\Q,\quad |D(x)-l|=|1-l|<\varepsilon,
+	\]
+	\[
+	\forall\,x\in\mathring{B}(a_0,\delta)\cap\Q^c,\quad |D(x)-l|=|0-l|<\varepsilon.
+	\]
+	由此推得
+	\[
+	1=|1-l+l|\le|1-l|+|l|<2\varepsilon,
+	\]
+	或 \(\varepsilon>\dfrac12\)，这与 \(0<\varepsilon<\dfrac12\) 假设矛盾。故 \(\forall\,a\in\R,\ \lim_{x\to a}D(x)\) 不存在。
+
+\end{sourceexample}
+
+\begin{sourceexample}{5}
+
+	考虑如下定义的 Riemann 函数 \(R\)：
+	\[
+	R(x)=\begin{cases}
+	0, & \text{若 }x\in\Q^c, \\
+	1, & \text{若 }x=0, \\
+	\dfrac1p, & \text{若 }x=\dfrac qp,\ p\in\N,\ p\text{ 与 }q\text{ 互质}.
+	\end{cases}
+	\]
+
+	证明：\(\forall\,a\in\R,\ \lim_{x\to a}R(x)=0\)。
+
+	为此任取 \(a\in\R\)。
+
+	若 \(a=0\)；则 \(\forall\,\delta>0\)，
+	\[
+	R(x)=\begin{cases}
+	0, & \forall\,x\in\mathring{B}(0,\delta)\cap\Q^c, \\
+	\dfrac1p, & \substack{\forall\,x\in\mathring{B}(0,\delta)\cap\Q,\quad x=\dfrac qp, \\ p\in\N,\quad p,q\text{ 互质}.}
+	\end{cases}
+	\]
+
+	若 \(a\neq0\)：则存在 \(\delta_0>0\) 使得 \(0\notin\mathring{B}(a,\delta_0)\)，于是
+	\[
+	R(x)=\begin{cases}
+	0, & \forall\,x\in\mathring{B}(a,\delta_0)\cap\Q^c, \\
+	\dfrac1p, & \substack{\forall\,x\in\mathring{B}(a,\delta_0)\cap\Q,\quad x=\dfrac qp, \\ p\in\N,\quad p,q\text{ 互质}.}
+	\end{cases}
+	\]
+
+	由此可知，不论 \(a=0\) 与否，
+	\[
+	R(x)=\begin{cases}
+	0, & \forall\,x\in\mathring{B}(a,\delta_0)\cap\Q^c, \\
+	\dfrac1p, & \substack{\forall\,x\in\mathring{B}(a,\delta_0)\cap\Q,\quad x=\dfrac qp, \\ p\in\N,\quad p,q\text{ 互质}.}
+	\end{cases}
+	\]
+
+	\(\forall\,\varepsilon>0\)，由 \(\dfrac1p\ge\varepsilon\) 知 \(p\le\dfrac1\varepsilon\)。显然在 \(\mathring{B}(a,\delta_0)\) 中分母 \(p\le\dfrac1\varepsilon\) 的有理数 \(\dfrac qp\) 只有有限多个。因此存在 \(0<\delta<\delta_0\)，使得在 \(\mathring{B}(a,\delta)\) 中所有有理数 \(\dfrac qp\) 的分母 \(p>\dfrac1\varepsilon\)。从而
+	\[
+	\forall\,x\in\mathring{B}(a,\delta)\cap\Q,\quad x=\frac qp,\ p\in\N,\ p,q\text{ 互质}
+	\]
+	\[
+	\Longrightarrow |R(x)|=\frac1p<\varepsilon.
+	\]
+	上述分析表明：\(\forall\,\varepsilon>0,\ \exists\,\delta>0\) 使得 \(\forall\,x\in\mathring{B}(a,\delta),\ |R(x)-0|<\varepsilon\)。
+
+	因此 \(\lim_{x\to a}R(x)=0\)。
+
+\end{sourceexample}
+
+\subsection{\texorpdfstring{\((\pm\infty,A)\) 型函数极限}{（正负无穷, A）型函数极限}}
+
+\begin{mydef*}{}
+
+	设 \(f:X\to\R\) 是任一函数，\(A\in\R\)。
+
+	\begin{enumerate}[label=\arabic*)]
+		\item 设 \(+\infty\) 是 \(X\) 的无穷远聚点。我们称函数 \(f\) 当 \(x\) 趋于 \(+\infty\) 时极限存在并且以 \(A\) 为极限，如果下述性质成立：
+		\[
+		(\forall\,\varepsilon>0)(\exists\,M>0)(\forall\,x\in X\cap\ ]M,+\infty[)\Longrightarrow |f(x)-A|<\varepsilon.
+		\]
+		这时，记为
+		\[
+		\lim_{x\to+\infty}f(x)=A \quad\text{或}\quad f(x)\to A\ (x\to+\infty).
+		\]
+
+		\item 设 \(-\infty\) 是 \(X\) 的无穷远聚点，我们称函数 \(f\) 当 \(x\) 趋于 \(-\infty\) 时极限存在并且以 \(A\) 为极限，如果下述性质成立：
+		\[
+		(\forall\,\varepsilon>0)(\exists\,M>0)(\forall\,x\in X\cap\ ]-\infty,-M[)\Longrightarrow |f(x)-A|<\varepsilon.
+		\]
+		这时，记为
+		\[
+		\lim_{x\to-\infty}f(x)=A \quad\text{或}\quad f(x)\to A\ (x\to-\infty).
+		\]
+	\end{enumerate}
+
+\end{mydef*}
+
+我们也可用邻域语言表述这两类极限定义：
+\[
+\lim_{x\to+\infty}f(x)=A \Longleftrightarrow (\forall\,\varepsilon>0)(\exists\,M>0),\ f(X\cap\ ]M,+\infty[)\subset B(A,\varepsilon),
+\]
+\[
+\lim_{x\to-\infty}f(x)=A \Longleftrightarrow (\forall\,\varepsilon>0)(\exists\,M>0),\ f(X\cap\ ]-\infty,-M[)\subset B(A,\varepsilon).
+\]
+
+从几何意义上来看，\(\lim_{x\to+\infty}f(x)=A\)（\(\lim_{x\to-\infty}f(x)=A\)）表明对任意小的 \(\varepsilon>0\)，总可以找到一个 \(M>0\)，使得 \(f\) 在 \(X\cap\ ]M,+\infty[\)（\(X\cap\ ]-\infty,-M[\)）上的限制的图形完全位于平面带形区域 \(]M,+\infty[\times]A-\varepsilon,A+\varepsilon[\)（\(]-\infty,-M[\times]A-\varepsilon,A+\varepsilon[\)）内（如\rfig{fig:4-5}所示）。
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}[font=\footnotesize]
+  \begin{axis}[
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-6, xmax=6,
+    ymin=-1.5, ymax=3.5,
+    xtick={-3,0,3},
+    xticklabels={$-M$, $O$, $M$},
+    ytick={0.8,1.5,2.2},
+    yticklabels={$A-\varepsilon$, $A$, $A+\varepsilon$},
+    width=12cm,
+    height=7cm,
+    axis equal image=false,
+    clip=false,
+  ]
+    % 水平条带填充（左右两块）
+    \fill[pattern=north east lines] (-6,0.8) rectangle (-3,2.2);
+    \fill[pattern=north east lines] (3,0.8) rectangle (6,2.2);
+
+    % 函数曲线（示意：中间在 y 轴附近有起伏，左右趋于水平）
+    \addplot[domain=-6:-3, samples=150, thick, smooth]
+      {1.5 + 0.6*sin(deg(x+3)) + 0.15*(x+3)};
+    \addplot[domain=-3:3, samples=150, thick, smooth]
+      {1.5 + 1.0*sin(deg(2*x))*exp(-0.3*x^2) + 0.3*x};
+    \addplot[domain=3:6, samples=150, thick, smooth]
+      {1.5 + 0.6*sin(deg(x-3)) - 0.15*(x-3)};
+
+    % 虚线 x = -M, x = M
+    \draw[dashed] (-3,-1.5) -- (-3,2.2);
+    \draw[dashed] (3,-1.5) -- (3,2.2);
+
+    % 实心点 (-M,0), (M,0)
+    \fill (-3,0) circle (1.5pt);
+    \fill (3,0) circle (1.5pt);
+
+    % y 轴上的点
+    \fill (0,0.8) circle (1.2pt);
+    \fill (0,1.5) circle (1.2pt);
+    \filldraw[fill=white] (0,2.2) circle (1.2pt);
+
+    % 标注
+    \node[anchor=west] at (axis cs:0.15,1.5) {$\mathrm{Gr}(f)$};
+    \node[anchor=west] at (axis cs:0.15,2.2) {$A+\varepsilon$};
+    \node[anchor=east] at (axis cs:-0.15,1.5) {$A$};
+    \node[anchor=east] at (axis cs:-0.15,0.8) {$A-\varepsilon$};
+  \end{axis}
+\end{tikzpicture}
+	\caption{}
+	\label{fig:4-5}
+\end{figure}
+
+\begin{sourceexample}{6}
+
+	考虑函数 \(x\mapsto\dfrac1{x^2},\ x\in\R-\{0\}\)。证明：
+	\[
+	\lim_{x\to+\infty}\frac1{x^2}=\lim_{x\to-\infty}\frac1{x^2}=0.
+	\]
+
+	事实上，\(\forall\,\varepsilon>0\)，由 \(\left|\dfrac1{x^2}-0\right|=\dfrac1{x^2}<\varepsilon\) 得到 \(|x|>\dfrac1{\sqrt{\varepsilon}}\)。若令 \(M=\dfrac1{\sqrt{\varepsilon}}\)，则
+	\[
+	\left.\begin{array}{l} \forall\,x\in\ ]M,+\infty[ \\[2pt] \forall\,x\in\ ]-\infty,-M[ \end{array}\right\}\Longrightarrow \left|\frac1{x^2}-0\right|<\varepsilon.
+	\]
+	因此 \(\lim_{x\to+\infty}\dfrac1{x^2}=0,\ \lim_{x\to-\infty}\dfrac1{x^2}=0\)。
+
+\end{sourceexample}
+
+\begin{sourceexample}{7}
+
+	考虑函数 \(x\mapsto\cos\dfrac1x,\ x\in\R-\{0\}\)。证明：
+	\[
+	\lim_{x\to+\infty}\cos\frac1x=\lim_{x\to-\infty}\cos\frac1x=1.
+	\]
+
+	事实上，由于 \(\forall\,x\in\R,\ |\sin x|\le|x|\)，故 \(\forall\,x\in\R-\{0\}\)，
+	\[
+	\left|\cos\frac1x-1\right|=\left|2\sin^2\frac1{2x}\right|\le2\cdot\frac1{4x^2}=\frac1{2x^2}.
+	\]
+	因此，\(\forall\,\varepsilon>0\)，由 \(\dfrac1{2x^2}<\varepsilon\) 得到 \(|x|>\dfrac1{\sqrt{2\varepsilon}}\)。若令 \(M=\dfrac1{\sqrt{2\varepsilon}}\)，则
+	\[
+	\left.\begin{array}{l} \forall\,x\in\ ]M,+\infty[ \\[2pt] \forall\,x\in\ ]-\infty,-M[ \end{array}\right\}\Longrightarrow \left|\cos\frac1x-1\right|<\varepsilon.
+	\]
+	因此 \(\lim_{x\to+\infty}\cos\dfrac1x=1,\ \lim_{x\to-\infty}\cos\dfrac1x=1\)。
+
+\end{sourceexample}
+
+\begin{sourceexample}{8}
+
+	考虑函数 \(x\mapsto\dfrac{x^2-1}{2(x^2+x-2)},\ x\in\R-\{1,-2\}\)。证明：
+	\[
+	\lim_{x\to+\infty}\frac{x^2-1}{2(x^2+x-2)}=\lim_{x\to-\infty}\frac{x^2-1}{2(x^2+x-2)}=\frac12.
+	\]
+
+	事实上，由于 \(\forall\,x\neq1,-2\)，我们有
+	\[
+	\left|\frac{x^2-1}{2(x^2+x-2)}-\frac12\right|=\left|\frac{-2(x-1)}{2(x-1)(x+2)}\right|=\frac1{|x+2|}.
+	\]
+	故若首先限制 \(|x|>2\)，则 \(\forall\,\varepsilon>0\)，由 \(\dfrac1{|x+2|}\le\dfrac1{|x|-2}<\varepsilon\) 得到
+	\[
+	|x|>2+\frac1\varepsilon.
+	\]
+	令 \(M=2+\dfrac1\varepsilon\)，则
+	\[
+	\left.\begin{array}{l} \forall\,x\in\ ]M,+\infty[ \\[2pt] \forall\,x\in\ ]-\infty,-M[ \end{array}\right\}\Longrightarrow \left|\frac{x^2-1}{2(x^2+x-2)}-\frac12\right|<\varepsilon.
+	\]
+	因此 \(\lim_{x\to+\infty}\dfrac{x^2-1}{2(x^2+x-2)}=\dfrac12,\ \lim_{x\to-\infty}\dfrac{x^2-1}{2(x^2+x-2)}=\dfrac12\)。
+
+\end{sourceexample}
+
+\begin{sourceexample}{9}
+
+	考虑函数 \(x\mapsto\sin x,\ x\in\R\)。证明 \(\lim_{x\to+\infty}\sin x\) 不存在。
+
+	事实上，如果存在 \(A\in\R\) 使得 \(\lim_{x\to+\infty}\sin x=A\)，则
+	\[
+	(\forall\,0<\varepsilon<1)(\exists\,M>0)(\forall\,x\in\ ]M,+\infty[)\Longrightarrow|\sin x-A|<\varepsilon.
+	\]
+	于是对 \(n\) 充分大，\(2n\pi-\dfrac\pi2,\ 2n\pi+\dfrac\pi2>M\)。从而
+	\[
+	\left|\sin\left(2n\pi-\frac\pi2\right)-A\right|=|(-1)-A|<\varepsilon,
+	\]
+	\[
+	\left|\sin\left(2n\pi+\frac\pi2\right)-A\right|=|1-A|<\varepsilon.
+	\]
+	由此推得
+	\[
+	2=|1-(-1)|=|1-A+A-(-1)|\le|1-A|+|A-(-1)|<2\varepsilon.
+	\]
+	于是 \(\varepsilon>1\)，这与 \(0<\varepsilon<1\) 假设相矛盾。因此 \(\lim_{x\to+\infty}\sin x\) 不存在。
+
+\end{sourceexample}
+
+\subsection*{习 题}
+
+\begin{exercise}
+	\item 用极限定义证明下列各极限：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\lim_{x\to0}x\sin\dfrac1x=0\)，\quad \(\lim_{x\to a}\sqrt[n]{x}=\sqrt[n]{a}\)（\(a>0,\ n\in\N\)）；
+		\item \(\lim_{x\to1}(3x^3-2)=1\)，\quad \(\lim_{x\to3}(2x^2-x)=15\)；
+		\item \(\lim_{x\to\pm\infty}\dfrac{[x]}{x}=1\)，\quad \(\lim_{x\to\pm\infty}\dfrac{2x^2-1}{3x^2-x}=\dfrac23\)；
+		\item \(\lim_{x\to\pm\infty}\dfrac{3x^2-1}{x^2+x+1}=3\)，\quad \(\lim_{x\to\pm\infty}(\sqrt{x^2+x}-x)=\dfrac12\)。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 证明：极限 \(\lim_{x\to0}\dfrac1x\) 不存在。
+\end{exercise}
+
+\begin{exercise}
+	\item 证明：若 \(\lim_{x\to a}f(x)=A\)，则 \(\lim_{x\to a}|f(x)|=|A|\)，这里 \(a\in\R\) 或 \(a=\pm\infty\)。
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(x\longmapsto x-[x],\ x\in\R\)。
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：\(\forall\,n\in\Z,\ \lim_{x\to n}(x-[x])\) 不存在；
+		\item 证明：\(\forall\,a\notin\Z,\ \lim_{x\to a}(x-[x])\) 存在。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:\R\to\R\) 是以 \(T\) 为周期的周期函数。证明：若 \(\lim_{x\to+\infty}f(x)=A\)，则 \(f(x)\equiv A,\ \forall\,x\in\R\)。
+\end{exercise}
+
+\begin{exercise}
+	\item 对函数
+	\[
+	x\longmapsto f(x)=\begin{cases} x, & \text{若 }x\in\Q, \\ -x, & \text{若 }x\in\Q^c, \end{cases}
+	\]
+	证明：\(\lim_{x\to0}f(x)=0\)；\(\forall\,a\neq0,\ \lim_{x\to a}f(x)\) 不存在。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \([a,b]\) 是任一有限闭区间。假设 \(\forall\,x_0\in[a,b]\)，极限 \(\lim_{x\to x_0}f(x)\) 存在。试用两种不同的方法证明：存在 \(M>0\)，使得 \(\forall\,x\in[a,b],\ |f(x)|\le M\)。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(P_n(x)=a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0\)，其中 \(n\ge1,\ a_n\neq0\)。试用极限定义证明 \(\lim_{x\to\pm\infty}|P_n(x)|=+\infty\)。
+\end{exercise}
+
+
+
+\section{函数极限的性质}
+
+函数极限的性质与收敛序列极限的大多数性质是类似的。这里我们只对 \((a,A)\) 型的函数极限性质进行叙述和证明。对于 \((\pm\infty,A)\) 型的情形，读者可仿照 \((a,A)\) 型的性质自己去论述。
+
+\subsection{函数极限的一般性质}
+	\label{sec:4-2-1}
+
+\begin{myproperty}{}{func-limit-uniqueness}
+	如果函数 \(f:X\to\R\) 当 \(x\to a\) 时有极限存在，则极限是唯一的。
+\end{myproperty}
+
+\begin{proof}
+	设 \(\lim_{x\to a}f(x)=A\)，\(\lim_{x\to a}f(x)=A'\) 并且 \(A\neq A'\)。那末由 \(\R\) 的 Hausdorff 分离性知，存在 \(\varepsilon_0>0\) 使得
+	\[
+	B(A,\varepsilon_0)\cap B(A',\varepsilon_0)=\varnothing.
+	\]
+	另一方面，对于 \(\varepsilon_0>0\)，存在 \(\delta_1>0,\delta_2>0\) 使得
+	\[
+	f(X\cap\mathring{B}(a,\delta_1))\subset B(A,\varepsilon_0),
+	\]
+	\[
+	f(X\cap\mathring{B}(a,\delta_2))\subset B(A',\varepsilon_0).
+	\]
+	令 \(\delta=\min(\delta_1,\delta_2)\)，则 \(\delta>0\)，并且
+	\[
+	f(X\cap\mathring{B}(a,\delta))\subset B(A,\varepsilon_0)\cap B(A',\varepsilon_0).
+	\]
+	于是 \(f(X\cap\mathring{B}(a,\delta))=\varnothing\)，这与 \(a\) 为 \(X\) 的聚点相矛盾，因此 \(A=A'\)。
+\end{proof}
+
+\begin{myproperty}{}{func-limit-local-boundedness}
+	若 \(\lim_{x\to a}f(x)=A\)，则 \(f\) 在 \(a\) 处是局部有界的。即
+	\[
+	(\exists\,M>0)(\exists\,\delta>0)(\forall\,x\in X\cap\mathring{B}(a,\delta))\Longrightarrow |f(x)|\le M.
+	\]
+\end{myproperty}
+
+\begin{proof}
+	因为 \(\lim_{x\to a}f(x)=A\)，所以由定义，对 \(\varepsilon=1>0\)，存在 \(\delta>0\)，使得
+	\[
+	\forall\,x\in X\cap\mathring{B}(a,\delta)\Longrightarrow |f(x)-A|<1
+	\]
+	\[
+	\Longrightarrow |f(x)|\le|A|+|f(x)-A|
+	\]
+	\[
+	<|A|+1.
+	\]
+	取 \(M=1+|A|\) 即可。
+\end{proof}
+
+\begin{myproperty}{Cauchy收敛准则}{func-limit-cauchy}
+	函数 \(f:X\to\R\) 当 \(x\) 趋于 \(a\) 时极限存在的充分必要条件是：
+	\[
+	(\forall\,\varepsilon>0)(\exists\,\delta>0)(\forall\,x,x'\in X\cap\mathring{B}(a,\delta))\Longrightarrow |f(x)-f(x')|<\varepsilon.
+	\]
+\end{myproperty}
+
+\begin{proof}
+	必要性\quad 设 \(\lim_{x\to a}f(x)=A\)。由定义有
+	\[
+	(\forall\,\varepsilon>0)(\exists\,\delta>0)(\forall\,x,x'\in X\cap\mathring{B}(a,\delta))
+	\]
+	\[
+	\Longrightarrow |f(x)-A|<\varepsilon/2,\quad |f(x')-A|<\varepsilon/2
+	\]
+	\[
+	\Longrightarrow |f(x)-f(x')|\le|f(x)-A|+|A-f(x')|
+	\]
+	\[
+	<\varepsilon/2+\varepsilon/2=\varepsilon.
+	\]
+
+	充分性\quad 假设条件满足，即
+	\[
+	(\forall\,\varepsilon>0)(\exists\,\delta>0)(\forall\,x,x'\in X\cap\mathring{B}(a,\delta))
+	\]
+	\[
+	\Longrightarrow |f(x)-f(x')|<\varepsilon.
+	\]
+	证明分两步进行。
+
+	\(1^\circ\) 证明：存在一个收敛的实数序列 \(\langle f(x_n)\rangle\)。
+
+	因为 \(a\in\R\) 是 \(X\) 的聚点，所以 \(\forall\,n\in\N,\ X\cap\mathring{B}(a,\frac1n)\neq\varnothing\)。任取 \(x_n\in X\cap\mathring{B}(a,\frac1n)\ (n\in\N)\)。于是我们得到一实数序列 \(\langle f(x_n)\rangle\)。
+
+	由于 \(\lim_{n\to+\infty}\frac1n=0\)，故对 \(\delta>0\) 存在 \(N\in\N\) 使得
+	\[
+	\forall\,n,m\in\N,\ n,m\ge N\Longrightarrow \frac1n\le\frac1N<\delta,\quad \frac1m\le\frac1N<\delta.
+	\]
+	于是
+	\[
+	\forall\,n,m\in\N,\ n,m\ge N\Longrightarrow x_n,x_m\in X\cap\mathring{B}(a,\frac1N)
+	\]
+	\[
+	\subset X\cap\mathring{B}(a,\delta)
+	\]
+	\[
+	\Longrightarrow |f(x_n)-f(x_m)|<\varepsilon.
+	\]
+	此即表明 \(\langle f(x_n)\rangle\) 是 Cauchy 实数序列。由 \(\R\) 的完备性知 \(\langle f(x_n)\rangle\) 收敛，令 \(\lim_{n\to+\infty}f(x_n)=A\)。
+
+	\(2^\circ\) 证明：\(\lim_{x\to a}f(x)=A\)。
+
+	因为 \(\lim_{n\to+\infty}f(x_n)=A\)，所以由定义
+	\[
+	(\forall\,\varepsilon>0)(\exists\,N\in\N)(\forall\,n\in\N,\ n\ge N)\Longrightarrow |f(x_n)-A|<\varepsilon.
+	\]
+	于是由已知条件及 \(\forall\,n\in\N,\ n\ge N,\ x_n\in X\cap\mathring{B}(a,\delta)\) 知，
+	\[
+	\forall\,x\in X\cap\mathring{B}(a,\delta)\Longrightarrow |f(x)-f(x_n)|<\varepsilon
+	\]
+	\[
+	\Longrightarrow |f(x)-A|\le|f(x)-f(x_n)|+|f(x_n)-A|<\varepsilon+\varepsilon=2\varepsilon.
+	\]
+	因此 \(\lim_{x\to a}f(x)=A\)。
+\end{proof}
+
+反映函数极限与序列极限之间联系的是下面的重要定理。
+
+\begin{myproperty}{Heine定理}{func-limit-heine}
+	函数 \(f:X\to\R\) 当 \(x\) 趋于 \(a\) 时有极限 \(A\) 的充分必要条件是：
+	\[
+	\forall\,x_n\in X-\{a\}\ (n\in\N)\ \text{且}\ x_n\to a\ (n\to+\infty),\ \lim_{n\to+\infty}f(x_n)=A.
+	\]
+\end{myproperty}
+
+\begin{proof}
+	必要性\quad 设 \(\lim_{x\to a}f(x)=A\)。\(x_n\in X-\{a\}\)，并且 \(x_n\to a\ (n\to+\infty)\)。由定义
+	\[
+	(\forall\,\varepsilon>0)(\exists\,\delta>0)(\forall\,x\in X\cap\mathring{B}(a,\delta))\Longrightarrow |f(x)-A|<\varepsilon.
+	\]
+	\[
+	(\forall\,\delta>0)(\exists\,N\in\N)(\forall\,n\in\N,\ n\ge N)\Longrightarrow x_n\in\mathring{B}(a,\delta).
+	\]
+	从而
+	\[
+	\forall\,n\in\N,\ n\ge N\Longrightarrow |f(x_n)-A|<\varepsilon.
+	\]
+	因此 \(\lim_{n\to+\infty}f(x_n)=A\)。
+
+	充分性\quad 假设条件成立，即
+	\[
+	\forall\,x_n\in X-\{a\}\ (n\in\N),\ x_n\to a\ (n\to+\infty),\ \text{则}\ \lim_{n\to+\infty}f(x_n)=A.
+	\]
+	我们用反证法证明。假设 \(\lim_{x\to a}f(x)\neq A\)，则
+	\[
+	(\exists\,\varepsilon_0>0)(\forall\,n\in\N)(\exists\,x_n\in X\cap\mathring{B}(a,\tfrac1n))
+	\]
+	\[
+	\Longrightarrow |f(x_n)-A|\ge\varepsilon_0. \tag{*}
+	\]
+	由此得一实数序列 \(\langle x_n\rangle\)，它满足：\(x_n\in X-\{a\}\)，\(x_n\to a\ (n\to+\infty)\)。于是 \(\lim_{n\to+\infty}f(x_n)=A\)，在 \((*)\) 式中令 \(n\to+\infty\) 得到 \(\varepsilon_0\le0\)。这与 \(\varepsilon_0>0\) 矛盾，故必有 \(\lim_{x\to a}f(x)=A\)。
+\end{proof}
+
+\begin{sourceexample}{1}
+
+	考虑函数 \(x\mapsto\sin\dfrac1x,\ x\in\R-\{0\}\) 及 \(x\mapsto\sin x,\ x\in\R\)。利用 Heine 定理证明：
+	\[
+	\text{1) } \lim_{x\to0}\sin\frac1x \text{ 不存在，}\qquad \text{2) } \lim_{x\to\pm\infty}\sin x \text{ 不存在}.
+	\]
+	为此，1) 取 \(x_n=\dfrac1{2n\pi}\)，\(x_n'=\dfrac1{2n\pi+\frac\pi2}\ (n\in\N)\)。则 \(x_n,x_n'\in\R-\{0\}\ (\forall\,n\in\N)\)，并且 \(x_n\to0,\ x_n'\to0\ (n\to+\infty)\) 但是
+	\[
+	\lim_{n\to+\infty}\sin\frac1{x_n}=0,\qquad \lim_{n\to+\infty}\sin\frac1{x_n'}=1.
+	\]
+	因此由 Heine 定理知，\(\lim_{x\to0}\sin\dfrac1x\) 不存在。
+
+	2) 取 \(x_n=2n\pi\)，\(x_n'=2n\pi+\dfrac\pi2\ (n\in\N)\)，则 \(x_n\to+\infty,\ x_n'\to+\infty\ (n\to+\infty)\)。由于
+	\[
+	\sin x_n=0,\qquad \sin x_n'=1,
+	\]
+	故由 Heine 定理知，\(\lim_{x\to+\infty}\sin x\) 不存在。
+
+\end{sourceexample}
+
+函数 \(x\mapsto\sin\dfrac1x,\ x\in\R-\{0\}\) 的图形如\rfig{fig:4-6}所示。
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}
+\begin{axis}[
+  width=10cm,height=5.5cm,
+  axis lines=middle,
+  xlabel={$x$},ylabel={$y$},
+  xmin=-0.45,xmax=0.45,
+  ymin=-1.35,ymax=1.35,
+  xtick={-0.3183,-0.1592,0.1592,0.3183},
+  xticklabels={$-\frac1\pi$,$-\frac1{2\pi}$,$\frac1{2\pi}$,$\frac1\pi$},
+  ytick={-1,1},
+  yticklabels={$-1$,$1$},
+  domain=-0.45:0.45,
+  samples=800,
+  smooth,
+  every axis plot/.append style={thick},
+  tick label style={font=\footnotesize},
+  label style={font=\footnotesize},
+  axis line style={->,>=stealth},
+]
+\addplot[black,thick] {sin(deg(1/x))};
+\end{axis}
+\end{tikzpicture}
+	\caption{}
+	\label{fig:4-6}
+\end{figure}
+
+\begin{sourceexample}{2}
+
+	考虑函数 \(x\mapsto x-[x],\ x\in\R\)（这里 \(x-[x]\) 是 \(x\) 的小数部分），证明 \(\lim_{x\to\pm\infty}(x-[x])\) 不存在。
+
+	为此取 \(x_n=n,\ x_n'=n+\dfrac12\ (n\in\N)\)，则 \(x_n\to+\infty,\ x_n'\to+\infty\ (n\to+\infty)\)。由于
+	\[
+	x_n-[x_n]=0,\qquad x_n'-[x_n']=\frac12\ (\forall\,n\in\N),
+	\]
+	故
+	\[
+	\lim_{n\to+\infty}(x_n-[x_n])=0,\qquad \lim_{n\to+\infty}(x_n'-[x_n'])=\frac12.
+	\]
+	由 Heine 定理知，\(\lim_{x\to+\infty}(x-[x])\) 不存在。同理可证 \(\lim_{x\to-\infty}(x-[x])\) 也不存在。
+
+\end{sourceexample}
+
+函数 \(x\mapsto x-[x],\ x\in\R\) 的图形如\rfig{fig:4-7}所示。
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}
+\begin{axis}[
+  width=12cm,
+  height=4.5cm,
+  axis lines=middle,
+  xlabel=$x$,
+  ylabel=$y$,
+  xmin=-3.5,
+  xmax=3.5,
+  ymin=-0.5,
+  ymax=1.5,
+  xtick={-3,-2,-1,0,1,2},
+  ytick={0,1},
+  tick label style={font=\footnotesize},
+  label style={font=\footnotesize},
+  every axis plot/.append style={thick},
+  samples=2,
+  smooth,
+]
+% y = x - floor(x) (fractional part) on each unit interval
+\addplot[domain=-3:-2] {x+3};
+\addplot[domain=-2:-1] {x+2};
+\addplot[domain=-1:0]  {x+1};
+\addplot[domain=0:1]   {x};
+\addplot[domain=1:2]   {x-1};
+\addplot[domain=2:3]   {x-2};
+
+% open circles at left endpoints (x = ..., y = 0)
+\addplot[only marks,mark=*,mark options={fill=white,draw=black,thick}] coordinates {(-3,0) (-2,0) (-1,0) (1,0) (2,0)};
+% closed circle at origin
+\addplot[only marks,mark=*,mark options={fill=black,draw=black,thick}] coordinates {(0,0)};
+% closed circles at right endpoints (x = ..., y = 1)
+\addplot[only marks,mark=*,mark options={fill=black,draw=black,thick}] coordinates {(-2,1) (-1,1) (0,1) (1,1) (2,1) (3,1)};
+\end{axis}
+\end{tikzpicture}
+	\caption{}
+	\label{fig:4-7}
+\end{figure}
+
+\subsection{函数极限的不等式性质}
+
+\begin{myproperty}{}{func-limit-eventual-order}
+	若 \(\lim_{x\to a}f(x)=A>r\ (<r)\)，则
+	\[
+	(\exists\,\delta>0)(\forall\,x\in X\cap\mathring{B}(a,\delta))\Longrightarrow f(x)>r\ (<r).
+	\]
+\end{myproperty}
+
+\begin{proof}
+	我们只对 \(A>r\) 的情形证明。由于 \(\lim_{x\to a}f(x)=A>r\)，故对 \(\varepsilon=\dfrac{A-r}2>0\)，存在 \(\delta>0\) 使得
+	\[
+	\forall\,x\in X\cap\mathring{B}(a,\delta)\Longrightarrow |f(x)-A|<\frac{A-r}2
+	\]
+	\[
+	\Longrightarrow f(x)>A-\frac{A-r}2=\frac{A+r}2>r.
+	\]
+\end{proof}
+
+\begin{myproperty}{}{func-limit-strict-comparison}
+	设 \(f,g\) 是任意两个函数，\(X=\operatorname{Dom}(f)\cap\operatorname{Dom}(g)\neq\varnothing\)，\(a\in\R\) 是 \(X\) 的聚点，并且
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\lim_{x\to a}f(x)=A,\ \lim_{x\to a}g(x)=B\)；
+		\item \(A>B\ (A<B)\)，
+	\end{enumerate}
+	则
+	\[
+	(\exists\,\delta>0)(\forall\,x\in X\cap\mathring{B}(a,\delta))\Longrightarrow f(x)>g(x)\ (f(x)<g(x)).
+	\]
+\end{myproperty}
+
+\begin{proof}
+	我们只对 \(A>B\) 的情形证明。令 \(r=\dfrac{A+B}2\)，则由 \(\lim_{x\to a}f(x)=A>r>B=\lim_{x\to a}g(x)\) 及\rprop{property:func-limit-eventual-order}知
+	\[
+	(\exists\,\delta_1>0)(\forall\,x\in X\cap\mathring{B}(a,\delta_1))\Longrightarrow f(x)>r,
+	\]
+	\[
+	(\exists\,\delta_2>0)(\forall\,x\in X\cap\mathring{B}(a,\delta_2))\Longrightarrow g(x)<r.
+	\]
+	令 \(\delta=\min(\delta_1,\delta_2)\)，则
+	\[
+	\forall\,x\in X\cap\mathring{B}(a,\delta)\Longrightarrow f(x)>g(x).
+	\]
+\end{proof}
+
+\begin{myproperty}{}{func-limit-preserves-order}
+	设 \(f,g\) 是任意两个函数，\(X=\operatorname{Dom}(f)\cap\operatorname{Dom}(g)\neq\varnothing\)，\(a\in\R\) 是 \(X\) 的聚点，并且
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\lim_{x\to a}f(x)=A,\ \lim_{x\to a}g(x)=B\)；
+		\item \((\exists\,\delta>0)(\forall\,x\in X\cap\mathring{B}(a,\delta))\Longrightarrow f(x)\ge g(x)\ (f(x)\le g(x))\)，
+	\end{enumerate}
+	则
+	\[
+	A\ge B\ (A\le B).
+	\]
+\end{myproperty}
+
+\begin{proof}
+	用反证法，由\rprop{property:func-limit-strict-comparison}立即推出。
+\end{proof}
+
+\textbf{附注}\quad 在条件 2) 中即使把 \(f(x)\ge g(x)\ (f(x)\le g(x))\) 换成严格不等式 \(f(x)>g(x)\ (f(x)<g(x))\)，也不一定有 \(A>B\ (A<B)\)。例如函数 \(x\mapsto2x^2,\ x\in\R-\{0\}\) 与 \(x\mapsto x^2,\ x\in\R-\{0\}\)，显然有 \(2x^2>x^2\ (\forall\,x\in\R-\{0\})\)，但 \(\lim_{x\to0}2x^2=\lim_{x\to0}x^2=0\)。
+
+\begin{myproperty}{}{func-limit-squeeze}
+	设 \(f,g,h\) 是任意三个函数，\(X=\operatorname{Dom}(f)\cap\operatorname{Dom}(g)\cap\operatorname{Dom}(h)\neq\varnothing\)，\(a\in\R\) 是 \(X\) 的聚点，并且
+	\begin{enumerate}[label=\arabic*)]
+		\item \((\exists\,\delta>0)(\forall\,x\in X\cap\mathring{B}(a,\delta))\Longrightarrow f(x)\le h(x)\le g(x)\)；
+		\item \(\lim_{x\to a}f(x)=\lim_{x\to a}g(x)=A\)，
+	\end{enumerate}
+	则
+	\[
+	\lim_{x\to a}h(x)=A.
+	\]
+\end{myproperty}
+
+\begin{proof}
+	因为 \(\lim_{x\to a}f(x)=\lim_{x\to a}g(x)=A\)，所以由定义
+	\[
+	(\forall\,\varepsilon>0)(\exists\,\delta'>0)(\forall\,x\in X\cap\mathring{B}(a,\delta'))
+	\]
+	\[
+	\Longrightarrow |f(x)-A|<\varepsilon,\quad |g(x)-A|<\varepsilon
+	\]
+	\[
+	\Longrightarrow A-\varepsilon<f(x),\ g(x)<A+\varepsilon.
+	\]
+	令 \(\eta=\min(\delta,\delta')\)，则由上述不等式及条件 1) 推得
+	\[
+	\forall\,x\in X\cap\mathring{B}(a,\eta)\Longrightarrow A-\varepsilon<h(x)<A+\varepsilon
+	\]
+	\[
+	\Longrightarrow |h(x)-A|<\varepsilon.
+	\]
+	因此 \(\lim_{x\to a}h(x)=A\)。
+\end{proof}
+
+\begin{sourceexample}{3}
+
+	证明：\(\lim_{x\to0}\dfrac{\sin x}{x}=1\)。
+
+	首先设 \(0<x<\dfrac\pi2\)。如\rfig{fig:4-8}所示，\(A,B\) 是单位圆周上两点，使得 \(\angle AOB=x\)，则由图形可知
+	三角形 \(AOB\) 的面积 \(S_1=\dfrac12\cdot1\cdot\sin x\)，
+	扇形 \(AOB\) 的面积 \(S_2=\dfrac12\cdot1\cdot x\)，
+	三角形 \(AOC\) 的面积 \(S_3=\dfrac12\cdot1\cdot\operatorname{tg}x\)，
+	并且 \(S_1<S_2<S_3\)。由此得到不等式
+	\[
+	\sin x<x<\operatorname{tg}x.
+	\]
+	两边同除以 \(\sin x\neq0\)，得 \(1<\dfrac{x}{\sin x}<\dfrac1{\cos x}\) 或
+	\[
+	\cos x<\frac{\sin x}{x}<1\quad\left(0<x<\frac\pi2\right).
+	\]
+	现设 \(-\dfrac\pi2<x<0\)，则 \(0<(-x)<\dfrac\pi2\)，代入上式得
+	\[
+	\cos(-x)<\frac{\sin(-x)}{(-x)}<1,
+	\]
+	或
+	\[
+	\cos x<\frac{\sin x}{x}<1.
+	\]
+	因此我们有下述不等式：
+	\[
+	\cos x<\frac{\sin x}{x}<1,\quad \forall\,x\in\left]-\frac\pi2,\frac\pi2\right[\setminus\{0\}.
+	\]
+	易证 \(\lim_{x\to0}\cos x=1\)，故由\rprop{property:func-limit-squeeze}立即推得
+	\[
+	\lim_{x\to0}\frac{\sin x}{x}=1.
+	\]
+
+\end{sourceexample}
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}[>=stealth,scale=1.2]
+  % 坐标轴
+  \draw[->] (-1.8,0) -- (2.2,0) node[right] {$x$};
+  \draw[->] (0,-1.8) -- (0,2.2) node[above] {$y$};
+  % 原点
+  \node[below left,font=\footnotesize] at (0,0) {$O$};
+  % 单位圆
+  \draw (0,0) circle (1.5);
+  % 点 A(1.5,0)
+  \fill (1.5,0) circle (1pt) node[below,font=\footnotesize] {$A$};
+  % 点 B 在圆上，角度 x
+  \coordinate (B) at ({1.5*cos(35)},{1.5*sin(35)});
+  \fill (B) circle (1pt) node[above,font=\footnotesize] {$B$};
+  % 点 C 在 x=1.5 的竖直线上，与 B 同高
+  \coordinate (C) at (1.5,{1.5*sin(35)});
+  \fill (C) circle (1pt) node[above,font=\footnotesize] {$C$};
+  % 半径 OB
+  \draw (0,0) -- (B);
+  % 角度 x 标注
+  \draw (0.45,0) arc (0:35:0.45);
+  \node[font=\footnotesize] at (0.55,0.18) {$x$};
+  % 竖直线段 AC（切线/竖直边）
+  \draw (1.5,0) -- (C);
+  % 线段 BC（连接 B 与 C）
+  \draw (B) -- (C);
+  % 弧 AB（用粗线表示）
+  \draw[line width=0.8pt] (1.5,0) arc (0:35:1.5);
+\end{tikzpicture}
+	\caption{}
+	\label{fig:4-8}
+\end{figure}
+
+\subsection{函数极限的运算性质}
+
+\begin{myproperty}{}{func-limit-arithmetic}
+	设 \(f,g\) 是任意两个函数，\(X=\operatorname{Dom}(f)\cap\operatorname{Dom}(g)\neq\varnothing\)，\(a\in\R\) 是 \(X\) 的聚点，并且
+	\[
+	\lim_{x\to a}f(x)=A,\qquad \lim_{x\to a}g(x)=B,
+	\]
+	则
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\lim_{x\to a}[f(x)+g(x)]=A+B\)；
+		\item \(\lim_{x\to a}f(x)g(x)=AB\)；
+		\item \(\lim_{x\to a}\dfrac{f(x)}{g(x)}=\dfrac AB\)，若 \(B\neq0\)。
+	\end{enumerate}
+\end{myproperty}
+
+\begin{proof}
+	因为 \(\lim_{x\to a}f(x)=A\)，\(\lim_{x\to a}g(x)=B\)，所以
+	\[
+	(\forall\,\varepsilon>0)(\exists\,\delta>0)(\forall\,x\in X\cap\mathring{B}(a,\delta))
+	\]
+	\[
+	\Longrightarrow \begin{cases} |f(x)-A|<\varepsilon, \\ |g(x)-B|<\varepsilon,\quad |g(x)|<|B|+\varepsilon. \end{cases}
+	\]
+	\[
+	\Longrightarrow
+	\begin{aligned}
+	|[f(x)+g(x)]-(A+B)| &\le |f(x)-A|+|g(x)-B|<2\varepsilon,\\
+	|f(x)g(x)-AB| &\le |g(x)|\,|f(x)-A|+|A|\,|g(x)-B|\\
+	&<(\varepsilon+|A|+|B|)\varepsilon.
+	\end{aligned}
+	\]
+	因此 \(\lim_{x\to a}[f(x)+g(x)]=A+B\)，\(\lim_{x\to a}f(x)g(x)=AB\)。
+
+	若 \(B\neq0\)，则只要 \(\delta>0\) 充分小，由\rprop{property:func-limit-eventual-order}知 \(\forall\,x\in X\cap\mathring{B}(a,\delta)\)，
+	\[
+	|g(x)|>\frac{|B|}2.
+	\]
+	于是
+	\[
+	\forall\,x\in X\cap\mathring{B}(a,\delta)\Longrightarrow \left|\frac{f(x)}{g(x)}-\frac AB\right|
+	\]
+	\[
+	=\frac{|Bf(x)-Ag(x)|}{|g(x)B|}
+	\]
+	\[
+	\le\frac{2(|B|\,|f(x)-A|+|A|\,|g(x)-B|)}{|B|^2}
+	\]
+	\[
+	\le\frac{2(|A|+|B|)}{|B|^2}\cdot\varepsilon.
+	\]
+	因此 \(\lim_{x\to a}\dfrac{f(x)}{g(x)}=\dfrac AB\)。
+\end{proof}
+
+\begin{sourceexample}{4}
+
+	计算 \(\lim_{x\to0}\dfrac{\sin ax}{\sin bx}\)（\(a\neq0,\ b\neq0\)）。
+
+	因为 \(\lim_{x\to0}\dfrac{\sin x}{x}=1\)，所以
+	\[
+	\lim_{x\to0}\frac{\sin ax}{\sin bx}
+	=\lim_{x\to0}\left(\frac{\sin ax}{ax}\cdot\frac{ax}{bx}\cdot\frac{bx}{\sin bx}\right)
+	\]
+	\[
+	=\lim_{x\to0}\frac{\sin ax}{ax}\cdot\lim_{x\to0}\frac{ax}{bx}\cdot\lim_{x\to0}\frac{bx}{\sin bx}
+	\]
+	\[
+	=1\cdot\frac ab\cdot\lim_{x\to0}\frac{1}{\frac{\sin bx}{bx}}
+	\]
+	\[
+	=\frac ab\cdot\frac1{\lim_{x\to0}\frac{\sin bx}{bx}}
+	\]
+	\[
+	=\frac ab.
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{5}
+
+	计算 \(\lim_{x\to2\pi}\dfrac{\cos2x-\cos3x}{(x-2\pi)^2}\)。
+
+	令 \(y=x-2\pi\)。则 \(y\to0\)，并且
+	\[
+	\frac{\cos2x-\cos3x}{(x-2\pi)^2}=\frac1{y^2}[\cos(2y+4\pi)-\cos(3y+6\pi)]
+	\]
+	\[
+	=\frac1{y^2}(\cos2y-\cos3y)=\frac2{y^2}\sin\frac{5y}2\sin\frac y2.
+	\]
+	因此
+	\[
+	\lim_{x\to2\pi}\frac{\cos2x-\cos3x}{(x-2\pi)^2}=\lim_{y\to0}\frac{2\sin\frac{5y}2\sin\frac y2}{y^2}
+	\]
+	\[
+	=\frac52\lim_{y\to0}\frac{\sin\frac{5y}2}{\frac{5y}2}\cdot\frac{\sin\frac y2}{\frac y2}
+	\]
+	\[
+	=\frac52\lim_{y\to0}\frac{\sin\frac{5y}2}{\frac{5y}2}\cdot\lim_{y\to0}\frac{\sin\frac y2}{\frac y2}
+	\]
+	\[
+	=\frac52.
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{6}
+
+	计算 \(\lim_{x\to1}\dfrac{x^n+x^{n-1}+\cdots+x-n}{x-1}\)（\(n\in\N\)）。
+
+	由于 \(\forall\,k\in\N,\ x^k-1=(x-1)(x^{k-1}+x^{k-2}+\cdots+x+1)\)，并且 \(\lim_{x\to1}x^k=1\)，故
+	\[
+	\lim_{x\to1}\frac{x^n+x^{n-1}+\cdots+x-n}{x-1}
+	=\lim_{x\to1}\frac{(x^n-1)+(x^{n-1}-1)+\cdots+(x-1)}{x-1}
+	\]
+	\[
+	=\lim_{x\to1}(x^{n-1}+x^{n-2}+\cdots+x+1)+\lim_{x\to1}(x^{n-2}+x^{n-3}+\cdots+x+1)+\cdots+1
+	\]
+	\[
+	=\underbrace{1+1+\cdots+1}_{n\text{ 个 }1}+\underbrace{1+1+\cdots+1}_{(n-1)\text{ 个 }1}+\cdots+1
+	\]
+	\[
+	=n+(n-1)+\cdots+1=\frac12n(n+1).
+	\]
+
+\end{sourceexample}
+
+\subsection*{习 题}
+
+\begin{exercise}
+	\item 计算下列各极限：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\lim_{x\to a}\dfrac{\sin x-\sin a}{x-a}\)；
+		\item \(\lim_{x\to0}\dfrac{1-2\cos x+\cos2x}{x^2}\)；
+		\item \(\lim_{x\to\pi}\dfrac{\sin nx}{\sin mx}\)（\(n,m\in\N\)）；
+		\item \(\lim_{x\to0}\dfrac{1-\cos x}{x^2}\)；
+		\item \(\lim_{x\to0}\dfrac{\cos px-\cos qx}{x^2}\)（\(p,q\in\N\)）；
+		\item \(\lim_{x\to0}\dfrac{\sqrt{1+\sin x}-\sqrt{1-\sin x}}{x}\)；
+		\item \(\lim_{x\to\frac\pi3}\dfrac{1-2\cos x}{\pi-3x}\)；
+		\item \(\lim_{x\to0}\dfrac{\sqrt{1-\cos x^2}}{1-\cos x}\)；
+		\item \(\lim_{x\to0}\dfrac{\operatorname{tg}x-\sin x}{\sin^3x}\)；
+		\item \(\lim_{x\to0}\dfrac{\sin(\sin(\sin x))}{x}\)；
+		\item \(\lim_{x\to+\infty}(\sin\sqrt{x+1}-\sin\sqrt{x})\)；
+		\item \(\lim_{x\to\pm\infty}x\sin\dfrac1x\)。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 分别确定参数 \(a,b,c\in\R\) 使得
+	\[
+	\lim_{x\to+\infty}\left(\frac{x^3+2}{x+1}-ax^2-bx-c\right)=0 \text{ 与 } 1.
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(\lim_{x\to a}f(x)=A,\ \lim_{x\to a}g(x)=B\)。证明：
+	\[
+	\lim_{x\to a}\max(f(x),g(x))=\max(A,B);\qquad \lim_{x\to a}\min(f(x),g(x))=\min(A,B).
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:X\to\R,\ g:Y\to\R\) 是任意两个函数，使得 \(f(X)\subset Y,\ a\in\R\) 是 \(X\) 的聚点，\(\lim_{x\to a}f(x)=A\)；\(A\in\R\) 是 \(Y\) 的聚点，\(\lim_{y\to A}g(y)=B\)。
+	\begin{enumerate}[label=\arabic*)]
+		\item 试问 \(\lim_{x\to a}g\circ f(x)=B\) 吗？研究例子：
+		\[
+		x\longmapsto f(x)=\begin{cases} 0, & x=0, \\ x\left(\sin\dfrac1x\right)^2, & x\neq0, \end{cases}
+		\text{ 与 }
+		y\longmapsto g(y)=\begin{cases} 1, & y=0, \\ 0, & y\neq0. \end{cases}
+		\]
+		\item 若 \(\exists\,\delta>0\)，使得 \(A\notin f(X\cap\mathring{B}(a,\delta))\)，证明 \(\lim_{x\to a}g\circ f(x)=B\)。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 用 Cauchy 收敛准则证明 \(\lim_{x\to0}\sin\dfrac1x\) 不存在。
+\end{exercise}
+
+\begin{exercise}
+	\item 证明：\(\lim_{x\to0^+}\left(\dfrac1x-\left[\dfrac1x\right]\right)\) 与 \(\lim_{x\to0^-}\left(\dfrac1x-\left[\dfrac1x\right]\right)\) 都不存在。画出函数 \(x\mapsto\dfrac1x-\left[\dfrac1x\right],\ x\in\R-\{0\}\) 的图形。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:X\to\R\) 是任一函数，\(a\in\R\) 是 \(X\) 的聚点。证明：若 \(\forall\,x_n\in X-\{a\}\ (n\in\N),\ x_n\to a\ (n\to+\infty)\)，并且满足 \(|x_{n+1}-a|<|x_n-a|\ (n\in\N)\) 都有 \(\lim_{n\to+\infty}f(x_n)=A\)，则 \(\lim_{x\to a}f(x)=A\)。
+\end{exercise}
+
+\section{无穷小与无穷大}
+
+与实数序列一样，对于函数来说，也有两类极限过程——无穷小与无穷大需要特别研究。
+
+\subsection{无穷小与无穷大的定义}
+
+\begin{mydef*}{}
+
+	设 \(f:X\to\R\) 是任一函数。\(a\in\R\) 是 \(X\) 的一个聚点。
+
+	\begin{enumerate}[label=\arabic*)]
+		\item 若 \(\lim_{x\to a}f(x)=0\)，则我们称函数 \(f\) 是 \(\langle a,0\rangle\) 型无穷小。
+
+		\item 若 \(f\) 具有下述性质：
+		\[
+		(\forall\,M>0)(\exists\,\delta>0)(\forall\,x\in X\cap\mathring{B}(a,\delta))\Longrightarrow |f(x)|>M,
+		\]
+		则我们称函数 \(f\) 是 \(\langle a,\infty\rangle\) 型无穷大。
+
+		特别地，若
+		\[
+		(\forall\,M>0)(\exists\,\delta>0)(\forall\,x\in X\cap\mathring{B}(a,\delta))\Longrightarrow f(x)>M\ (f(x)<M),
+		\]
+		则我们称函数 \(f\) 是 \(\langle a,+\infty\rangle\) 型无穷大（\(\langle a,-\infty\rangle\) 型无穷大）或称函数 \(f\) 当 \(x\) 趋于 \(a\) 时有极限 \(+\infty\)（\(-\infty\)），并记为
+		\[
+		\lim_{x\to a}f(x)=+\infty \quad (\lim_{x\to a}f(x)=-\infty).
+		\]
+	\end{enumerate}
+
+\end{mydef*}
+
+\begin{sourceexample}{1}
+
+	考虑函数（\(n\in\N\)）
+	\[
+	x\longmapsto f(x)=(x-a)^n,\quad x\in\R,\quad\text{与}\quad x\longmapsto g(x)=\frac1{(x-a)^n},
+	\]
+	\(x\in\R-\{a\}\)。证明：\(f\) 是 \(\langle a,0\rangle\) 型无穷小，\(g\) 是 \(\langle a,\infty\rangle\) 型无穷大。
+
+	事实上，对于函数 \(f\)：\(\forall\,\varepsilon>0\)，由 \(|(x-a)^n|<\varepsilon\) 得到 \(|x-a|<\sqrt[n]{\varepsilon}\)。令 \(\delta=\sqrt[n]{\varepsilon}\)，则
+	\[
+	\forall\,x\in\mathring{B}(a,\delta)\Longrightarrow |(x-a)^n-0|<\varepsilon.
+	\]
+	因此 \(\lim_{x\to a}(x-a)^n=0\)，从而函数 \(f\) 是 \(\langle a,0\rangle\) 型无穷小。
+
+	对于函数 \(g\)：\(\forall\,M>0\)，由 \(\left|\dfrac1{(x-a)^n}\right|>M\) 得到 \(|x-a|^n<\dfrac1M\) 或
+	\[
+	|x-a|<\frac1{\sqrt[n]{M}}.
+	\]
+	令 \(\delta=\dfrac1{\sqrt[n]{M}}\)，则 \(\delta>0\)，并且
+	\[
+	\forall\,x\in\mathring{B}(a,\delta)\Longrightarrow \left|\frac1{(x-a)^n}\right|>M.
+	\]
+	因此函数 \(g\) 是 \(\langle a,\infty\rangle\) 型无穷大。
+
+\end{sourceexample}
+
+\begin{mythm}{}{func-infinitesimal-infinite-reciprocal}
+
+	设 \(f:X\to\R\) 是任一函数，\(a\in\R\) 是 \(X\) 的一个聚点。
+
+	\begin{enumerate}[label=\arabic*)]
+		\item 若 \(f\) 是 \(\langle a,0\rangle\) 型无穷小，并且 \(\forall\,x\in X\cap\mathring{B}(a,\delta)\)，\(f(x)\neq0\)，则函数 \(\dfrac1f\) 是 \(\langle a,\infty\rangle\) 型无穷大。
+
+		\item 若 \(f\) 是 \(\langle a,\infty\rangle\) 型无穷大，则 \(\dfrac1f\) 是 \(\langle a,0\rangle\) 型无穷小。
+	\end{enumerate}
+
+\end{mythm}
+
+\begin{proof}
+
+	1) 设 \(f\) 是 \(\langle a,0\rangle\) 型无穷小。\(M>0\)。于是
+	\[
+	(\exists\,\delta'>0)(\forall\,x\in X\cap\mathring{B}(a,\delta'))\Longrightarrow |f(x)|<\frac1M.
+	\]
+	令 \(\eta=\min(\delta,\delta')\)，则 \(\eta>0\) 并且
+	\[
+	\forall\,x\in X\cap\mathring{B}(a,\eta)\Longrightarrow \left|\frac1{f(x)}\right|>M.
+	\]
+	因此 \(\dfrac1f\) 是 \(\langle a,\infty\rangle\) 型无穷大。
+
+	2) 设 \(f\) 是 \(\langle a,\infty\rangle\) 型无穷大。\(\forall\,\varepsilon>0\)。由定义
+	\[
+	(\exists\,\delta>0)(\forall\,x\in X\cap\mathring{B}(a,\delta))\Longrightarrow |f(x)|>\frac1\varepsilon
+	\]
+	\[
+	\Longrightarrow \left|\frac1{f(x)}\right|<\varepsilon.
+	\]
+	因此 \(\dfrac1f\) 是 \(\langle a,0\rangle\) 型无穷小。
+
+\end{proof}
+
+除了上面我们介绍的无穷小与无穷大类型外，我们还可以定义下述各种类型的无穷小与无穷大，与这些类型相对应的\rthm{thm:func-infinitesimal-infinite-reciprocal}的叙述和证明我们都留给读者作为练习自己去完成。
+
+无穷小：\(\langle a^+,0\rangle\)、\(\langle a^-,0\rangle\)、\(\langle+\infty,0\rangle\)、\(\langle-\infty,0\rangle\) 型
+
+无穷大：\(\langle a^+,\infty\rangle\)、\(\langle a^+,+\infty\rangle\)、\(\langle a^+,-\infty\rangle\)、\(\langle a^-,\infty\rangle\)、\(\langle a^-,+\infty\rangle\)、\(\langle a^-,-\infty\rangle\)、\(\langle+\infty,\infty\rangle\)、\(\langle+\infty,+\infty\rangle\)、\(\langle+\infty,-\infty\rangle\)、\(\langle-\infty,\infty\rangle\)、\(\langle-\infty,+\infty\rangle\)、\(\langle-\infty,-\infty\rangle\) 型。
+
+\begin{sourceexample}{2}
+
+	考虑函数 \(x\longmapsto f(x)=\dfrac1{\sqrt{x}},\ x\in\R^+_*\)。证明：\(f\) 是 \(\langle0^+,+\infty\rangle\) 型无穷大。
+
+	事实上，\(\forall\,M>0\)，由 \(\dfrac1{\sqrt{x}}>M\) 得到 \(x<\dfrac1{M^2}\)。若令 \(\delta=\dfrac1{M^2}\)，则 \(\delta>0\)，并且
+	\[
+	\forall\,x\in\mathring{B}_+(0,\delta)\Longrightarrow \frac1{\sqrt{x}}>M.
+	\]
+	因此 \(f\) 是 \(\langle0^+,+\infty\rangle\) 型无穷大。
+
+\end{sourceexample}
+
+\begin{sourceexample}{3}
+
+	考虑函数
+	\[
+	x\longmapsto P_n(x)=a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0,\quad x\in\R,\ n\in\N.
+	\]
+	证明：若 \(a_n>0\)，则 \(P_n\) 是 \(\langle+\infty,+\infty\rangle\) 型无穷大。
+
+	为此我们首先有：\(\forall\,x>0\)，
+	\[
+	P_n(x)=a_nx^n\left(1+a_{n-1}\frac1x+\cdots+a_1\frac1{x^{n-1}}+a_0\frac1{x^n}\right).
+	\]
+	由于 \(\forall\,k\in\N\)，\(\lim_{x\to+\infty}\dfrac1{x^k}=0\)，故
+	\[
+	\lim_{x\to+\infty}\left(1+a_{n-1}\frac1x+\cdots+a_1\frac1{x^{n-1}}+a_0\frac1{x^n}\right)=1.
+	\]
+	从而存在 \(A>0\) 使得
+	\[
+	\forall\,x\in\ ]A,+\infty[\Longrightarrow 1+a_{n-1}\frac1x+\cdots+a_1\frac1{x^{n-1}}+a_0\frac1{x^n}>\frac12
+	\]
+	\[
+	\Longrightarrow P_n(x)>\frac12a_nx^n.
+	\]
+	于是 \(\forall\,M>0\)，由 \(\dfrac12a_nx^n>M\) 得到 \(x>\sqrt[n]{\dfrac{2M}{a_n}}\)，令 \(\Delta=\max\left(A,\sqrt[n]{\dfrac{2M}{a_n}}\right)\)，则 \(\Delta>0\) 并且
+	\[
+	\forall\,x\in\ ]\Delta,+\infty[\Longrightarrow P_n(x)>M.
+	\]
+	因此函数 \(P_n\) 是 \(\langle+\infty,+\infty\rangle\) 型无穷大。
+
+\end{sourceexample}
+
+\subsection{不定型}
+	\label{sec:4-3-2}
+
+对于一元函数来说，像实数序列一样，也有 \(\infty-\infty\)、\(0\cdot\infty\)、\(\dfrac00\)、\(\dfrac\infty\infty\) 不定型。例如：
+
+\textbf{\(\dfrac00\) 不定型}\quad
+\begin{enumerate}[label=\arabic*)]
+	\item \(f(x)=x^2,\ g(x)=x\)。则 \(f,g\) 是 \(\langle0,0\rangle\) 型无穷小，\(\dfrac fg\) 是 \(\langle0,0\rangle\) 型无穷小。
+	\item \(f(x)=x,\ g(x)=x^2\)。则 \(f,g\) 是 \(\langle0,0\rangle\) 型无穷小，\(\dfrac fg\) 是 \(\langle0,\infty\rangle\) 型无穷大。
+	\item \(f(x)=(-1)^{[1/x]}x,\ g(x)=x\)。则 \(f,g\) 是 \(\langle0,0\rangle\) 型无穷小，但
+	\[
+	\lim_{x\to0}\frac{f(x)}{g(x)}=\lim_{x\to0}(-1)^{[1/x]}
+	\]
+	不存在。
+\end{enumerate}
+
+\textbf{\(\dfrac\infty\infty\) 不定型}\quad
+\begin{enumerate}[label=\arabic*)]
+	\item \(f(x)=\dfrac1{x^3},\ g(x)=\dfrac1x\)。则 \(f,g\) 是 \(\langle0,\infty\rangle\) 型无穷大，\(\dfrac fg\) 是 \(\langle0,+\infty\rangle\) 型无穷大。
+	\item \(f(x)=\dfrac1x,\ g(x)=\dfrac1{x^3}\)。则 \(f,g\) 是 \(\langle0,\infty\rangle\) 型无穷大，\(\dfrac fg\) 是 \(\langle0,0\rangle\) 型无穷小。
+	\item \(f(x)=\dfrac{(-1)^{[1/x]}}x,\ g(x)=\dfrac1x\)。则 \(f,g\) 是 \(\langle0,\infty\rangle\) 型无穷大，但
+	\[
+	\lim_{x\to0}\frac{f(x)}{g(x)}=\lim_{x\to0}(-1)^{[1/x]}
+	\]
+	不存在。
+\end{enumerate}
+
+\textbf{\(0\cdot\infty\) 不定型}\quad 对于这种不定型，我们可以把它化为 \(\dfrac00\) 或 \(\dfrac\infty\infty\) 不定型，例如设 \(f\) 是 \(\langle a,0\rangle\) 型无穷小，\(g\) 是 \(\langle a,\infty\rangle\) 型无穷大，则
+
+1) \(\dfrac1g\) 是 \(\langle a,0\rangle\) 型无穷小，从而 \(f\cdot g=\dfrac{f}{\frac1g}\) 是 \(\dfrac00\) 不定型。
+
+2) 若 \(f\neq0\)，则 \(\dfrac1f\) 是 \(\langle a,\infty\rangle\) 型无穷大，从而 \(f\cdot g=\dfrac{g}{\frac1f}\) 是 \(\dfrac\infty\infty\) 不定型。
+
+\textbf{\(\infty-\infty\) 不定型}\quad 对于这种不定型，一般也可以把它化为 \(\dfrac00\) 或 \(\dfrac\infty\infty\) 不定型。例如，设 \(f,g\) 是 \(\langle a,\infty\rangle\) 型无穷大。我们有
+\[
+f-g=f\left(1-\frac gf\right)\quad(\text{若 }f\neq0).
+\]
+
+1) 若 \(\lim_{x\to a}\dfrac{g(x)}{f(x)}=A\ (\neq1)\)，则 \(f-g\) 是 \(\langle a,\infty\rangle\) 型无穷大。
+
+2) 若 \(\lim_{x\to a}\dfrac{g(x)}{f(x)}=1\)，则
+\[
+f-g=\frac{1-\frac gf}{\frac1f}
+\]
+是 \(\dfrac00\) 不定型。
+\[
+f-g=\frac{f}{\frac1{1-g/f}}
+\]
+又是 \(\dfrac\infty\infty\) 不定型。
+
+\begin{sourceexample}{4}
+
+	计算 \(\lim_{x\to\frac\pi2}\dfrac{\operatorname{tg}3x}{\operatorname{tg}x}\)。
+
+	这是 \(\dfrac\infty\infty\) 不定型。令 \(y=\dfrac\pi2-x\)，则 \(y\to0\)，
+	\[
+	\frac{\operatorname{tg}3x}{\operatorname{tg}x}=\frac{\operatorname{tg}\left(\frac{3\pi}2-3y\right)}{\operatorname{tg}\left(\frac\pi2-y\right)}=\frac{\operatorname{ctg}3y}{\operatorname{ctg}y}=\frac{\cos3y\cdot\sin y}{\sin3y\cdot\cos y}.
+	\]
+	因此
+	\[
+	\lim_{x\to\frac\pi2}\frac{\operatorname{tg}3x}{\operatorname{tg}x}=\lim_{y\to0}\frac{\cos3y\,\sin y}{\sin3y\,\cos y}=\lim_{y\to0}\frac{\sin y}{\sin3y}
+	\]
+	\[
+	=\frac13\lim_{y\to0}\frac{\sin y}{y}\cdot\frac{3y}{\sin3y}
+	\]
+	\[
+	=\frac13.
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{5}
+
+	计算 \(\lim_{x\to+\infty}\bigl(\sqrt{x+\sqrt{x+\sqrt{x}}}-\sqrt{x}\,\bigr)\)。
+
+	这是 \(\infty-\infty\) 不定型。
+	\[
+	\lim_{x\to+\infty}\bigl(\sqrt{x+\sqrt{x+\sqrt{x}}}-\sqrt{x}\,\bigr)=\lim_{x\to+\infty}\frac{x+\sqrt{x+\sqrt{x}}-x}{\sqrt{x+\sqrt{x+\sqrt{x}}}+\sqrt{x}}
+	\]
+	\[
+	=\lim_{x\to+\infty}\frac{\sqrt{x+\sqrt{x}}}{\sqrt{x+\sqrt{x+\sqrt{x}}}+\sqrt{x}}
+	\]
+	\[
+	=\lim_{x\to+\infty}\frac{\sqrt{1+\sqrt{\frac1x}}}{\sqrt{1+\sqrt{\frac1x+\frac1{x^{3/2}}}}+1}
+	\]
+	\[
+	=\frac12.
+	\]
+
+\end{sourceexample}
+
+关于函数不定型的极限计算方法，我们在第 6 章和第 8 章中将要进一步研究。目前就介绍到这里为止。
+
+\subsection*{习 题}
+
+\begin{exercise}
+	\item 对函数 \(x\longmapsto P_n(x)=a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0,\ x\in\R\)，分 \(n\) 为奇数、偶数，\(a_n>0,\ a_n<0\) 详细研究 \(P_n\) 可能有的无穷大类型。
+\end{exercise}
+
+\begin{exercise}
+	\item 计算下列各极限：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\lim_{x\to1}\dfrac{x^4-3x+2}{x^5-4x+3}\)；
+		\item \(\lim_{x\to0}\dfrac{(1+mx)^n-(1+nx)^m}{x^2}\)（\(m,n\in\N\)）；
+		\item \(\lim_{x\to a}\dfrac{\sqrt[m]{x}-\sqrt[m]{a}}{\sqrt[n]{x}-\sqrt[n]{a}}\)（\(a>0,\ m,n\in\N\)）；
+		\item \(\lim_{x\to a}\dfrac{\sqrt{x}-\sqrt{a}+\sqrt{x-a}}{\sqrt{x^2-a^2}}\)（\(a>0\)）；
+		\item \(\lim_{x\to0}\dfrac{\sqrt[n]{1+x}-1}{x}\)（\(n\in\N\)），\quad \(\lim_{x\to0^\pm}\dfrac{3x+|x|}{5x-3|x|}\)；
+		\item \(\lim_{x\to\pm\infty}\bigl(\sqrt{1+x+x^2}-\sqrt{1-x+x^2}\,\bigr)\)；
+		\item \(\lim_{x\to+\infty}x^{1/3}\bigl[(x+1)^{2/3}-(x-1)^{2/3}\bigr]\)；
+		\item \(\lim_{x\to+\infty}\bigl[\sqrt[n]{(x+a_1)\cdots(x+a_n)}-x\bigr]\)；
+		\item \(\lim_{x\to\pm\infty}\dfrac{\bigl(x-\sqrt{x^2-1}\,\bigr)^n+\bigl(x+\sqrt{x^2-1}\,\bigr)^n}{x^n}\)（\(n\in\N\)）。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 考虑函数 \(x\longmapsto f(x)=\dfrac1x\left(1+\sin\dfrac1x\right),\ x\in\R-\{0\}\)。证明：函数 \(f\) 在任何一个去心邻域 \(\mathring{B}(0,\delta)\) 上是无界的，但 \(f\) 并不是 \(\langle0,\infty\rangle\) 型无穷大。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:\ ]a,+\infty[\to\R\) 是任一函数（\(a\in\R\)）满足条件：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\forall\,b>a,\ \exists\,M>0\) 使得 \(\forall\,x\in\ ]a,b[,\ |f(x)|\le M\)；
+		\item \(\lim_{x\to+\infty}[f(x+1)-f(x)]=+\infty\ (-\infty)\)。
+	\end{enumerate}
+	证明：\(\lim_{x\to+\infty}\dfrac{f(x)}{x}=+\infty\ (-\infty)\)。
+\end{exercise}
+
+\section{单调函数的极限}
+
+我们首先介绍函数的上、下确界。
+
+\subsection{函数的上、下确界}
+
+\begin{mydef*}{}
+
+	设 \(f:X\to\R\) 是任一函数。
+
+	\begin{enumerate}[label=\arabic*)]
+		\item 我们称 \(f\) 在 \(X\) 上是上（下）有界的，如果
+		\[
+		\operatorname{Ran}(f)=\{f(x)\in\R \mid x\in X\}
+		\]
+		是上（下）有界集。\(\operatorname{Ran}(f)\) 的上（下）界称为 \(f\) 在 \(X\) 上的上（下）界。
+
+		\item 如果 \(f\) 在 \(X\) 上是上（下）有界的，则 \(\operatorname{Ran}(f)\) 的上（下）确界就称为 \(f\) 在 \(X\) 上的上（下）确界，记为
+		\[
+		\sup_{x\in X}f(x)\quad \Bigl(\inf_{x\in X}f(x)\Bigr).
+		\]
+
+		\item 我们称 \(f\) 在 \(X\) 上有界，如果 \(f\) 在 \(X\) 上既是上有界的又是下有界的。
+	\end{enumerate}
+
+\end{mydef*}
+
+由上述定义立即推知：
+
+\(f\) 在 \(X\) 上上（下）有界 \(\Longleftrightarrow\ \exists\,M\in\R,\ \forall\,x\in X,\ f(x)\le M\ (\ge M)\)。
+
+\(f\) 在 \(X\) 上有界 \(\Longleftrightarrow\ \exists\,m,M\in\R,\ \forall\,x\in X,\ m\le f(x)\le M\) \(\Longleftrightarrow\ \exists\,M>0,\ \forall\,x\in X,\ |f(x)|\le M\)。
+
+\(A\) 是 \(f\) 在 \(X\) 上的上（下）确界 \(\Longleftrightarrow\) i) \(\forall\,x\in X,\ f(x)\le A\ (\ge A)\)；ii) \(\forall\,\varepsilon>0,\ \exists\,x\in X,\ A-\varepsilon<f(x)\ (f(x)<A+\varepsilon)\)。
+
+\textbf{附注}\quad 如果函数 \(f:X\to\R\) 在 \(X\) 上无上（下）界，那末
+\[
+(\forall\,n\in\N)(\exists\,x_n\in X)\Longrightarrow f(x_n)>n\ (<-n).
+\]
+因此，为了今后叙述上的统一起见，我们称 \(f\) 在 \(X\) 上有上（下）确界 \(+\infty\ (-\infty)\)，并仍记为
+\[
+\sup_{x\in X}f(x)=+\infty\quad \Bigl(\inf_{x\in X}f(x)=-\infty\Bigr).
+\]
+
+\begin{sourceexample}{1}
+
+	考虑正弦、余弦函数
+	\[
+	x\longmapsto\sin x,\quad x\in\R;\qquad x\longmapsto\cos x,\quad x\in\R.
+	\]
+	由于
+	\[
+	|\sin x|\le1,\quad |\cos x|\le1,\quad \forall\,x\in\R,
+	\]
+	故这两个函数在 \(\R\) 上都是有界的，并且
+	\[
+	\sup_{x\in\R}\sin x=\sup_{x\in\R}\cos x=1,\quad \inf_{x\in\R}\sin x=\inf_{x\in\R}\cos x=-1.
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{2}
+
+	考虑函数 \(x\longmapsto f(x)=x+\dfrac1x,\ x\in\R^+_*\)。证明：
+	\[
+	\sup_{x\in\R^+_*}f(x)=+\infty,\quad \inf_{x\in\R^+_*}f(x)=2.
+	\]
+	事实上，由于 \(\forall\,M>0,\ \exists\,x=2M\)，使 \(x+\dfrac1x>M\)，故此函数 \(f\) 在 \(\R^+_*\) 上无上界，从而 \(\sup_{x\in\R^+_*}f(x)=+\infty\)。
+
+	其次，由于 \(\forall\,x\in\R^+_*,\ \left(x+\dfrac1x\right)-2=\dfrac{(x-1)^2}{x}\ge0\)，故 \(2\) 是函数 \(f\) 的一个下界。又由于
+	\[
+	\forall\,\delta>0,\quad 1+\delta+\frac1{1+\delta}=2+\frac{\delta^2}{1+\delta},
+	\]
+	故
+	\[
+	(\forall\,\varepsilon>0)(\exists\,\delta>0)\Longrightarrow f(1+\delta)=1+\delta+\frac1{1+\delta}=2+\frac{\delta^2}{1+\delta}<2+\varepsilon.
+	\]
+	因此 \(\inf_{x\in\R^+_*}f(x)=2\)。
+
+\end{sourceexample}
+
+\begin{sourceexample}{3}
+
+	对于正切函数 \(x\longmapsto\operatorname{tg}x,\ x\in\left]-\dfrac\pi2,\dfrac\pi2\right[\)，显然有
+	\[
+	\sup_{x\in\left]-\frac\pi2,\frac\pi2\right[}\operatorname{tg}x=+\infty,\qquad \inf_{x\in\left]-\frac\pi2,\frac\pi2\right[}\operatorname{tg}x=-\infty.
+	\]
+
+\end{sourceexample}
+
+\subsection{单调函数的极限}
+	\label{sec:4-4-2}
+
+我们先介绍单调函数的定义。
+
+\begin{mydef*}{}
+
+	设 \(f:X\to\R\) 是任一函数。
+
+	\begin{enumerate}[label=\arabic*)]
+		\item 我们称 \(f\) 在 \(X\) 上是单调上升（下降）的，如果：
+		\[
+		\forall\,x_1,x_2\in X,\ x_1<x_2\Longrightarrow f(x_1)\le f(x_2)\ (f(x_1)\ge f(x_2)).
+		\]
+		\item 我们称 \(f\) 在 \(X\) 上是严格单调上升（下降）的，如果：
+		\[
+		\forall\,x_1,x_2\in X,\ x_1<x_2\Longrightarrow f(x_1)<f(x_2)\ (f(x_1)>f(x_2)).
+		\]
+		\item 单调上升与单调下降函数称为单调函数。
+	\end{enumerate}
+
+\end{mydef*}
+
+\begin{sourceexample}{4}
+
+	对上面例 2 的函数 \(x\longmapsto x+\dfrac1x,\ x\in\R^+_*\)，由于
+	\[
+	\forall\,x_1,x_2\in\R^+_*,\ x_1<x_2,
+	\]
+	\[
+	\left(x_2+\frac1{x_2}\right)-\left(x_1+\frac1{x_1}\right)=(x_2-x_1)\cdot\frac{x_1x_2-1}{x_1x_2},
+	\]
+	故此函数在 \(\R^+_*\) 上不是单调的，但它在 \([1,+\infty[\) 上是严格单调上升的，而在 \(]0,1[\) 上是严格单调下降的。
+
+\end{sourceexample}
+
+关于单调函数的极限，我们有下述定理。
+
+\begin{mythm}{}{monotone-function-limit}
+
+	设 \(f:X\to\R\) 是任一单调函数，\(x_0\in X\) 是 \(X\) 的一个聚点，\(c=\inf X,\ d=\sup X\)。
+
+	\begin{enumerate}[label=\arabic*)]
+		\item 设 \(f\) 在 \(X\) 上单调上升。
+
+		若 \(x_0\) 是右侧聚点，则 \(f(x_0^+)\) 存在且 \(f(x_0)\le f(x_0^+)\)；
+		若 \(x_0\) 是左侧聚点，则 \(f(x_0^-)\) 存在且 \(f(x_0)\ge f(x_0^-)\)。
+
+		对 \(c\) 与 \(d\)，则有
+		\[
+		\lim_{x\to c^+}f(x)=\inf_{x\in X}f(x),\qquad \lim_{x\to d^-}f(x)=\sup_{x\in X}f(x).
+		\]
+
+		\item 设 \(f\) 在 \(X\) 上单调下降。
+
+		若 \(x_0\) 是右侧聚点，则 \(f(x_0^+)\) 存在且 \(f(x_0)\ge f(x_0^+)\)；
+		若 \(x_0\) 是左侧聚点，则 \(f(x_0^-)\) 存在且 \(f(x_0)\le f(x_0^-)\)。
+
+		对 \(c\) 与 \(d\)，则有
+		\[
+		\lim_{x\to c^+}f(x)=\sup_{x\in X}f(x),\qquad \lim_{x\to d^-}f(x)=\inf_{x\in X}f(x).
+		\]
+	\end{enumerate}
+
+\end{mythm}
+
+\begin{proof}
+
+	我们只对 \(f\) 是单调上升的情形证明。对单调下降函数 \(f\)，可换 \(f\) 为 \(-f\)，从而结论 2) 由 1) 推出。
+
+	若 \(x_0\) 是 \(X\) 的右侧聚点，则
+	\[
+	\forall\,x\in X\cap B_+(x_0,\eta),\ f(x_0)\le f(x)\Longrightarrow f(x_0)\le\inf_{x\in X\cap B_+(x_0,\eta)}f(x)=B.
+	\]
+	于是 \(\forall\,\varepsilon>0\)，由下确界性质知，存在 \(\bar x\in X\cap\mathring{B}_+(x_0,\eta)\)，使得 \(f(\bar x)<B+\varepsilon\)。令 \(\delta=\bar x-x_0\)，则 \(0<\delta<\eta\)。由 \(f\) 的单调上升性我们有
+	\[
+	\forall\,x\in X\cap B_+(x_0,\delta)\Longrightarrow B-\varepsilon<f(x)\le f(\bar x)<B+\varepsilon
+	\]
+	\[
+	\Longrightarrow |f(x)-B|<\varepsilon.
+	\]
+	因此 \(\lim_{x\to x_0^+}f(x)=f(x_0^+)\) 存在，并且 \(f(x_0)\le B=f(x_0^+)\)。
+
+	若 \(x_0\) 是 \(X\) 的左侧聚点，则
+	\[
+	\forall\,x\in X\cap B_-(x_0,\eta),\ f(x)\le f(x_0)
+	\]
+	\[
+	\Longrightarrow \sup_{x\in X\cap B_-(x_0,\eta)}f(x)=A\le f(x_0).
+	\]
+	于是 \(\forall\,\varepsilon>0\)，由上确界性质知，存在 \(\bar x\in X\cap\mathring{B}_-(x_0,\eta)\) 使得 \(A-\varepsilon<f(\bar x)\)。令 \(\delta=x_0-\bar x\)，则 \(0<\delta<\eta\)。由 \(f\) 的单调上升性我们有
+	\[
+	\forall\,x\in X\cap B_-(x_0,\delta)\Longrightarrow A-\varepsilon<f(\bar x)\le f(x)<A+\varepsilon
+	\]
+	\[
+	\Longrightarrow |f(x)-A|<\varepsilon.
+	\]
+	因此 \(\lim_{x\to x_0^-}f(x)=f(x_0^-)\) 存在，并且 \(A=f(x_0^-)\le f(x_0)\)。
+
+	对于 \(\lim_{x\to c^+}f(x)=\inf_{x\in X}f(x)\) 及 \(\lim_{x\to d^-}f(x)=\sup_{x\in X}f(x)\) 可类似证明。
+
+\end{proof}
+
+\begin{sourceexample}{5}
+
+	考虑函数 \(x\longmapsto[x],\ x\in\R\)。
+
+	此函数在 \(\R\) 上单调上升，无上、下界，且
+	\[
+	\forall\,n\in\Z,\ \forall\,x\in\ ]n,n+1[,\ [x]=n.
+	\]
+	因此 \(\forall\,n\in\Z,\ \lim_{x\to n^+}[x]=n,\ \lim_{x\to n^-}[x]=n-1\)；\(\forall\,x_0\in\ ]n,n+1[\)，
+	\[
+	\lim_{x\to x_0}[x]=n;
+	\]
+	\[
+	\lim_{x\to-\infty}[x]=-\infty;\qquad \lim_{x\to+\infty}[x]=+\infty.
+	\]
+
+\end{sourceexample}
+
+\subsection*{习 题}
+
+\begin{exercise}
+	\item 设 \(f:X\to\R\) 是任一函数。我们称 \(f\) 在点 \(a\in X\) 处是\textbf{局部有界}的，如果 \(\exists\,\delta>0\) 使得 \(f\) 在 \(X\cap B(a,\delta)\) 上有界。我们称 \(f\) 在 \(X\) 上是局部有界，如果 \(f\) 在 \(X\) 的每一点 \(x\) 处是局部有界的。
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：若 \(f\) 在 \(X\) 上有界，则 \(f\) 在 \(X\) 上局部有界。
+		\item 举例说明，\(f\) 在 \(X\) 上局部有界不一定 \(f\) 在 \(X\) 上有界。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 考虑函数
+	\[
+	x\longmapsto f(x)=\begin{cases} 0, & \text{若 }x\notin\Q; \\ p, & \text{若 }x=\dfrac qp,\ p>0,\ p,q\text{ 互质}. \end{cases}
+	\]
+	证明：\(f\) 在 \(\R\) 的任一点 \(x\) 处都不是局部有界的。
+\end{exercise}
+
+\begin{exercise}
+	\item 考虑函数
+	\[
+	x\longmapsto f(x)=\begin{cases} 0, & \text{若 }x=0; \\ \dfrac1x\sin\dfrac1x, & \text{若 }x\neq0. \end{cases}
+	\]
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：\(f\) 在 \(x=0\) 处不是局部有界的。
+		\item 证明：\(\lim_{x\to0}f(x)\neq\pm\infty\)。
+		\item 证明：\(\forall\,\delta>0\)，\(f\) 在 \(\R-B(0,\delta)\) 上是有界的。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 确定函数 \(x\longmapsto\dfrac1x-\left[\dfrac1x\right]\) 在 \(\R-\{0\}\) 上的上、下确界。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f,g\) 是任意两个函数，\(X=\operatorname{Dom}(f)\cap\operatorname{Dom}(g)\neq\varnothing\)，证明下述各不等式成立：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\sup_{x\in X}[f(x)+g(x)]\le\sup_{x\in X}f(x)+\sup_{x\in X}g(x)\)；
+		\item \(\inf_{x\in X}[f(x)+g(x)]\ge\inf_{x\in X}f(x)+\inf_{x\in X}g(x)\)；
+		\item \(\sup_{x\in X}f(x)g(x)\le(\sup_{x\in X}f(x))\cdot(\sup_{x\in X}g(x))\)（\(f\ge0,\ g\ge0\)）；
+		\item \(\inf_{x\in X}f(x)g(x)\ge(\inf_{x\in X}f(x))\cdot(\inf_{x\in X}g(x))\)（\(f\ge0,\ g\ge0\)）。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:\R^+\to\R\) 是任一单调上升函数，证明下述三个结论互相等价：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\lim_{x\to+\infty}f(x)\) 存在。
+		\item 实数序列 \(\langle f(n)\rangle\) 收敛。
+		\item \(f\) 在 \(\R^+\) 上有上界。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(I\subset\R\) 是任一区间，\(f:I\to\R\) 是任一函数，我们称 \(f\) 在 \(x_0\in I\) 处是增大的，如果存在 \(\delta>0\) 使得
+	\[
+	f(x)-f(x_0)\begin{cases} >0, & \forall\,x\in I\cap\mathring{B}_+(x_0,\delta), \\ <0, & \forall\,x\in I\cap\mathring{B}_-(x_0,\delta). \end{cases}
+	\]
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：函数
+		\[
+		x\longmapsto\widetilde f(x)=\begin{cases} 0, & x=0; \\ x\left(1+x\sin\dfrac1x\right), & x\neq0 \end{cases}
+		\]
+		在 \(x=0\) 处是增大的，但对任意 \(\varepsilon>0\)，函数 \(\widetilde f\) 并不是在 \(]-\varepsilon,\varepsilon[\) 的每一点 \(x\) 处增大的。
+		\item 证明：如果函数 \(f\) 在 \(I\) 的每一点 \(x\) 处都是增大的，则 \(f\) 在 \(I\) 上是严格单调上升的。反之结论也成立。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:X\to\R\) 是任一函数，\(a\) 是 \(X\) 的一个聚点（\(a\) 可以是 \(\pm\infty\)）。设 \(x_n\in X-\{a\}\ (n\in\N)\) 并且 \(x_n\to a\ (n\to+\infty)\)。若 \(\lim_{n\to+\infty}f(x_n)=A\)（有限或 \(\pm\infty\)），则称 \(A\) 为函数 \(f\) 在 \(a\) 处的\textbf{子序列极限}。令
+	\[
+	E=\{A\in\overline\R \mid A\text{ 是 }f\text{ 在 }a\text{ 处的子序列极限}\}.
+	\]
+	\(\sup E\) 称为函数 \(f\) 当 \(x\to a\) 时的\textbf{上极限}，记为 \(\varlimsup_{x\to a}f(x)\)；\(\inf E\) 称为函数 \(f\) 当 \(x\to a\) 时的\textbf{下极限}，记为 \(\varliminf_{x\to a}f(x)\)。
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：\(\lim_{x\to a}f(x)=A\) 当且仅当 \(\varlimsup_{x\to a}f(x)=\varliminf_{x\to a}f(x)=A\)（\(A\) 为有限或 \(\pm\infty\)）。
+		\item 证明：
+		\[
+		\varlimsup_{x\to a}f(x)=\lim_{\delta\to0^+}\Bigl(\sup_{0<|x-a|<\delta}f(x)\Bigr)=\inf_{\delta>0}\Bigl(\sup_{0<|x-a|<\delta}f(x)\Bigr),
+		\]
+		\[
+		\varliminf_{x\to a}f(x)=\lim_{\delta\to0^+}\Bigl(\inf_{0<|x-a|<\delta}f(x)\Bigr)=\sup_{\delta>0}\Bigl(\inf_{0<|x-a|<\delta}f(x)\Bigr)
+		\]
+		（这里 \(a\in\R\)）。
+		\item 对 \(a=+\infty\)，证明：
+		\[
+		\varlimsup_{x\to+\infty}f(x)=\lim_{M\to+\infty}\Bigl(\sup_{x\ge M}f(x)\Bigr)=\inf_{M>0}\Bigl(\sup_{x\ge M}f(x)\Bigr),
+		\]
+		\[
+		\varliminf_{x\to+\infty}f(x)=\lim_{M\to+\infty}\Bigl(\inf_{x\ge M}f(x)\Bigr)=\sup_{M>0}\Bigl(\inf_{x\ge M}f(x)\Bigr).
+		\]
+		\item 计算下列各函数 \(f\) 的上、下极限：
+		\[
+		f(x)=\frac1{x+1}\sin\frac1x\qquad(x\to0),
+		\]
+		\[
+		f(x)=\frac1{x+1}\cos x\qquad(x\to\pm\infty),
+		\]
+		\[
+		f(x)=\sin\frac1x\qquad(x\to0).
+		\]
+	\end{enumerate}
+\end{exercise}
+
+\section{函数的连续与间断}
+
+函数极限 \(\lim_{x\to a}f(x)=A\in\R\) 中 \(a\in X\) 的情形需要进一步的研究。
+
+\subsection{函数的连续点}
+	\label{sec:4-5-1}
+
+\begin{mydef*}{}
+
+	设 \(f:X\to\R\) 是任一函数，\(x_0\in X\)。
+
+	\begin{enumerate}[label=\arabic*)]
+		\item 我们称函数 \(f\) 在 \(x_0\) 处连续或 \(x_0\) 是 \(f\) 的连续点，如果下述性质成立：
+		\[
+		(\forall\,\varepsilon>0)(\exists\,\delta>0)(\forall\,x\in X\cap B(x_0,\delta))
+		\]
+		\[
+		\Longrightarrow |f(x)-f(x_0)|<\varepsilon,
+		\]
+		或
+		\[
+		(\forall\,\varepsilon>0)(\exists\,\delta>0)\Longrightarrow f\bigl(X\cap B(x_0,\delta)\bigr)\subset B\bigl(f(x_0),\varepsilon\bigr).
+		\]
+		我们称函数 \(f\) 在 \(X\) 上连续，如果 \(f\) 在 \(X\) 的每一点处连续。
+
+		\item 我们称函数 \(f\) 在 \(x_0\) 处右连续或 \(x_0\) 是 \(f\) 的右连续点，如果下述性质成立：
+		\[
+		(\forall\,\varepsilon>0)(\exists\,\delta>0)(\forall\,x\in X\cap B_+(x_0,\delta))
+		\]
+		\[
+		\Longrightarrow |f(x)-f(x_0)|<\varepsilon,
+		\]
+		或
+		\[
+		(\forall\,\varepsilon>0)(\exists\,\delta>0)\Longrightarrow f\bigl(X\cap B_+(x_0,\delta)\bigr)\subset B\bigl(f(x_0),\varepsilon\bigr).
+		\]
+
+		\item 我们称函数 \(f\) 在 \(x_0\) 处左连续或 \(x_0\) 是 \(f\) 的左连续点，如果下述性质成立：
+		\[
+		(\forall\,\varepsilon>0)(\exists\,\delta>0)(\forall\,x\in X\cap B_-(x_0,\delta))
+		\]
+		\[
+		\Longrightarrow |f(x)-f(x_0)|<\varepsilon,
+		\]
+		或
+		\[
+		(\forall\,\varepsilon>0)(\exists\,\delta>0)\Longrightarrow f\bigl(X\cap B_-(x_0,\delta)\bigr)\subset B\bigl(f(x_0),\varepsilon\bigr).
+		\]
+	\end{enumerate}
+
+\end{mydef*}
+
+下面是两个最简单的连续函数的例子。
+
+\begin{sourceexample}{1}
+
+	\(\forall\,n\in\N\)，幂函数 \(x\longmapsto x^n,\ x\in\R\) 在 \(\R\) 上连续。
+
+	事实上，任取一点 \(x_0\in\R\)。令 \(|x-x_0|<1\)，则
+	\[
+	\begin{aligned}
+	|x^n-x_0^n|
+	&=|(x-x_0)(x^{n-1}+x^{n-2}x_0+\cdots+x_0^{n-1})|\\
+	&\le|x-x_0|\,(|x|^{n-1}+|x|^{n-2}|x_0|+\cdots+|x_0|^{n-1})\\
+	&<|x-x_0|\bigl[(|x_0|+1)^{n-1}+(|x_0|+1)^{n-2}|x_0|+\cdots+|x_0|^{n-1}\bigr]\\
+	&<n(|x_0|+1)^{n-1}|x-x_0|.
+	\end{aligned}
+	\]
+	\(\forall\,\varepsilon>0\)，由 \(n(|x_0|+1)^{n-1}|x-x_0|<\varepsilon\) 得到
+	\[
+	|x-x_0|<\varepsilon/n(|x_0|+1)^{n-1}.
+	\]
+	若令 \(\delta=\min\bigl(\varepsilon/n(|x_0|+1)^{n-1},\,1\bigr)\)，则
+	\[
+	\forall\,x\in\R,\ |x-x_0|<\delta\Longrightarrow|x^n-x_0^n|<n(|x_0|+1)^{n-1}|x-x_0|<\varepsilon.
+	\]
+	因此幂函数 \(x\longmapsto x^n,\ x\in\R\) 在 \(x_0\) 处连续，由 \(x_0\in\R\) 的任意性知，此幂函数在 \(\R\) 上连续。
+
+\end{sourceexample}
+
+\begin{sourceexample}{2}
+
+	正弦函数 \(x\longmapsto\sin x,\ x\in\R\) 与余弦函数 \(x\longmapsto\cos x,\ x\in\R\) 在 \(\R\) 上连续。
+
+	\(\forall\,x_0\in\R\)，由于 \(|\sin x|\le|x|\ (\forall\,x\in\R)\)，故
+	\[
+	|\sin x-\sin x_0|=2\left|\sin\frac{x-x_0}{2}\cos\frac{x+x_0}{2}\right|
+	\]
+	\[
+	\le2\cdot\frac{|x-x_0|}{2}=|x-x_0|.
+	\]
+	于是
+	\[
+	(\forall\,\varepsilon>0)(\exists\,\delta=\varepsilon>0)(\forall\,x\in\R,\ |x-x_0|<\delta)
+	\]
+	\[
+	\Longrightarrow|\sin x-\sin x_0|<\varepsilon.
+	\]
+	此即表明正弦函数 \(x\longmapsto\sin x,\ x\in\R\) 在 \(x_0\) 处连续。再由 \(x_0\) 的任意性推知，正弦函数在 \(\R\) 上连续。同理可证余弦函数 \(x\longmapsto\cos x,\ x\in\R\) 在 \(\R\) 上连续。
+
+\end{sourceexample}
+
+从上面函数在一点处的连续、右（左）连续的定义可推出下述几个简单结论：
+
+1) 若 \(x_0\in X\) 是孤立点，则 \(f\) 在 \(x_0\) 处连续。
+
+2) 若 \(x_0\in X\) 是聚点、右侧聚点、左侧聚点，则
+\[
+f\text{ 在 }x_0\text{ 处连续}\Longleftrightarrow\lim_{x\to x_0}f(x)=f(x_0),
+\]
+\[
+f\text{ 在 }x_0\text{ 处右连续}\Longleftrightarrow\lim_{x\to x_0^+}f(x)=f(x_0),
+\]
+\[
+f\text{ 在 }x_0\text{ 处左连续}\Longleftrightarrow\lim_{x\to x_0^-}f(x)=f(x_0).
+\]
+
+3) 若 \(x_0\in X\) 是双侧聚点，则
+\[
+f\text{ 在 }x_0\text{ 处连续}\Longleftrightarrow f\text{ 在 }x_0\text{ 处左、右连续}.
+\]
+
+\subsection{函数的间断点}
+	\label{sec:4-5-2}
+
+\begin{mydef*}{}
+
+	设 \(f:X\to\R\) 是任一函数，\(x_0\in X\)。若 \(f\) 在 \(x_0\) 处不连续，则我们称 \(f\) 在 \(x_0\) 处间断，\(x_0\) 称为 \(f\) 的间断点或不连续点。
+
+	根据 \(f\) 在 \(x_0\) 处连续的定义可知，\(x_0\in X\) 是 \(f\) 的间断点 \(\Longleftrightarrow\)
+	\[
+	(\exists\,\varepsilon_0>0)(\forall\,\delta>0)(\exists\,\bar x\in X\cap B(x_0,\delta))
+	\]
+	\[
+	\Longrightarrow|f(\bar x)-f(x_0)|\ge\varepsilon_0.
+	\]
+
+\end{mydef*}
+
+现在我们来研究间断点的分类。
+
+\begin{mydef*}{}
+
+	设 \(f:X\to\R\) 是任一函数，\(x_0\in X\)。
+
+	\begin{enumerate}[label=\arabic*)]
+		\item \(x_0\) 是 \(X\) 的右侧聚点。
+
+		若 \(\lim_{x\to x_0^+}f(x)=f(x_0^+)\) 存在，但 \(f(x_0^+)\neq f(x_0)\)，则称 \(x_0\) 是 \(f\) 的第一类右侧间断点。
+
+		若 \(\lim_{x\to x_0^+}f(x)\) 不存在，或等于 \(\pm\infty\)，则称 \(x_0\) 是 \(f\) 的第二类右侧间断点。
+
+		\item \(x_0\) 是 \(X\) 的左侧聚点。
+
+		若 \(\lim_{x\to x_0^-}f(x)=f(x_0^-)\) 存在，但 \(f(x_0^-)\neq f(x_0)\)，则称 \(x_0\) 是 \(f\) 的第一类左侧间断点。
+
+		若 \(\lim_{x\to x_0^-}f(x)\) 不存在，或等于 \(\pm\infty\)，则称 \(x_0\) 是 \(f\) 的第二类左侧间断点。
+
+		\item \(x_0\) 是 \(X\) 的双侧聚点。
+
+		若 \(x_0\) 同时是 \(f\) 的第一类右、左侧间断点，则称 \(x_0\) 是 \(f\) 的第一类间断点。
+
+		若 \(x_0\) 是 \(f\) 的第一类间断点，并且 \(f(x_0^+)=f(x_0^-)\)，则称 \(x_0\) 是 \(f\) 的可去间断点。
+
+		若 \(x_0\) 是 \(f\) 的非第一类间断点的间断点，则我们称 \(x_0\) 是 \(f\) 的第二类间断点。
+	\end{enumerate}
+
+\end{mydef*}
+
+\textbf{附注}\quad 当 \(x_0\) 是函数 \(f:X\to\R\) 的可去间断点时，我们可以改变 \(f\) 在 \(x_0\) 处的定义使得修改后的函数在 \(x_0\) 处连续。为此我们令
+\[
+\widetilde f(x)=\begin{cases} f(x), & x\in X,\ x\neq x_0; \\ f(x_0^+)=f(x_0^-), & x=x_0. \end{cases}
+\]
+显然函数 \(\widetilde f:X\to\R\) 在 \(x_0\) 处连续。
+
+如果 \(x_0\) 是 \(f\) 的第一类右（左）侧间断点，则也可类似地改变 \(f\) 在 \(x_0\) 处的定义，使得修改后的函数在 \(x_0\) 处右（左）连续。
+
+\begin{sourceexample}{3}
+
+	考虑如下定义的函数 \(f,g:\R\to\R\)：
+	\[
+	f(x)=\begin{cases} \sin x, & x>0, \\ 1, & x\le0; \end{cases}
+	\qquad
+	g(x)=\begin{cases} \dfrac{\sin x}{x}, & x\neq0, \\ 2, & x=0. \end{cases}
+	\]
+	由于 \(\lim_{x\to0^+}f(x)=0\neq f(0)\)，\(\lim_{x\to0}g(x)=1\neq g(0)\)，故 \(x=0\) 是函数 \(f\) 的第一类右侧间断点，\(0\) 是函数 \(g\) 的第一类间断点，并且是可去间断点。
+
+\end{sourceexample}
+
+\begin{sourceexample}{4}
+
+	考虑符号函数 \(x\longmapsto\operatorname{sgn}(x),\ x\in\R\)。
+
+	由于 \(\lim_{x\to0^+}\operatorname{sgn}(x)=1\)，\(\lim_{x\to0^-}\operatorname{sgn}(x)=-1\)，\(\operatorname{sgn}(0)=0\)，故 \(x=0\) 是第一类间断点，但不是可去间断点。
+
+\end{sourceexample}
+
+\begin{sourceexample}{5}
+
+	考虑函数
+	\[
+	x\longmapsto f(x)=\begin{cases} \sin\dfrac1x, & x\neq0; \\ 0, & x=0. \end{cases}
+	\]
+	在 \S2 例 1 中已证 \(\lim_{x\to0}\sin\dfrac1x\) 不存在。因此 \(0\) 是此函数 \(f\) 的第二类间断点。
+
+\end{sourceexample}
+
+\begin{sourceexample}{6}
+
+	考虑函数
+	\[
+	x\longmapsto f(x)=\begin{cases} \dfrac1x, & x\neq0; \\ 1, & x=0. \end{cases}
+	\]
+	由于 \(\lim_{x\to0^+}\dfrac1x=+\infty\)，\(\lim_{x\to0^-}\dfrac1x=-\infty\)，故 \(0\) 是此函数 \(f\) 的第二类间断点。
+
+\end{sourceexample}
+
+关于函数的间断点，我们自然要问：
+
+1) 是否存在函数 \(f:I\to\R\)（\(I\subset\R\) 是一区间），使得 \(I\) 的所有点是第一类的可去间断点？
+
+2) 是否存在函数 \(f:I\to\R\)，使得属于 \(I\) 的 \(f\) 的所有间断点是第一类的可去间断点？
+
+3) 是否存在函数 \(f:I\to\R\)，使得属于 \(I\) 的 \(f\) 的所有间断点是第二类间断点？
+
+第一个问题的答案是否定的（见习题 12）。第二、三两个问题的回答是肯定的。
+
+\begin{sourceexample}{7}
+
+	考虑 Riemann 函数
+	\[
+	x\longmapsto R(x)=\begin{cases} 0, & x\in\Q^c; \\ 1, & x=0; \\ \dfrac1p, & x=\dfrac qp,\ p\in\N,\ q\in\Z,\ p,q\text{ 互质}. \end{cases}
+	\]
+	由于 \(\forall\,x_0\in\R,\ \lim_{x\to x_0}R(x)=0\)，故 Riemann 函数 \(R\) 在每一个无理点处连续，而在每一个有理点处间断。因此 Riemann 函数的所有间断点是第一类的可去间断点。虽然此间断点集 \(\Q\) 在 \(\R\) 中稠密。
+
+\end{sourceexample}
+
+\begin{sourceexample}{8}
+
+	考虑 Dirichlet 函数
+	\[
+	x\longmapsto D(x)=\begin{cases} 1, & x\in\Q; \\ 0, & x\in\Q^c. \end{cases}
+	\]
+	由于 \(\forall\,x_0\in\R,\ \lim_{x\to x_0}D(x)\) 不存在，故 Dirichlet 函数定义域 \(\R\) 的每一点都是它的第二类间断点。
+
+\end{sourceexample}
+
+\subsection{单调函数的间断点}
+
+\begin{mythm}{}{monotone-discontinuities-first-kind}
+
+	任一单调函数 \(f:X\to\R\) 的所有间断点（若存在）都是第一类的。
+
+\end{mythm}
+
+\begin{proof}
+
+	设 \(x_0\in X\) 是 \(f\) 的任一间断点。根据\rthm{thm:monotone-function-limit}知，若 \(x_0\) 是 \(X\) 的右（左）侧或双侧聚点，则 \(f(x_0^+)\)（\(f(x_0^-)\)）或 \(f(x_0^+)\)、\(f(x_0^-)\) 存在，因此 \(x_0\) 是第一类的间断点。
+
+\end{proof}
+
+\begin{mydef*}{}
+
+	设 \(f:X\to\R\) 是任一单调函数，\(x_0\in X\) 是 \(f\) 的任一间断点。
+
+	\begin{enumerate}[label=\arabic*)]
+		\item 若 \(x_0\) 是 \(X\) 的右（左）侧间断点，则我们称数
+		\[
+		s(x_0^+)=|f(x_0^+)-f(x_0)|\quad \bigl(s(x_0^-)=|f(x_0^-)-f(x_0)|\bigr)
+		\]
+		为 \(f\) 在 \(x_0\) 处的右（左）侧跃度。
+
+		\item 若 \(x_0\) 是 \(X\) 的双侧间断点，则我们称数
+		\[
+		s(x_0)=|f(x_0^+)-f(x_0^-)|
+		\]
+		为 \(f\) 在 \(x_0\) 处的跃度。
+	\end{enumerate}
+
+\end{mydef*}
+
+\begin{mythm}{}{monotone-discontinuity-set-countable}
+
+	设 \(f:X\to\R\) 是任一单调函数。
+
+	\begin{enumerate}[label=\arabic*)]
+		\item 令 \(A=\inf X,\ B=\sup X\)，则 \(\forall\,\lambda>0,\ \forall\,a,b\in\R\)，并且 \(A<a<b<B\)，\(f\) 在 \(X\cap[a,b]\) 上最多只有有限个右（左）侧跃度大于 \(\lambda\) 的右（左）侧间断点。
+
+		\item \(f\) 在 \(X\) 上的间断点集是一可数集。
+	\end{enumerate}
+
+\end{mythm}
+
+\begin{proof}
+
+	1) 我们只需考虑 \(f\) 是单调上升及右侧间断点的情形。
+
+	首先由确界性质知，存在 \(\bar x,\ \bar{\bar x}\in X\) 使得 \(A<\bar x<a<b<\bar{\bar x}<B\)。现设 \(x_1,x_2,\cdots,x_k\) 是 \(f\) 在 \(X\cap[a,b]\) 上的 \(k\) 个右侧间断点。我们证明下述不等式成立：
+	\[
+	\sum_{i=1}^k[f(x_i^+)-f(x_i)]\le f(\bar{\bar x})-f(\bar x).
+	\]
+	事实上，由 \(\bar x<x_i<x_{i+1}<\bar{\bar x}\ (i=1,2,\cdots,k-1)\) 及 \(f\) 的单调上升性知，\(f(x_1)-f(\bar x)\ge0,\ f(\bar{\bar x})-f(x_k^+)\ge0,\ f(x_{i+1})-f(x_i^+)\ge0\ (i=1,2,\cdots,k-1)\)。由此推得
+	\[
+	\begin{aligned}
+	\sum_{i=1}^k[f(x_i^+)-f(x_i)]
+	&=\sum_{i=1}^k[f(x_i^+)-f(x_i)]+f(\bar x)-f(\bar x)+f(\bar{\bar x})-f(\bar{\bar x})\\
+	&=f(\bar{\bar x})-f(\bar x)-[f(x_1)-f(\bar x)]-[f(\bar{\bar x})-f(x_k^+)]\\
+	&\qquad-\sum_{i=1}^{k-1}[f(x_{i+1})-f(x_i^+)]\\
+	&\le f(\bar{\bar x})-f(\bar x).
+	\end{aligned}
+	\]
+	如果在右侧间断点 \(x_i\ (i=1,2,\cdots,k)\) 处的右侧跃度 \(s(x_i^+)=f(x_i^+)-f(x_i)>\lambda\)，则由上述不等式得到
+	\[
+	k\lambda\le f(\bar{\bar x})-f(\bar x). \tag{*}
+	\]
+	由于 \(f(\bar{\bar x})-f(\bar x)\) 是与 \(k\) 无关的常数，故满足不等式 \((*)\) 的 \(k\) 不能无限的大。因此 \(f\) 在 \(X\cap[a,b]\) 上最多只有有限个右侧跃度大于 \(\lambda\) 的右侧间断点。
+
+	对左侧间断点的情形可类似证明。
+
+	2) 我们用 \(E\) 表示 \(f\) 在 \(X\) 上的间断点集。
+
+	设 \(A,B\in\R\)。\(\forall\,n\in\N\)，我们用 \(E_n\)、\(E_n^{(+)}\)、\(E_n^{(-)}\) 分别表示 \(f\) 在 \(X\cap\left[A+\dfrac1n,\ B-\dfrac1n\right]\) 上的间断点集、右侧间断点集、左侧间断点集。则
+	\[
+	E_n=E_n^{(+)}\cup E_n^{(-)},\qquad E=\bigcup_{n\in\N}E_n.
+	\]
+	若令
+	\[
+	E_{nk}^{(+)}=\left\{x\in E_n^{(+)}\ \middle|\ s(x^+)>\frac1k\right\},
+	\]
+	\[
+	E_{nk}^{(-)}=\left\{x\in E_n^{(-)}\ \middle|\ s(x^-)>\frac1k\right\},
+	\]
+	则我们有
+	\[
+	E_n^{(+)}=\bigcup_{k\in\N}E_{nk}^{(+)},\qquad E_n^{(-)}=\bigcup_{k\in\N}E_{nk}^{(-)}.
+	\]
+	因此
+	\[
+	E=\bigcup_{n\in\N}\bigcup_{k\in\N}\bigl(E_{nk}^{(+)}\cup E_{nk}^{(-)}\bigr).
+	\]
+	根据 1) 所证，\(\forall\,n\in\N,\ \forall\,k\in\N\)，\(E_{nk}^{(+)}\) 与 \(E_{nk}^{(-)}\) 是有限集，故 \(\bigcup_{n\in\N}\bigcup_{k\in\N}\bigl(E_{nk}^{(+)}\cup E_{nk}^{(-)}\bigr)\) 是可数集，从而 \(E\) 是可数集。
+
+	对 \(A,B\) 的其他情形，只需将上述证明稍作修改，即可类似证明。
+
+\end{proof}
+
+\begin{sourceexample}{9}
+
+	对于函数 \(x\longmapsto[x],\ x\in\R\)，从 \S4 例 5 的证明可知：
+
+	1) \(\forall\,n\in\Z\)，此函数在 \(]n,n+1[\) 上连续。
+
+	2) \(\forall\,n\in\Z\)，\(n\) 是此函数的第一类间断点。因此该函数的全部间断点的集合为 \(\Z\)，它是一个可数无限集。
+
+\end{sourceexample}
+
+\subsection*{习 题}
+
+\begin{exercise}
+	\item 确定下列各函数 \(x\longmapsto f(x),\ x\in X\) 的间断点集及间断点的类型，并画出函数的图形。
+	\begin{enumerate}[label=\arabic*)]
+		\item \(f(x)=\operatorname{sgn}\left(\sin\dfrac\pi x\right),\ x\neq0\)；
+		\item \(f(x)=\left[\dfrac1x\right],\ x\neq0\)；
+		\item \(f(x)=\begin{cases} x^3, & |x|\le1; \\ 1, & |x|>1; \end{cases}\)
+		\item \(f(x)=\begin{cases} \cos\dfrac{\pi x}{2}, & |x|\le1; \\ |x-1|, & |x|>1; \end{cases}\)
+		\item \(f(x)=\begin{cases} \cos\pi x, & x\in\Q; \\ 0, & x\notin\Q; \end{cases}\)
+		\item \(f(x)=\begin{cases} \dfrac{\sin x}{|x|}, & x\neq0; \\ 1, & x=0; \end{cases}\)
+		\item \(f(x)=\begin{cases} \operatorname{ctg}^2\pi x, & x\notin\Z; \\ 0, & x\in\Z; \end{cases}\)
+		\item \(f(x)=\begin{cases} \dfrac{x}{1-|x|}, & |x|\neq1; \\ 1, & |x|=1. \end{cases}\)
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 研究函数
+	\[
+	x\longmapsto\begin{cases} \dfrac{x}{\operatorname{tg}x}, & x\neq n\pi+\dfrac\pi2,\ n\pi; \\ 1, & x=n\pi+\dfrac\pi2,\ n\pi \end{cases}\quad(n\in\Z)
+	\]
+	的间断点类型。
+\end{exercise}
+
+\begin{exercise}
+	\item 证明：函数
+	\[
+	x\longmapsto\begin{cases} x\left[\dfrac1x\right], & x\neq0; \\ 1, & x=0 \end{cases}
+	\]
+	在 \(x=0\) 处连续。
+\end{exercise}
+
+\begin{exercise}
+	\item 证明：函数 \(x\longmapsto\sqrt{x},\ x\in\R^+\) 在 \(\R^+\) 上连续。
+\end{exercise}
+
+\begin{exercise}
+	\item 证明：函数
+	\[
+	x\longmapsto\begin{cases} x^2, & x\in\Q; \\ 0, & x\notin\Q \end{cases}
+	\]
+	只在 \(x=0\) 处连续。
+\end{exercise}
+
+\begin{exercise}
+	\item 证明：函数
+	\[
+	x\longmapsto\begin{cases} x, & x\in\Q; \\ 1-x, & x\notin\Q \end{cases}
+	\]
+	只在 \(x=\dfrac12\) 处连续。
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(f:X\to\R\) 满足条件：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\forall\,x,y\in X\) 且 \(x+y\in X\)，\(f(x)+f(y)=f(x+y)\)；
+		\item \(f\) 在 \(x=0\) 处连续。
+	\end{enumerate}
+	证明：\(\forall\,x_0\in X\)，\(f\) 在 \(x_0\) 处连续。
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(f:[a,b]\to\R\) 在 \([a,b]\) 上有界。定义函数 \(i,s,\widetilde i,\widetilde s:[a,b]\to\R\) 如下：\(\forall\,x\in[a,b]\)，
+	\[
+	i(x)=\inf_{a<t<x}f(t),\qquad s(x)=\sup_{a<t<x}f(t),
+	\]
+	\[
+	\widetilde i(x)=\inf_{a\le t<x}f(t),\qquad \widetilde s(x)=\sup_{a\le t<x}f(t).
+	\]
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：函数 \(i,s\) 在 \([a,b]\) 的每一点 \(x\) 处左连续。
+		\item 举例说明函数 \(\widetilde i,\widetilde s\) 在 \([a,b]\) 上不一定右连续。
+		\item 若函数 \(f\) 在 \([a,b]\) 上连续，则函数 \(\widetilde i,\widetilde s\) 在 \([a,b]\) 上连续。
+		\item 若函数 \(f\) 在 \(x_0\in[a,b]\) 处连续，并且 \(f(x_0)<\widetilde s(x_0)\)，则存在 \(x_0\) 的一个邻域 \(]\alpha,\beta[\)，使得 \(\widetilde s\) 在 \(]\alpha,\beta[\) 上取常值。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:\ ]0,1[\to\R\) 是任一连续函数，\(\langle a_n\rangle,\langle b_n\rangle\) 是两个实数序列使得 \(\lim_{n\to+\infty}a_n=0,\ \lim_{n\to+\infty}b_n=0\)。假设 \(\forall\,x\in\ ]0,1[\)，\(\exists\,N=N(x)\in\N\) 使得 \(\forall\,n\ge N,\ f(x+a_n)=f(x+b_n)\)。
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：若 \(0<a_n=b_{n+1}\ (\forall\,n\in\N)\)，则 \(f\) 是常值函数。
+		\item 若 \(0<b_n<a_n\ (\forall\,n\in\N)\)，试问 \(f\) 一定是常值函数吗？
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(A\subset\R\) 是任一非空集合。\(A\) 的直径 \(D(A)\) 定义为：
+	\[
+	D(A)\triangleq\sup_{x,y\in A}|x-y|.
+	\]
+	现设 \(f:X\to\R\) 是任一有界函数。\(\forall\,x\in X\)，令
+	\[
+	\omega(f,x)=\inf_{U\in\mathscr N(x)}D\bigl(f(U\cap X)\bigr).
+	\]
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：\(f\) 在 \(x\) 处连续，当且仅当 \(\omega(f,x)=0\)。
+		\item 证明：\(\forall\,\varepsilon>0,\ E=\{x\in X\mid\omega(f,x)\ge\varepsilon\}\) 是闭集。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:\R\to\R^+\) 是任一函数，使得 \(\forall\,\varepsilon>0\)，集合 \(E_\varepsilon=\{x\in\R\mid f(x)\ge\varepsilon\}\) 是有限集。
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：\(\forall\,[a,b]\subset\R\)，存在 \(\xi\in[a,b]\) 使得 \(f(\xi)=0\)。
+		\item 证明：若 \(x_0\in\R\) 且 \(f(x_0)=0\)，则 \(f\) 在 \(x_0\) 处连续。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:[a,b]\to\R\) 是任一函数使得它的每一个间断点都是可去间断点。
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：\(\forall\,\varepsilon>0\)，\(E_\varepsilon=\left\{x\in[a,b]\ \middle|\ \bigl|\lim_{y\to x}f(y)-f(x)\bigr|>\varepsilon\right\}\) 是有限集。
+		\item 证明：\(f\) 的间断点集是可数集。由此推知，不存在函数 \(f:[a,b]\to\R\) 使得 \([a,b]\) 的每一点是 \(f\) 的可去间断点。
+	\end{enumerate}
+\end{exercise}
+
+\section{连续函数性质}
+
+连续函数除了具有函数极限的一般性质外，还有它本身的许多特性。
+
+\subsection{连续函数的一般性质}
+
+\begin{mythm}{}{continuous-function-operations}
+
+	设函数 \(f,g:X\to\R\) 在 \(x_0\in X\) 处连续，则
+
+	\begin{enumerate}[label=\arabic*)]
+		\item \(f\pm g,\ fg,\ \dfrac fg\ (g(x_0)\neq0)\) 都在点 \(x_0\) 处连续。
+
+		\item \(f\) 在 \(x_0\) 处是局部有界的。
+
+		\item 若 \(f(x_0)>r\ (<r)\)，则存在 \(\delta>0\) 使得
+		\[
+		\forall\,x\in X\cap B(x_0,\delta),\ f(x)>r\ (<r).
+		\]
+
+		\item 若 \(\exists\,\delta>0\)，使得 \(\forall\,x\in X\cap B(x_0,\delta),\ f(x)\ge g(x)\)，则 \(f(x_0)\ge g(x_0)\)。
+
+		\item 若 \(f(x_0)>g(x_0)\)，则存在 \(\delta>0\) 使得
+		\[
+		\forall\,x\in X\cap B(x_0,\delta),\ f(x)>g(x).
+		\]
+	\end{enumerate}
+
+\end{mythm}
+
+此定理可由函数极限的相应性质推出，证明从略。
+
+\begin{mythm}{}{continuity-sequence-characterization}
+
+	设 \(f:X\to\R\) 是任一函数，\(x_0\in X\)，则 \(f\) 在 \(x_0\) 处连续的充分必要条件是：
+	\[
+	\forall\,x_n\in X\ (n\in\N),\ \text{且 }x_n\to x_0\ (n\to+\infty),\ \lim_{n\to+\infty}f(x_n)=f(x_0).
+	\]
+
+\end{mythm}
+
+此定理可由函数极限的\rprop{property:func-limit-heine}（Heine 定理），令 \(A=f(x_0)\) 推出。
+
+\begin{sourceexample}{1}
+
+	\(\forall\,n\in\N\)，任意一个实系数的 \(n\) 次多项式函数
+	\[
+	x\longmapsto P_n(x)=a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0,\quad x\in\R
+	\]
+	在 \(\R\) 上连续。
+
+\end{sourceexample}
+
+\begin{sourceexample}{2}
+
+	\(\forall\,n,m\in\N\)。任意一个实系数的有理分式函数
+	\[
+	x\longmapsto\frac{P_n(x)}{Q_m(x)}=\frac{a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0}{b_mx^m+b_{m-1}x^{m-1}+\cdots+b_1x+b_0}
+	\]
+	在其定义域 \(X\) 上连续。
+
+\end{sourceexample}
+
+\begin{sourceexample}{3}
+
+	由于 \(\operatorname{tg}x=\dfrac{\sin x}{\cos x}\)，\(\operatorname{ctg}x=\dfrac{\cos x}{\sin x}\)，故正切函数 \(x\longmapsto\operatorname{tg}x\)，\(x\in\R-\left\{k\pi+\dfrac\pi2 \mid k\in\Z\right\}\)，余切函数 \(x\longmapsto\operatorname{ctg}x\)，\(x\in\R-\{k\pi\mid k\in\Z\}\) 在各自定义域上连续。
+
+\end{sourceexample}
+
+\subsection{连续函数的特性}
+	\label{sec:4-6-2}
+
+\begin{mythm}{复合函数的连续性}{composite-continuity}
+
+	设函数 \(f:X\to\R\) 与 \(g:Y\to\R\) 满足下列条件：
+
+	1) \(f\) 在 \(X\) 上连续，\(g\) 在 \(Y\) 上连续；
+
+	2) \(Z=\operatorname{Dom}(g\circ f)\neq\varnothing\)。
+
+	则复合函数 \(g\circ f:Z\to\R\) 在 \(Z\) 上连续。
+
+\end{mythm}
+
+\begin{proof}
+
+	任取一点 \(x_0\in Z=\operatorname{Dom}(g\circ f)\)。由于 \(\operatorname{Dom}(g\circ f)=\operatorname{Dom}(f)\cap f^{-1}(\operatorname{Dom}(g))\)，故 \(x_0\in X\)，\(y_0=f(x_0)\in Y\)。
+
+	现在由 \(g\) 在 \(y_0=f(x_0)\) 处连续知
+	\[
+	(\forall\,\varepsilon>0)(\exists\,\eta>0)\Longrightarrow g\bigl(Y\cap B(f(x_0),\eta)\bigr)\subset B\bigl(g(f(x_0)),\varepsilon\bigr).
+	\]
+	另一方面，由于 \(f\) 在 \(x_0\) 处连续，故
+	\[
+	(\text{对}\,\eta>0)(\exists\,\delta>0)\Longrightarrow f\bigl(X\cap B(x_0,\delta)\bigr)\subset B\bigl(f(x_0),\eta\bigr).
+	\]
+	于是
+	\[
+	\begin{aligned}
+	g\circ f\bigl(Z\cap B(x_0,\delta)\bigr)
+	&=g\circ f\bigl(X\cap f^{-1}(Y)\cap B(x_0,\delta)\bigr)\\
+	&=g\bigl(f(f^{-1}(Y)\cap X\cap B(x_0,\delta))\bigr)\\
+	&\subset g\bigl(f(f^{-1}(Y))\cap f(X\cap B(x_0,\delta))\bigr)\\
+	&\subset g\bigl(Y\cap B(f(x_0),\eta)\bigr)\\
+	&\subset B\bigl(g(f(x_0)),\varepsilon\bigr)\\
+	&=B\bigl(g\circ f(x_0),\varepsilon\bigr).
+	\end{aligned}
+	\]
+	因此 \(g\circ f\) 在 \(x_0\) 处连续。由 \(x_0\) 的任意性知 \(g\circ f\) 在 \(Z\) 上连续。
+
+\end{proof}
+
+\begin{sourceexample}{4}
+
+	考虑函数 \(x\longmapsto\sqrt{|\cos x|},\ x\in\R\)。
+
+	此函数可以看作下述三个函数的复合：
+	\[
+	x\stackrel{f}{\longmapsto}\cos x,\ x\in\R,\qquad y\stackrel{g}{\longmapsto}|y|,\ y\in\R,\qquad z\stackrel{h}{\longmapsto}\sqrt{z},\ z\in\R^+.
+	\]
+	即
+	\[
+	\sqrt{|\cos x|}=h\circ g\circ f(x),\quad x\in\R.
+	\]
+	由于函数 \(f,g,h\) 在各自定义域上连续，故由上述定理知（两次应用\rthm{thm:composite-continuity}），函数 \(h\circ g\circ f\) 也即函数 \(x\longmapsto\sqrt{|\cos x|},\ x\in\R\) 在 \(\R\) 上连续。
+
+\end{sourceexample}
+
+\begin{mythm}{Weierstrass定理}{weierstrass-theorem}
+
+	设 \([a,b]\subset\R\)，\(f:[a,b]\to\R\) 是任一连续函数，则
+
+	\begin{enumerate}[label=\arabic*)]
+		\item \(f\) 在 \([a,b]\) 上有界。
+
+		\item \(f\) 达到它的上、下确界，即存在 \(x',x''\in[a,b]\) 使得
+		\[
+		f(x')=\inf_{x\in[a,b]}f(x),\qquad f(x'')=\sup_{x\in[a,b]}f(x).
+		\]
+
+		\item \(f\) 取介于 \(f(x')\) 与 \(f(x'')\) 之间的一切值，即
+		\[
+		f([a,b])=[f(x'),f(x'')].
+		\]
+	\end{enumerate}
+
+\end{mythm}
+
+\begin{proof}
+
+	1) 用反证法，假设 \(f\) 在 \([a,b]\) 上无界，则
+	\[
+	(\forall\,n\in\N)(\exists\,x_n\in[a,b])\Longrightarrow|f(x_n)|>n. \tag{*}
+	\]
+	由此得一实数序列 \(\langle x_n\rangle\)。由 Bolzano-Weierstrass 定理不妨设序列 \(\langle x_n\rangle\) 本身收敛。令 \(\lim_{n\to+\infty}x_n=\bar x\)，则 \(\bar x\in[a,b]\)。由 \(f\) 的连续性知，函数值序列 \(\langle f(x_n)\rangle\) 收敛于 \(f(\bar x)\)，于是序列 \(\langle f(x_n)\rangle\) 有界。这显然与上述 \((*)\) 式相矛盾。因此 \(f\) 在 \([a,b]\) 上有界。
+
+	2) 令
+	\[
+	m=\inf_{x\in[a,b]}f(x),\qquad M=\sup_{x\in[a,b]}f(x).
+	\]
+	则由 1) 知，\(m,M\in\R\)。
+
+	由上确界特性知，
+	\[
+	(\forall\,n\in\N)(\exists\,x_n\in[a,b])\Longrightarrow M-\frac1n<f(x_n)\le M. \tag{**}
+	\]
+	由此得一实数序列 \(\langle x_n\rangle\)，它是有界的，由 Bolzano-Weierstrass 定理，不失一般性，可以假设序列 \(\langle x_n\rangle\) 本身收敛。令 \(\lim_{n\to+\infty}x_n=x''\)。于是 \(x''\in[a,b]\)。由 \(f\) 的连续性得到
+	\[
+	f(x'')=\lim_{n\to+\infty}f(x_n).
+	\]
+	最后在不等式 \((**)\) 中令 \(n\to+\infty\) 取极限得到 \(f(x'')=M\)。
+
+	下确界的情形可类似证明。
+
+	3) 若 \(x'=x''\)，则 \(f(x')=f(x'')\)。于是 \(f\) 在 \([a,b]\) 上为常值函数，结论自然成立，因此不妨设 \(x'\neq x''\) 且 \(x'<x''\)。令 \(y_0\in[f(x'),f(x'')]\)。考虑集合
+	\[
+	G=\{x\in[x',x'']\mid f(x)\le y_0\}.
+	\]
+	因为 \(x'\in G\)，所以 \(G\neq\varnothing\)。\(G\) 是有界集。于是 \(c=\sup G\) 存在，并且 \(x'\le c\le x''\)。我们证明 \(f(c)=y_0\)。
+
+	首先证明 \(f(c)\le y_0\)。事实上，由上确界的特性知，存在实数序列 \(\langle x_n\rangle\) 使得 \(x_n\in G\ (n\in\N)\)，\(x_n\to c\ (n\to+\infty)\)。由于 \(f(x_n)\le y_0\)，故由 \(f\) 的连续性知，\(f(c)\le y_0\)。
+
+	若 \(f(c)<y_0\)，则 \(c<x''\)。于是由 \(f\) 在 \(c\) 处的连续性，存在 \(\delta>0\) 使得
+	\[
+	c<c+\delta<x''\ \text{并且}\ f(c+\delta)<y_0.
+	\]
+	此即表明 \(c+\delta\in G\)，这与 \(c\) 的定义相矛盾。因此 \(f(c)=y_0\)。
+
+\end{proof}
+
+\begin{mycor*}{1}
+
+	设 \(f:[a,b]\to\R\) 是任一连续函数，则对任一介于 \(f(a)\) 与 \(f(b)\) 之间的值 \(\mu\)，存在 \(c\in[a,b]\) 使得
+	\[
+	f(c)=\mu.
+	\]
+	特别地，若 \(f(a)\cdot f(b)<0\)，则存在 \(c\in\ ]a,b[\) 使得 \(f(c)=0\)。
+
+\end{mycor*}
+
+从几何上来看，此推论表明，在 \(xOy\) 平面上平行于 \(x\) 轴的直线 \(y=\mu\) 必与函数 \(f\) 的图形相交。若 \(f(a)\cdot f(b)<0\)，则 \(f\) 的图形必穿过 \(x\) 轴。
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}
+\begin{axis}[
+  width=5.8cm,height=4.2cm,
+  axis lines=middle,
+  xlabel=$x$,ylabel=$y$,
+  xmin=-0.3,xmax=4.5,
+  ymin=-0.3,ymax=3.2,
+  xtick={0.6,2,3.8},
+  xticklabels={$a$,$c$,$b$},
+  ytick={1.8},
+  yticklabels={$\mu$},
+  domain=0.2:4,
+  samples=200,
+  smooth,
+  every axis plot/.append style={thick},
+  tick label style={font=\footnotesize},
+  label style={font=\footnotesize},
+  axis line style={-stealth},
+]
+\addplot[thick] {1.2+1.6*sin(deg(x-0.8))+0.4*sin(deg(2.5*(x-0.8)))};
+\addplot[dashed,domain=0.6:3.8] {1.8};
+\draw[dashed] (axis cs:0.6,0) -- (axis cs:0.6,1.8);
+\draw[dashed] (axis cs:3.8,0) -- (axis cs:3.8,1.8);
+\filldraw[fill=white,draw=black] (axis cs:0.6,1.8) circle (1.5pt);
+\filldraw[fill=white,draw=black] (axis cs:3.8,1.8) circle (1.5pt);
+\node[font=\footnotesize] at (axis cs:-0.15,-0.15) {$O$};
+\end{axis}
+\end{tikzpicture}
+\quad
+\begin{tikzpicture}
+\begin{axis}[
+  width=5.8cm,height=4.2cm,
+  axis lines=middle,
+  xlabel=$x$,ylabel=$y$,
+  xmin=-0.3,xmax=4.5,
+  ymin=-1.5,ymax=2.5,
+  xtick={0.6,2,3.8},
+  xticklabels={$a$,$c$,$b$},
+  ytick={-1,1.8},
+  yticklabels={$f(a)$,$f(b)$},
+  domain=0.2:4,
+  samples=200,
+  smooth,
+  every axis plot/.append style={thick},
+  tick label style={font=\footnotesize},
+  label style={font=\footnotesize},
+  axis line style={-stealth},
+]
+\addplot[thick] {-1.5+2.2*tanh(0.8*(x-0.6))};
+\draw[dashed] (axis cs:0.6,0) -- (axis cs:0.6,-1);
+\draw[dashed] (axis cs:3.8,0) -- (axis cs:3.8,1.8);
+\draw[dashed] (axis cs:0,1.8) -- (axis cs:3.8,1.8);
+\draw[dashed] (axis cs:0,-1) -- (axis cs:0.6,-1);
+\filldraw[fill=white,draw=black] (axis cs:0.6,-1) circle (1.5pt);
+\filldraw[fill=white,draw=black] (axis cs:3.8,1.8) circle (1.5pt);
+\node[font=\footnotesize] at (axis cs:-0.15,-0.15) {$O$};
+\end{axis}
+\end{tikzpicture}
+	\caption{}
+	\label{fig:4-9}
+\end{figure}
+
+\begin{mycor*}{2}
+
+	设 \(I\subset\R\) 是任一区间，\(f:I\to\R\) 是任一连续函数，则 \(f(I)\) 也是一个区间。
+
+\end{mycor*}
+
+\begin{proof}
+
+	根据第 3 章 \S4 习题 10 的结论，我们只需证明：
+	\[
+	\forall\,y_1,y_2\in f(I)\ \text{且}\ y_1<y_2\Longrightarrow[y_1,y_2]\subset f(I).
+	\]
+	令 \(x_1,x_2\in I\)，使 \(y_1=f(x_1),\ y_2=f(x_2)\)。不妨设 \(x_1<x_2\)。于是由上述定理知，
+	\[
+	[y_1,y_2]\subset\Bigl[\inf_{x\in[x_1,x_2]}f(x),\ \sup_{x\in[x_1,x_2]}f(x)\Bigr]=f\bigl([x_1,x_2]\bigr)\subset f(I).
+	\]
+
+\end{proof}
+
+\begin{sourceexample}{5}
+
+	任意一个实系数的奇次代数方程
+	\[
+	a_{2n+1}x^{2n+1}+a_{2n}x^{2n}+\cdots+a_1x+a_0=0\quad(a_{2n+1}\neq0)
+	\]
+	至少有一个实根。
+
+	事实上，定义函数 \(f:\R\to\R\) 如下：
+	\[
+	f(x)=a_{2n+1}x^{2n+1}+a_{2n}x^{2n}+\cdots+a_1x+a_0,\quad x\in\R
+	\]
+	\[
+	=a_{2n+1}x^{2n+1}\left(1+\frac{a_{2n}}{a_{2n+1}}\cdot\frac1x+\cdots+\frac{a_1}{a_{2n+1}}\cdot\frac1{x^{2n}}+\frac{a_0}{x^{2n+1}}\right).
+	\]
+	右边括号内的表达式当 \(|x|\) 充分大以后恒为正值，因此存在 \(M>0\)，使得 \(f(M)\) 与 \(a_{2n+1}M^{2n+1}\) 同号，\(f(-M)\) 与 \(-a_{2n+1}M^{2n+1}\) 同号，从而 \(f(M)\cdot f(-M)<0\)。由于 \(f\) 在 \([-M,M]\) 上连续，故由上述推论 1 知，至少存在一点 \(c\in\ ]-M,M[\) 使得 \(f(c)=0\)。
+
+\end{sourceexample}
+
+\subsection{一致连续性}
+
+设 \(X\subset\R\) 是任一非空集合，\(f:X\to\R\) 在 \(X\) 上连续。于是 \(\forall\,x_0\in X\)，由连续性定义知
+\[
+(\forall\,\varepsilon>0)(\exists\,\delta_{x_0}>0)(\forall\,x\in X,\ |x-x_0|<\delta_{x_0})\Longrightarrow|f(x)-f(x_0)|<\varepsilon.
+\]
+这里 \(\delta_{x_0}\) 与 \(x_0\) 有关。
+
+如果 \(\delta=\inf_{x_0\in X}\delta_{x_0}>0\)，则显然我们有：
+\[
+\forall\,x,x'\in X,\ |x-x'|<\delta\Longrightarrow|f(x)-f(x')|<\varepsilon.
+\]
+但一般说来，可能出现 \(\inf_{x_0\in X}\delta_{x_0}=0\) 的情形。
+
+例如考虑函数 \(f:\ ]0,1]\to\R\)：\(\forall\,x\in\ ]0,1],\ f(x)=\dfrac1x\)。
+
+\(\forall\,x_0\in\ ]0,1]\)，\(\forall\,x\in\left[\dfrac{x_0}{2},1\right]\)，我们有
+\[
+\left|\frac1x-\frac1{x_0}\right|=\frac{|x-x_0|}{xx_0}<\frac{2|x-x_0|}{x_0^2}.
+\]
+\(\forall\,\varepsilon>0\)，由 \(\dfrac{2|x-x_0|}{x_0^2}<\varepsilon\) 得到 \(|x-x_0|<\dfrac{\varepsilon x_0^2}{2}\)。若令
+\[
+\delta_{x_0}=\frac{x_0^2\varepsilon}{2},
+\]
+则 \(\delta_{x_0}>0\)，于是对 \(0<\varepsilon<1\)，我们有：
+\[
+\forall\,x\in\ ]0,1],\ |x-x_0|<\delta_{x_0}\Longrightarrow\left|\frac1x-\frac1{x_0}\right|<\varepsilon.
+\]
+很显然，这里
+\[
+\inf_{x_0\in\ ]0,1]}\delta_{x_0}=\inf_{x_0\in\ ]0,1]}\frac{x_0^2\varepsilon}{2}=0,
+\]
+换句话说，不存在 \(\delta>0\) 使得
+\[
+\forall\,x,x'\in\ ]0,1],\quad |x-x'|<\delta\Longrightarrow\left|\frac1x-\frac1{x'}\right|<\varepsilon.
+\]
+为了研究这种“一致性”\(\delta\) 的存在性，我们引进一致连续性的下述定义。
+
+\begin{mydef*}{}
+
+	设 \(X\subset\R\) 是任一非空集合，\(f:X\to\R\) 是任一函数，我们称 \(f\) 在 \(X\) 上是一致连续的，如果下述性质成立：
+	\[
+	(\forall\,\varepsilon>0)(\exists\,\delta>0)(\forall\,x,x'\in X,\ |x-x'|<\delta)
+	\]
+	\[
+	\Longrightarrow|f(x)-f(x')|<\varepsilon.
+	\]
+
+\end{mydef*}
+
+下面的定理指出了一个一致连续函数类。
+
+\begin{mythm}{}{closed-bounded-uniform-continuity}
+
+	设 \(X\subset\R\) 是有界闭集，若函数 \(f:X\to\R\) 连续，则 \(f\) 是一致连续的。
+
+\end{mythm}
+
+\begin{proof}
+
+	用反证法。假设 \(f\) 在 \(X\) 上不一致连续。则
+	\[
+	(\exists\,\varepsilon_0>0)(\forall\,\delta>0)(\exists\,x',x''\in X,\ |x'-x''|<\delta)
+	\]
+	\[
+	\Longrightarrow|f(x')-f(x'')|\ge\varepsilon_0.
+	\]
+	取 \(\delta=\dfrac1n\ (n\in\N)\)。于是存在 \(x_n',x_n''\in X\) 使得
+	\[
+	|x_n'-x_n''|<\frac1n,\quad |f(x_n')-f(x_n'')|\ge\varepsilon_0\quad(\forall\,n\in\N).
+	\]
+	由此得到两个实数序列 \(\langle x_n'\rangle\) 与 \(\langle x_n''\rangle\)，它们都是有界的。由 Bolzano-Weierstrass 定理知，序列 \(\langle x_n'\rangle\) 有收敛子序列，不妨设 \(\langle x_n'\rangle\) 本身收敛。令 \(\lim_{n\to+\infty}x_n'=\bar x\)。由于 \(X\) 是闭集，故 \(\bar x\in X\)。
+
+	另一方面，由
+	\[
+	|x_n'-x_n''|<\frac1n,\quad x_n''=(x_n''-x_n')+x_n'\quad(\forall\,n\in\N)
+	\]
+	知，\(\lim_{n\to+\infty}(x_n'-x_n'')=0\)，从而序列 \(\langle x_n''\rangle\) 收敛，并且
+	\[
+	\lim_{n\to+\infty}x_n''=\lim_{n\to+\infty}(x_n''-x_n')+\lim_{n\to+\infty}x_n'=\bar x.
+	\]
+	现在对不等式 \(|f(x_n')-f(x_n'')|\ge\varepsilon_0\ (\forall\,n\in\N)\) 令 \(n\to+\infty\) 取极限，由 \(f\) 的连续性推知
+	\[
+	\varepsilon_0\le\left|\lim_{n\to\infty}f(x_n')-\lim_{n\to\infty}f(x_n'')\right|=|f(\bar x)-f(\bar x)|=0.
+	\]
+	这与 \(\varepsilon_0>0\) 矛盾。因此 \(f\) 在 \(X\) 上一致连续。
+
+\end{proof}
+
+\begin{sourceexample}{6}
+
+	正弦、余弦函数 \(x\longmapsto\sin x,\ x\longmapsto\cos x,\ x\in\R\)，在 \(\R\) 上一致连续。
+
+	事实上，\(\forall\,x,x'\in\R\)，我们有
+	\[
+	|\sin x-\sin x'|=2\left|\sin\frac{x-x'}2\right|\left|\cos\frac{x+x'}2\right|\le|x-x'|.
+	\]
+	于是
+	\[
+	(\forall\,\varepsilon>0)(\exists\,\delta=\varepsilon)(\forall\,x,x'\in\R,\ |x-x'|<\delta)
+	\]
+	\[
+	\Longrightarrow|\sin x-\sin x'|<\varepsilon.
+	\]
+	因此正弦函数 \(x\longmapsto\sin x,\ x\in\R\) 在 \(\R\) 上一致连续。同理可证余弦函数 \(x\longmapsto\cos x,\ x\in\R\) 在 \(\R\) 上一致连续。
+
+\end{sourceexample}
+
+\begin{sourceexample}{7}
+
+	函数 \(x\longmapsto\dfrac1x,\ x\in\ ]0,1]\)，在 \(]0,1]\) 上不是一致连续的，但 \(\forall\,0<a<1\)，此函数在 \([a,1]\) 上是一致连续的。
+
+	由于 \([a,1]\) 是有限闭区间，故由上述定理知，此函数在 \([a,1]\) 上一致连续。为了证明它在 \(]0,1]\) 上不一致连续，令
+	\[
+	x_n=\frac1{2n},\quad x_n'=\frac1n\quad(\forall\,n\in\N),
+	\]
+	则 \(|x_n-x_n'|=\dfrac1{2n}\to0\ (n\to+\infty)\)，但 \(\left|\dfrac1{x_n}-\dfrac1{x_n'}\right|=n>1\)。
+
+	此即表明此函数在 \(]0,1]\) 上不一致连续。
+
+\end{sourceexample}
+
+\begin{mythm}{}{uniform-continuity-bounded}
+
+	设 \(X\subset\R\) 是任一有界集，\(f:X\to\R\) 在 \(X\) 上一致连续，则 \(f\) 在 \(X\) 上连续、有界。
+
+\end{mythm}
+
+\begin{proof}
+
+	\(f\) 的连续性是显然的。假设 \(f\) 在 \(X\) 上无界。那末
+	\[
+	(\forall\,n\in\N)(\exists\,x_n\in X)\Longrightarrow|f(x_n)|>n.
+	\]
+	由此得一实数序列 \(\langle x_n\rangle\)。由 Bolzano-Weierstrass 定理知，不妨设 \(\langle x_n\rangle\) 本身收敛。
+
+	另一方面，由于 \(f\) 在 \(X\) 上一致连续，故由定义有：
+	\[
+	(\forall\,\varepsilon>0)(\exists\,\delta>0)(\forall\,x,x'\in X,\ |x-x'|<\delta)
+	\]
+	\[
+	\Longrightarrow|f(x)-f(x')|<\varepsilon.
+	\]
+	又因为 \(\langle x_n\rangle\) 收敛，所以 \(\langle x_n\rangle\) 是 Cauchy 序列，从而对上述 \(\delta>0\)，存在 \(N\in\N\)，使得
+	\[
+	\forall\,n,m\in\N,\ n,m\ge N\Longrightarrow|x_n-x_m|<\delta.
+	\]
+	由此得到
+	\[
+	\forall\,n,m\in\N,\ n,m\ge N\Longrightarrow|f(x_n)-f(x_m)|<\varepsilon.
+	\]
+	此即表明 \(\langle f(x_n)\rangle\) 是 Cauchy 实数序列。从而序列 \(\langle f(x_n)\rangle\) 有界，这显然与前面的不等式 \(|f(x_n)|>n\ (\forall\,n\in\N)\) 相矛盾。因此 \(f\) 在 \(X\) 上有界。
+
+\end{proof}
+
+现在我们用此定理来重新证明例 7 的函数 \(x\longmapsto\dfrac1x,\ x\in\ ]0,1]\)，在 \(]0,1]\) 上不一致连续就十分简单，因为此函数在 \(]0,1]\) 上无界。
+
+\rthm{thm:uniform-continuity-bounded}的逆命题不成立。
+
+\begin{sourceexample}{8}
+
+	函数 \(x\longmapsto\sin\dfrac1x,\ x\in\ ]0,1]\)，在 \(]0,1]\) 上有界，并且连续，但不一致连续。
+
+	事实上，对 \(\varepsilon_0=1\)，及 \(\forall\,\delta>0\)，\(\exists\,n\in\N\) 使得
+	\[
+	x'=\frac1{2n\pi},\quad x''=\frac1{2n\pi+\frac\pi2}\in\ ]0,1]\ \text{且}\ |x'-x''|<\delta.
+	\]
+	但是
+	\[
+	\left|\sin\frac1{x'}-\sin\frac1{x''}\right|=\left|\sin2n\pi-\sin\left(2n\pi+\frac\pi2\right)\right|=1.
+	\]
+
+\end{sourceexample}
+
+\subsection*{习 题}
+
+\begin{exercise}
+	\item 设 \(f,g:\ ]a,b[\to\R\) 是任意两个连续函数。
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：\(E=\{x\in\ ]a,b[\mid f(x)\neq0\}\) 是开集。
+		\item 证明：\(F=\{x\in\ ]a,b[\mid f(x)>g(x)\}\) 是开集。
+		\item 证明：\(G=\{x\in\ ]a,b[\mid f(x)=g(x)\}\) 是闭集。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设连续函数 \(f,g:[a,b]\to\R\) 满足不等式
+	\[
+	0<g(x)<f(x),\quad\forall\,x\in[a,b].
+	\]
+	证明：存在 \(k>1\) 使得 \(kg(x)\le f(x)\)，\(\forall\,x\in[a,b]\)。
+\end{exercise}
+
+\begin{exercise}
+	\item 设连续函数 \(f,g:[0,1]\to\R\) 满足条件
+	\[
+	f(0)=0,\quad f(1)=1,\quad g(0)=1,\quad g(1)=0.
+	\]
+	证明：\(\forall\,\lambda\in\R^+\)，\(\exists\,x\in[0,1]\) 使得 \(f(x)=\lambda g(x)\)。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f,g:[a,b]\to[a,b]\) 是任意两个连续函数。
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：至少存在一个 \(x_0\in[a,b]\)，使得 \(f(x_0)=x_0\)。
+		\item 若 \(f\circ g=g\circ f\)，则至少存在一个 \(x_0\in[a,b]\) 使得 \(f(x_0)=g(x_0)\)。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(I\subset\R\) 是任一区间，\(f:I\to\R\) 是任一函数。
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：若 \(f\) 在 \(I\) 上连续，并且 \(f(I)\subset\Q\)，则 \(f\) 是常值函数。
+		\item 证明：若 \(f\) 在 \(I\) 上连续，并且 \(f(I)\subset\Q^c\)，则 \(f\) 是常值函数。
+		\item 证明：若 \(I\) 不为单元集，并且 \(f(I\cap\Q)\subset\Q^c\)，\(f(I\cap\Q^c)\subset\Q\)，则 \(f\) 在 \(I\) 上不可能连续。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设连续函数 \(f,g:[a,b]\to\R\) 满足条件：
+	\[
+	f(x)\neq0,\quad f^2(x)=g^2(x),\quad\forall\,x\in[a,b].
+	\]
+	证明：下述两种情形中有且只有一种情形出现：
+	1) \(f(x)=g(x),\ \forall\,x\in[a,b]\)；2) \(f(x)=-g(x),\ \forall\,x\in[a,b]\)。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(a\in\R\)，\(f:[a,+\infty[\to\R\) 是任一连续函数。并且 \(\lim_{x\to+\infty}f(x)=A\)（有限或 \(\pm\infty\)）。
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：\(f\) 取介于 \(f(a)\) 与 \(A\) 之间的一切值。
+		\item 证明：若 \(A=+\infty\)，则 \(f\) 是下有界的，并且 \(f\) 达到它的下确界。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(P_n(x)=x^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0\)。证明：
+	\begin{enumerate}[label=\arabic*)]
+		\item 若 \(a_0<0\)，则 \(P_n(x)=0\) 至少有一个正根。
+		\item 若 \(a_0<0\)，且 \(n\) 为偶数，则 \(P_n(x)=0\) 至少有一个负根。
+		\item 若 \(n\) 为偶数，则存在 \(\overline{x}\in\R\) 使得 \(P_n(x)\ge P_n(\overline{x})\ \forall\,x\in\R\)。由此推出：存在实数 \(m\) 使得 \(\forall\,b\ge m\)，方程 \(P_n(x)=b\) 有实解存在，而 \(\forall\,b<m\)，方程 \(P_n(x)=b\) 没有实解存在。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \([a,b]\subset\R\) 是任一有限闭区间，\(f:[a,b]\to\R\) 是任一连续函数。
+	\begin{enumerate}[label=\arabic*)]
+		\item 令 \(\mathscr{A}=\{I\mid I\text{ 是 }[a,b]\text{ 的闭子区间使得 }f\text{ 在 }I\text{ 上有界}\}\)。证明：\(\mathscr{A}\) 是 \([a,b]\) 的一个完全覆盖。由此推出 \(f\) 在 \([a,b]\) 上有界。
+		\item 设在 \([a,b]\) 上 \(f\neq0\)。令 \(\mathscr{B}=\{I\mid I\text{ 是 }[a,b]\text{ 的闭子区间使 }f\text{ 在 }I\text{ 上不变号}\}\)。证明：\(\mathscr{B}\) 是 \([a,b]\) 的一个完全覆盖。由此推出：若 \(f(a)f(b)<0\)，则至少存在一点 \(\xi\in[a,b]\) 使得 \(f(\xi)=0\)。
+		\item \(\forall\,\varepsilon>0\)，令 \(\mathscr{C}=\{I\mid I\text{ 是 }[a,b]\text{ 的闭子区间，使得 }\forall\,x,y\in I,\ |f(x)-f(y)|<\varepsilon/2\}\)。证明：\(\mathscr{C}\) 是 \([a,b]\) 的一个完全覆盖，由此推出 \(f\) 在 \([a,b]\) 上一致连续。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 直接用定义证明：函数 \(x\longmapsto\sqrt{x}\)，\(x\in[0,+\infty[\)，在 \([0,1]\) 上一致连续。
+\end{exercise}
+
+\begin{exercise}
+	\item 证明：函数 \(x\longmapsto x^2\) 在 \(x\in[0,a]\) 上一致连续，但在 \([0,+\infty[\) 上不一致连续（这里 \(a>0\)）。
+\end{exercise}
+
+\begin{exercise}
+	\item 证明：函数 \(x\longmapsto\sin x^2\)，\(x\in\R\)，在 \(\R\) 上不一致连续。
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(f:[a,+\infty[\to\R\) 在 \([a,+\infty[\) 上连续，并且 \(\lim_{x\to+\infty}f(x)=A\in\R\)。证明：\(f\) 在 \([a,+\infty[\) 上一致连续。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(X\subset\R\) 是任一闭集。\(f:X\to\R\) 是任一单调的有界连续函数。证明：\(f\) 在 \(X\) 上一致连续。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(X\subset\R\) 是任一非空集合，\(f:X\to\R\) 是任一函数，\(a\in X\) 是 \(X\) 的一个聚点。我们称 \(f\) 在 \(a\) 处是上（下）半连续的，如果下述性质成立：
+	\[
+	\forall\,\lambda>f(a)\ (\lambda<f(a)),\ \exists\,\delta>0,\ \forall\,x\in X\cap B(a,\delta)
+	\]
+	\[
+	\Longrightarrow\lambda>f(x)\ (\lambda<f(x)).
+	\]
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：\(f\) 在 \(a\) 处下半连续的充分必要条件是函数 \(-f\) 在 \(a\) 处是上半连续的。
+		\item 证明：\(f\) 在 \(a\) 处连续当且仅当 \(f\) 在 \(a\) 处既上半连续，又下半连续。
+		\item 证明：Dirichlet 函数
+		\[
+		x\longmapsto D(x)=\begin{cases} 1, & x\in\Q; \\ 0, & x\in\Q^c, \end{cases}
+		\]
+		在任一有理点 \(a\) 处是上半连续的，而在任一无理点 \(a\) 处是下半连续的。
+		\item 考虑函数
+		\[
+		x\longmapsto f(x)=\begin{cases} 0, & x=0; \\ \dfrac1{x^k}, & x\neq0, \end{cases}\quad(k\in\N).
+		\]
+		证明：若 \(k\) 是偶数时，\(f\) 在 \(0\) 处是下半连续的，若 \(k\) 是奇数时，\(f\) 在 \(0\) 处既不是上半连续的，又不是下半连续的。
+		\item 证明：\(f\) 在 \(a\) 处下半连续当且仅当 \(f(a)=\varliminf_{x\to a}f(x)\)。
+		\item 设 \(X\subset\R\) 是任一开区间。则 \(f\) 在 \(X\) 上是下半连续（即 \(\forall\,a\in X\)，\(f\) 在 \(a\) 处下半连续）当且仅当 \(\forall\,\lambda\in\R\)，集合 \(\{x\in X\mid f(x)>\lambda\}\) 是开集。
+		\item 设 \(A\subset\R\) 是任一集合，证明 \(A\) 是开集当且仅当 \(A\) 的特征函数 \(\chi_A\) 在 \(\R\) 上是下半连续的，而 \(A\) 是闭集当且仅当 \(\chi_A\) 在 \(\R\) 上是上半连续的。
+	\end{enumerate}
+\end{exercise}
+
+\section{单调连续函数的反函数}
+
+\subsection{反函数存在性}
+	\label{sec:4-7-1}
+
+\begin{mythm}{}{inverse-function-continuity}
+
+	设 \(I\subset\R\) 是任一非空区间，\(f:I\to\R\) 是任一严格单调上升（下降）的连续函数。则
+
+	\begin{enumerate}[label=\arabic*)]
+		\item \(f:I\to f(I)\) 是一一映射。
+
+		\item \(f\) 的逆映射 \(f^{-1}:f(I)\to I\) 也是严格单调上升（下降）的连续函数（\(f^{-1}\) 通常称为 \(f\) 的反函数）。
+	\end{enumerate}
+
+\end{mythm}
+
+\begin{proof}
+
+	我们假设 \(f\) 是严格单调上升的。对严格单调下降的情形可类似证明。
+
+	1) 因为 \(f\) 是严格单调上升的，所以 \(f\) 是单射，从而 \(f:I\to f(I)\) 是一一映射。因此 \(f\) 的逆映射 \(f^{-1}:f(I)\to I\) 存在。
+
+	2) 设 \(y_1,y_2\in f(I)\) 且 \(y_1<y_2\)。若 \(f^{-1}(y_1)\ge f^{-1}(y_2)\)，则由 \(f\) 的严格单调上升性及 \(f\circ f^{-1}=\operatorname{id}_{f(I)}\) 知
+	\[
+	y_1=f\circ f^{-1}(y_1)\ge f\circ f^{-1}(y_2)=y_2,
+	\]
+	这与假设相矛盾。因此 \(f^{-1}(y_1)<f^{-1}(y_2)\)，即 \(f^{-1}\) 是严格单调上升函数。
+
+	下面证明 \(f^{-1}\) 在 \(f(I)\) 上连续。任取 \(y_0\in f(I)\)。由于 \(I\) 是区间，故 \(f(I)\) 也是一个区间。
+
+	1) \(y_0\in f(\mathring I)\)：于是 \(f^{-1}(y_0^-)\)，\(f^{-1}(y_0^+)\) 存在。为了证明 \(f^{-1}\) 在 \(y_0\) 处连续，我们只需证明 \(f^{-1}(y_0^-)=f^{-1}(y_0)=f^{-1}(y_0^+)\)。
+
+	首先由 \(f^{-1}\) 的单调上升性，我们有：
+	\[
+	\forall\,y\in f(I)\ \text{且}\ y<y_0,\quad f^{-1}(y)<f^{-1}(y_0^-),
+	\]
+	\[
+	\forall\,y\in f(I)\ \text{且}\ y_0<y,\quad f^{-1}(y_0^+)<f^{-1}(y).
+	\]
+	因此
+	\[
+	f^{-1}\bigl(\ ]-\infty,y_0[\ \cap f(I)\bigr)\subset\ ]-\infty,f^{-1}(y_0^-)\ ],
+	\]
+	\[
+	f^{-1}\bigl(\ ]y_0,+\infty[\ \cap f(I)\bigr)\subset\bigl[\ f^{-1}(y_0^+),+\infty\bigr[\ .
+	\]
+	从而
+	\[
+	\begin{aligned}
+	I&=f^{-1}(f(I))\\
+	&=f^{-1}\Bigl(\bigl(\ ]-\infty,y_0[\ \cap f(I)\bigr)\cup\{y_0\}\cup\bigl(\ ]y_0,+\infty[\ \cap f(I)\bigr)\Bigr)\\
+	&=f^{-1}\bigl(\ ]-\infty,y_0[\ \cap f(I)\bigr)\cup f^{-1}(y_0)\cup f^{-1}\bigl(\ ]y_0,+\infty[\ \cap f(I)\bigr)\\
+	&\subset\ ]-\infty,f^{-1}(y_0^-)\ ]\cup f^{-1}(y_0)\cup\bigl[\ f^{-1}(y_0^+),+\infty\bigr[\ .
+	\end{aligned}
+	\]
+	因为 \(I\) 是一个区间，并且 \(f^{-1}(y_0^-)\le f^{-1}(y_0)\le f^{-1}(y_0^+)\)，所以必然有 \(f^{-1}(y_0^-)=f^{-1}(y_0)=f^{-1}(y_0^+)\)。
+
+	2) \(y_0=\inf f(I)\)：则 \(f^{-1}(y_0)\le f^{-1}(y_0^+)\)。由于
+	\[
+	\begin{aligned}
+	I&=f^{-1}(f(I))\\
+	&=f^{-1}\Bigl(\{y_0\}\cup\bigl(\ ]y_0,+\infty[\ \cap f(I)\bigr)\Bigr)\\
+	&\subset f^{-1}(y_0)\cup\bigl[\ f^{-1}(y_0^+),+\infty\bigr[\ ,
+	\end{aligned}
+	\]
+	故 \(f^{-1}(y_0)=f^{-1}(y_0^+)\)。因此 \(f^{-1}\) 在 \(y_0\) 处右连续。
+
+	3) \(y_0=\sup f(I)\)：则 \(f^{-1}(y_0^-)\le f^{-1}(y_0)\)。由于
+	\[
+	\begin{aligned}
+	I&=f^{-1}(f(I))\\
+	&=f^{-1}\Bigl(\bigl(\ ]-\infty,y_0[\ \cap f(I)\bigr)\cup\{y_0\}\Bigr)\\
+	&\subset\ ]-\infty,f^{-1}(y_0^-)\ ]\cup f^{-1}(y_0),
+	\end{aligned}
+	\]
+	因此 \(f^{-1}(y_0^-)=f^{-1}(y_0)\)。即 \(f^{-1}\) 在 \(y_0\) 处左连续。
+
+\end{proof}
+
+\subsection{\texorpdfstring{函数 \(f\) 的图形与反函数 \(f^{-1}\) 的图形}{函数f的图形与反函数的图形}}
+
+根据函数图形的定义我们有
+\[
+Gr(f)=\{(x,f(x))\mid x\in I\},
+\]
+\[
+Gr(f^{-1})=\{(y,f^{-1}(y))\mid y\in f(I)\}.
+\]
+\(\forall\,y\in f(I)\)，令 \(x\in I\) 使得 \(y=f(x)\)，则 \(f^{-1}(y)=f^{-1}(f(x))=x\)，因此
+\[
+Gr(f^{-1})=\{(f(x),x)\mid x\in I\}.
+\]
+由于在平面直角坐标系 \(\{O;x,y\}\) 中点 \((x,f(x))\) 与点 \((f(x),x)\) 关于直线 \(y=x\) 对称，故在同一直角坐标系 \(\{O;x,y\}\) 下，\(Gr(f)\) 与 \(Gr(f^{-1})\) 关于直线 \(y=x\) 对称（\rfig{fig:4-10}）。
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}
+\begin{axis}[
+  width=9cm,height=8cm,
+  axis lines=middle,
+  xlabel={$x$},ylabel={$y$},
+  xmin=-0.8,xmax=6.5,ymin=-0.8,ymax=6.5,
+  xtick=\empty,ytick=\empty,
+  domain=0.5:5.5,
+  samples=200,
+  smooth,
+  every axis plot/.append style={thick},
+  label style={font=\small},
+  clip=false
+]
+% 直线 y = x
+\addplot[thick,domain=-0.5:6] {x};
+
+% 曲线 y = f(x)：单调递增，下凸，经过 (1,1.2) 附近和 (4,3.5) 附近
+% 用三次曲线近似：y = 0.2 + 0.8*x + 0.05*x^2 - 0.01*x^3，调整使其通过合理点
+\addplot[thick,domain=0.7:4.8] {0.1 + 0.75*x + 0.08*x^2 - 0.012*x^3};
+
+% 反函数曲线 x = f^{-1}(y)，即 y = f(x) 关于 y=x 的对称曲线
+\addplot[thick,domain=0.7:4.8] ({0.1 + 0.75*x + 0.08*x^2 - 0.012*x^3},{x});
+
+% 标注点 (x, f(x))
+\coordinate (P) at (axis cs:3.5,{0.1+0.75*3.5+0.08*3.5^2-0.012*3.5^3});
+\filldraw[fill=white,draw=black,thick] (P) circle (2pt);
+\node[right,font=\small] at (P) {$(x,f(x))$};
+
+% 标注点 (f(x), x)
+\coordinate (Q) at (axis cs:{0.1+0.75*3.5+0.08*3.5^2-0.012*3.5^3},3.5);
+\filldraw[fill=white,draw=black,thick] (Q) circle (2pt);
+\node[left,font=\small] at (Q) {$(f(x),x)$};
+
+% 从 (x, f(x)) 到 x 轴的虚线
+\draw[dashed] (P) -- (axis cs:3.5,0);
+\node[below,font=\small] at (axis cs:3.5,0) {$x$};
+
+% 从 (x, f(x)) 到 y 轴的虚线
+\draw[dashed] (P) -- (axis cs:0,{0.1+0.75*3.5+0.08*3.5^2-0.012*3.5^3});
+\node[left,font=\small] at (axis cs:0,{0.1+0.75*3.5+0.08*3.5^2-0.012*3.5^3}) {$f(x)$};
+
+% 从 (f(x), x) 到 y 轴的虚线（水平）
+\draw[dashed] (Q) -- (axis cs:0,3.5);
+\node[left,font=\small] at (axis cs:0,3.5) {$x=f^{-1}(y)$};
+
+% 从 (f(x), x) 到 x 轴的虚线（垂直）
+\draw[dashed] (Q) -- (axis cs:{0.1+0.75*3.5+0.08*3.5^2-0.012*3.5^3},0);
+\node[below,font=\small] at (axis cs:{0.1+0.75*3.5+0.08*3.5^2-0.012*3.5^3},0) {$y=f(x)$};
+
+% 原点标注
+\node[below left,font=\small] at (axis cs:0,0) {$O$};
+
+% 对称线段（连接两点的虚线，垂直于 y=x）
+\draw[dashed] (P) -- (Q);
+
+% 箭头标注 y=x
+\node[font=\small] at (axis cs:5.2,5.6) {$y=x$};
+\end{axis}
+\end{tikzpicture}
+	\caption{}
+	\label{fig:4-10}
+\end{figure}
+
+\subsection{三角函数的反函数}
+	\label{sec:4-7-3}
+
+1) 由于正弦函数 \(\sin\) 在 \(\left[-\dfrac\pi2,\dfrac\pi2\right]\) 上的限制 \(x\longmapsto\sin x,\ x\in\left[-\dfrac\pi2,\dfrac\pi2\right]\) 是严格单调上升的连续函数，并且
+\[
+\lim_{x\to-\frac\pi2}\sin x=-1,\quad \lim_{x\to\frac\pi2}\sin x=1.
+\]
+故它有从 \([-1,1]\) 到 \(\left[-\dfrac\pi2,\dfrac\pi2\right]\) 上的严格上升的连续反函数。我们记这个反函数为
+\[
+x\longmapsto\arcsin x,\quad x\in[-1,1].
+\]
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}
+% 左图：y = sin x
+\begin{axis}[
+  width=5.8cm,height=4.8cm,
+  axis lines=middle,
+  xlabel={$x$},ylabel={$y$},
+  xmin=-2.2,xmax=2.2,ymin=-1.6,ymax=1.6,
+  xtick={-1.5708,1.5708},
+  xticklabels={$-\frac{\pi}{2}$,$\frac{\pi}{2}$},
+  ytick={-1,1},
+  yticklabels={$-1$,$1$},
+  domain=-1.5708:1.5708,
+  samples=200,
+  smooth,
+  every axis plot/.append style={thick},
+  tick label style={font=\footnotesize},
+  label style={font=\footnotesize},
+  clip=false,
+]
+\addplot[black,thick] {sin(deg(x))};
+% 右端点 (pi/2,1) 实心
+\addplot[only marks,mark=*,mark size=1.5pt,mark options={fill=black,draw=black}] coordinates {(1.5708,1)};
+% 左端点 (-pi/2,-1) 实心
+\addplot[only marks,mark=*,mark size=1.5pt,mark options={fill=black,draw=black}] coordinates {(-1.5708,-1)};
+% 虚线框
+\draw[dashed] (axis cs:-1.5708,-1) -- (axis cs:1.5708,-1) -- (axis cs:1.5708,1) -- (axis cs:-1.5708,1) -- cycle;
+\end{axis}
+\node at (2.4,-0.8) {$y=\sin x$};
+\end{tikzpicture}
+\quad
+\begin{tikzpicture}
+% 右图：y = arcsin x
+\begin{axis}[
+  width=5.8cm,height=4.8cm,
+  axis lines=middle,
+  xlabel={$x$},ylabel={$y$},
+  xmin=-1.6,xmax=1.6,ymin=-2.2,ymax=2.2,
+  xtick={-1,1},
+  ytick={-1.5708,1.5708},
+  yticklabels={$-\frac{\pi}{2}$,$\frac{\pi}{2}$},
+  domain=-1:1,
+  samples=200,
+  smooth,
+  every axis plot/.append style={thick},
+  tick label style={font=\footnotesize},
+  label style={font=\footnotesize},
+  clip=false,
+]
+\addplot[black,thick] {rad(asin(x))};
+% 右端点 (1, pi/2) 实心
+\addplot[only marks,mark=*,mark size=1.5pt,mark options={fill=black,draw=black}] coordinates {(1,1.5708)};
+% 左端点 (-1, -pi/2) 实心
+\addplot[only marks,mark=*,mark size=1.5pt,mark options={fill=black,draw=black}] coordinates {(-1,-1.5708)};
+% 虚线框
+\draw[dashed] (axis cs:-1,-1.5708) -- (axis cs:1,-1.5708) -- (axis cs:1,1.5708) -- (axis cs:-1,1.5708) -- cycle;
+\end{axis}
+\node at (2.4,-0.8) {$y=\arcsin x$};
+\end{tikzpicture}
+	\caption{}
+	\label{fig:4-11}
+\end{figure}
+
+2) 由于余弦函数 \(\cos\) 在 \([0,\pi]\) 上的限制 \(x\longmapsto\cos x,\ x\in[0,\pi]\) 是严格单调下降的连续函数，并且
+\[
+\lim_{x\to0}\cos x=1,\quad \lim_{x\to\pi}\cos x=-1.
+\]
+故它有从 \([-1,1]\) 到 \([0,\pi]\) 上的严格单调下降的连续反函数。我们记这个反函数为
+\[
+x\longmapsto\arccos x,\quad x\in[-1,1].
+\]
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}
+\begin{axis}[
+  width=6cm,height=5cm,
+  axis lines=middle,
+  xlabel={$x$},ylabel={$y$},
+  xmin=-0.3,xmax=3.5,
+  ymin=-1.5,ymax=1.3,
+  xtick={1.5708,3.1416},
+  xticklabels={$\frac{\pi}{2}$,$\pi$},
+  ytick={-1,1},
+  yticklabels={$-1$,$1$},
+  domain=0:3.1416,
+  samples=200,
+  smooth,
+  every axis plot/.append style={thick},
+  tick label style={font=\footnotesize},
+  label style={font=\footnotesize},
+  axis line style={->},
+]
+\addplot[black,thick] {cos(deg(x))};
+\addplot[black,thick,domain=3.1416:3.3] {-1};
+\draw[dashed] (axis cs:3.1416,-1.2) -- (axis cs:3.1416,-1);
+\draw[dashed] (axis cs:0.2,-1) -- (axis cs:3.1416,-1);
+\filldraw[fill=white,draw=black,thick] (axis cs:0,1) circle (1.5pt);
+\filldraw[fill=white,draw=black,thick] (axis cs:3.1416,-1) circle (1.5pt);
+\node at (axis cs:1.5708,-1.8) {$y=\cos x$};
+\end{axis}
+\end{tikzpicture}
+\quad
+\begin{tikzpicture}
+\begin{axis}[
+  width=6cm,height=5cm,
+  axis lines=middle,
+  xlabel={$x$},ylabel={$y$},
+  xmin=-1.5,xmax=1.5,
+  ymin=-0.5,ymax=3.5,
+  xtick={-1,1},
+  xticklabels={$-1$,$1$},
+  ytick={1.5708,3.1416},
+  yticklabels={$\frac{\pi}{2}$,$\pi$},
+  domain=-1:1,
+  samples=200,
+  smooth,
+  every axis plot/.append style={thick},
+  tick label style={font=\footnotesize},
+  label style={font=\footnotesize},
+  axis line style={->},
+]
+\addplot[black,thick] {acos(x)/180*pi};
+\addplot[black,thick,domain=-1.3:-1] {3.1416};
+\draw[dashed] (axis cs:-1.3,3.1416) -- (axis cs:-1,3.1416);
+\draw[dashed] (axis cs:-1,0.2) -- (axis cs:-1,3.1416);
+\filldraw[fill=white,draw=black,thick] (axis cs:-1,3.1416) circle (1.5pt);
+\filldraw[fill=black,draw=black,thick] (axis cs:1,0) circle (1.5pt);
+\node at (axis cs:0,-0.8) {$y=\arccos x$};
+\end{axis}
+\end{tikzpicture}
+	\caption{}
+	\label{fig:4-12}
+\end{figure}
+
+3) 由于正切函数 \(\operatorname{tg}\) 在 \(\left]-\dfrac\pi2,\dfrac\pi2\right[\) 上的限制 \(x\longmapsto\operatorname{tg}x,\ x\in\left]-\dfrac\pi2,\dfrac\pi2\right[\)，是严格单调上升的连续函数，并且
+\[
+\lim_{x\to-\frac\pi2^+}\operatorname{tg}x=-\infty,\quad \lim_{x\to\frac\pi2^-}\operatorname{tg}x=+\infty.
+\]
+故它有从 \(]-\infty,+\infty[\) 到 \(\left]-\dfrac\pi2,\dfrac\pi2\right[\) 上的严格单调上升的连续反函数。我们记这个反函数为
+\[
+x\longmapsto\operatorname{arctg}x,\quad x\in\ ]-\infty,+\infty[.
+\]
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}
+\begin{axis}[width=5.5cm,height=4.5cm,
+  axis lines=middle,
+  xlabel={$x$},ylabel={$y$},
+  xmin=-2.2,xmax=2.2,ymin=-4.5,ymax=4.5,
+  xtick={-1.5708,1.5708},
+  xticklabels={$-\frac{\pi}{2}$,$\frac{\pi}{2}$},
+  ytick={\empty},
+  domain=-1.55:1.55,samples=200,smooth,
+  every axis plot/.append style={thick},
+  tick label style={font=\footnotesize},
+  label style={font=\footnotesize},
+  axis line style={-stealth},
+]
+\addplot[thick] {tan(deg(x))};
+\draw[dashed,thick] (axis cs:-1.5708,-4.5) -- (axis cs:-1.5708,4.5);
+\draw[dashed,thick] (axis cs:1.5708,-4.5) -- (axis cs:1.5708,4.5);
+\node[font=\footnotesize] at (axis cs:0,-5.2) {$y=\operatorname{tg}x$};
+\end{axis}
+%
+\begin{axis}[width=5.5cm,height=4.5cm,
+  at={(6.2cm,0cm)},anchor=south west,
+  axis lines=middle,
+  xlabel={$x$},ylabel={$y$},
+  xmin=-4.5,xmax=4.5,ymin=-2.2,ymax=2.2,
+  xtick={\empty},
+  ytick={-1.5708,1.5708},
+  yticklabels={$-\frac{\pi}{2}$,$\frac{\pi}{2}$},
+  domain=-4.5:4.5,samples=200,smooth,
+  every axis plot/.append style={thick},
+  tick label style={font=\footnotesize},
+  label style={font=\footnotesize},
+  axis line style={-stealth},
+]
+\addplot[thick] {rad(atan(x))};
+\draw[dashed,thick] (axis cs:-4.5,1.5708) -- (axis cs:4.5,1.5708);
+\draw[dashed,thick] (axis cs:-4.5,-1.5708) -- (axis cs:4.5,-1.5708);
+\node[font=\footnotesize] at (axis cs:0,-2.9) {$y=\operatorname{arctg}x$};
+\end{axis}
+\end{tikzpicture}
+	\caption{}
+	\label{fig:4-13}
+\end{figure}
+
+4) 由于余切函数 \(\operatorname{ctg}\) 在 \(]0,\pi[\) 上的限制 \(x\longmapsto\operatorname{ctg}x,\ x\in\ ]0,\pi[\)，是严格单调下降的连续函数，并且
+\[
+\lim_{x\to0^+}\operatorname{ctg}x=+\infty,\quad \lim_{x\to\pi^-}\operatorname{ctg}x=-\infty.
+\]
+故它有从 \(]-\infty,+\infty[\) 到 \(]0,\pi[\) 上的严格单调下降的连续反函数。我们记这个反函数为
+\[
+x\longmapsto\operatorname{arcctg}x,\quad x\in\ ]-\infty,+\infty[.
+\]
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}
+\begin{axis}[
+  width=6cm,height=7cm,
+  axis lines=middle,
+  xlabel={$x$},ylabel={$y$},
+  xmin=-0.3,xmax=3.5,
+  ymin=-6,ymax=6,
+  xtick={1.5708,3.1416},
+  xticklabels={$\dfrac{\pi}{2}$,$\pi$},
+  ytick=\empty,
+  domain=0.05:3.09,
+  samples=200,
+  smooth,
+  every axis plot/.append style={thick},
+  tick label style={font=\footnotesize},
+  label style={font=\footnotesize},
+  axis line style={->},
+]
+\addplot {cot(deg(x))};
+\end{axis}
+\node at (2.6,-0.6) {$y=\operatorname{ctg}x$};
+\end{tikzpicture}\quad
+		\begin{tikzpicture}
+\begin{axis}[
+    width=7cm,
+    height=6.5cm,
+    axis lines=middle,
+    xlabel=$x$,
+    ylabel=$y$,
+    xmin=-5,
+    xmax=5,
+    ymin=-0.5,
+    ymax=3.5,
+    xtick=\empty,
+    ytick={1.5708,3.1416},
+    yticklabels={$\frac{\pi}{2}$,$\pi$},
+    every axis plot/.append style={thick},
+    tick label style={font=\footnotesize},
+    label style={font=\footnotesize},
+    samples=200,
+    smooth,
+    domain=-5:5,
+    restrict y to domain=-0.5:3.5,
+]
+% Horizontal asymptotes
+\addplot[domain=-5:5, dashed, thin] {pi};
+\addplot[domain=-5:5, dashed, thin] {0};
+
+% y = arccot(x) = pi/2 - arctan(x), range (0, pi)
+\addplot[thick] {pi/2 - rad(atan(x))};
+
+% Point at (0, pi/2)
+\addplot[only marks, mark=*, mark size=1.5pt, mark options={fill=black,draw=black}] coordinates {(0,1.5708)};
+
+\end{axis}
+
+% Label below the figure
+\node at (3.5,-0.6) {$y=\operatorname{arcctg}x$};
+\end{tikzpicture}
+	\caption{}
+	\label{fig:4-14}
+\end{figure}
+
+\subsection*{习 题}
+
+\begin{exercise}
+	\item 直接用 \(\varepsilon\)-\(\delta\) 语言证明\rthm{thm:inverse-function-continuity}中的反函数 \(f^{-1}:f(I)\to I\) 的连续性。
+\end{exercise}
+
+\begin{exercise}
+	\item 证明下列各等式：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\arcsin(-x)=-\arcsin x\)；
+		\item \(\arccos(-x)=\pi-\arccos x\)；
+		\item \(\operatorname{arctg}(-x)=-\operatorname{arctg}x\)；
+		\item \(\operatorname{arcctg}(-x)=\pi-\operatorname{arcctg}x\)；
+		\item \(\arcsin x+\arccos x=\dfrac\pi2\)；
+		\item \(\operatorname{arctg}x+\operatorname{arcctg}x=\dfrac\pi2\)。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 考虑函数 \(y\longmapsto f(y)=y-\lambda\sin y\)，\(y\in\R\ (0\le\lambda<1)\)。
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：\(f\) 是从 \(\R\) 到 \(\R\) 上的严格单调上升的连续函数。
+		\item 证明：存在唯一的连续反函数 \(x\longmapsto y(x)\)，\(x\in\R\)，满足方程
+		\[
+		y-\lambda\sin y=x\quad(\forall\,x\in\R).
+		\]
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(I\subset\R\) 是任一非空区间，\(f:I\to\R\) 是任一单调函数，证明下述结论等价：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(f\) 在 \(I\) 上连续；
+		\item \(f(I)\) 是一区间。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(I\subset\R\) 是任一非空区间，\(f:I\to\R\) 是任一连续单射。
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：\(\forall\,x_1,x_2\in I,\ x_1<x_2\)，\(f\) 在 \([x_1,x_2]\) 上是单调的。
+		\item 由此推出 \(f\) 在 \(I\) 上是严格单调的。
+	\end{enumerate}
+\end{exercise}
+

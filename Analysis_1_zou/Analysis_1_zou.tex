@@ -1,0 +1,173 @@
+% !TeX program = xelatex
+\documentclass{qbook}
+
+\hypersetup{
+  pdftitle={数学分析（上册）},
+  pdfauthor={邹应},
+  pdfsubject={数学分析教材重排本}
+}
+\graphicspath{{figure/}}
+\captionsetup{bi-first}
+\renewcommand{\thefigure}{\thechapter-\arabic{figure}}
+
+% TikZ 重绘全书插图所需（本仓库统一使用，非一次性正文宏）
+\usepackage{pgfplots}
+\usepgfplotslibrary{fillbetween}
+\pgfplotsset{compat=1.18}
+% 全书插图统一为黑色、无采样点标记（原书为黑白印刷，避免 pgfplots 默认彩色循环与默认 mark=*）
+\pgfplotsset{every axis plot post/.append style={black, mark=none}}
+\usetikzlibrary{patterns,patterns.meta,calc,decorations.markings}
+
+
+% Long-form Chinese body: Source Han/Noto Serif; headings: Source Han/Noto Sans.
+% Prefer static Source Han font files so XeLaTeX can select real bold weights.
+\IfFontExistsTF{Source Han Serif CN}{%
+  \setCJKmainfont[
+    BoldFont={Source Han Serif CN Bold},
+    ItalicFont={KaiTi}
+  ]{Source Han Serif CN}
+  \setCJKsansfont[
+    BoldFont={Source Han Sans CN Bold}
+  ]{Source Han Sans CN}
+  \setCJKmonofont{FangSong}
+}{%
+  \IfFontExistsTF{Noto Serif SC}{%
+    \setCJKmainfont[AutoFakeBold=2,ItalicFont={KaiTi}]{Noto Serif SC}
+    \setCJKsansfont[AutoFakeBold=2]{Noto Sans SC}
+    \setCJKmonofont{FangSong}
+  }{%
+    \IfFontExistsTF{Noto Serif CJK SC}{%
+      \setCJKmainfont[AutoFakeBold=2,AutoFakeSlant=.2]{Noto Serif CJK SC}
+      \setCJKsansfont[AutoFakeBold=2]{Noto Sans CJK SC}
+      \setCJKmonofont{Noto Sans Mono CJK SC}
+    }{%
+      \setCJKmainfont[AutoFakeBold=2,AutoFakeSlant=.2]{SimSun}
+      \setCJKsansfont[AutoFakeBold=2]{Microsoft YaHei}
+      \setCJKmonofont{FangSong}
+    }
+  }
+}
+\newenvironment{sourceexample}[1]{%
+  \Needspace{6\baselineskip}%
+  \begin{exaBox}\qbookcompactdisplays\allowdisplaybreaks[4]\par\smallskip\noindent
+  {\small\sffamily\bfseries\color{sthlmGreen}例\if\relax\detokenize{#1}\relax\else\ #1\fi}%
+  \par\nopagebreak[4]\noindent
+}{\par\smallskip\end{exaBox}}
+
+
+% define set
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+
+% recall formula
+\newcommand\remember[2]{
+	\makeatletter
+	\expandafter\gdef\csname @labeled:#1\endcsname{#2}\label{#1}#2
+	\makeatother
+}
+\newcommand\recall[1]{
+	\makeatletter
+	\csname @labeled:#1\endcsname\tag{\ref{#1}}
+	\makeatother
+}
+
+
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\lt}{\mathrel{<}}
+\providecommand{\nin}{\notin}
+\providecommand{\nightharpoonup}{\mathrel{\not\!\rightharpoonup}}
+
+% 附录“符号索引/名词索引”中的“章·节·段”交叉引用：跳转到对应小节
+\newcommand{\idxref}[3]{\hyperref[sec:#1-#2-#3]{#1·#2·#3}}
+\setlength{\tabcolsep}{4pt}
+
+% Pandoc-generated nested lists can begin while their outer item is still
+% empty.  Finish that item and collapse the otherwise empty wrapper line.
+% A proof is also implemented internally as a list, but it is not an empty
+% wrapper: a list at the start of a proof must begin below the proof heading.
+\makeatletter
+\newif\ifqbookinproof
+\AtBeginEnvironment{proof}{%
+  \qbookinprooftrue
+  \setlist[enumerate]{topsep=3pt,itemsep=2pt,parsep=0pt,partopsep=0pt}%
+  \setlist[itemize]{topsep=3pt,itemsep=2pt,parsep=0pt,partopsep=0pt}%
+}
+\newcommand{\qbookstartnestedlist}{%
+  \ifqbookinproof
+    \leavevmode\par\nobreak
+  \else
+    \if@newlist
+      \leavevmode\par\nobreak\vspace{-\baselineskip}%
+    \fi
+  \fi
+}
+\BeforeBeginEnvironment{enumerate}{\qbookstartnestedlist}
+\BeforeBeginEnvironment{itemize}{\qbookstartnestedlist}
+\makeatother
+
+\begin{document}
+\begin{sloppypar}
+  \frontmatter
+  \pagestyle{empty}
+  \begin{titlepage}
+    \centering
+    \vspace*{4cm}
+    {\rmfamily\fontsize{36}{44}\selectfont\bfseries 数学分析\par}
+    \vspace{1.2cm}
+    {\rmfamily\LARGE 上册\par}
+    \vspace{1.0cm}
+    \begin{tikzpicture}[x=1.25cm,y=1.25cm]
+      % A restrained analysis motif: function, tangent and integral area.
+      \draw[->,gray!55,line width=.45pt] (-3.15,0) -- (3.35,0)
+        node[below right=-1pt] {$x$};
+      \draw[->,gray!55,line width=.45pt] (0,-.12) -- (0,2.35)
+        node[above left=-1pt] {$y$};
+      \fill[C1!11]
+        (.35,0) --
+        plot[domain=.35:1.55,samples=40,smooth,variable=\x]
+          ({\x},{.08*\x*\x*\x-.4*\x+1}) --
+        (1.55,0) -- cycle;
+      \draw[C1,line width=1.15pt]
+        plot[domain=-3:3,samples=100,smooth,variable=\x]
+          ({\x},{.08*\x*\x*\x-.4*\x+1});
+      \draw[sthlmGreen!85!black,line width=.75pt]
+        plot[domain=1.15:2.85,samples=2,variable=\x]
+          ({\x},{.56*\x-.28});
+      \fill[sthlmGreen!85!black] (2,.84) circle (1.25pt);
+      \node[C1,above left] at (2.95,1.92) {$f(x)$};
+      \node[sthlmGreen!70!black,above] at (2.65,1.20) {$T_a$};
+      \node[C1!75!black,font=\small] at (.95,.28)
+        {$\displaystyle \int_a^b f(x)\,\mathrm dx$};
+    \end{tikzpicture}
+    \vfill
+     {\CJKfontspec{KaiTi}\Huge 邹应\par}
+    \vspace{1.5cm}
+    {\rmfamily\Large 高等教育出版社\quad 1995\par}
+    \vspace*{2cm}
+  \end{titlepage}
+  \include{tex/frontmatter}
+  \tableofcontents
+
+  \mainmatter
+  \pagestyle{fancy}
+  \include{tex/chapter01}
+  \include{tex/chapter02}
+  \include{tex/chapter03}
+  \include{tex/chapter04}
+  \include{tex/chapter05}
+  \include{tex/chapter06}
+  \include{tex/chapter07}
+  \include{tex/chapter08}
+  \include{tex/chapter09}
+  \include{tex/chapter10}
+
+  \backmatter
+  \include{tex/symbol_index}
+  \include{tex/term_index}
+\end{sloppypar}
+\end{document}

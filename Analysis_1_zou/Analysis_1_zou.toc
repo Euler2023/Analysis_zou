@@ -1,0 +1,220 @@
+\let \CTEX@spaceChar \relax 
+\contentsline {chapter}{序 言}{iii}{chapter*.1}%
+\contentsline {chapter}{编者的话}{v}{chapter*.2}%
+\contentsline {chapter}{\numberline {第1章}集合与映射}{1}{chapter.1}%
+\contentsline {section}{\numberline {\S 1}集 合}{1}{section.1.1}%
+\contentsline {subsection}{\numberline {1.}集合的定义}{1}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {2.}集合之间的关系}{2}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {3.}集合的运算及性质}{2}{subsection.1.1.3}%
+\contentsline {subsection}{\numberline {4.}量词}{6}{subsection.1.1.4}%
+\contentsline {subsection}{\numberline {5.}习 题}{8}{subsection.1.1.5}%
+\contentsline {section}{\numberline {\S 2}关 系}{10}{section.1.2}%
+\contentsline {subsection}{\numberline {1.}一般关系}{10}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {2.}等价关系}{12}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {3.}序关系}{15}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {4.}习 题}{16}{subsection.1.2.4}%
+\contentsline {section}{\numberline {\S 3}映 射}{18}{section.1.3}%
+\contentsline {subsection}{\numberline {1.}映射的一般概念}{18}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {2.}单射、满射与一一映射}{20}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {3.}逆映射与复合映射}{23}{subsection.1.3.3}%
+\contentsline {subsection}{\numberline {4.}集合的可数性}{26}{subsection.1.3.4}%
+\contentsline {subsection}{\numberline {5.}习 题}{29}{subsection.1.3.5}%
+\contentsline {chapter}{\numberline {第2章}实数的构造}{33}{chapter.2}%
+\contentsline {section}{\numberline {\S 1}实数的定义}{33}{section.2.1}%
+\contentsline {subsection}{\numberline {1.}有理数Cauchy序列}{33}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.}实数集的构造}{37}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {3.}习 题}{38}{subsection.2.1.3}%
+\contentsline {section}{\numberline {\S 2}实数集$\mathbb {R}$的群性质}{40}{section.2.2}%
+\contentsline {subsection}{\numberline {1.}$\mathbb {R}$关于加法的群性质}{40}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.}$\mathbb {R}-\{0\}$关于乘法的群性质}{41}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {3.}$\mathbb {R}$的加法对乘法的分配性质}{43}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {4.}习 题}{43}{subsection.2.2.4}%
+\contentsline {section}{\numberline {\S 3}实数集 \(\mathbb {R}\) 的全序性}{44}{section.2.3}%
+\contentsline {subsection}{\numberline {1.}\(\mathbb {R}\) 上的序关系}{44}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.}\(\mathbb {Q}\) 在 \(\mathbb {R}\) 中的嵌入}{45}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {3.}习 题}{48}{subsection.2.3.3}%
+\contentsline {section}{\numberline {\S 4}实数集 \(\mathbb {R}\) 的扩展}{49}{section.2.4}%
+\contentsline {subsection}{\numberline {1.}\(\mathbb {R}\) 的第一个扩展}{49}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.}\(\mathbb {R}\) 的第二个扩展}{49}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {3.}习 题}{51}{subsection.2.4.3}%
+\contentsline {section}{\numberline {\S 5}实数集 \(\mathbb {R}\) 的特殊点、集}{51}{section.2.5}%
+\contentsline {subsection}{\numberline {1.}\(\mathbb {R}\) 的度量}{51}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.}\(\mathbb {R}\) 的一些重要集合}{54}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {3.}邻域}{54}{subsection.2.5.3}%
+\contentsline {subsection}{\numberline {4.}聚点、孤立点、内点}{55}{subsection.2.5.4}%
+\contentsline {subsection}{\numberline {5.}开集、闭集}{56}{subsection.2.5.5}%
+\contentsline {subsection}{\numberline {6.}习 题}{56}{subsection.2.5.6}%
+\contentsline {chapter}{\numberline {第3章}实数的连续性}{59}{chapter.3}%
+\contentsline {section}{\numberline {\S 1}实数序列的极限}{59}{section.3.1}%
+\contentsline {subsection}{\numberline {1.}实数序列的极限定义}{59}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {2.}用 \(\varepsilon \)-\(N\) 极限语言证明序列极限的方法}{61}{subsection.3.1.2}%
+\contentsline {section}{\numberline {\S 2}收敛序列的性质}{69}{section.3.2}%
+\contentsline {subsection}{\numberline {1.}收敛序列的一般性质}{69}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {2.}收敛序列极限的运算性质}{71}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.}收敛序列的不等式性质}{72}{subsection.3.2.3}%
+\contentsline {section}{\numberline {\S 3}无穷小、无穷大序列}{76}{section.3.3}%
+\contentsline {subsection}{\numberline {1.}无穷小、无穷大序列}{76}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {2.}无穷小、无穷大序列的性质}{77}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.}不定型}{78}{subsection.3.3.3}%
+\contentsline {section}{\numberline {\S 4}实数的连续性}{81}{section.3.4}%
+\contentsline {subsection}{\numberline {1.}Cauchy收敛准则}{82}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {2.}集合的上、下确界}{84}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.}单调序列极限}{86}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {4.}闭区间套}{88}{subsection.3.4.4}%
+\contentsline {subsection}{\numberline {5.}集合的聚点}{89}{subsection.3.4.5}%
+\contentsline {subsection}{\numberline {6.}有界序列的收敛子序列}{89}{subsection.3.4.6}%
+\contentsline {subsection}{\numberline {7.}有限覆盖}{90}{subsection.3.4.7}%
+\contentsline {section}{\numberline {\S 5}序列的上、下极限}{97}{section.3.5}%
+\contentsline {subsection}{\numberline {1.}上、下极限的定义}{97}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {2.}上、下极限的性质}{98}{subsection.3.5.2}%
+\contentsline {chapter}{\numberline {第4章}一元实值函数的极限}{105}{chapter.4}%
+\contentsline {section}{\numberline {\S 1}函数极限的定义}{105}{section.4.1}%
+\contentsline {subsection}{\numberline {1.}(a, A)型函数极限}{105}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {2.}( \(\pm \) \(\infty \) , A)型函数极限}{112}{subsection.4.1.2}%
+\contentsline {section}{\numberline {\S 2}函数极限的性质}{127}{section.4.2}%
+\contentsline {subsection}{\numberline {1.}函数极限的一般性质}{127}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {2.}函数极限的不等式性质}{132}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {3.}函数极限的运算性质}{136}{subsection.4.2.3}%
+\contentsline {section}{\numberline {\S 3}无穷小与无穷大}{141}{section.4.3}%
+\contentsline {subsection}{\numberline {1.}无穷小与无穷大的定义}{141}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {2.}不定型}{145}{subsection.4.3.2}%
+\contentsline {paragraph}{\numberline {4.3.2.0.1}\(\frac 00\) 不定型}{145}{paragraph.4.3.2.0.1}%
+\contentsline {paragraph}{\numberline {4.3.2.0.2}\(\frac \infty \infty \) 不定型}{145}{paragraph.4.3.2.0.2}%
+\contentsline {paragraph}{\numberline {4.3.2.0.3}\(0\cdot \infty \) 不定型}{146}{paragraph.4.3.2.0.3}%
+\contentsline {paragraph}{\numberline {4.3.2.0.4}\(\infty -\infty \) 不定型}{146}{paragraph.4.3.2.0.4}%
+\contentsline {section}{\numberline {\S 4}单调函数的极限}{149}{section.4.4}%
+\contentsline {subsection}{\numberline {1.}函数的上、下确界}{149}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {2.}单调函数的极限}{151}{subsection.4.4.2}%
+\contentsline {section}{\numberline {\S 5}函数的连续与间断}{155}{section.4.5}%
+\contentsline {subsection}{\numberline {1.}函数的连续点}{155}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {2.}函数的间断点}{158}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {3.}单调函数的间断点}{160}{subsection.4.5.3}%
+\contentsline {section}{\numberline {\S 6}连续函数性质}{165}{section.4.6}%
+\contentsline {subsection}{\numberline {1.}连续函数的一般性质}{165}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {2.}连续函数的特性}{166}{subsection.4.6.2}%
+\contentsline {subsection}{\numberline {3.}一致连续性}{170}{subsection.4.6.3}%
+\contentsline {section}{\numberline {\S 7}单调连续函数的反函数}{176}{section.4.7}%
+\contentsline {subsection}{\numberline {1.}反函数存在性}{176}{subsection.4.7.1}%
+\contentsline {subsection}{\numberline {2.}函数f的图形与反函数\(f^{-1}\) 的图形}{178}{subsection.4.7.2}%
+\contentsline {subsection}{\numberline {3.}三角函数的反函数}{179}{subsection.4.7.3}%
+\contentsline {chapter}{\numberline {第5章}一元实值函数的积分}{185}{chapter.5}%
+\contentsline {section}{\numberline {\S 1}阶梯函数的积分}{185}{section.5.1}%
+\contentsline {subsection}{\numberline {1.}区间的分割}{185}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {2.}阶梯函数的积分}{186}{subsection.5.1.2}%
+\contentsline {subsection}{\numberline {3.}阶梯函数积分的性质}{190}{subsection.5.1.3}%
+\contentsline {section}{\numberline {\S 2}Riemann可积函数}{194}{section.5.2}%
+\contentsline {subsection}{\numberline {1.}问题的提出}{195}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {2.}Riemann可积性定义}{196}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {3.}Riemann积分的定义}{199}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {4.}Riemann可积函数类}{201}{subsection.5.2.4}%
+\contentsline {subsection}{\numberline {5.}Riemann可积函数的性质}{207}{subsection.5.2.5}%
+\contentsline {subsection}{\numberline {6.}积分的推广}{217}{subsection.5.2.6}%
+\contentsline {section}{\numberline {\S 3}Riemann和}{220}{section.5.3}%
+\contentsline {section}{\numberline {\S 4}基本初等函数的定义}{233}{section.5.4}%
+\contentsline {subsection}{\numberline {1.}函数图形的无穷远分支及其渐近线}{233}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {2.}基本初等函数的定义及性质}{234}{subsection.5.4.2}%
+\contentsline {chapter}{\numberline {第6章}一元实值函数的导数}{259}{chapter.6}%
+\contentsline {section}{\numberline {\S 1}导数的定义}{259}{section.6.1}%
+\contentsline {subsection}{\numberline {1.}概念的引入}{259}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {2.}有限导数}{260}{subsection.6.1.2}%
+\contentsline {subsection}{\numberline {3.}可导性的另一表示法}{262}{subsection.6.1.3}%
+\contentsline {subsection}{\numberline {4.}无穷大导数}{265}{subsection.6.1.4}%
+\contentsline {subsection}{\numberline {5.}导函数与高阶导数}{266}{subsection.6.1.5}%
+\contentsline {subsection}{\numberline {6.}一元复值函数的导数}{269}{subsection.6.1.6}%
+\contentsline {section}{\numberline {\S 2}导数的计算}{271}{section.6.2}%
+\contentsline {subsection}{\numberline {1.}导数计算的一般法则}{271}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {2.}基本初等函数的导数}{276}{subsection.6.2.2}%
+\contentsline {section}{\numberline {\S 3}可导函数的性质}{290}{section.6.3}%
+\contentsline {subsection}{\numberline {1.}Rolle定理}{290}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {2.}Lagrange中值定理}{293}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {3.}Cauchy中值定理}{295}{subsection.6.3.3}%
+\contentsline {subsection}{\numberline {4.}Darboux定理}{296}{subsection.6.3.4}%
+\contentsline {section}{\numberline {\S 4}导数的应用}{299}{section.6.4}%
+\contentsline {subsection}{\numberline {1.}函数单调性的研究}{300}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {2.}函数的凸凹性研究}{303}{subsection.6.4.2}%
+\contentsline {subsection}{\numberline {3.}函数不定型极限的计算}{318}{subsection.6.4.3}%
+\contentsline {chapter}{\numberline {第7章}原 函 数}{327}{chapter.7}%
+\contentsline {section}{\numberline {\S 1}Newton-Leibniz公式}{327}{section.7.1}%
+\contentsline {subsection}{\numberline {1.}原函数定义}{327}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {2.}原函数的非唯一性}{328}{subsection.7.1.2}%
+\contentsline {subsection}{\numberline {3.}原函数的存在性}{329}{subsection.7.1.3}%
+\contentsline {section}{\numberline {\S 2}求原函数的一般法则}{333}{section.7.2}%
+\contentsline {subsection}{\numberline {1.}基本初等函数的原函数}{333}{subsection.7.2.1}%
+\contentsline {subsection}{\numberline {2.}计算原函数的三个方法}{334}{subsection.7.2.2}%
+\contentsline {section}{\numberline {\S 3}有理分式的原函数}{350}{section.7.3}%
+\contentsline {subsection}{\numberline {1.}有理分式\(\frac {P_n(x)}{Q_m(x)}\) 的分解}{351}{subsection.7.3.1}%
+\contentsline {subsection}{\numberline {2.}原函数 \(\displaystyle \DOTSI \intop \ilimits@ \frac {P_n(x)}{Q_m(x)}\,dx\) 的计算}{352}{subsection.7.3.2}%
+\contentsline {subsection}{\numberline {3.}可化为有理分式求原函数的情形 I}{359}{subsection.7.3.3}%
+\contentsline {subsection}{\numberline {4.}可化为有理分式求原函数的情形 II}{369}{subsection.7.3.4}%
+\contentsline {subsection}{\numberline {5.}可化为有理分式求原函数的情形III}{371}{subsection.7.3.5}%
+\contentsline {chapter}{\numberline {第8章}函数的限定展开}{379}{chapter.8}%
+\contentsline {section}{\numberline {\S 1}函数的局部比较}{379}{section.8.1}%
+\contentsline {subsection}{\numberline {1.}大$O$关系}{379}{subsection.8.1.1}%
+\contentsline {subsection}{\numberline {2.}小o关系}{382}{subsection.8.1.2}%
+\contentsline {subsection}{\numberline {3.}等价关系}{384}{subsection.8.1.3}%
+\contentsline {section}{\numberline {\S 2}函数的限定展开}{389}{section.8.2}%
+\contentsline {subsection}{\numberline {1.}问题的提出}{389}{subsection.8.2.1}%
+\contentsline {subsection}{\numberline {2.}函数限定展开的定义}{390}{subsection.8.2.2}%
+\contentsline {subsection}{\numberline {3.}限定展开式的唯一性}{391}{subsection.8.2.3}%
+\contentsline {subsection}{\numberline {4.}限定展开式的两个简单性质}{391}{subsection.8.2.4}%
+\contentsline {subsection}{\numberline {5.}限定展开式的存在性}{393}{subsection.8.2.5}%
+\contentsline {section}{\numberline {\S 3}函数限定展开的一般法则}{400}{section.8.3}%
+\contentsline {subsection}{\numberline {1.}直接按定义展开}{400}{subsection.8.3.1}%
+\contentsline {subsection}{\numberline {2.}和函数的限定展开}{403}{subsection.8.3.2}%
+\contentsline {subsection}{\numberline {3.}乘积函数的限定展开}{404}{subsection.8.3.3}%
+\contentsline {subsection}{\numberline {4.}商函数的限定展开}{406}{subsection.8.3.4}%
+\contentsline {subsection}{\numberline {5.}复合函数的限定展开}{407}{subsection.8.3.5}%
+\contentsline {subsection}{\numberline {6.}导函数的限定展开}{409}{subsection.8.3.6}%
+\contentsline {subsection}{\numberline {7.}原函数的限定展开}{412}{subsection.8.3.7}%
+\contentsline {section}{\numberline {\S 4}函数限定展开的推广}{415}{section.8.4}%
+\contentsline {subsection}{\numberline {1.}限定展开的第一个推广}{415}{subsection.8.4.1}%
+\contentsline {subsection}{\numberline {2.}限定展开的第二个推广}{417}{subsection.8.4.2}%
+\contentsline {subsection}{\numberline {3.}限定展开的第三个推广}{419}{subsection.8.4.3}%
+\contentsline {section}{\numberline {\S 5}函数限定展开的应用}{422}{section.8.5}%
+\contentsline {subsection}{\numberline {1.}函数不定型极限的计算}{422}{subsection.8.5.1}%
+\contentsline {subsection}{\numberline {2.}函数局部极值的研究}{426}{subsection.8.5.2}%
+\contentsline {subsection}{\numberline {3.}函数图形的研究}{433}{subsection.8.5.3}%
+\contentsline {chapter}{\numberline {第9章}广义积分}{443}{chapter.9}%
+\contentsline {section}{\numberline {\S 1}广义积分的定义}{443}{section.9.1}%
+\contentsline {subsection}{\numberline {1.}\(\DOTSI \intop \ilimits@ _{0}^{b^{-}} f(x) dx\) 型广义积分}{443}{subsection.9.1.1}%
+\contentsline {subsection}{\numberline {2.}\(\DOTSI \intop \ilimits@ _{a^+}^{c} f(x) dx\) 型广义积分}{446}{subsection.9.1.2}%
+\contentsline {subsection}{\numberline {3.}\(\DOTSI \intop \ilimits@ _{a}^{b} f(x) dx\) 型广义积分}{447}{subsection.9.1.3}%
+\contentsline {subsection}{\numberline {4.}广义积分的两个计算方法}{452}{subsection.9.1.4}%
+\contentsline {subsection}{\numberline {5.}两个重要的广义积分}{455}{subsection.9.1.5}%
+\contentsline {section}{\numberline {\S 2}广义积分的收敛准则}{457}{section.9.2}%
+\contentsline {subsection}{\numberline {1.}广义积分的一般收敛准则}{458}{subsection.9.2.1}%
+\contentsline {subsection}{\numberline {2.}广义积分的绝对收敛与条件收敛}{462}{subsection.9.2.2}%
+\contentsline {subsection}{\numberline {3.}广义积分的Abel与Dirichlet判别法}{464}{subsection.9.2.3}%
+\contentsline {chapter}{\numberline {第10章}度量空间}{471}{chapter.10}%
+\contentsline {section}{\numberline {\S 1}度量空间的定义}{471}{section.10.1}%
+\contentsline {subsection}{\numberline {1.}概念的引入}{471}{subsection.10.1.1}%
+\contentsline {subsection}{\numberline {2.}几个度量空间的例子}{472}{subsection.10.1.2}%
+\contentsline {subsection}{\numberline {3.}度量的等价}{474}{subsection.10.1.3}%
+\contentsline {subsection}{\numberline {4.}賦范向量空间}{475}{subsection.10.1.4}%
+\contentsline {section}{\numberline {\S 2}度量空间的开集、闭集}{481}{section.10.2}%
+\contentsline {subsection}{\numberline {1.}开球、闭球及球面}{482}{subsection.10.2.1}%
+\contentsline {subsection}{\numberline {2.}开集、闭集、邻域}{484}{subsection.10.2.2}%
+\contentsline {subsection}{\numberline {3.}集合的闭包、内部、边界}{489}{subsection.10.2.3}%
+\contentsline {subsection}{\numberline {4.}度量空间的子空间}{491}{subsection.10.2.4}%
+\contentsline {section}{\numberline {\S 3}度量空间的点序列极限, 映射的极限与连续性}{495}{section.10.3}%
+\contentsline {subsection}{\numberline {1.}度量空间的点序列极限}{496}{subsection.10.3.1}%
+\contentsline {subsection}{\numberline {2.}度量空间上的映射的极限与连续性}{500}{subsection.10.3.2}%
+\contentsline {subsection}{\numberline {3.}映射的一致连续性}{507}{subsection.10.3.3}%
+\contentsline {subsection}{\numberline {4.}度量空间的同胚映射}{509}{subsection.10.3.4}%
+\contentsline {section}{\numberline {\S 4}完备度量空间}{515}{section.10.4}%
+\contentsline {subsection}{\numberline {1.}Cauchy序列}{515}{subsection.10.4.1}%
+\contentsline {subsection}{\numberline {2.}完备度量空间}{516}{subsection.10.4.2}%
+\contentsline {subsection}{\numberline {3.}完备度量空间的不动点定理}{519}{subsection.10.4.3}%
+\contentsline {section}{\numberline {\S 5}紧度量空间}{522}{section.10.5}%
+\contentsline {subsection}{\numberline {1.}紧度量空间与紧集概念}{522}{subsection.10.5.1}%
+\contentsline {subsection}{\numberline {2.}紧度量空间的性质}{522}{subsection.10.5.2}%
+\contentsline {subsection}{\numberline {3.}紧集的性质}{526}{subsection.10.5.3}%
+\contentsline {subsection}{\numberline {4.}紧集上连续映射的性质}{530}{subsection.10.5.4}%
+\contentsline {section}{\numberline {\S 6}连通度量空间}{533}{section.10.6}%
+\contentsline {subsection}{\numberline {1.}连通空间与连通子集}{534}{subsection.10.6.1}%
+\contentsline {subsection}{\numberline {2.}连通空间与连通集的等价定义}{534}{subsection.10.6.2}%
+\contentsline {subsection}{\numberline {3.}连诵集的性质}{537}{subsection.10.6.3}%
+\contentsline {subsection}{\numberline {4.}道路连诵空间}{540}{subsection.10.6.4}%
+\contentsline {subsection}{\numberline {5.}道路连通的性质}{541}{subsection.10.6.5}%
+\contentsline {chapter}{符号索引}{547}{chapter*.21}%
+\contentsline {chapter}{名词索引}{549}{chapter*.22}%

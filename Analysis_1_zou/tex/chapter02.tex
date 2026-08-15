@@ -1,0 +1,1671 @@
+\chapter{实数的构造}
+
+严格的实数理论是在19世纪的后半叶才由Cantor和Dedekind等数学家完整地建立起来的。这一章我们介绍Cantor的实数构造理论。
+
+\section{实数的定义}
+
+Cantor是以有理数系为基础用引进有理数Cauchy序列等价类的方法来定义实数的.关于有理数集$\Q$,我们已经在第1章§2例9中严格定义它了,并在同一节的习题9中详细列出了它的基本性质,因此现在我们可以来介绍Cantor实数构造理论了.
+
+\subsection{有理数Cauchy序列}
+
+% 2026.08.10
+
+\begin{mydef*}{}
+
+从$\N$到$\Q$的任一映射\(r: \N \to \Q\) 称为一个有理数序列,简记为\(\langle r_n \rangle\). \(r_n\ (n \in \N)\) 称为此序列的第$n$项或通项。
+
+\end{mydef*}
+
+\begin{sourceexample}{1}
+
+以下列各项:
+
+\begin{enumerate}[label=\arabic*)]
+\item
+  \[r_n = \frac{1}{10^n} (n \in \mathbb{N});\]
+\item
+  \[r_n = 1 + \frac{1}{1!} + \frac{1}{2!} + \cdots + \frac{1}{n!} (n \in \mathbb{N});\]
+\item
+  \[r_n = 1 + \frac{1}{2} + \frac{1}{3} + \cdots + \frac{1}{n} \quad (n \in \mathbb{N})\]
+\end{enumerate}
+
+为通项的序列都是有理数序列。
+
+\end{sourceexample}
+
+
+
+\begin{mydef*}{}
+
+我们称有理数序列\(\langle r_n \rangle\) 是Cauchy序列,如果它具有下述性质：
+
+\[(\forall\,0<\varepsilon\in \Q)(\exists N\in \N)
+(\forall\,n,m\in \N,\ n,m\geqslant N) \Longrightarrow |r_n - r_m| < \varepsilon. \tag{*} \]
+
+显然性质(*)也可以表示成下述等价的形式:
+
+\[(\forall 0 < \varepsilon \in \mathbb{Q}) (\exists N \in \mathbb{N}) (\forall n, k \in \mathbb{N}, n \geqslant \N) \Longrightarrow |r_{n+k} - r_n| < \varepsilon \]
+
+
+\end{mydef*}
+
+
+
+\begin{sourceexample}{2}
+
+证明有理数序列\(\left\langle \frac{1}{10^n} \right\rangle\) 是Cauchy序列.
+
+事实上,\(\forall n\) ,\(m \in \mathbb{N}\) 且\(m \geqslant n\) , 有
+
+\[\left| \frac{1}{10^n} - \frac{1}{10^m} \right| = \frac{1}{10^n} \left| 1 - \frac{1}{10^{m-n}} \right| \le \frac{1}{10^n} < \frac{1}{n}\]
+
+\[\forall\,0<\varepsilon=\frac{q}{p}\in\mathbb Q,\]
+由\(\frac1n<\frac qp\) 知,取\(N=p\),则
+
+\[\forall n, m \in \mathbb{N}, n, m \geqslant N \Longrightarrow \left| \frac{1}{10^n} - \frac{1}{10^m} \right| < \frac{1}{n} < \frac{q}{p}.\]
+
+因此\(\left\langle \frac{1}{10^n}\right\rangle\) 是有理数Cauchy序列。
+
+\end{sourceexample}
+
+
+
+\begin{sourceexample}{3}
+
+证明有理数序列\(\left\langle 1 + \frac{1}{1!} + \frac{1}{2!} + \cdots + \frac{1}{n!} \right\rangle\)是Cauchy序列。
+
+事实上，若令\(r_n = 1 + \frac{1}{1!} + \frac{1}{2!} + \cdots + \frac{1}{n!}\)，则\(\forall n, k \in \mathbb{N}\)有
+
+\begin{align*}
+	0 < r_{n+k} - r_n &= \frac{1}{(n+1)!} + \frac{1}{(n+2)!} + \dots + \frac{1}{(n+k)!} \\
+	&< \frac{1}{(n+1)!} + \frac{1}{(n+1)!(n+1)} + \dots + \frac{1}{(n+1)!(n+1)^{k-1}} \\
+	&= \frac{1}{(n+1)!}\left(1 + \frac{1}{n+1} + \dots + \frac{1}{(n+1)^{k-1}}\right) \\
+	&< \frac{1}{(n+1)!} \cdot \frac{1}{1 - \frac{1}{n+1}} = \frac{1}{n \cdot n!} \le \frac{1}{n}.
+\end{align*}
+
+
+\[\forall\,0<\varepsilon=\frac{q}{p}\in\mathbf \Q,\]
+
+由\(\frac1n<\frac qp\)知，若取\(N=p\)，则
+\[
+\forall n, k \in \mathbb{N},\; n \geqslant N \Longrightarrow |r_{n+k} - r_n| < \frac{1}{n} < \frac{q}{p}.
+\]
+
+因此\(\left\langle 1 + \frac{1}{1!} + \frac{1}{2!} + \dots + \frac{1}{n!} \right\rangle\)是有理数Cauchy序列。
+
+
+\end{sourceexample}
+
+
+\begin{sourceexample}{4}
+
+证明由下述递推公式
+
+\[r_0=1,\qquad r_n=\frac{1}{1+r_{n-1}}\quad(n\in\mathbb N)\]
+
+所定义的有理数序列是Cauchy序列.
+
+首先容易证明\(\frac{1}{2} \leqslant r_n \leqslant 1 (\forall n \in \mathbb{N}).\)
+
+其次由
+
+\[|r_{n+1} - r_n| = \left| \frac{1}{1+r_n} - \frac{1}{1+r_{n-1}} \right| = \frac{|r_{n-1} - r_n|}{(1+r_n)(1+r_{n-1})}\]
+
+\[\leq \frac{4}{9} |r_n - r_{n-1}| \leq \cdots\]
+
+\[\leq \left(\frac{4}{9}\right)^n |r_1 - r_0| < \left(\frac{4}{9}\right)^n\]
+
+得到：对任意\(n,k\in\mathbb N\)且\(n\ge2\),
+
+\[\begin{aligned}
+	|r_{n+k}-r_n|
+	&\le |r_{n+k}-r_{n+k-1}|+|r_{n+k-1}-r_{n+k-2}|+\cdots+|r_{n+1}-r_n|\\
+	&<\left(\frac49\right)^{n+k-1}+\left(\frac49\right)^{n+k-2}+\cdots+\left(\frac49\right)^n.
+\end{aligned}\]
+
+\[< \left(\frac{4}{9}\right)^n \cdot 2 \left(\frac{1}{2}\right)^n \cdot 2 = \frac{1}{2^{n-1}} < \frac{1}{n-1}.\]
+
+\[\forall \ 0 < \epsilon = \frac{q}{p} \in \mathbb{Q}\] ,由\(\frac{1}{n-1} < \frac{q}{p}\) 知若取\(N = p+1\) ,则
+
+\[\forall n, k \in \mathbb{N}, n \geqslant N \Longrightarrow |r_{n+k} - r_n| < \frac{1}{n-1} < \frac{q}{p}.\]
+
+因此序列\(\langle r_n \rangle\) 是有理数Cauchy序列。
+
+\end{sourceexample}
+
+
+
+现在设\(\langle r_n \rangle\) 是任一有理数序列,由Cauchy序列的定义可知,\(\langle r_n \rangle\) 不是Cauchy序列当且仅当:
+
+\[(\exists 0 < \varepsilon_0 \in \mathbb{Q}) (\forall n \in \mathbb{N}) (\exists k_n, m_n \in \mathbb{N}, k_n, m_n \ge n) \Longrightarrow |r_{k_n} - r_{m_n}| \ge \varepsilon_0 \]
+
+
+\begin{sourceexample}{5}
+
+证明有理数序列\(\left\langle1+\frac{1}{2}+\frac{1}{3}+\cdots+\frac{1}{n}\right\rangle\) 不是Cauchy 序列。
+
+事实上,\(\forall n \in \mathbb{N}\) ,
+
+\[|r_{2n}-r_n|=\frac{1}{n+1}+\frac{1}{n+2}+\cdots+\frac{1}{2n}>\frac{2n-n}{2n}=\frac{1}{2}.\]
+
+因此 \[\left\langle 1 + \frac{1}{2} + \frac{1}{3} + \cdots + \frac{1}{n} \right\rangle\] 不是Cauchy序列。
+
+\end{sourceexample}
+
+我们用 $E$ 表示由所有的有理数 Cauchy 序列组成的集合。$E \ne \varnothing$，因为 $\forall a \in \mathbb{Q}$，常值有理数序列 $\langle a \rangle \in E$。
+
+在 $E$ 上我们定义加法“$+$”、乘法“$\cdot$”及数乘运算如下：
+
+对于任意 $\langle r_n \rangle, \langle s_n \rangle \in E$ 和任意 $\lambda \in \mathbb{Q}$，我们规定：
+
+\[
+\langle r_n \rangle + \langle s_n \rangle \stackrel{\triangle}{=} \langle r_n + s_n \rangle; \qquad
+\langle r_n \rangle \cdot \langle s_n \rangle \stackrel{\triangle}{=} \langle r_n s_n \rangle;
+\]
+
+\[
+\lambda \langle r_n \rangle \stackrel{\triangle}{=} \langle \lambda r_n \rangle.
+\]
+
+我们有下述定理:
+
+\begin{mythm}{}{PropertyE}
+
+集合 \(E\) 具有下述性质：
+
+\begin{enumerate}[label=\arabic*)]
+	\item \(\forall \langle r_n \rangle \in E\)，\(\langle r_n \rangle\) 是有界的，即 \(\exists\,0<M\in\mathbb{Q}\)，\(\forall n\in\mathbb{N}\)，\(|r_n|\leq M\)；
+	\item \(\forall \langle r_n \rangle, \langle s_n \rangle \in E\)，\(\forall \lambda \in \mathbb{Q}\)，有
+	\[
+	\langle r_n \rangle + \langle s_n \rangle,\quad
+	\langle r_n \rangle \cdot \langle s_n \rangle,\quad
+	\lambda \langle r_n \rangle \in E.
+	\]
+\end{enumerate}
+
+\end{mythm}
+
+
+
+\begin{proof}
+
+集合 \(E\) 具有下述性质：
+
+\begin{enumerate}[label=\arabic*)]
+	\item 设 \(\langle r_n \rangle \in E\). 由定义，对 \(\bar{\varepsilon}=1\)，
+	\[
+	\exists N\in\mathbb{N},\ \forall n\ge N \Longrightarrow |r_n-r_N|<1.
+	\]
+	\[
+	\implies |r_n| \leqslant |r_n - r_N| + |r_N| < 1 + |r_N|.
+	\]
+	令 \(M=\max(|r_1|,|r_2|,\dots,|r_{N-1}|,1+|r_N|)\)，则\footnote[1]{$\min,\max$分别表示英文maximum, minimum的头三个字母。}
+	\[
+	0<M\in\mathbb{Q},\ \forall n\in\mathbb{N},\ |r_n|\leq M.
+	\]
+	
+	\item 设 \(\lambda \in \mathbb{Q}\)，\(\langle r_n \rangle,\langle s_n \rangle \in E\). 于是由定义有
+	\[
+	(\forall\,0<\varepsilon\in\mathbb{Q})\ 
+	\begin{cases}
+		(\exists N_1\in\mathbb{N})(\forall n,m\in\mathbb{N},\,n,m\geqslant N_1)\\
+		\quad\Longrightarrow |r_n-r_m|<\varepsilon,\\[4pt]
+		(\exists N_2\in\mathbb{N})(\forall n,m\in\mathbb{N},\,n,m\geqslant N_2)\\
+		\quad\Longrightarrow |s_n-s_m|<\varepsilon.
+	\end{cases}
+	\]
+	取 \(N=\max(N_1,N_2)\)，则
+	\[
+	\forall n,m\in\mathbb{N},\,n,m\geq N \Longrightarrow |r_n-r_m|<\varepsilon\ \text{且}\ |s_n-s_m|<\varepsilon.
+	\]
+	于是
+	\[
+	|(r_n+s_n)-(r_m+s_m)| < |r_n-r_m|+|s_n-s_m| < \varepsilon+\varepsilon = 2\varepsilon,
+	\]
+	因此 \(\langle r_n \rangle + \langle s_n \rangle \in E\).
+	
+	为了证明 \(\langle r_n \rangle \cdot \langle s_n \rangle \in E\)，由第 1) 条所证知存在 \(0<A,B\in\mathbb{Q}\)，使得 \(\forall n\in\mathbb{N}\)，\(|r_n|\leq A\)，\(|s_n|\leq B\). 于是
+	\[
+	\forall n,m\in\mathbb{N},\,n,m\geq N \Longrightarrow |r_n s_n - r_m s_m|
+	\]
+	\[
+	\leq |r_n|\,|s_n-s_m| + |s_m|\,|r_n-r_m|
+	< A\varepsilon + B\varepsilon = (A+B)\varepsilon.
+	\]
+	因此 \(\langle r_n \rangle \cdot \langle s_n \rangle \in E\).
+	
+	\item 最后证明 \(\lambda \langle r_n \rangle \in E\).
+	
+	若 \(\lambda=0\)，则 \(\lambda\langle r_n\rangle = \langle 0\rangle \in E\).
+	
+	若 \(\lambda\neq 0\)，则
+	\[
+	\forall n,m\in\mathbb{N},\,n,m\geq N \Longrightarrow |\lambda r_n - \lambda r_m| = |\lambda|\,|r_n-r_m| < |\lambda|\varepsilon.
+	\]
+	因此 \(\lambda \langle r_n \rangle \in E\).
+\end{enumerate}
+
+\end{proof}
+
+现在我们介绍实数集的构造
+
+\subsection{实数集的构造}
+
+在$E$上定义关系\(\mathscr{R}\) 如下:
+
+\[\begin{aligned}
+\forall\langle r_n\rangle,\langle s_n\rangle\in E,\qquad
+\langle r_n\rangle\mathscr R\langle s_n\rangle
+\iff{}&(\forall\,0<\varepsilon\in\mathbb Q)(\exists N\in\mathbb N)\\
+& (\forall n\in\mathbb N, n\ge N)\Longrightarrow |r_n-s_n|<\varepsilon.
+\end{aligned}\]
+
+容易验证\(\mathscr R\)是\(E\)上的一个等价关系.
+
+\begin{mydef*}{}
+
+$E$关于\(\mathscr R\)的商集\(E/\mathscr R\)称为\textbf{实数集},记为$\R$. $\R$中的每一个元素\(x\)称为\textbf{实数}.
+
+\end{mydef*}
+
+现在设\(x\in\mathbb R\)是任一实数.由于\(x\)是一个\(\mathscr R\)等价类,所以我们有:
+
+\[\forall\langle r_n\rangle,\langle s_n\rangle\in x,\qquad
+x=\widetilde{\langle r_n\rangle}=\widetilde{\langle s_n\rangle}.\]
+
+下面我们将要在$\R$上定义加法与乘法运算,为此先证明下述命题.
+
+\begin{myprop*}{}
+
+设\(\langle r_n\rangle,\langle r'_n\rangle,\langle s_n\rangle,\langle s'_n\rangle\in E\),如果\(\langle r_n\rangle\mathscr R\langle r'_n\rangle\),\(\langle s_n\rangle\mathscr R\langle s'_n\rangle\),那末
+
+\[(\langle r_n \rangle + \langle s_n \rangle) \mathscr{R}(\langle r'_n \rangle + \langle s'_n \rangle), (\langle r_n \rangle \cdot \langle s_n \rangle) \mathscr{R}(\langle r'_n \rangle \cdot \langle s'_n \rangle).\]
+
+\end{myprop*}
+
+
+
+\begin{proof}
+
+首先由 \(\langle r'_n \rangle, \langle s_n \rangle \in E\) 及\rthm{thm:PropertyE} 知
+\[
+\exists\,0<A,B\in\mathbb{Q},\ \forall n\in\mathbb{N},\ |r'_n|\leq A,\ |s_n|\leq B.
+\]
+
+另一方面，由于 \(\langle r_n \rangle \sim \langle r'_n \rangle\)，\(\langle s_n \rangle \sim \langle s'_n \rangle\)，故有
+\[
+(\forall\,0<\varepsilon\in\mathbb{Q})\ 
+\begin{cases}
+	(\exists N_1\in\mathbb{N})(\forall n\in\mathbb{N},\,n\geqslant N_1) \Longrightarrow |r_n-r'_n|< \varepsilon,\\[4pt]
+	(\exists N_2\in\mathbb{N})(\forall n\in\mathbb{N},\,n\geqslant N_2) \Longrightarrow |s_n-s'_n|<\varepsilon.
+\end{cases}
+\]
+
+令 \(N=\max(N_1,N_2)\)，则我们有
+\begin{align*}
+	\forall n\in\mathbb{N},\,n\geqslant N &\Longrightarrow |(r_n+s_n)-(r'_n+s'_n)|
+	\leq |r_n-r'_n| + |s_n-s'_n| < 2\varepsilon,\\[4pt]
+	&\Longrightarrow |r_n s_n - r'_n s'_n|
+	\leq |s_n|\,|r_n-r'_n| + |r'_n|\,|s_n-s'_n| \\
+	& < B\varepsilon + A\varepsilon = (A+B)\varepsilon.
+\end{align*}
+
+因此
+\[
+(\langle r_n \rangle + \langle s_n \rangle) \sim (\langle r'_n \rangle + \langle s'_n \rangle),\qquad
+(\langle r_n \rangle \cdot \langle s_n \rangle) \sim (\langle r'_n \rangle \cdot \langle s'_n \rangle).
+\]
+
+\end{proof}
+
+这个命题说明，若 \(x,y\in \R\)，\(\langle r_n\rangle,\langle r'_n\rangle\in x\)，\(\langle s_n\rangle,\langle s'_n\rangle\in y\)，则
+\[
+\widetilde{\langle r_n\rangle+\langle s_n\rangle}
+= \widetilde{\langle r'_n\rangle+\langle s'_n\rangle},\qquad
+\widetilde{\langle r_n\rangle\cdot\langle s_n\rangle}
+= \widetilde{\langle r'_n\rangle\cdot\langle s'_n\rangle}.
+\]
+
+也就是说，\(\langle r_n\rangle+\langle s_n\rangle\) 与 \(\langle r_n\rangle\cdot\langle s_n\rangle\) 是两个只与 \(x,y\) 有关而与 \(x,y\) 的代表元的选择无关的实数。因此在 \(\R\) 上按下面定义中的方式定义实数的加法与乘法就是合理的。
+
+\begin{mydef*}{}
+
+\(\forall x,y\in\mathbb \R\),令\(x=\widetilde{\langle x_n\rangle}\),\(y=\widetilde{\langle y_n\rangle}\). \(x\)与\(y\)的和\(x+y\)及积\(x\cdot y\)分别定义为:
+
+\[x+y=\widetilde{\langle x_n\rangle+\langle y_n\rangle},\qquad
+x\cdot y=\widetilde{\langle x_n\rangle\cdot\langle y_n\rangle}.\]
+
+关于实数的加法与乘法的运算性质,我们在下一节中讨论。
+
+
+\end{mydef*}
+
+
+\subsection{习 题}
+
+\begin{exercise}
+  \item 证明以下列各 \(r_n\) 为通项的有理数序列是 Cauchy 序列：
+  \[
+  \begin{alignedat}{3}
+    1)\;& r_n=\frac{1}{n^2},\qquad&
+    2)\;& r_n=\frac{n}{n^3+1},\qquad&
+    3)\;& r_n=\frac{a^n}{n!}\quad(a\in\mathbb{Q});\\
+    4)\;& r_n=\sum_{k=1}^{n}\frac{1}{k^2},&
+    5)\;& r_n=\sum_{k=1}^{n}\frac{(-1)^k}{k},&
+    6)\;& r_n=\sum_{k=1}^{n}\frac{1}{k^k}.
+  \end{alignedat}
+  \]
+\end{exercise}
+
+\begin{exercise}
+  \item 设 \(\langle r_n\rangle\) 是如下定义的有理数序列：
+  \[
+  \begin{aligned}
+    r_1&=0.1,\\
+    r_2&=0.101,\\
+    r_3&=0.101001,\\[-2pt]
+       &\ \vdots\\[-2pt]
+    r_n&=0.\,1\,01\,001\,\cdots\,
+    \underbrace{00\cdots 0}_{n-1\text{ 个 }0}1,\\[-2pt]
+       &\ \vdots
+  \end{aligned}
+  \]
+  证明 \(\langle r_n\rangle\) 是 Cauchy 序列。
+\end{exercise}
+
+\begin{exercise}
+  \item 证明：对任意 \(r_0,r_1\in\mathbb{Q}\)，由下述递推公式
+  \[
+  r_{n+1}=\frac{1}{2}(r_n+r_{n-1}),\qquad n\in\mathbb{N},
+  \]
+  所定义的 \(\langle r_n\rangle\) 是有理数 Cauchy 序列。
+\end{exercise}
+
+\begin{exercise}
+  \item 设 \(\langle r_n\rangle\) 是任一有理数序列。如果存在一个有理数 \(l\)，它具有下述性质：
+  \[
+  (\forall\,0<\varepsilon\in\mathbb{Q})(\exists\,N\in\mathbb{N})
+  (\forall\,n\in\mathbb{N},\ n\geq N)
+  \Longrightarrow |r_n-l|<\varepsilon,
+  \]
+  则称 \(\langle r_n\rangle\) 收敛于 \(l\)，并记为
+  \(\displaystyle\lim_{n\to+\infty}r_n=l\)。
+  \begin{enumerate}[label=\arabic*)]
+    \item 证明：任何一个收敛的有理数序列是 Cauchy 序列。
+    \item 设 \(\langle r_n\rangle\) 与 \(\langle s_n\rangle\) 是两个有理数序列，并且
+    \[
+    \lim_{n\to+\infty}r_n=\lim_{n\to+\infty}s_n=l.
+    \]
+    证明序列 \(\langle r_n\rangle\) 与 \(\langle s_n\rangle\) 等价。
+    \item 证明：任何一个收敛的有理数序列是有界的。
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  \item 设 \(\langle r_n\rangle\) 是任一有理数 Cauchy 序列。证明下述三个结论中有一个并且只有一个成立：
+  \begin{enumerate}[label=\arabic*)]
+    \item \(\displaystyle\lim_{n\to+\infty}r_n=0\)；
+    \item \((\exists\,0<M\in\mathbb{Q})(\exists\,N\in\mathbb{N})
+    (\forall\,n\in\mathbb{N},\ n\geq N)\Longrightarrow r_n>M\)；
+    \item \((\exists\,0<M\in\mathbb{Q})(\exists\,N\in\mathbb{N})
+    (\forall\,n\in\mathbb{N},\ n\geq N)\Longrightarrow r_n<-M\)。
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  \item 设 \(\mathscr{X}\) 是有理数 Cauchy 序列集合 \(E\) 的一个非空子集合。我们称 \(\mathscr{X}\) 是 \(E\) 的一个理想，如果 \(\mathscr{X}\) 具有下述性质：
+  \begin{enumerate}[label=\arabic*)]
+    \item 对任意 \(\langle r_n\rangle,\langle s_n\rangle\in\mathscr{X}\)，有
+    \[
+    \langle-r_n\rangle\in\mathscr{X},\qquad
+    \langle r_n\rangle+\langle s_n\rangle\in\mathscr{X};
+    \]
+    \item 对任意 \(\langle a_n\rangle\in E\) 及
+    \(\langle r_n\rangle\in\mathscr{X}\)，有
+    \[
+    \langle a_n\rangle\cdot\langle r_n\rangle\in\mathscr{X}.
+    \]
+  \end{enumerate}
+  我们称 \(\mathscr{X}\) 是 \(E\) 的一个极大理想，如果 \(\mathscr{X}\) 是 \(E\) 的一个理想，并且 \(E\) 中不存在满足
+  \[
+  \mathscr{X}\subsetneq\mathscr{Y}\subsetneq E
+  \]
+  的理想 \(\mathscr{Y}\)。
+  \begin{enumerate}[label=\arabic*)]
+    \item 证明
+    \[
+    \mathscr{X}
+    =\left\{\langle r_n\rangle\in E\ \middle|\
+    \lim_{n\to+\infty}r_n=0\right\}
+    \]
+    是 \(E\) 的一个理想。
+    \item 设 \(\mathscr{J}\) 是 \(E\) 的任一理想，使得
+    \(\mathscr{X}\subsetneq\mathscr{J}\)，令
+    \(\langle s_n\rangle\in\mathscr{J}-\mathscr{X}\)。试证明：
+    \begin{enumerate}[label=\alph*)]
+      \item 存在 \(\langle r_n\rangle\in E\)，使得
+      \[
+      \langle r_n\rangle+\langle s_n\rangle\in\mathscr{X},\qquad
+      r_n+s_n\neq0\quad(\forall n\in\mathbb{N}),
+      \]
+      并且
+      \[
+      \left\langle\frac{1}{r_n+s_n}\right\rangle\in E;
+      \]
+      \item 常值序列 \(\langle1\rangle\in\mathscr{J}\)；
+      \item 由此推出 \(\mathscr{X}\) 是一个极大理想。
+    \end{enumerate}
+  \end{enumerate}
+\end{exercise}
+
+\section{实数集$\R$的群性质}
+
+%2026.08.11
+
+\subsection{$\R$关于加法的群性质}
+	\label{sec:2-2-1}
+
+\begin{mythm}{}{addtivegroup}
+
+实数集$\mathbb{R}$关于加法运算是一个交换群,即下述性质成立:
+
+\begin{enumerate}[label=\arabic*)]
+	\item \(\forall x, y \in \mathbb{R}, x + y = y + x\);
+	\item \(\forall x,y,z \in \mathbb{R}\), \((x+y)+z = x+(y+z)\);
+	\item 存在零元素0, 使得\(\forall x \in \mathbb{R}\), \(x + 0 = x\);
+	\item \(\forall x \in \mathbb{R}\), 存在负元素, 记为\(-x\), 使得 \(x + (-x) = 0\).
+\end{enumerate}
+
+\end{mythm}
+
+\begin{proof}
+
+设$x = \widetilde{\langle x_n \rangle} , y = \widetilde{\langle y_n \rangle}, z = \widetilde{\langle z_n \rangle}$ , 由定义
+
+
+	\[x + y = \widetilde{\langle x_n \rangle + \langle y_n \rangle}  = \widetilde{\langle x_n + y_n \rangle} = \widetilde{\langle y_n \rangle + \langle x_n \rangle} = y + x\] 
+	 
+	\[(x + y) + z = \widetilde{\langle x_n \rangle + \langle y_n \rangle} + \widetilde{\langle z_n \rangle} = \widetilde{\langle x_n + y_n + z_n \rangle}\]
+	\[= \widetilde{\langle x_n \rangle} + \widetilde{\langle y_n \rangle + \langle z_n \rangle} = x + (y + z)\] 
+
+因此1)、2)成立.
+
+现证3). 因为\(0 \in \mathbb{Q}\) ,若令\(0_n = 0 (\forall n \in \mathbb{N})\) ,则\(\langle 0_n \rangle \in E\) ,记\(0 = \widetilde{\langle 0_n \rangle}\) .那末
+
+\[x + 0 = \widetilde{\langle x_n \rangle} + \widetilde{\langle 0_n \rangle} = \widetilde{\langle x_n + 0_n \rangle} = \widetilde{\langle x_n \rangle} = x\]
+
+最后证 4) .记\(-x = \widetilde{\langle -x_n \rangle}\) ,则\(-x \in \mathbb{R}\) 并且
+
+\[x + (-x) = \widetilde{\langle x_n \rangle} + \widetilde{\langle -x_n \rangle} = \widetilde{\langle x_n - x_n \rangle} = \widetilde{\langle 0_n \rangle} = 0\]
+
+\end{proof}
+
+\subsection{$\R-\{0\}$关于乘法的群性质}
+
+在介绍\(\R - \{0\}\) 关于乘法的群性质之前,我们先证明下述引理。
+
+\begin{mylemma*}{}
+
+\(\forall x \in \mathbb{R} - \{0\}\) ,存在有理数$r > 0$ 及$x$的一个代表\(\langle r_n \rangle\) 使得
+
+\[(\forall n \in \mathbb{N}, r_n \geqslant r) \text{或者} (\forall n \in \mathbb{N}, r_n \leqslant -r)\]
+
+\end{mylemma*}
+
+
+\begin{proof}
+
+设\(\langle x_n \rangle\) 是$x$的任一代表.由于$x = 0$,故\(\langle x_n \rangle\) 不 等价于\(\langle 0_n \rangle\) .因此
+
+\[(\exists 0 < \varepsilon_0 \in \mathbb{Q}) (\forall n \in \mathbb{N}) (\exists k_n \in \mathbb{N}, k_n \geqslant n) \Longrightarrow |x_{k_n}| = |x_{k_n} - 0_n| \geq \varepsilon_0 \]
+
+另一方面,由于\(\langle x_n \rangle \in E\) ,对于\(\varepsilon_0 > 0\) ,存在\(N \in \mathbb{N}\) 使得\(\forall n, m \in \mathbb{N}, n, m \geqslant N \Longrightarrow |x_n - x_m| < \varepsilon_0 / 2\) .
+
+下面分两种情形讨论:
+
+\begin{enumerate}[label=\arabic*)]
+
+\item \(x_{k_N} \geqslant \varepsilon_0\) : 这时我们有\(\forall n \in \mathbb{N}, n \geqslant k_N > N \Longrightarrow |x_n - x_{k_N}| < \varepsilon_0/2\) .
+
+因为\(x_{k_N} - x_n \leqslant |x_n - x_{k_N}|\) ,所以
+
+\[|x_n| \ge x_{k_N} - |x_n - x_{k_N}| > \varepsilon_0 - \varepsilon_0/2 = \varepsilon_0/2\]
+
+定义有理数序列\(\langle r_u \rangle\) 如下:
+
+
+\[r_n = \begin{cases} \varepsilon_0/2, & \forall n < k_N; \\ x_n, \quad  \forall n \geqslant k_N \end{cases}\]
+
+那末\(\langle r_n \rangle \in E\) ,并且\(x = \widetilde{\langle r_n \rangle}\) .显然我们有\(\forall n \in \mathbb{N}, r_n \geq \varepsilon_0/2\) .
+
+\item 这时我们有\(\forall n \in \mathbb{N}, n \geqslant k_N > N \Longrightarrow |x_n - x_{k_N}| < \varepsilon_0/2\) .
+
+由于\(x_n - x_{k_N} \leq |x_n - x_{k_N}|\) , 故
+
+\[|x_n \leq x_{k_N} + |x_n - x_{k_N}| < -\varepsilon_0 + \varepsilon_0/2 = -\varepsilon_0/2\]
+
+若我们定义有理数序列\(\langle r_n \rangle\) 为:
+
+\[r_n = \begin{cases} -\varepsilon_0/2, & \forall n < k_N; \\ x_n, \quad  \forall n \geq k_N, \end{cases}\]
+
+则\(\langle r_n \rangle \in E\) , 并且\(x = \widetilde{\langle r_n \rangle } \) .对于此\(\langle r_n \rangle\) 显然有
+
+\[\forall n \in \mathbb{N}, r_n \leqslant -\varepsilon_0/2.\]
+\end{enumerate}
+
+\end{proof}
+
+现在我们可以来介绍$\R-\{0\}$的群性质,即下述定理.
+
+\begin{mythm}{}{Rpostivegroup}
+
+$\mathbb{R}-\{0\}$关于乘法运算是一个交换群,即下述性质成立:
+
+\begin{enumerate}[label=\arabic*)]
+	\item \(\forall x,y \in \mathbb{R}-\{0\}, x \cdot y \in \mathbb{R}-\{0\}, x \cdot y = y \cdot x;\)
+	\item \(\forall x,y,z \in \mathbb{R}-\{0\}, (x,y),z = x,(y,z);\)
+	\item 存在单位元1 \(\in\) $\mathbb{R}-\{0\}$, 使得\(\forall x\) \(\in\) $\mathbb{R}-\{0\}$, $x\cdot 1=x$;
+	\item \(\forall x \in \mathbb{R}-\{0\}\) , 存在逆元素, 记为\(x^{-1}\) , 使得\(x \cdot x^{-1} = 1\) .
+\end{enumerate}
+
+\end{mythm}
+
+\begin{proof}
+
+\(\forall x,y,z \in \mathbb{R} - \{0\}, \Leftrightarrow x = \widetilde{\langle x_n \rangle}, y = \widetilde{\langle y_n \rangle}, z = \widetilde{\langle z_n \rangle}\) 根据上述引理,不妨设存在正有理数\(\alpha\) ,\(\beta\) 使得\(|x_n| \ge \alpha\) ,\(|y_n| \ge \beta\)
+
+( \(\forall\)  \( n \in \N \) )。于是 
+
+\begin{enumerate}[label=\arabic*)]
+
+\item \(x \cdot y = \widetilde{\langle x_n \rangle \cdot \langle y_n \rangle}  = \widetilde{\langle x_n y_n \rangle}  = \widetilde{\langle y_n \rangle \cdot \langle x_n \rangle} = y \cdot x\)
+
+\[
+|x_ny_n| \ge \alpha\beta (\forall n \in \mathbb{N})
+\] 
+
+因此\(\langle x_n y_n \rangle\) 不与\(\langle 0_n \rangle\) 等价,从而\(x \cdot y \in \mathbb{R} - \{0\}\) .
+
+\item
+\begin{align*}
+	(x \cdot y) \cdot z 
+	&= \widetilde{\langle x_n y_n \rangle} \cdot \langle z_n \rangle = \widetilde{\langle x_n y_n z_n\rangle} \\
+	&= \widetilde{\langle x_n\rangle \cdot \langle y_n z_n\rangle }  = x \cdot (y \cdot z)
+\end{align*}
+
+
+\item
+  因为\(1 \in \mathbb{Q}\) , 若令\(1_n = 1(\forall n \in \mathbb{N})\) ,则\((1_n) \in E\) 并且\(\langle 1_n \rangle \) 不与\(\langle 0_n \rangle\) 等价。令\(1 = \widetilde{\langle 1_n \rangle}\), 则\(1 \in \mathbb{R} - \{0\}\)，并且
+  
+  \[
+  x \cdot 1 = \widetilde{\langle x_n \rangle \cdot \langle 1_n \rangle} = \widetilde{\langle x_n 1_n \rangle} = \widetilde{\langle x_n \rangle} = x
+  \] 
+
+\item
+  首先证明\(\langle x_n^{-1} \rangle \in E\) .因为\(\langle x_n \rangle \in E\) ,由定义
+
+\[
+(\forall 0 < \varepsilon \in \mathbb{Q}) (\exists N \in \mathbb{N}) (\forall n, m \in \mathbb{N}, n, m \geqslant N) \Longrightarrow |x_n - x_m| < \varepsilon
+\]
+
+因此
+
+\[
+\forall n, m \in \mathbb{N}, n, m \geq N \Longrightarrow |x_n^{-1} - x_m^{-1}| = \frac{|x_n - x_m|}{|x_n| |x_m|} < \frac{1}{\alpha^2} \varepsilon
+\] 
+
+此即表明\(\langle x_n^{-1} \rangle \in E\) .我们记$x^{-1} = \widetilde{\langle x_n^{-1} \rangle}$。下面证明\(x^{-1} \in \mathbb{R}\)
+
+事实上,由\rthm{thm:addtivegroup}，\(\langle x_n \rangle\)是有界的，于是存在正有理数$M$使得\(|x_n| \leq M\) (\(\forall n \in \mathbb{N}\) )。由此得\(|x_n^{-1}| \geq \frac{1}{M}\) (\(\forall n \in \mathbb{N}\) ),因此\(\langle x_n^{-1} \rangle\) 不与 \(\langle 0_n \rangle\) 等价,从而\(x^{-1}\in \mathbb{R} - \{0\}\) 。现在
+
+\[
+x \cdot x^{-1} = \widetilde{\langle x_n \rangle \cdot \langle x_n^{-1} \rangle} = \widetilde{\langle x_n x_n^{-1} \rangle} = \widetilde{\langle 1_n \rangle} = 1
+\]
+
+\end{enumerate}
+
+
+\end{proof}
+
+\subsection{$\R$的加法对乘法的分配性质}
+	\label{sec:2-2-3}
+
+\begin{mythm}{}{Rdistribute}
+
+\( \forall x, y, z \in \mathbb{R}\) ,
+
+\[
+ (x+y)\cdot z = x\cdot z + y\cdot z
+\]
+
+\end{mythm}
+
+\begin{proof}
+
+设$x = \widetilde{\langle x_n \rangle},y = \widetilde{\langle y_n \rangle}, z = \widetilde{\langle z_n \rangle}$
+
+则
+\begin{align*}
+	(x+y) \cdot z 
+	&= \widetilde{\langle x_n + y_n \rangle \cdot \langle z_n \rangle} = \widetilde{\langle (x_n + y_n) z_n \rangle} \\
+	&= \widetilde{\langle x_n z_n \rangle + \langle y_n z_n \rangle} = x\cdot z + y\cdot z 
+\end{align*}
+
+\textbf{附注} 1)根据上述三个定理,$\R$对于加法形成交换群, \(\mathbb{R} -\{0\}\)对于乘法形成交换群，并且$\R$的加法对乘法满足分配律, 因此我们称实数集$\R$对于加法与乘法运算构成一个\textbf{交换域}。
+
+2）为了书写简便起见,从以下开始,我们记$\textbf{1}$为$1$，$\textbf{0}$为$0$, $x\cdot y$为$xy$。
+
+\end{proof}
+
+\subsection{习 题}
+
+\begin{exercise}
+	\item 证明：\(\forall x \in \mathbb{R}, 0x = 0, x = -(-x) \)。
+\end{exercise}
+
+\begin{exercise}
+	\item 证明：\(\forall x, y \in \mathbb{R},(-x)(-y) = xy, (-x)y = x(-y) = -xy\) 。
+\end{exercise}	
+
+\begin{exercise}
+	\item
+	证明:\(\forall a, b \in \mathbb{R}\) , 且\(a \neq 0\) , 则方程$ax = b$有唯一的解$x$。
+\end{exercise}	
+
+\begin{exercise}
+	\item 证明, 零元、负元、逆元都是唯一确定的。
+\end{exercise}	
+
+
+
+\section{实数集 \(\R\) 的全序性}
+
+为了研究实数集 \(\R\) 的全序性，我们首先介绍 \(\R\) 上的序关系。
+
+\subsection{\(\R\) 上的序关系}
+	\label{sec:2-3-1}
+
+考虑下面两个集合
+\[
+\begin{aligned}
+\R^+&\mathrel{\triangleq}
+\left\{x\in\R\ \middle|\
+\begin{array}{l}
+\text{存在 }\langle r_n\rangle\in x\text{，使得}\
+r_n\geq0\quad(\forall n\in\N)
+\end{array}
+\right\},\\[2pt]
+\R^-&\mathrel{\triangleq}\{x\in\R\mid -x\in\R^+\}.
+\end{aligned}
+\]
+\(\R^+\) 与 \(\R^-\) 分别称为非负实数集与非正实数集。除此以外，我们还分别称
+\[
+\R_*^+\mathrel{\triangleq}\R^+-\{0\},
+\qquad
+\R_*^-\mathrel{\triangleq}\R^--\{0\}
+\]
+为正实数集与负实数集。
+
+关于这些集合之间的关系，我们有下述定理。
+
+\begin{mythm}{}{real-sign-sets}
+如果我们定义 \(\R\) 的任意两个子集合 \(A\) 与 \(B\) 的和 \(A+B\) 与积 \(A\cdot B\) 为
+\[
+A+B=\{x+y\in\R\mid x\in A,\ y\in B\},
+\qquad
+A\cdot B=\{xy\in\R\mid x\in A,\ y\in B\},
+\]
+那么我们有：
+\begin{enumerate}[label=\arabic*)]
+  \item \(\R^++\R^+=\R^+\)，\(\R^-+\R^-=\R^-\)；
+  \item \(\R^+\cdot\R^+=\R^-\cdot\R^-=\R^+\)，\(\R^+\cdot\R^-=\R^-\)；
+  \item \(\R^+\cap\R^-=\{0\}\)，
+  \(\R^+\cup\R^-=\R=\R_*^+\cup\R_*^-\cup\{0\}\)。
+\end{enumerate}
+\end{mythm}
+
+\begin{proof}
+1) 与 2) 的论证我们留给读者作为练习。我们来证明 3)。
+
+设 \(x\in\R^+\cap\R^-\)。于是 \(x\in\R^+\)，\(-x\in\R^+\)。根据定义，存在
+\(\langle r_n\rangle,\langle s_n\rangle\in E\)，使得
+\[
+x=\widetilde{\langle r_n\rangle},
+\qquad
+-x=\widetilde{\langle s_n\rangle},
+\qquad
+r_n\geq0,\ s_n\geq0\quad(\forall n\in\N).
+\]
+由于 \(x=-(-x)\)，故
+\(x=\widetilde{\langle-s_n\rangle}\)，从而
+\(\langle r_n\rangle\) 与 \(\langle-s_n\rangle\) 等价。因此
+\[
+(\forall\,0<\varepsilon\in\Q)(\exists\,N\in\N)
+(\forall\,n\in\N,\ n\geq N)
+\Longrightarrow |r_n-(-s_n)|<\varepsilon.
+\]
+由此推得
+\[
+\forall n\in\N,\quad n\geq N
+\Longrightarrow
+|r_n-0_n|=|r_n|\leq|r_n+s_n|<\varepsilon.
+\]
+这表明 \(\langle r_n\rangle\) 与 \(\langle0_n\rangle\) 等价，因此 \(x=0\)。
+
+为了证明 \(\R^+\cup\R^-=\R\)，首先注意到
+\(\R^+\cup\R^-\subset\R\)。现设 \(x\in\R\)。若 \(x=0\)，则
+\(x\in\R^+\cup\R^-\)。若 \(x\neq0\)，则由 §2 的引理知，存在
+\(\langle r_n\rangle\in E\) 及正有理数 \(r\)，使得
+\(x=\widetilde{\langle r_n\rangle}\)，并且
+\[
+r_n\geq r\quad(\forall n\in\N),
+\qquad\text{或}\qquad
+r_n\leq-r\quad(\forall n\in\N).
+\]
+在第一种情形下，\(x\in\R^+\)；在第二种情形下，
+\(-r_n\geq r\)，且
+\(-x=\widetilde{\langle-r_n\rangle}\in\R^+\)，故 \(x\in\R^-\)。
+因此 \(\R=\R^+\cup\R^-\)，从而
+\(\R=\R_*^+\cup\R_*^-\cup\{0\}\)。
+\end{proof}
+
+现在我们在 \(\R\) 上定义关系 \(\leq\) 如下：
+\[
+\forall x,y\in\R,
+\qquad
+x\leq y
+\iff
+y-x\mathrel{\triangleq}y+(-x)\in\R^+.
+\]
+并且规定
+\[
+x<y\iff x\leq y\text{ 且 }x\neq y.
+\]
+
+\begin{mythm}{}{real-total-order}
+实数集 \(\R\) 关于如上定义的关系 \(\leq\) 是一个全序集。
+\end{mythm}
+
+\begin{proof}
+\begin{enumerate}[label=\arabic*)]
+   
+  \item 自反性：对任意 \(x\in\R\)，由于
+  \(x-x=x+(-x)=0\in\R^+\)，所以 \(x\leq x\)。
+
+  \item 反对称性：设 \(x,y\in\R\)，并且 \(x\leq y\)、\(y\leq x\)。那么
+  \(y-x\in\R^+\)、\(x-y\in\R^+\)，从而 \(y-x\in\R^-\)。因此
+  \(y-x\in\R^+\cap\R^-\)。由\rthm{thm:real-sign-sets}知
+  \(y-x=0\)，即 \(x=y\)。
+
+  \item 传递性：设 \(x,y,z\in\R\)，并且 \(x\leq y\)、\(y\leq z\)。那么
+  \(y-x\in\R^+\)、\(z-y\in\R^+\)。于是由\rthm{thm:real-sign-sets}知
+  \[
+  z-x=(z-y)+(y-x)\in\R^++\R^+=\R^+,
+  \]
+  因此 \(x\leq z\)。
+
+  \item 对任意 \(x,y\in\R\)，证明 \(x\leq y\) 或 \(y\leq x\)。事实上，
+  \(y-x\in\R=\R^+\cup\R^-\)。若 \(y-x\in\R^+\)，则 \(x\leq y\)；
+  若 \(y-x\in\R^-\)，则 \(x-y=-(y-x)\in\R^+\)，从而 \(y\leq x\)。
+\end{enumerate}
+综合上述所证，\(\leq\) 是 \(\R\) 上的一个序关系，从而
+\((\R,\leq)\) 是全序集。
+\end{proof}
+
+\begin{mycor*}{}
+对任意 \(x,y\in\R\)，下述三个关系式
+\[
+x<y,\qquad y<x,\qquad x=y
+\]
+中有一个并且只有一个成立。
+\end{mycor*}
+
+\begin{proof}
+留给读者。
+\end{proof}
+
+下面我们研究 \(\Q\) 在 \(\R\) 中的嵌入。
+
+\subsection{\(\Q\) 在 \(\R\) 中的嵌入}
+	\label{sec:2-3-2}
+
+在 §1，我们从有理数出发构造了实数。自然要问：实数集 \(\R\) 一定比有理数集
+\(\Q\) 有更多的元素吗？下面我们就来研究这个问题。为此我们定义映射
+\(p:\Q\to\R\) 如下：
+\[
+\forall r\in\Q,
+\qquad
+p(r)=\widetilde{\langle r\rangle}.
+\]
+映射 \(p\) 的性质可以综述为下述定理。
+
+\begin{mythm}{}{rational-embedding}
+映射 \(p\) 是从 \(\Q\) 到 \(p(\Q)\) 上的保序同构映射，即下述性质成立：
+\begin{enumerate}[label=\arabic*)]
+  \item \(p:\Q\to p(\Q)\) 是一一映射；
+  \item 对任意 \(r,s\in\Q\)，
+  \[
+  p(r+s)=p(r)+p(s),
+  \qquad
+  p(rs)=p(r)p(s);
+  \]
+  \item 对任意 \(r,s\in\Q\)，若 \(r<s\)，则 \(p(r)<p(s)\)。
+\end{enumerate}
+\end{mythm}
+
+\begin{proof}
+\begin{enumerate}[label=\arabic*)]
+  \item 我们只需证明 \(p\) 是单射。设 \(r,s\in\Q\)，\(r\neq s\)。那么
+  \(\langle r\rangle\) 与 \(\langle s\rangle\) 不等价，因此
+  \(\widetilde{\langle r\rangle}\neq\widetilde{\langle s\rangle}\)，从而
+  \(p(r)\neq p(s)\)。
+
+  \item 对任意 \(r,s\in\Q\)，由定义有
+  \begin{align*}
+  p(r)+p(s)
+  &=\widetilde{\langle r\rangle}+\widetilde{\langle s\rangle}
+   =\widetilde{\langle r+s\rangle}=p(r+s),\\
+  p(r)p(s)
+  &=\widetilde{\langle r\rangle}\cdot\widetilde{\langle s\rangle}
+   =\widetilde{\langle rs\rangle}=p(rs).
+  \end{align*}
+
+  \item 设 \(r,s\in\Q\)，且 \(r<s\)。那么 \(s-r>0\)，从而
+  \[
+  p(s-r)=\widetilde{\langle s-r\rangle}\in\R^+.
+  \]
+  但是
+  \[
+  p(s-r)=p(s+(-r))=p(s)-p(r),
+  \]
+  因此 \(p(r)\leq p(s)\)。又由 \(p\) 的单射性知
+  \(p(r)\neq p(s)\)，故 \(p(r)<p(s)\)。
+\end{enumerate}
+\end{proof}
+
+\textbf{附注}\quad
+我们记
+\[
+\widetilde{\Q}=p(\Q),
+\qquad
+\widetilde r=p(r)\quad(r\in\Q),
+\]
+并称 \(\widetilde r\) 为有理实数，\(\widetilde{\Q}\) 为有理实数集。在本节习题 9 中我们将证明
+\[
+\widetilde{\Q}^{c}=\R-\widetilde{\Q}\neq\varnothing,
+\]
+因此 \(\widetilde{\Q}\) 是 \(\R\) 的一个真子集。
+\(\R-\widetilde{\Q}\) 中的每一个元素称为无理实数。
+
+\rthm{thm:rational-embedding}表明，\(\Q\) 与 \(\widetilde{\Q}\) 上的加法、乘法及序关系保持不变；又由附注可知
+\(\widetilde{\Q}\) 是 \(\R\) 的真子集。据此我们称 \(\Q\) 嵌入 \(\R\) 中，或称
+\(\R\) 是 \(\Q\) 的扩张。
+
+正因为有理数集 \(\Q\) 与有理实数集 \(\widetilde{\Q}\) 之间保持这种运算关系及序关系，故从下一章起，如未特别指明，我们将不再区分有理数 \(r\) 与有理实数
+\(\widetilde r\)，而一律记 \(\widetilde r\) 为 \(r\)。
+
+最后我们介绍有理实数集 \(\widetilde{\Q}\) 的两个重要性质，即下述定理。
+
+\begin{mythm}{}{rational-density}
+（\(\widetilde{\Q}\) 在 \(\R\) 中的稠密性）对任意 \(x,y\in\R\)，若
+\(x<y\)，则存在 \(\widetilde r\in\widetilde{\Q}\)，使得
+\[
+x<\widetilde r<y.
+\]
+\end{mythm}
+
+\begin{proof}
+因为 \(x<y\)，所以 \(0<y-x\)。由 §2 的引理知，存在
+\(\langle r'_n\rangle,\langle s'_n\rangle\in E\) 及正有理数 \(\alpha\)，使得
+\[
+x=\widetilde{\langle r'_n\rangle},
+\qquad
+y=\widetilde{\langle s'_n\rangle},
+\qquad
+s'_n-r'_n\geq\alpha\quad(\forall n\in\N).
+\]
+另一方面，由 \(\langle r'_n\rangle,\langle s'_n\rangle\in E\)，对
+\(\alpha>0\)，存在 \(N\in\N\)，使得
+\[
+\forall n\in\N,\quad n\geq N
+\Longrightarrow
+|r'_n-r'_N|<\frac{\alpha}{4},
+\qquad
+|s'_n-s'_N|<\frac{\alpha}{4}.
+\]
+因此
+\[
+r'_n<r'_N+\frac{\alpha}{4},
+\qquad
+s'_N-\frac{\alpha}{4}<s'_n
+\quad(n\geq N).
+\]
+令
+\[
+r=\frac{r'_N+s'_N}{2},
+\]
+则 \(r\in\Q\)，并且
+\[
+\forall n\in\N,\quad n\geq N
+\Longrightarrow
+r'_n<r'_N+\frac{\alpha}{4}<r
+<s'_N-\frac{\alpha}{4}<s'_n.
+\]
+现在我们定义有理数序列 \(\langle r_n\rangle\) 及 \(\langle s_n\rangle\) 如下：
+\[
+r_n=
+\begin{cases}
+r'_N+\dfrac{\alpha}{4},&n<N,\\
+r'_n,&n\geq N,
+\end{cases}
+\qquad
+s_n=
+\begin{cases}
+s'_N-\dfrac{\alpha}{4},&n<N,\\
+s'_n,&n\geq N.
+\end{cases}
+\]
+则 \(\langle r_n\rangle,\langle s_n\rangle\in E\)，并且
+\[
+r_n<r<s_n\quad(\forall n\in\N),
+\qquad
+x=\widetilde{\langle r_n\rangle},
+\qquad
+y=\widetilde{\langle s_n\rangle}.
+\]
+故 \(x<\widetilde r<y\)。
+\end{proof}
+
+\begin{mythm}{}{archimedean-property}
+（Archimedes 性质）对任意 \(x,y\in\R\)，若 \(0<x<y\)，则存在
+\(N\in\N\)，使得
+\[
+y<\widetilde N x.
+\]
+\end{mythm}
+
+\begin{proof}
+因为 \(x>0\)，故由 §2 的引理知，存在 \(\langle r_n\rangle\in E\) 及正有理数
+\(q/p\)，使得
+\[
+x=\widetilde{\langle r_n\rangle},
+\qquad
+\frac{1}{p}\leq\frac{q}{p}\leq r_n
+\quad(\forall n\in\N).
+\]
+令 \(y=\widetilde{\langle s_n\rangle}\)。由于 \(\langle s_n\rangle\) 有界，存在
+\(m\in\N\)，使得 \(|s_n|\leq m\)（\(\forall n\in\N\)）。令
+\(N=p(m+1)\)，则
+\(\widetilde N x=\widetilde{\langle Nr_n\rangle}\)，并且
+\[
+s_n\leq m<m+1=p(m+1)\frac{1}{p}\leq Nr_n.
+\]
+因此 \(y<\widetilde N x\)。
+\end{proof}
+
+\subsection{习 题}
+
+\begin{exercise}
+  \item 证明\rthm{thm:real-sign-sets}的 1)、2)。
+\end{exercise}
+
+\begin{exercise}
+  \item 证明：对任意 \(x,y\in\R\)，若 \(x\in\R_*^+\)、\(xy\in\R^+\)，则
+  \(y\in\R^+\)。
+\end{exercise}
+
+\begin{exercise}
+  \item 设 \(x,y\in\R\)，证明：
+  \begin{enumerate}[label=\arabic*)]
+    \item \(x\leq y\) 的充分必要条件是 \(-y\leq-x\)；
+    \item \(0<x<y\) 的充分必要条件是
+    \(0<y^{-1}<x^{-1}\)。
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  \item 证明\rthm{thm:real-total-order}的推论。
+\end{exercise}
+
+\begin{exercise}
+  \item 证明在实数集 \(\R\) 上所定义的序关系 \(\leq\) 与加法及乘法运算是相容的，即：
+  \begin{enumerate}[label=\arabic*)]
+    \item 若 \(x\leq y\)、\(x'\leq y'\)，则
+    \(x+x'\leq y+y'\)；
+    \item 设 \(x\leq y\)。若 \(0\leq z\)，则 \(xz\leq yz\)；若
+    \(z\leq0\)，则 \(yz\leq xz\)；
+    \item
+    \[
+    0<xy
+    \iff
+    \bigl(0<x,\ 0<y\bigr)\text{ 或 }\bigl(x<0,\ y<0\bigr),
+    \]
+    \[
+    xy<0
+    \iff
+    \bigl(0<x,\ y<0\bigr)\text{ 或 }\bigl(x<0,\ 0<y\bigr).
+    \]
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  \item 设 \(x\) 是一个无理实数，\(a,b,c,d\in\Q\)，并且
+  \(ad-bc\neq0\)。证明
+  \[
+  \frac{\widetilde a x+\widetilde b}{\widetilde c x+\widetilde d}
+  \mathrel{\triangleq}
+  (\widetilde a x+\widetilde b)
+  (\widetilde c x+\widetilde d)^{-1}
+  \]
+  是无理实数。
+\end{exercise}
+
+\begin{exercise}
+  \item 证明：对任意 \(x\in\R\)，存在唯一的整数，记为 \([x]\)，使得
+  \[
+  [x]\leq x<[x]+1.
+  \]
+  \([x]\) 称为 \(x\) 的整数部分。
+\end{exercise}
+
+\begin{exercise}
+  \item 设 \(x\in\R^+\)。我们把满足方程 \(z^2=x\) 的非负实数 \(z\) 记作
+  \(\sqrt{x}\)。证明：如果 \(\sqrt{x}\) 与 \(\sqrt{y}\) 是无理实数，则
+  \(\sqrt{x}+\sqrt{y}\) 也是无理实数。
+\end{exercise}
+
+\begin{exercise}
+  \item 证明无理实数集 \(\widetilde{\Q}^{c}\) 在 \(\R\) 中稠密，即
+  \[
+  \forall x,y\in\R,\quad x<y
+  \Longrightarrow
+  (\exists z\in\widetilde{\Q}^{c})\quad x<z<y.
+  \]
+\end{exercise}
+
+\begin{exercise}
+  \item 这个题目的内容是介绍 Dedekind 实数构造法。
+  \begin{enumerate}[label=\arabic*)]
+    \item 设 \(\Q\) 是有理数集，\(X\subset\Q\) 是任一子集。若它满足下列三个条件：
+    \begin{enumerate}[label=\roman*)]
+      \item \(X\neq\varnothing\)，\(X\neq\Q\)；
+      \item 若 \(r\in X\)、\(s\in\Q\) 且 \(s<r\)，则 \(s\in X\)；
+      \item 若 \(r\in X\)，则存在 \(s\in X\)，使得 \(r<s\)，
+    \end{enumerate}
+    则称 \(X\) 是一个 Dedekind 实数。
+
+    现设 \(X\) 是任一 Dedekind 实数。如果 \(\Q-X\) 有最小者，则称
+    \(X\) 是第一类 Dedekind 实数；反之，则称 \(X\) 是第二类 Dedekind 实数。
+    \begin{enumerate}[label=\alph*)]
+      \item 证明
+      \[
+      X=\{r\in\Q\mid r<1\}
+      \]
+      是第一类 Dedekind 实数；
+      \item 证明
+      \[
+      Y=\{r\in\Q\mid r<0\text{ 或 }r^2<2\}
+      \]
+      是第二类 Dedekind 实数；
+      \item 证明 \(X_0\) 是第一类 Dedekind 实数的充分必要条件是存在有理数
+      \(r_0\)，使得
+      \[
+      X_0=\{r\in\Q\mid r<r_0\}.
+      \]
+    \end{enumerate}
+
+    \item 我们用 \(\R\) 表示所有 Dedekind 实数的集合。在 \(\R\) 上定义关系
+    \(\leq\) 如下：
+    \[
+    \forall X,Y\in\R,
+    \qquad
+    X\leq Y\iff X\subset Y.
+    \]
+    证明 \(\leq\) 是 \(\R\) 上的一个序关系。
+  \end{enumerate}
+\end{exercise}
+
+\section{实数集 \(\R\) 的扩展}
+
+\subsection{\(\R\) 的第一个扩展}
+
+将实数集 \(\R\) 添加两个新的元素 \(-\infty\) 与 \(+\infty\) 所得的新集合记为
+\(\overline{\R}\)。在 \(\R\) 上的序关系 \(\leq\) 之外，再作如下约定：
+\[
+\forall x\in\R,
+\qquad
+-\infty<x<+\infty,\quad
+-\infty\leq-\infty,\quad
++\infty\leq+\infty.
+\]
+由此所得 \(\overline{\R}\) 上的关系显然也是序关系。因此，\(\overline{\R}\)
+关于这个序关系是一个全序集，它是 \(\R\) 的第一个扩展。
+
+\(\overline{\R}\) 通常称为有终端的直线。
+
+\subsection{\(\R\) 的第二个扩展}
+
+我们来考虑乘积集合 \(\R\times\R\)。在 \(\R\times\R\) 上定义加法
+“\(+\)”、乘法“\(\cdot\)”与数乘运算：对任意
+\((a,b),(c,d)\in\R\times\R\) 及 \(\lambda\in\R\)，规定
+\[
+\begin{aligned}
+\text{i)}\quad &(a,b)+(c,d)\mathrel{\triangleq}(a+c,b+d);\\
+\text{ii)}\quad &(a,b)\cdot(c,d)\mathrel{\triangleq}(ac-bd,ad+bc);\\
+\text{iii)}\quad &\lambda(a,b)\mathrel{\triangleq}(\lambda a,\lambda b).
+\end{aligned}
+\]
+
+\begin{mydef*}{}
+定义了上述三个运算的集合 \(\R\times\R\) 称为复数集，记为 \(\C\)。
+\(\C\) 的每一个元素 \((a,b)\) 称为复数。
+\end{mydef*}
+
+关于复数集 \(\C\) 的性质，我们有下述定理。
+
+\begin{mythm}{}{complex-field}
+\begin{enumerate}[label=\arabic*)]
+  \item 复数集 \(\C\) 关于加法与乘法运算是一个交换域，即 \(\C\)
+  关于加法是交换群，\(\C-\{(0,0)\}\) 关于乘法是交换群，\(\C\)
+  的加法对乘法满足分配律。
+  \item 映射
+  \[
+  \pi:\R\longrightarrow\C,
+  \qquad
+  \pi(x)=(x,0)\quad(x\in\R)
+  \]
+  是从 \(\R\) 到 \(\pi(\R)\) 上的同构映射，即
+  \begin{enumerate}[label=\roman*)]
+    \item \(\pi:\R\to\pi(\R)\) 是一一映射；
+    \item \(\pi(x+y)=\pi(x)+\pi(y)\)，\(\forall x,y\in\R\)；
+    \item \(\pi(xy)=\pi(x)\cdot\pi(y)\)，\(\forall x,y\in\R\)。
+  \end{enumerate}
+\end{enumerate}
+\end{mythm}
+
+定理的证明留给读者作为练习。
+
+利用映射 \(\pi\)，我们可以规定
+\[
+\forall x\in\R,\qquad (x,0)\mathrel{\triangleq}x.
+\]
+如果我们引入记号
+\[
+(0,1)\mathrel{\triangleq}i,
+\]
+则由复数的乘法定义，我们得到
+\[
+i^2\mathrel{\triangleq}i\cdot i=(0,1)\cdot(0,1)=(-1,0)=-1.
+\]
+现设 \(z=(a,b)\in\C\) 是任一复数，由
+\[
+(a,b)=(a,0)+(0,b)=(a,0)+b(0,1)
+\]
+得到
+\[
+z=a+ib.
+\]
+这就是复数的通常表示法。
+
+\begin{mydef*}{}
+对任意一个复数 \(z=a+ib\in\C\)，
+\begin{enumerate}[label=\arabic*)]
+  \item \(i\) 称为虚数单位；
+  \item \(a\) 称为复数 \(z\) 的实部，\(b\) 称为复数 \(z\) 的虚部系数，
+  并记为
+  \[
+  a=\operatorname{Re}z,\qquad b=\operatorname{Im}z;
+  \]
+  \item \(a-ib\) 称为复数 \(z=a+ib\) 的共轭复数，记为 \(\overline z\)；
+  \item 非负实数 \(\sqrt{a^2+b^2}\) 称为复数 \(z=a+ib\) 的模，记为 \(|z|\)；
+  \item 复数 \(z=a+ib\neq(0,0)\) 的辐角就是满足
+  \[
+  \cos\theta=\frac{a}{\sqrt{a^2+b^2}},
+  \qquad
+  \sin\theta=\frac{b}{\sqrt{a^2+b^2}}
+  \]
+  的实数 \(\theta\) 的模 \(2\pi\) 类。通常用 \(\arg z\) 表示这个模
+  \(2\pi\) 类中的任一元素。
+\end{enumerate}
+\end{mydef*}
+
+容易验证下述定理。
+
+\begin{mythm}{}{complex-modulus-argument}
+模 \(|z|\) 与辐角 \(\arg z\) 具有下述性质：
+\begin{enumerate}[label=\arabic*)]
+  \item 对任意 \(z\in\C\)，\(|z|\geq0\)，且
+  \[
+  |z|=0\iff z=(0,0);
+  \]
+  \item 对任意 \(z_1,z_2\in\C\)，
+  \[
+  |z_1-z_2|=|z_2-z_1|,\qquad
+  |z_1+z_2|\leq|z_1|+|z_2|,
+  \]
+  \[
+  |z_1z_2|=|z_1|\,|z_2|;
+  \]
+  \item 对任意 \(z_1,z_2\in\C-\{(0,0)\}\)，
+  \[
+  \arg(z_1z_2)=\arg z_1+\arg z_2\pmod{2\pi}.
+  \]
+\end{enumerate}
+\end{mythm}
+
+\subsection{习 题}
+
+\begin{exercise}
+  \item 证明：\(\R\) 上的序关系 \(\leq\) 加上下述约定
+  \[
+  \forall x\in\R,\qquad
+  -\infty<x<+\infty,\quad
+  -\infty\leq-\infty,\quad
+  +\infty\leq+\infty
+  \]
+  所得关系是 \(\overline{\R}\) 上的一个序关系。
+\end{exercise}
+
+\begin{exercise}
+  \item 证明\rthm{thm:complex-field}。
+\end{exercise}
+
+\begin{exercise}
+  \item 证明\rthm{thm:complex-modulus-argument}。
+\end{exercise}
+
+\section{实数集 \(\R\) 的特殊点、集}
+
+这一节我们初步介绍一些反映实数集 \(\R\) 拓扑结构的特殊点、集。这不仅有助于
+我们加深对 \(\R\) 的进一步认识，而且这些点、集在以后的一元实值函数的分析性质
+的研究中将发挥重要作用。
+
+\subsection{\(\R\) 的度量}
+	\label{sec:2-5-1}
+
+我们首先介绍实数的绝对值概念。
+
+\begin{mydef*}{}
+对任意 \(x\in\R\)，\(x\) 的绝对值 \(|x|\) 定义为
+\[
+|x|=\begin{cases}
+x,&x\geq0,\\
+-x,&x<0.
+\end{cases}
+\]
+\end{mydef*}
+
+绝对值有下面两个最基本的性质。
+
+\textbf{性质 1}\quad 对任意 \(x,y\in\R\)，
+\begin{enumerate}[label=\arabic*)]
+  \item \(|x|\geq0\)，且 \(|x|=0\iff x=0\)；
+  \item \(|x|=|-x|\)，且 \(-|x|\leq x\leq|x|\)；
+  \item \(|xy|=|x|\,|y|\)；
+  \item 对任意 \(\varepsilon>0\)，
+  \[
+  |x|\leq\varepsilon\iff-\varepsilon\leq x\leq\varepsilon;
+  \]
+  \item
+  \[
+  |x\pm y|\leq|x|+|y|,
+  \qquad
+  \bigl||x|-|y|\bigr|\leq|x-y|.
+  \]
+\end{enumerate}
+
+\begin{proof}
+\begin{enumerate}[label=\arabic*)]
+  \item 直接由绝对值定义推出。
+
+  \item \(|x|=|-x|\) 也可由绝对值定义推得。现在证明 \(|x|\geq x\)。
+  为此只需证明 \(|x|-x\in\R^+\)。若 \(x\geq0\)，则
+  \(|x|-x=x-x=0\in\R^+\)；若 \(x<0\)，则
+  \[
+  |x|-x=(-x)+(-x)\in\R^++\R^+\subset\R^+.
+  \]
+  因此 \(|x|\geq x\)。类似可证 \(x\geq-|x|\)。
+
+  \item 若 \(xy\geq0\)，则 \(x\geq0,y\geq0\) 或 \(x\leq0,y\leq0\)，因此
+  \[
+  |xy|=\begin{cases}
+  xy=|x|\,|y|,&x\geq0, y\geq0,\\
+  xy=(-x)(-y)=|x|\,|y|,&x\leq0, y\leq0.
+  \end{cases}
+  \]
+  若 \(xy\leq0\)，则 \(x\geq0,y\leq0\) 或 \(x\leq0,y\geq0\)，因此
+  \[
+  |xy|=\begin{cases}
+  -(xy)=x(-y)=|x|\,|y|,&x\geq0, y\leq0,\\
+  -(xy)=(-x)y=|x|\,|y|,&x\leq0, y\geq0.
+  \end{cases}
+  \]
+  因此 \(|xy|=|x|\,|y|\)。
+
+  \item 设 \(\varepsilon>0\)，且 \(|x|\leq\varepsilon\)。若 \(x\geq0\)，则
+  \(|x|=x\)，从而 \(0\leq x\leq\varepsilon\)，故
+  \(-\varepsilon\leq x\leq\varepsilon\)。若 \(x<0\)，则 \(|x|=-x\)，
+  于是 \(-x\leq\varepsilon\)，由此得到
+  \(-\varepsilon\leq x<0\)，仍有
+  \(-\varepsilon\leq x\leq\varepsilon\)。
+
+  反之设 \(-\varepsilon\leq x\leq\varepsilon\)。若 \(x\geq0\)，则
+  \(0\leq x\leq\varepsilon\)，从而 \(|x|\leq\varepsilon\)；若 \(x<0\)，
+  则 \(-\varepsilon\leq x<0\)，从而 \(0<-x\leq\varepsilon\)，因此
+  \(|x|\leq\varepsilon\)。
+
+  \item 由 2) 我们有
+  \[
+  -|x|\leq x\leq|x|,
+  \qquad
+  -|y|\leq y\leq|y|.
+  \]
+  因此
+  \[
+  -(|x|+|y|)\leq x+y\leq|x|+|y|.
+  \]
+  由 4) 得到
+  \[
+  |x+y|\leq|x|+|y|.
+  \]
+  对第二个三角不等式，我们有
+  \[
+  |x-y|=|x+(-y)|\leq|x|+|-y|=|x|+|y|.
+  \]
+  最后，关于不等式 \(\bigl||x|-|y|\bigr|\leq|x-y|\)，由于
+  \[
+  |x|=|x-y+y|\leq|x-y|+|y|,
+  \]
+  \[
+  |y|=|y-x+x|\leq|y-x|+|x|=|x-y|+|x|,
+  \]
+  故
+  \[
+  -|x-y|\leq|x|-|y|\leq|x-y|.
+  \]
+  由 4) 得到
+  \[
+  \bigl||x|-|y|\bigr|\leq|x-y|.
+  \]
+\end{enumerate}
+\end{proof}
+
+\textbf{性质 2}\quad 对任意 \(x,y,z\in\R\)，
+\begin{enumerate}[label=\arabic*)]
+  \item \(|x-y|\geq0\)，且 \(|x-y|=0\iff x=y\)；
+  \item \(|x-y|=|y-x|\)；
+  \item \(|x-y|\leq|x-z|+|z-y|\)。
+\end{enumerate}
+
+\begin{proof}
+可由性质 1 推出。
+\end{proof}
+
+正因为绝对值 \(|x-y|\) 具有性质 2，故引入下述定义。
+
+\begin{mydef*}{}
+对任意 \(x,y\in\R\)，实数值 \(|x-y|\) 称为 \(x\) 与 \(y\) 之间的度量。
+实数集 \(\R\) 连同这个度量一起称为实数度量空间，简称为实数空间。
+\end{mydef*}
+
+显然，\(\R\) 上的这个绝对值度量不是别的，正是我们通常所说的实数轴上任意两点
+之间的 Euclidean 距离。
+
+一元函数的分析就是以这个实数度量空间为基本空间的。
+
+\subsection{\(\R\) 的一些重要集合}
+
+设 \(a,b\in\R\)，\(a\leq b\)，我们定义下面四个集合：
+\begin{equation}
+\begin{aligned}
+\text{闭区间 }[a,b]&\mathrel{\triangleq}\{x\in\R\mid a\leq x\leq b\},\\
+\text{开区间 }]a,b[&\mathrel{\triangleq}\{x\in\R\mid a<x<b\},\\
+\text{左闭右开区间 }[a,b[&\mathrel{\triangleq}\{x\in\R\mid a\leq x<b\},\\
+\text{左开右闭区间 }]a,b]&\mathrel{\triangleq}\{x\in\R\mid a<x\leq b\}.
+\end{aligned}
+\tag{1}
+\end{equation}
+注意，若 \(a=b\)，则 \([a,b]=\{a\}\)，而
+\(]a,b[=[a,b[=]a,b]=\varnothing\)。此外，我们还定义下面几个集合：
+\begin{equation}
+\begin{aligned}
+] -\infty,a]&\mathrel{\triangleq}\{x\in\R\mid x\leq a\},&
+] -\infty,a[&\mathrel{\triangleq}\{x\in\R\mid x<a\},\\
+[a,+\infty[&\mathrel{\triangleq}\{x\in\R\mid x\geq a\},&
+]a,+\infty[&\mathrel{\triangleq}\{x\in\R\mid x>a\},\\
+\R&\mathrel{\triangleq}]-\infty,+\infty[,&
+\overline{\R}&\mathrel{\triangleq}[-\infty,+\infty].
+\end{aligned}
+\tag{2}
+\end{equation}
+
+式 (1) 中的各区间称为 \(\R\) 的有限区间，式 (2) 中的各集合称为无限区间。
+有限区间与无限区间统称为区间。
+
+\subsection{邻域}
+	\label{sec:2-5-3}
+
+\begin{mydef*}{}
+设 \(a\in\R\)。
+\begin{enumerate}[label=\arabic*)]
+  \item 包含 \(a\) 的任一开区间 \(]\alpha,\beta[\) 称为 \(a\) 的一个邻域。
+  我们用 \(\mathcal N(a)\) 表示由 \(a\) 的所有邻域组成的邻域系。
+
+  特别地，对任意 \(\delta>0\)，
+  \[
+  B(a,\delta)\mathrel{\triangleq}
+  \{x\in\R\mid |x-a|<\delta\}
+  =]a-\delta,a+\delta[
+  \]
+  称为以 \(a\) 为中心、\(\delta\) 为半径的 \(\delta\) 邻域。
+
+  \item 对任意 \(\delta>0\)，
+  \[
+  \mathring B(a,\delta)\mathrel{\triangleq}
+  \{x\in\R\mid 0<|x-a|<\delta\}
+  \]
+  称为以 \(a\) 为中心、\(\delta\) 为半径的去心 \(\delta\) 邻域。
+  \[
+  \begin{aligned}
+  B_+(a,\delta)&\mathrel{\triangleq}\{x\in\R\mid a\leq x<a+\delta\},\\
+  B_-(a,\delta)&\mathrel{\triangleq}\{x\in\R\mid a-\delta<x\leq a\}
+  \end{aligned}
+  \]
+  分别称为 \(a\) 的右侧与左侧 \(\delta\) 邻域；
+  \[
+  \begin{aligned}
+  \mathring B_+(a,\delta)&\mathrel{\triangleq}
+  \{x\in\R\mid a<x<a+\delta\},\\
+  \mathring B_-(a,\delta)&\mathrel{\triangleq}
+  \{x\in\R\mid a-\delta<x<a\}
+  \end{aligned}
+  \]
+  分别称为 \(a\) 的右侧与左侧去心 \(\delta\) 邻域。
+
+  \item 开区间 \(]a,+\infty[\) 与 \(]-\infty,a[\) 分别称为 \(+\infty\)
+  与 \(-\infty\) 的邻域。
+\end{enumerate}
+\end{mydef*}
+
+\textbf{性质（Hausdorff 分离性）}\quad 对任意 \(x,y\in\R\)，若 \(x\neq y\)，
+则存在 \(\delta>0\)，使得
+\[
+B(x,\delta)\cap B(y,\delta)=\varnothing.
+\]
+
+\begin{proof}
+取
+\[
+\delta=\frac{|x-y|}{3}.
+\]
+\end{proof}
+
+\subsection{聚点、孤立点、内点}
+	\label{sec:2-5-4}
+
+\begin{mydef*}{}
+设 \(X\subset\R\) 是任一集合，\(a\in\R\)。
+\begin{enumerate}[label=\arabic*)]
+  \item 我们称 \(a\) 是 \(X\) 的（有限）聚点，如果
+  \[
+  \forall\delta>0,\qquad X\cap\mathring B(a,\delta)\neq\varnothing;
+  \]
+  \item 我们称 \(a\) 是 \(X\) 的右侧聚点，如果
+  \[
+  \forall\delta>0,\qquad X\cap\mathring B_+(a,\delta)\neq\varnothing;
+  \]
+  \item 我们称 \(a\) 是 \(X\) 的左侧聚点，如果
+  \[
+  \forall\delta>0,\qquad X\cap\mathring B_-(a,\delta)\neq\varnothing;
+  \]
+  \item 我们称 \(a\) 是 \(X\) 的双侧聚点，如果 \(a\) 是 \(X\) 的右侧聚点
+  又是 \(X\) 的左侧聚点。
+\end{enumerate}
+\end{mydef*}
+
+\textbf{注意}\quad 由上述定义可知：若 \(a\) 是 \(X\) 的聚点，则它至少是一个
+单侧聚点；\(X\) 的聚点可以属于 \(X\)，也可以不属于 \(X\)。
+
+\begin{sourceexample}{1}
+考虑集合
+\[
+X=\left\{1,\frac12,\frac13,\ldots,\frac1n,\ldots\right\}.
+\]
+\(0\) 是 \(X\) 的唯一聚点，且 \(0\notin X\)。
+\end{sourceexample}
+
+\begin{sourceexample}{2}
+考虑区间 \(]a,b]\)。对任意 \(x\in]a,b]\)，\(x\) 都是 \(]a,b]\) 的聚点；
+但 \(a\) 是右侧聚点，\(b\) 是左侧聚点，而其他点都是 \(]a,b]\) 的双侧聚点。
+\end{sourceexample}
+
+\begin{mydef*}{}
+设 \(X\subset\R\) 是任一集合，\(a\in X\)。
+\begin{enumerate}[label=\arabic*)]
+  \item 我们称 \(a\) 是 \(X\) 的孤立点，如果存在 \(\delta>0\)，使得
+  \[
+  X\cap B(a,\delta)=\{a\};
+  \]
+  \item 我们称 \(a\) 是 \(X\) 的内点，如果存在 \(\delta>0\)，使得
+  \[
+  B(a,\delta)\subset X.
+  \]
+\end{enumerate}
+由 \(X\) 的所有内点组成的集合称为 \(X\) 的内部，记为 \(\mathring X\)。
+\end{mydef*}
+
+\begin{sourceexample}{3}
+例 1 中的集合 \(X\) 的每一个元素 \(1/n\ (n\in\N)\) 都是孤立点，
+\(X\) 的内部 \(\mathring X=\varnothing\)。例 2 中的集合 \(]a,b]\) 没有孤立点，
+\(]a,b]\) 的内部为
+\[
+\overset{\circ}{]a,b]}=]a,b[.
+\]
+\end{sourceexample}
+
+\begin{sourceexample}{4}
+考虑开区间 \(]a,b[\)。显然 \(]a,b[\) 没有孤立点，并且它的内部为自身：
+\[
+\overset{\circ}{]a,b[}=]a,b[.
+\]
+\end{sourceexample}
+
+\begin{mydef*}{}
+设 \(X\subset\R\) 是任一集合。我们称 \(+\infty\)（\(-\infty\)）是 \(X\)
+的正（负）无穷远聚点，如果
+\[
+\forall M>0,\qquad
+X\cap]M,+\infty[\neq\varnothing
+\quad
+\bigl(X\cap]-\infty,-M[\neq\varnothing\bigr).
+\]
+\end{mydef*}
+
+\begin{sourceexample}{5}
+考虑集合 \(X=\Z\)。显然 \(\Z\) 有 \(\pm\infty\) 无穷远聚点，\(\Z\)
+没有有限聚点。
+\end{sourceexample}
+
+\begin{sourceexample}{6}
+考虑集合
+\[
+X=\left\{\frac1n+\bigl((-1)^n+1\bigr)n\ \middle|\ n\in\N\right\},
+\]
+\[
+Y=\left\{\frac1n+\bigl((-1)^n-1\bigr)n\ \middle|\ n\in\N\right\}.
+\]
+\(X\) 有 \(+\infty\) 无穷远聚点，\(Y\) 有 \(-\infty\) 无穷远聚点，
+\(X\) 与 \(Y\) 有有限聚点 \(0\)。
+\end{sourceexample}
+
+\subsection{开集、闭集}
+
+\begin{mydef*}{}
+设 \(X\subset\R\) 是任一集合。
+\begin{enumerate}[label=\arabic*)]
+  \item 我们称 \(X\) 是开集，如果
+  \[
+  (\forall x\in X)(\exists\delta>0),\qquad B(x,\delta)\subset X;
+  \]
+  \item 我们称 \(X\) 是闭集，如果 \(\R-X\) 是开集。
+\end{enumerate}
+\end{mydef*}
+
+显然空集 \(\varnothing\) 与 \(\R\) 既是开集又是闭集。任意开区间 \(]a,b[\)
+是开集，而闭区间 \([a,b]\) 是闭集；任意集合 \(X\) 的内部 \(\mathring X\) 是开集。
+
+\subsection{习 题}
+
+\begin{exercise}
+  \item 证明下列各关系式：
+  \begin{enumerate}[label=\arabic*)]
+    \item \(|x+y|=|x|+|y|\) 当且仅当 \(xy\geq0\)，
+    \(|x+y|<|x|+|y|\) 当且仅当 \(xy<0\)；
+    \item
+    \[
+    \frac{|x+y|}{1+|x+y|}
+    \leq
+    \frac{|x|}{1+|x|}+\frac{|y|}{1+|y|}.
+    \]
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  \item 证明绝对值的性质 2。
+\end{exercise}
+
+\begin{exercise}
+  \item 指出下列各集合 \(X\) 的（有限或无穷远）聚点：
+  \begin{enumerate}[label=\arabic*)]
+    \item \(\displaystyle X=\left\{\frac{1+(-1)^n}{n}\ \middle|\ n\in\N\right\}\)；
+    \item \(\displaystyle X=\left\{n^{(-1)^n}\ \middle|\ n\in\N\right\}\)；
+    \item \(\displaystyle X=\left\{(-1)^n\left(1+\frac1n\right)\ \middle|\ n\in\N\right\}\)；
+    \item \(\displaystyle X=\left\{\frac1n+\frac1m\ \middle|\ n,m\in\N\right\}\)。
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  \item 有理数集 \(\Q\) 及无理数集 \(\Q^c\) 的聚点是哪些？
+  \(\Q\) 与 \(\Q^c\) 有孤立点与内点吗？
+\end{exercise}
+
+\begin{exercise}
+  \item 设 \(X\subset\R\) 是任一非空集合。证明：\(a\in\R\) 是 \(X\)
+  的聚点的充分必要条件是 \(a\) 的每一个邻域 \(U\in\mathcal N(a)\)
+  包含 \(X\) 的无限多个元素。
+\end{exercise}
+
+\begin{exercise}
+  \item 回答下列各问题：
+  \begin{enumerate}[label=\arabic*)]
+    \item \(\displaystyle\bigcap_{n=1}^{+\infty}]0,1/n[\) 是非空开集吗？
+    \item \(\displaystyle\bigcap_{n=1}^{+\infty}]-1/n,1/n[\) 是非空开集吗？是闭集吗？
+    \item \(\displaystyle\bigcap_{n=1}^{+\infty}]-1,1+1/n[\) 是既非开又非闭集吗？
+    \item \(\displaystyle\bigcap_{n=1}^{+\infty}[-1+1/n,1-1/n]\) 是闭集吗？
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  \item 证明：对任意 \(a,b\in\R\)，若 \(a<b\)，则 \([a,b[\) 既不是
+  \(\R\) 的开集，也不是闭集。
+\end{exercise}

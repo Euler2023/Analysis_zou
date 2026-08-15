@@ -1,0 +1,2070 @@
+\chapter{集合与映射}
+
+这一章我们首先介绍了集合的定义、集合的运算、集合的关系,然后利用集合的关系定义了映射,并利用映射研究了集合的可数性,这些内容是全书的基础.
+
+\section{集 合}
+
+\subsection{集合的定义}
+	\label{sec:1-1-1}
+
+集合这个名词是由德国数学家G.Cantor在1874年首先提出的.这是一个至今没有严格数学定义的概念.为了完备起见,我们直接采用Cantor原话作为我们的定义。
+
+\begin{mydef*}{}
+	
+"集合是由我们直观感觉或意识到的、确定的、不同对象汇集而成的一个整体.这些对象称为此集合的\textbf{元素}(成员)或点."
+
+\end{mydef*}
+
+通常用大写字母$A,B,X,Y,\Omega,\cdots$ 表示集合,而用小写字母$a,b,x,y,\omega,\cdots $表示集合的元素.
+
+若$a$是集合$A$的元素,则称$a$属于$A$,记为$a \in A$；若$a$不是集合$A$的元素,则称$a$不属于$A$,并记为\(a \notin A\).
+
+只含一个元素$a$的集合称为\textbf{单点集},记为$\{a\}$ ,没有元素的集合称为\textbf{空集},记为$\emptyset$ .
+
+表示集合的方法一般是:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  列举集合的元素(如果可能的话);
+\item
+  设$P$是一性质,x是一对象,$P(x)$表示$x$具有性质$P$.由 所有具有性质P的对象组成的集合 记为$\{x\mid P(x)\}$。
+\end{enumerate}
+
+\begin{sourceexample}{1}
+	\begin{enumerate}[label=\arabic{enumi}),leftmargin=1.8em]
+		\item 自然数集 $\{1,2,3,\dots\}$ 记为 $\N$。
+		\item 整数集 $\{0,\pm1,\pm2,\dots\}$ 记为 $\Z$。
+		\item 有理数集 $\left\{\dfrac{m}{n}\;\middle|\; m,n\in\Z,\;n\neq0,\;\gcd(m,n)=1\right\}$ 记为 $\Q$。
+		\item 实数集记为 $\R$（它的表示方法将在下一章介绍）。
+		\item 一元二次方程 $x^2+x-2=0$ 的解集记为 $\{x\in\R\mid x^2+x-2=0\}$。
+	\end{enumerate}
+\end{sourceexample}
+
+\subsection{集合之间的关系}
+	\label{sec:1-1-2}
+
+\begin{mydef*}{}
+
+设A、B是两个集合.
+
+\begin{enumerate}[label=\arabic{enumi})]
+	\item 若\(x\in A\)，则\(x\in B\)，则我们称A是B的\textbf{子集}，或称A包含于B中，或称B包含A，记为 $A\subset B\quad\text{或}\quad B\supset A;$
+	\item 若A \(\subset\) B, B \(\subset\) A, 则我们称A与B\textbf{相等},记为$A = B$; 
+	\item 若\(A\subset B\)，\(A\neq B\)，则我们称A是B的\textbf{真子集}，或称A严格包含于B中，或称B严格包含A，记为$A \subsetneq B$
+\end{enumerate}
+
+
+\end{mydef*}
+
+
+\textbf{注意}\quad 存在互不包含的集合$A$与$B$.
+
+\begin{sourceexample}{2}
+	
+	\begin{enumerate}[label=\arabic{enumi})]
+		\item 对任一集合A,\(\emptyset \subset A\) ;
+		\item \(\N \subsetneq \Z \subsetneq \Q \subsetneq \R\) ;
+		\item \(\{x \in \R \mid x^2 + 1 = 0\} = \emptyset;\)
+		\item \(\{x \in \mathbb{R} \mid x^2+x-2=0\}=\{1,-2\}\)；
+		\item 集合\(\{2k | k \in \N \}\) 与\(\{2k+1 | k \in \N \}\) 互不包含.
+	\end{enumerate}
+\end{sourceexample}
+
+\subsection{集合的运算及性质}
+	\label{sec:1-1-3}
+
+\begin{mydef*}{}
+	
+	设$A,B$是两个集合.
+	
+	
+	\begin{enumerate}[label=\arabic{enumi})]
+		\item
+		A与B的\textbf{并集},记为\(A\cup B\),定义为\footnote[1]{$\triangleq$为规定、约定符号，以下同} \[A\cup B\mathrel{\triangleq}\{x\mid x\in A\text{ 或 }x\in B\};\]
+		\item
+		A与B的\textbf{交集},记为\(A\cap B\),定义为 \[A\cap B\mathrel{\triangleq}\{x\mid x\in A\text{ 并且 }x\in B\};\]
+		\item
+		B关于A的\textbf{差集},记为\(A-B\),定义为 \[A-B\mathrel{\triangleq}\{x\mid x\in A\text{ 但 }x\notin B\};\]
+		\item
+		若\(B\subset A\),则称\(A-B\)为B在A中的\textbf{余集}或\textbf{补集},记为\(C_A B\).如果在上、下文中A与B的关系很清楚,则可简记\(C_A B\)为\(B^c\).
+	\end{enumerate}
+	
+	
+\end{mydef*}
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}[line cap=round,line join=round,>=stealth,scale=0.9]
+% 左上：A ∪ B
+\begin{scope}[shift={(-3.2,1.6)}]
+  \fill[pattern=north east lines] (-0.8,0) circle (1.2);
+  \fill[pattern=north east lines] (0.8,0) circle (1.2);
+  \draw (-0.8,0) circle (1.2);
+  \draw (0.8,0) circle (1.2);
+  \node[font=\footnotesize] at (-2.1,0) {$A$};
+  \node[font=\footnotesize] at (2.1,0) {$B$};
+  \node[font=\footnotesize] at (0,-1.7) {$A\cup B$};
+\end{scope}
+
+% 右上：A ∩ B
+\begin{scope}[shift={(3.2,1.6)}]
+  \begin{scope}
+    \clip (-0.8,0) circle (1.2);
+    \fill[pattern=north east lines] (0.8,0) circle (1.2);
+  \end{scope}
+  \draw (-0.8,0) circle (1.2);
+  \draw (0.8,0) circle (1.2);
+  \node[font=\footnotesize] at (-2.1,0) {$A$};
+  \node[font=\footnotesize] at (2.1,0) {$B$};
+  \node[font=\footnotesize] at (0,-1.7) {$A\cap B$};
+\end{scope}
+
+% 左下：A − B 与 B − A
+\begin{scope}[shift={(-3.2,-2.4)}]
+  \begin{scope}
+    \clip (-0.8,0) circle (1.2);
+    \fill[white] (0.8,0) circle (1.2);
+  \end{scope}
+  \fill[pattern=north east lines] (-0.8,0) circle (1.2);
+  \begin{scope}
+    \clip (0.8,0) circle (1.2);
+    \fill[white] (-0.8,0) circle (1.2);
+  \end{scope}
+  \fill[pattern=north east lines] (0.8,0) circle (1.2);
+  \draw (-0.8,0) circle (1.2);
+  \draw (0.8,0) circle (1.2);
+  \node[font=\footnotesize] at (-2.1,0) {$A$};
+  \node[font=\footnotesize] at (2.1,0) {$B$};
+  \node[font=\footnotesize] at (-0.8,-1.7) {$A-B$};
+  \node[font=\footnotesize] at (0.8,-1.7) {$B-A$};
+\end{scope}
+
+% 右下：补集 C_A B 或 B^c
+\begin{scope}[shift={(3.2,-2.4)}]
+  \fill[pattern=north east lines] (-1.6,-1.2) rectangle (1.6,1.2);
+  \fill[white] (0.4,0) circle (0.7);
+  \draw (-1.6,-1.2) rectangle (1.6,1.2);
+  \draw (0.4,0) circle (0.7);
+  \node[font=\footnotesize] at (-1.9,0) {$A$};
+  \node[font=\footnotesize] at (0.4,0) {$B$};
+  \node[font=\footnotesize] at (0,-1.6) {$C_A B$ 或 $B^c$};
+\end{scope}
+\end{tikzpicture}
+	\caption{}
+	\label{fig:1-1}
+\end{figure}
+
+\begin{sourceexample}{3}
+	
+	记$\mathbb{I}$为无理数集,则 \[\Q\cup\mathbb{I} = \R,\quad \Q\cap \mathbb{I}=\varnothing,\quad \Q=\R-\mathbb{I},\quad \mathbb{I}=\R-\Q,\] \[\mathbb{I}={C}_{\R}\Q=\Q^c,\quad \Q=C_{\R}\mathbb{I}=\mathbb{I}^c.\]
+	
+\end{sourceexample}
+
+\begin{mythm*}{1.1.1}
+	
+	设$E,F,G$是三个集合,则
+	
+	\begin{enumerate}[label=\arabic{enumi})]
+		\item 并、交都是可交换的：
+		\[
+		E\cup F=F\cup E,\qquad
+		E\cap F=F\cap E;
+		\]
+		
+		\item 并、交都是可结合的：
+		\[
+		E\cup(F\cup G)=(E\cup F)\cup G,\qquad
+		E\cap(F\cap G)=(E\cap F)\cap G;
+		\]
+		
+		\item 并关于交是可分配的：
+		\[
+		E\cup(F\cap G)=(E\cup F)\cap(E\cup G);
+		\]
+		
+		\item 交关于并是可分配的：
+		\[
+		E\cap(F\cup G)=(E\cap F)\cup(E\cap G);
+		\]
+		
+		\item De Morgan 公式：
+		\begin{gather*}
+			E-(F\cap G)=(E-F)\cup(E-G),\\
+			E-(F\cup G)=(E-F)\cap(E-G).
+		\end{gather*}
+	\end{enumerate}
+	
+\end{mythm*}
+
+\begin{proof}
+	
+	1)---4)的验证留给读者作为练习,我们证明5)的第一式,第二式的证明类似.
+	
+	先证\(E-(F\cap G)\subset(E-F)\cup(E-G)\).设\(x\in E-(F\cap G)\),则 \[x\in E,\quad x\notin F\cap G
+	\Longrightarrow x\in E,\quad x\notin F\text{ 或 }x\notin G\] \[\Longrightarrow x\in E-F\text{ 或 }x\in E-G
+	\Longrightarrow x\in(E-F)\cup(E-G).\] 因此\(E-(F\cap G)\subset(E-F)\cup(E-G)\).
+	
+	再证\((E-F)\cup(E-G)\subset E-(F\cap G)\).设\(x\in(E-F)\cup(E-G)\),则 \[x\in E-F\text{ 或 }x\in E-G
+	\Longrightarrow x\in E,\quad x\notin F\text{ 或 }x\notin G\] \[\Longrightarrow x\in E,\quad x\notin F\cap G
+	\Longrightarrow x\in E-(F\cap G).\] 因此\((E-F)\cup(E-G)\subset E-(F\cap G)\).
+	
+	综合上述所证,\(E-(F\cap G)=(E-F)\cup(E-G)\).
+	
+\end{proof}
+
+\textbf{附注}\quad 若\(F\subset E\)、\(G\subset E\),则De Morgan公式的第二式可直接从第一式推得.
+
+% 2026.07.22
+事实上，分别用 $E\setminus F$ 和 $E\setminus G$ 代换第一式中的 $F$ 与 $G$ 得
+\[
+E \setminus \bigl((E\setminus F) \cap (E\setminus G)\bigr)
+= (E \setminus (E\setminus F)) \cup (E \setminus (E\setminus G))
+= F \cup G.
+\]
+
+由于$(E-F)\cap(E-G) \subset E$故，
+\[
+	E-(F\cup G) = (E-F)\cap(E-G)
+\]
+
+% 2026.08.07
+\subsection*{任意多个集合的并与交}
+
+\begin{mydef*}{}
+
+以集合作为元素的集合称为集族或集系.
+
+\end{mydef*}
+
+通常用花体字母\(\mathscr{A}\)或\(\mathscr{B}\)等来表示\textbf{集族}或\textbf{集系}.
+
+\begin{sourceexample}{4}
+
+设$X$是任一集合,由$X$的所有子集组成的集族称为$X$的幂集,记为\(2^X\).
+
+\end{sourceexample}
+
+\begin{sourceexample}{5}
+
+设\(\Lambda\)是一非空集合.对\(\Lambda\)的每一元素\(\lambda\),规定集合X的一个子集\(X_\lambda\),由这些子集组成的集族记为\(\{X_\lambda\}_{\lambda\in\Lambda}\),并称之为依\(\Lambda\)赋予指标的集族.集合\(\Lambda\)称为此集族的\textbf{指标集},\(\Lambda\)的元素称为\textbf{指标}.
+
+比如平面上以点\(M_0\)为中心、以\(n\in\mathbb{N}\)为半径的闭圆盘
+
+\[\overline{B}(M_0,n)=\{M\mid \overline{M_0M}\leq n\}\]
+
+的全体构成一个以\(\mathbb{N}\)为指标集的集族\(\{\overline{B}(M_0,n)\}_{n\in\mathbb{N}}\)。
+
+\end{sourceexample}
+
+
+\begin{mydef*}{}
+
+设\(\mathscr{A}\)是任一非空集族.
+
+1)\(\mathscr{A}\)中的元素的并,记为\(\bigcup_{A\in\mathscr{A}}A\),定义为
+
+\[\bigcup_{A\in\mathscr{A}}A\mathrel{\triangleq}
+\{x\mid\text{存在一个 }A\in\mathscr{A}\text{ 使得 }x\in A\};\]
+
+2)\(\mathscr{A}\)中的元素的交,记为\(\bigcap_{A\in\mathscr{A}}A\),定义为
+
+\[\bigcap_{A\in\mathscr{A}}A\mathrel{\triangleq}
+\{x\mid\text{对每一个 }A\in\mathscr{A},\ x\in A\}.\]
+
+
+\end{mydef*}
+
+
+例如,对例5中的集族\(\{\overline{B}(M_0, n)\}_{n\in\mathbb{N}}\) ,我们有\footnote[1]{整理者注：下面的第一个例子是可以证明的，这个例子表明，$\mathbb{R}^2$具有$\sigma$有限测度}:
+
+\[
+\bigcup_{n\in\mathbb{N}}\overline{B}(M_0,n)=\mathbb{R}^2 \\
+\bigcap_{n\in\mathbb{N}}\overline{B}(M_0,n)=\overline{B}(M_0,1).\]
+
+
+现设\(\{X_\lambda\}_{\lambda\in\Lambda}\)是任一集族,直接从定义容易推出下述De Morgan公式:
+
+\[X-\bigcap_{\lambda\in\Lambda}X_\lambda
+=\bigcup_{\lambda\in\Lambda}(X-X_\lambda),\]
+
+\[X-\bigcup_{\lambda\in\Lambda}X_\lambda
+=\bigcap_{\lambda\in\Lambda}(X-X_\lambda).\]
+
+\subsection*{集合的乘积}
+
+\begin{mydef*}{}
+
+设X, Y 是两个非空集合。
+
+\begin{enumerate}[label=\arabic{enumi})]
+	\item 若\(x\in X\)、\(y\in Y\),则我们称\((x,y)\)为一个序偶,x称为此序偶的第一坐标,y称为第二坐标.由所有这种序偶组成的集合称为X与Y的乘积或简称为积,记为\(X\times Y\).于是
+	
+	\[X \times Y = \{(x, y) | x \in X, y \in Y\}\]
+	
+	\item 对任意\(n\)（\(n\in\mathbb{N},n\geq2\)）个非空集合\(X_1,X_2,\dots,X_n\)的乘积\(X_1\times X_2\times\cdots\times X_n\),定义为
+	
+	\[X_1 \times X_2 \times \cdots \times X_n = \{(x_1, x_2, \cdots, x_n) \mid x_i \in X_i, i = 1, 2, \cdots, n\},\]
+	
+	其中每一元素\((x_1,x_2,\dots,x_n)\)称为n元有序组,\(x_i\)（\(i=1,2,\dots,n\)）称为此有序组的第i坐标.
+	
+\end{enumerate}
+
+\end{mydef*}
+
+\begin{sourceexample}{6}
+	在平面上引进笛卡尔坐标系\(\{O; x, y\}\) ,则平面成为两 个数轴的乘积\(\mathbb{R} \times \mathbb{R}\) ; 在空间中引进笛卡尔 坐标系\(\{0, x, y, z\}\) , 则空间成为三个数轴的乘积$\mathbb{R}\times\mathbb{R}\times\mathbb{R}$
+\end{sourceexample}
+
+最后我们介绍量词。
+
+\subsection{量词}
+
+设$X$是任一集合，$P$是$X$的元素可能具有的一个性质。我们约定:
+
+``存在\(x\in X\),具有性质P''记为\((\exists x)P\),
+
+``每一个\(x\in X\)具有性质P''记为\((\forall x)P\).
+
+符号``\(\exists\)''与``\(\forall\)''分别称为存在量词与全称量词.
+
+考虑集合
+
+\[A=\{x\in X\mid x\text{ 有性质 }P\},\]
+
+则
+
+\[X-A=\{x\in X\mid x\text{ 没有性质 }P\}.\]
+
+显然我们有:
+
+
+\begin{align*}
+	(\exists x)P &\iff A \neq \emptyset, \\
+	(\forall x)P &\iff A = X \iff X - A = \emptyset, \\
+	\text{``$(\exists x)P$'' 不成立} &\iff A = \emptyset \\
+	&\iff X - A = X \\
+	&\iff (\forall x)(\lnot P), \\
+	\text{``$(\forall x)P$'' 不成立} &\iff A \neq X \\
+	&\iff X - A \neq \emptyset \\
+	&\iff (\exists x)(\lnot P).
+\end{align*}
+
+\begin{sourceexample}{7}
+
+考虑正弦\(\sin x\) ,\(x \in \mathbb{R}\) . 设\(y_0 \in \mathbb{R}\) . $P$表示性质''\(\sin x \leq y_0\) ``,那末我们有:
+
+\((\exists x)P \iff\) 存在\(x \in \mathbb{R}\) 使得\(\sin x \leq y_0\) .
+
+\((\forall x)P\iff\) 对每一个\(x\in\mathbb{R}\),\(\sin x\leq y_0\).
+
+\((\exists x)(\text{非}P)\iff\) 存在\(x\in\mathbb{R}\)使得\(\sin x>y_0\).
+
+\((\forall x)(\text{非}P)\iff\) 对每一个\(x\in\mathbb{R}\),\(\sin x>y_0\).
+
+
+\end{sourceexample}
+
+
+现在设X与Y是任意两个非空集合,P是\(x \in X\) ,\(y \in Y\) 可能具有的性质,我们约定:
+
+``存在\(x \in X\) ,存在\(y \in Y\) 具有性质$P$''记为
+
+\((\exists x \in X)(\exists y \in Y)P\) ,
+
+``存在\(x \in X\) ,对每一\(y \in Y\) 具有性质$P$''记为
+
+\((\exists x \in X)(\forall y \in Y)P\) ,
+
+``对每\(-x \in X\) ,存在\(y \in Y\) 具有性质$P$''记为
+
+\((\forall x \in X)(\exists y \in Y)P\) ,
+
+``对每一\(x \in X\) ,对每一\(y \in Y\) 具有性质$P$''记为
+
+ (\(\forall x \in X\) )(\(\forall y \in Y\) )$P$.
+
+那末下述各结论就不难理解了:
+
+\begin{align*}
+	(\exists x \in X)(\exists y \in Y)P
+	&\iff (\exists y \in Y)(\exists x \in X)P, \\[6pt]
+	(\exists x \in X)(\forall y \in Y)P
+	&\Longrightarrow (\forall y \in Y)(\exists x \in X)P, \\[6pt]
+	(\forall y \in Y)(\exists x \in X)P
+	&\not\Longrightarrow (\exists x \in X)(\forall y \in Y)P, \\[6pt]
+	(\forall x \in X)(\forall y \in Y)P
+	&\iff (\forall y \in Y)(\forall x \in X)P.
+\end{align*}
+
+如果我们要考虑语句''存在\(x \in X\) ,存在\(y \in Y\) 具有性质P''的否定语句,那末我们有:
+
+“存在\(x \in X\) ,存在\(y \in Y\) 具有性质P"不成立
+
+\(\iff\) "不存在$x\in X$，不存在$y \in Y$具有性质$P$" 
+
+\(\iff\) "对每一个\(x \in X\) ,对每一个\(y \in Y\) 不具有性质$P$".
+
+因此
+
+``(\(\exists x \in X\) )(\(\exists y \in Y\) )P''不成 立\(\iff\) (\(\forall x \in X\) )(\(\forall y \in Y\) )(非$P$).
+
+同理下述结论成立:
+
+.''(\(\forall x \in X\) )(\(\forall y \in Y\) )$P$''不成立\(\Longleftrightarrow\) (\(\exists x \in X\) )(\(\exists y \in Y\) )(非$P$).
+
+``(\(\exists x \in X\) )(\(\forall y \in Y\) )\(P\)''不成 立\(\Longleftrightarrow\) (\(\forall x \in X\) )(\(\exists y \in Y\) )(非$P$).
+
+``(\(\forall x \in X\) )(\(\exists y \in Y  \)  )$P$''不成立\(\iff\) (\(\exists x \in X\) )(\(\forall y \in Y\) )(非$P$).
+
+类似地,我们可以考虑更多个元素所具有的性质的语句及其否定语句.
+
+\begin{sourceexample}{8}
+
+考虑下面两个语句:
+
+\((\forall \varepsilon > 0)(\exists \delta > 0)(\forall x \in \mathbb{R}, -\delta < x < \delta)(|\sin x| < \varepsilon),\)
+
+\[(\forall \varepsilon > 0)(\exists \delta > 0)(\forall x \in \mathbb{R}, -\delta < x < \delta, x \neq 0)(\left|\sin \frac{1}{x}\right| < \varepsilon).\]
+
+对于第一个语句: 由于\(|\sin x| \le |x|\) .故\(\forall \varepsilon > 0\) ,\(\exists \delta = \varepsilon\) ,使得\(\forall x \in \mathbb{R}\), 且\( - \delta < x < \delta \) 有 \(|\sin x| < \varepsilon\) .
+
+对于第二个语句: 显然不成立 · 它的否定语句是:
+
+\[(\exists \varepsilon > 0)(\forall \delta > 0)(\exists x \in \mathbb{R}, -\delta < x < \delta, x \neq 0) \left( \left| \sin \frac{1}{x} \right| \geqslant \varepsilon \right).\]
+
+事实上,若取\(\varepsilon = \frac{1}{2}\) ,则\(\forall \delta > 0\) ,\(\exists n \in \mathbb{N}\) 使 得\(0 < \frac{1}{n} < \delta\) ,令
+
+\[x = \frac{1}{n\pi + \frac{\pi}{2}}\] 则\(-\delta < x < \delta\) ,\(x \neq 0\) 并且\(\left| \sin \frac{1}{x} \right| > \frac{1}{2}\) .
+
+\end{sourceexample}
+
+
+
+\textbf{附注} 从上面的讨论中可以看出,在出现多个存在量词$\exists$ 与全称量词$\forall$的语句中,一般不能随意交换存在量词$\exists$与全称量词$\forall$的出现次序,否则所得新语句与原语句不等价,例如前面的语句''(\(\exists x \in X\) )(\( \forall y \in Y\) )$P$''与''(\( \forall y \in Y\) )(\( \exists x \in X\) )$P$''就是如此.
+
+其次,从前述的语句的否定语句中可以得出这样一个规律: 为了得到一个含存在量词 \(\exists\) 或全称量词 \(\forall\) 的语句的否定语句,只需将该语句中的存在量词 \(\exists\) 换为全称量词 \(\forall\) ,将全称量词 \(\forall\) 换为 存在量词 \(\exists\) ,将性质$P$换为$\lnot P$即可.
+
+\subsection{习 题}
+
+\begin{exercise}
+	\item 证明下列各等式（$A, B, C, D \subset X$）：
+	\begin{enumerate}[label=\arabic*)]
+		\item $A-B=A \cap B^c$;
+		\item $(A \cup B)-C=(A-C)\cup(B-C)$;
+		\item $A-(B-C)=(A-B) \cup (A \cap C)$;
+		\item $A-(B \cup C)=(A-B)-C$;
+		\item $(A-B) \cap (C-D)=A \cap C-(B \cup D)$;
+		\item $A \cap (B-C)=(A \cap B)-(A \cap C)$.
+	\end{enumerate}
+\end{exercise}
+
+
+
+
+
+\begin{exercise}
+	\item 试找出使等式 \((A-B)\cup C=A-(B-C)\) 成立的充分必要条件。
+\end{exercise}
+
+\begin{exercise}	
+	\item 证明：
+	\begin{enumerate}[label=\roman*)]
+		\item \(\displaystyle
+		\left(\bigcup_{\lambda\in\Lambda}A_\lambda\right)-B
+		=\bigcup_{\lambda\in\Lambda}(A_\lambda-B);\)
+		\item \(\displaystyle
+		\left(\bigcap_{\lambda\in\Lambda}A_\lambda\right)-B
+		=\bigcap_{\lambda\in\Lambda}(A_\lambda-B).\)
+	\end{enumerate}
+\end{exercise}	
+	
+\begin{exercise}
+	\item 设 \(\{E_n\}_{n\in\mathbb{N}}\) 是任一集族，
+	
+	\begin{enumerate}[label=\arabic*)]
+	
+	\item 构造集族$\{A_n\}_{n\in\N}$ 如下，
+	\[
+	A_1 = E_1,A_2 = E_2-E_1,\cdots,
+	A_n = E_n - (\bigcup_{k=1}^{n-1}) E_k (n\in N).
+	\]
+	证明 \(\{A_n\}_{n\in\mathbb{N}}\) 具有如下性质：
+	\[
+	A_n\cap A_m=\varnothing\;(n\ne m),\qquad
+	\bigcup_{k=1}^{n}A_k=\bigcup_{k=1}^{n}E_k.
+	\]
+	
+	\item 若 \(\{E_n\}_{n\in\mathbb N}\) 是单调下降集族，即
+	\[
+	E_{n+1} \subset E_n,\qquad n\in\mathbb N,
+	\]
+	则
+	\[
+	\begin{aligned}
+		E_1
+		&=(E_1-E_2)\cup(E_2-E_3)\cup\cdots\\
+		&\quad{}\cup(E_n - E_{n+1})\cup\cdots
+		\cup\left(\bigcap_{n\in\mathbb N}E_n\right).
+	\end{aligned}
+	\]
+	并且
+	\[
+	(E_n - E_{n+1})
+	\cap
+	(E_m - E_{m+1})
+	=\varnothing,
+	\qquad m\ne n.
+	\]
+	
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(A,B\) 为任意集合，集合
+	\[
+	A \triangle B\mathrel{\scalebox{1.8}{$\triangleq$}}(A-B)\cup(B-A).
+	\]
+	称为$A$与$B$的对称差，证明下列各等式成立：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(A\triangle B=(A\cup B)-(A\cap B);\)
+		\item \(A\cap(B\triangle C)=(A\cap B)\triangle(A\cap C);\)
+		\item \(A\triangle(B\triangle C)=(A\triangle B)\triangle C;\)
+		\item \(A\cup B=A\triangle B\triangle(A\cap B);\)
+		\item \(A-B=A\triangle(A\cap B).\)
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 若集合 \(X=\varnothing\) 或 \(|X|=n\)，试问$X$的幂集 \(2^X\) 各有多少个元素？
+\end{exercise}
+
+\begin{exercise}
+	\item 用符号 \(\subset,\supset,=\) 填入下列各式横线处，使等式成立：
+	\begin{enumerate}[label=\arabic*)]
+		\item \((A \times B) \cup (C \times D)\;\underline{\qquad}\;
+		(A \cup C) \times (B \cup D);\)
+		\item \((A \times B) \cap (C \times D)\;\underline{\qquad}\;
+		(A \cap C) \times (B \cap D);\)
+		\item \(A\times(B-C)\;\underline{\qquad}\;
+		(A\times B)-(A\times C);\)
+		\item \((A-B)\times(C-D)\;\underline{\qquad}\;
+		\bigl((A\times C-B\times C)-A\times D\bigr);\)
+		\item \((A\times B)-(C\times D)\;\underline{\qquad}\;
+		(A-C)\times(B-D).\)
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 将下列 \(\mathbb{R}\times\mathbb{R}\) 的子集写成 \(A\times B\) 的形式：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\{(x,y)\mid x\in\mathbb{Z}\};\)
+		\item \(\{(x,y)\mid x\in\mathbb{N},\,y\in\mathbb{Z}\};\)
+		\item \(\{(x,y)\mid 0\le y\le 1\};\)
+		\item \(\{(x,y)\mid x\in\mathbb{Q},\,y\notin\mathbb{Q}\}.\)
+	\end{enumerate}
+\end{exercise}
+
+%% 2026.08.06 完成$1.1
+
+\section{关 系}
+
+一个"关系",从数学的观点来看就是具有某种性质的集合. 我们首先介绍一般关系.
+
+\subsection{一般关系}
+	\label{sec:1-2-1}
+
+
+
+\begin{mydef*}{}
+
+以序偶为元素的一个集合\(\mathscr{R}\)称为一个二元关系,简称为关系.\((x,y)\in\mathscr{R}\) 也记为\(x\mathscr{R}y\) ,并称$x$与$y$有关系\(\mathscr{R}\) .
+
+\end{mydef*}
+
+
+令
+
+\(\operatorname{Dom}(\mathscr{R}) = \{x \mid \text{存在}y\text{使得}x\mathscr{R}y\},\)
+
+\(\operatorname{Ran}(\mathscr{R}) = \{y \mid \text{存在}x\text{使得}x\mathscr{R}y\}\) .
+
+\begin{mydef*}
+	
+	设 \(\mathscr R\) 是一个关系。
+	
+	\begin{enumerate}[label=\arabic*)]
+		\item $\operatorname{Dom}(\mathscr R)$ 称为关系 \(\mathscr R\) 的\textbf{定义域}； $\operatorname{Ran}(\mathscr R)$称为关系 \(\mathscr R\) 的\textbf{值域}。
+		
+		\item
+		我们称\(\mathscr R\) 是从 \(X\) 到 \(Y\) 的关系，如果$\operatorname{Dom}(\mathscr R)=X$,$\operatorname{Ran}(\mathscr R)\subset Y$。
+		
+		\item $X$到$X$的关系\(\mathscr R\)简称$X$上的关系。
+		
+	\end{enumerate}
+	
+\end{mydef*}
+
+下述包含关系式显然成立:
+
+\[\mathscr{R} \subset \operatorname{Dom}\left( \mathscr{R} \right) \times \operatorname{Ran}\left( \mathscr{R} \right).\]
+
+\begin{sourceexample}{1}
+
+设$X$是中国公民集合.在$X$上定义关系\(\mathscr{R}_1\) ,\(\mathscr{R}_2\) 如下.
+
+\[
+\mathscr{R}_1 = \{(x, y) \in X \times X \mid \text{$x$是$y$的父亲} \}
+\]
+
+\[\mathscr{R}_2 = \{(x, y) \in X \times X \mid \text{$x$是$y$的妻子} \}.
+\]
+
+于是 \(\mathscr{R}_1,\mathscr{R}_2\) 分别是通常所说的父子关系、夫妻关系.
+
+\end{sourceexample}
+
+
+
+\begin{sourceexample}{2}
+
+在$\mathbb{N}$上定义关系\(\mathscr{R}_1\) 、\(\mathscr{R}_2\) 如下:
+
+\[
+\mathscr{R}_1 = \{ (m, n) \in \mathbb{N} \times \mathbb{N} \mid m \leq n \} 
+\]
+
+\[
+\mathscr{R}_2 = \{ (m, n) \in \mathbb{N} \times \mathbb{N} \mid m \text{乘除} n \} 
+\]
+
+显然,\(\mathscr{R}_1\) 是 \(\mathbb{N}\) 上的通常大小关系,\(\mathscr{R}_2\) 是 \(\mathbb{N}\) 上的整除关系.
+
+\end{sourceexample}
+
+
+
+\begin{sourceexample}{3}
+
+设\(a \in N\) .在Z上定义关系\(\mathscr{R}\) 为:
+
+\[\mathscr{R} = \{(m, n) \in \mathbb{Z} \times \mathbb{Z} \mid m = n \pmod{a}\}.\]
+
+这个关系 \(\mathscr{R}\) 就是 \(Z\) 上的模 \(a\) 同余关系.
+
+\end{sourceexample}
+
+
+\begin{sourceexample}{4}
+
+设$E$表示平面上三角形的集合.在$E$上定义关系为
+
+\[
+\mathscr{R} = \{ (\Delta,\Delta^{\prime})\in E \times E \mid \Delta\text{与}\Delta^{\prime}\text{相似} \} 
+\]
+
+则关系\(\mathscr{R}\) 是平面上三角形的相似关系.
+\end{sourceexample}
+
+
+
+\begin{mydef*}{}
+
+设\(\mathscr{U}\)与\(\mathscr{V}\)是任意两个关系.
+
+\begin{enumerate}[label=\arabic*)]
+
+\item
+  \(\mathscr{U}^{-1} = \{(x, y) \mid y \mathscr{U} x\}\) 称为\(\mathscr{U}\) 的\textbf{逆关系}.
+\item
+  \(\mathscr{U} \circ \mathscr{V} = \{(x, y) |\) 存在$z$使得\(x\mathscr{V} z, z\mathscr{U} y \}\) 称为\(\mathscr{V}\) 与\(\mathscr{U}\) 的\textbf{复合关系}.
+\end{enumerate}
+
+\end{mydef*}
+
+\begin{sourceexample}{5}
+
+我们用\(\mathscr{R}\) 表示例2中的自然数集 $\mathbb{N}$上的整除关系,即
+
+\[
+\mathscr{R} = \{(m, n) | m, n \in \mathbb{N}, m \mid n\}
+\] 
+
+则\(\mathscr{R}\)的逆关系
+
+\begin{align*}
+	\mathscr{R}^{-1} 
+	&= \{(m, n) \mid n \mathscr{R} m\} \\
+	&= \{(m, n) \mid n, m \in \mathbb{N},\ n \mid m\} \\
+	&= \{(m, n) \mid n, m \in \mathbb{N},\ n \text{ 是 } m \text{ 的因子}\}.
+\end{align*}
+
+因此$\mathbb{N}$上的整除关系$\mathscr{R}$的逆关系$\mathscr{R}^{-1}$一是$\mathbb{N}$上的“倍数”关系。
+
+
+\end{sourceexample}
+
+
+\begin{sourceexample}{6}
+
+设 \(\mathscr{U} = \{(x, y) \mid x \in \mathbb{R}, y = \sin x\}\), 
+\(\mathscr{V} = \{(x, y) \mid 1 < x < 2, y = \sqrt{x}\}\)，则
+\begin{align*}
+	\mathscr{U}^{-1} &= \{(x, y) \mid y \mathscr{U} x\} = \{(x, y) \mid y \in \mathbb{R}, x = \sin y\} \\
+	&= \{(\sin y, y) \mid y \in \mathbb{R}\}; \\
+	\mathscr{V}^{-1} &= \{(x, y) \mid y \mathscr{V} x\} = \{(x, y) \mid 1 < y < 2, x = \sqrt{y}\} \\
+	&= \{(\sqrt{y}, y) \mid 1 < y < 2\}; \\
+	\mathscr{U} \circ \mathscr{V} &= \{(x, y) \mid \exists z,\, x \mathscr{V} z,\, z \mathscr{U} y\} \\
+	&= \{(x, y) \mid \exists z,\, z = \sqrt{x},\, 1 < x < 2,\, y = \sin z\} \\
+	&= \{(x, y) \mid 1 < x < 2,\, y = \sin \sqrt{x}\} \\
+	&= \{(x, \sin \sqrt{x}) \mid 1 < x < 2\}; \\
+	\mathscr{V} \circ \mathscr{U} &= \{(x, y) \mid \exists z,\, x \mathscr{U} z,\, z \mathscr{V} y\} \\
+	&= \{(x, y) \mid \exists z,\, z = \sin x,\, y = \sqrt{z},\, 1 < z < 2\} \\
+	&= \varnothing. \quad (\text{因为 } |\sin x| \leq 1)
+\end{align*}
+
+如果我们将\(\mathscr{U}^{-1}\) ,\(\mathscr{V}^{-1}\) 中序偶的第一坐标而不是现在的第二坐标换成自变元,则\(\mathscr{U}^{-1}\).\(\mathscr{V}^{-1}\) 也可以表示成下述形式:
+
+\[\mathscr{U}^{-1} = \{(x, k\pi + (-1)^k \arcsin x) \mid -1 \le x \le 1, k \in \mathbb{Z}\}.\]
+
+\[\mathscr{V}^{-1} = \{(x, x^2) \mid 1 < x < \sqrt{2}\}.\]
+
+
+\end{sourceexample}
+
+
+关于逆关系与复合关系有下述重要结论.
+
+\begin{myprop*}{}
+
+对任意的关系\(\mathscr{T}\) ,\(\mathscr{S}\) ,\(\mathscr{R}\) ,
+
+\[(\mathscr{R}^{-1})^{-1} = \mathscr{R}, (\mathscr{T} \circ \mathscr{S}) \circ \mathscr{R} = \mathscr{T} \circ (\mathscr{S} \circ \mathscr{R}).\]
+
+\end{myprop*}
+
+\begin{proof}
+
+
+\begin{align*}
+	(x, y) \in (\mathscr{R}^{-1})^{-1} &\iff (y, x) \in \mathscr{R}^{-1} \\
+	&\iff (x, y) \in \mathscr{R}; \\[6pt]
+	(x, y) \in (\mathscr{T} \circ \mathscr{S}) \circ \mathscr{R} 
+	&\iff \exists z \, \bigl((x, z) \in \mathscr{R} \land (z, y) \in \mathscr{T} \circ \mathscr{S}\bigr) \\
+	&\iff \exists z, w \, \bigl((x, z) \in \mathscr{R} \land (z, w) \in \mathscr{S} \land (w, y) \in \mathscr{T}\bigr) \\
+	&\iff \exists w \, \bigl((x, w) \in \mathscr{S} \circ \mathscr{R} \land (w, y) \in \mathscr{T}\bigr) \\
+	&\iff (x, y) \in \mathscr{T} \circ (\mathscr{S} \circ \mathscr{R}).
+\end{align*}
+
+\end{proof}
+
+关系、逆关系与复合关系概念在下一节有重要应用,下面我们介绍一类在现代数学中有许多应用的特殊关系,即等价关系。
+
+\subsection{等价关系}
+	\label{sec:1-2-2}
+
+\begin{mydef*}{}
+
+设\(\mathscr{R}\) 是$X$上的一个关系,我们称\(\mathscr{R}\) 是\textbf{等价关系},如果它满足下列条件.
+
+\begin{enumerate}[label=\arabic*)]
+
+\item
+  若\(x \in X\) , 则\(x \mathscr{R} x\) ;(自反性)
+
+\item
+  若$x\mathscr{R}y$, 则 $y\mathscr{R}x$; (对称性)
+
+\item
+  若$x\mathscr{R}y,y\mathscr{R}z$, 则$x\mathscr{R}z$. (传递性)
+\end{enumerate}
+
+如果\(\mathscr{R}\) 是$X$上的一个等价关系,并且\(x\mathscr{R}y\) ,则我们称\(x\mathscr{R}\) 等价于$y$或称$x$与\(y\)\(\mathscr{R}\) 等价.
+\end{mydef*}
+
+容易验证前面所举的父子关系、夫妻关系、及$\mathbb{N}$上的大小关系与整除关系都不是等价关系,而三角形相似关系是等价关系。下面我们来证明$\mathbb{Z}$上的模$a$同余关系是等价关系.
+
+\begin{enumerate}[label=\arabic*)]
+	\item 自反性: 设$n\in\mathbb{Z}$，由于$n-n=0\cdot a$，所以$n\in\mathscr{R}n$
+	\item 对称性: 设 \(m\mathscr{R}n\). 则 \(m=n+ka\ (k\in \mathbb{Z})\). 于是 \(n=m+(-k)a\ (-k\in \mathbb{Z})\), 因此 \(n\mathscr{R}m\).
+	\item 传递性: 设 \(m\mathscr{R}n\), \(n\mathscr{R}l\). 则 \(m=n+ka\), \(n=l+sa\ (k, s\in \mathbb{Z})\). 于是 \(m=l+(k+s)a\ (k+s\in \mathbb{Z})\), 因此 \(m\mathscr{R}l\).
+\end{enumerate}
+
+\begin{mydef*}{}
+
+设$\mathscr{R}$是$X$上的任一等价关系.\(x \in X\) .集合\(\{y \in X \mid x \mathscr{R} y\}\)称为$x$的\(\mathscr{R}\) 等价类,记为\(\tilde{x}\) .\(\tilde{x}\) 中的每一个元素$y$称为\(\tilde{x}\) 的一个代表.
+
+\end{mydef*}
+
+例如，对 \(\mathbb{Z}\) 上的模 \(a\) 同余关系 \(\mathscr{R}\)，\(n \in \mathbb{Z}\) 的等价类 \(\tilde{n}\) 为：
+\begin{align*}
+	\tilde{n} &= \{ m \in \mathbb{Z} \mid m \equiv n \pmod{a} \} \\
+	&= \{ m \in \mathbb{Z} \mid m = n + ka,\ k \in \mathbb{Z} \} \\
+	&= \{ n + ka \mid k \in \mathbb{Z} \} \\
+	&\mathrel{\scalebox{1.8}{$\triangleq$}} n + a\mathbb{Z}.
+\end{align*}
+
+关于等价类之间的关系,我们有下述定理. 
+
+\begin{mythm*}{1.2.1}
+	
+设 \(\mathscr{R}\) 是 \(X\) 上的任一等价关系。
+\begin{enumerate}[label=\arabic*)]
+	\item 若 \(x \in X\)，则 \(x \in \tilde{x}\)；
+	\item \(x \mathscr{R} y \iff \tilde{x} = \tilde{y} \iff \tilde{x} \cap \tilde{y} \neq \emptyset\).
+\end{enumerate}
+
+\end{mythm*}
+
+\begin{proof}
+
+1) 因为\(x \mathscr{R} x\) , 所以\(x \in \tilde{x}\) .
+
+2)设\(x,y \in X \land  x \mathscr{R} y\) .若\(z \in \tilde{x}\) ,则\(x \mathscr{R} z\) ,由对称性,\(z \mathscr{R} x\) .由传递性得\(z \mathscr{R} y\) .故\(y \mathscr{R} z\) ,\(z \in \tilde{y}\) 因此\(\tilde{x} \subset \tilde{y}\) .由于\(y \mathscr{R} x\) ,故同理可证\(\tilde{y} \subset \tilde{x}\) .因此\(\tilde{x} = \tilde{y}\) .
+
+若\(\tilde{x} = \tilde{y}\)，则显然有 \(\tilde{x} \cap \tilde{y} \ne \varnothing\)
+
+现设\(\tilde{x} \cap \tilde{y} \ne  \varnothing\) .令\( z \in \tilde{x} \cap \tilde{y}\) ,则\(x \mathscr{R} z\) ,\(y \mathscr{R} z\) .于是\(x \mathscr{R} z\) ,\(z \mathscr{R} y\) , 由传递性得\(x \mathscr{R} y\) .
+
+\end{proof}
+
+上述定理告诉我们,在X的全体\(\mathscr{R}\)等价类中,任意两个\(\mathscr{R}\) 等价类要么相等,要么不相交.
+
+根据上述定理, 我们可以引进下述定义.
+
+\begin{mydef*}{}
+
+设\(\mathscr{R}\) 是X上的任一等价关系.由X的所有\(\mathscr{R}\) 等价类组成的集合称为X关于\(\mathscr{R}\) 的商集,记为\(X/\mathscr{R}\) .于是
+
+\[X/\mathscr{R} = \{ \tilde{x} \mid x \in X \}.\]
+
+\end{mydef*}
+
+\begin{sourceexample}{7}
+
+$\mathbb{Z}$关于模$a$同余关系\(\mathscr{R}\) 的商集\(\mathbb{Z}/\mathscr{R}\)为
+\[
+\mathbb{Z}/\mathscr{R} = \{n + a\mathbb{Z} | n = 0, 1, 2, \dots, a-1\}
+\] .
+
+\end{sourceexample}
+
+\begin{sourceexample}{8}
+
+设$P$是一平面,\(O \in P\) 是一定点,在$P$上定义关系\(\mathscr{R}\) 如下:
+\[
+\mathscr{R} = \{(M, N) \in P \times P \mid \overline{MO} = \overline{NO}\}
+\]
+容易验证\(\mathscr{R}\) 是$P$上的一个等价关系. 对每一点\(M \in P\),$M$的\(\mathscr{R}\)等价类$M$就是平面$P$上以$O$为中心以\(\overline{MO}\) 为半径的圆周\(S(O; \overline{MO}) = \{N \in P \mid \overline{NO} = \overline{MO}\}\) . 当$M=O$时,\(S(O;\overline{MO}) = \{O\}\) . 
+
+因此$P$关于\(\mathscr{R}\) 的 商集\(P/\mathscr{R}\) 为;
+\[
+P/\mathscr{R} = \{S(O; r) | r \geq 0\}
+\]
+
+\end{sourceexample}
+
+
+
+\begin{sourceexample}{9}
+
+作为商集概念的一个重要应用，我们介绍从整数集 \(\mathbb{Z}\) 出发的有理数集的构造。
+
+考虑乘积集合 \(E = \mathbb{Z} \times \mathbb{N}\)。在 \(E\) 上定义关系 \(\mathscr{R}\) 如下：
+\[
+\mathscr{R} = \{((m, n), (m', n')) \in E \times E \mid mn' = nm'\}.
+\]
+我们证明 \(\mathscr{R}\) 是 \(E\) 上的一个等价关系。
+\begin{enumerate}[label=\arabic*), noitemsep]
+	\item 自反性：设 \((m, n) \in E\)，则 \(mn = nm\)，因此 \((m, n)\mathscr{R}(m, n)\)。
+	\item 对称性：设 \((m, n)\mathscr{R}(m', n')\)，则 \(mn' = nm'\)，从而 \(m'n = n'm\)，因此 \((m', n')\mathscr{R}(m, n)\)。
+	\item 传递性：设 \((m, n)\mathscr{R}(m', n')\)，\((m', n')\mathscr{R}(m'', n'')\)，则 \(mn' = nm'\)，\(m'n'' = n'm''\)。
+	由此得到 \(mn'n'' = nm'n'' = nn'm'' \Longrightarrow mn'' = nm''\)，因此 \((m, n)\mathscr{R}(m'', n'')\)。
+\end{enumerate}
+
+集合 \(E\) 关于此等价关系 \(\mathscr{R}\) 的商集 \(E/\mathscr{R}\) 称为有理数集，通常记为 \(\mathbb{Q}\)。\(\mathbb{Q}\) 的每一个 \(\mathscr{R}\)-等价类 \(\widetilde{(m, n)}\) 称为一个有理数，简记为 \(\frac{m}{n}\)（\(m\) 称为分子，\(n\) 称为分母）。于是
+\[
+\frac{m}{n} = \widetilde{(m,n)} = \{(m', n') \in E \mid mn' = nm'\}.
+\]
+
+很显然,这里所定义的有理数\(\frac{m}{n}\) 实际上就是我们通常所说的分子分母为整数,并且没有公因子的既约分数.
+
+\end{sourceexample}
+
+最后我们介绍集合元素的顺序概念, 即序关系.
+
+\subsection{序关系}
+	\label{sec:1-2-3}
+
+\begin{mydef*}{}
+
+设$X$是任一非空集合,\(\mathscr{R}\)是$X$上的一个关系.我们称\(\mathscr{R}\) 是$X$上的一个\textbf{偏序关系},如果它满足下列条件.
+
+\begin{enumerate}[label = \arabic*)]
+\item
+  若\(x \in X\) , 则\(x \mathscr{R} x\)  (自反性)
+\item
+  若x\(\mathscr{R}y\) , y\(\mathscr{R}x\) , 则x = y (反对称性)
+\item
+  若x\(\mathscr{R}y\) , y\(\mathscr{R}z\) , 则x\(\mathscr{R}z\) (传递性).
+\end{enumerate}
+
+偏序关系\(\mathscr{R}\) 常记为\(\preceq\).\(x \preceq y\) 读作$y$在$x$后($y$大于$x$)或$x$在$y$前($x$小于$y$).具有偏序关系\(\mathscr{R}\) 的集合$X$称为\textbf{偏序集}.有时记为$(X,\preceq)$.
+
+此外,如果X上的偏序关系\(\preceq\) 还满足条件.
+
+对任意的\(x,y \in X\) ,\(x \preceq y = y \preceq x\) 至少有一个成立,则我们称关系\(\mathscr{R}\)为$X$上的一个序关系.具有序关系\(\mathscr{R}\)的集合$X$称为\textbf{全序集}或\textbf{线性序集}.
+\end{mydef*}
+
+设 \(\preceq\) 是$X$上的任一偏序关系.我们规定:
+\[x \prec y \Longleftrightarrow x \preceq y \land x \neq y\] ,
+并读作$y$真在$x$后,($y$真大于$x$)或$x$真在$y$前,($x$真小于$y$).
+
+
+\begin{sourceexample}{10}
+
+在整数集$\mathbb{Z}$上定义关系$\mathscr{R}$如下:
+
+\[m, n \in \mathbb{Z}, m \mathscr{R} n \iff m \leqslant n\]
+
+(这里 \(\leq\) 为通常的大小关系),显然$\mathscr{R}$是$\mathbb{Z}$上的一个序关系.因此定义了此关系$\mathscr{R}$的整数集$\mathbb{Z}$是一个全序集。
+\end{sourceexample}
+
+
+\begin{sourceexample}{11}
+
+在例2中所定义的N上的整除关系$\mathscr{R}$是一个偏序关系 而不是序关系.事实上,对3,5\(\in\) N,3\(\mathscr{R}\) 5与5\(\mathscr{R}\) 3没有一个成立.
+
+\end{sourceexample}
+
+\begin{sourceexample}{12}
+
+设$X$是任一非空集合.在幂集\(2^{X}\) 上定义关系\(\mathscr{R}\) 如下:\(A, B \in 2^{X}, A \mathscr{R} B \iff A \subset B\)
+容易验证.$\mathscr{R}$是$2^{X}$上的一个偏序关系.但不是一个序关系.这是因为存在\(A,B \in2^X\),它们互不包含.因此\(2^X\)关于此关系\(\mathscr{R}\) 只 是一个偏序集,而不是全序集.
+\end{sourceexample}
+
+
+
+\subsection{习 题}
+
+\begin{exercise}
+	\item 设 $\mathscr{A}$ 是由关系组成的任意集族，证明：
+	\begin{enumerate}[label=\arabic*)]
+		\item 
+		\[
+		\operatorname{Dom}\left(\bigcup_{A\in\mathscr{A}} A\right) = \bigcup_{A\in\mathscr{A}}\operatorname{Dom}(A),\qquad
+		\operatorname{Ran}\left(\bigcup_{A\in\mathscr{A}} A\right) = \bigcup_{A\in\mathscr{A}}\operatorname{Ran}(A)
+		\]
+		\item 
+		\[
+		\operatorname{Dom}\left(\bigcap_{A\in\mathscr{A}} A\right) \subset \bigcap_{A\in\mathscr{A}}\operatorname{Dom}(A),\qquad
+		\operatorname{Ran}\left(\bigcap_{A\in\mathscr{A}} A\right) \subset \bigcap_{A\in\mathscr{A}}\operatorname{Ran}(A)
+		\]
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 证明下列各结论:
+	\begin{enumerate}[label=\arabic*)]
+		\item 对任意的集合 $X$ 与 $Y$，$X \times Y$ 是从 $X$ 到 $Y$ 的一个关系，并且 $(X \times Y)^{-1} = Y \times X$。
+		\item $\operatorname{id}_{X}=\{(x,x)\mid x\in X\}$（称为 $X\times X$ 的对角线）。对任一从 $X$ 到 $Y$ 的关系 $\mathscr{U}$，以及从 $Z$ 到 $X$ 的关系 $\mathscr{V}$，
+		\[
+		\mathscr{U}\circ \operatorname{id}_X = \mathscr{U},\qquad \operatorname{id}_X \circ \mathscr{V} = \mathscr{V}.
+		\]
+		\item 设$\mathscr{V} = \{ (x,y)\mid x\in\mathbb{R}-{0},y=\frac{1}{x} \}, \mathscr{U} = \{(x,y)\mid x\in\mathbb{R}^{+},y=\sqrt{x}\}$\footnote[1]{$\mathbb{R}^{+},\mathbb{R}^{-},\mathbb{R}^{+}_{\star},\mathbb{R}^{-}_{\star}$，分别表示非负实数集，非正实数集，负实数集，正实数集。其严格定义将在第2章$\S$3中介绍}，试写出$\mathscr{V}^{-1},\mathscr{U}^{-1},\mathscr{U}\circ\mathscr{V},\mathscr{V}\circ\mathscr{U}$
+		\item 设$\mathscr{A},\mathscr{B}$是任意两个关系，则
+		
+		\begin{align*}
+			(\mathscr{A}^{-1})^{-1} &= \mathscr{A} \\
+			(\mathscr{A}\cup\mathscr{B})^{-1} &= \mathscr{A}^{-1}\cup\mathscr{B}^{-1} \\
+			(\mathscr{A}\cap\mathscr{B})^{-1} &= \mathscr{A}^{-1}\cap\mathscr{B}^{-1} \\
+			(\mathscr{A}\circ\mathscr{B})^{-1} &= \mathscr{B}^{-1}\circ\mathscr{A}^{-1}
+		\end{align*}
+		
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $\mathscr{R}$ 是 $X$ 上的一个等价关系。证明:
+	\begin{enumerate}[label=\arabic*)]
+		\item $\mathscr{R}$ 是自反的，当且仅当 $\operatorname{id}_X\subset\mathscr{R}$;
+		\item $\mathscr{R}$ 是对称的，当且仅当 $\mathscr{R}^{-1}=\mathscr{R}$;
+		\item $\mathscr{R}$ 是传递的，当且仅当 $\mathscr{R}\circ\mathscr{R}\subset\mathscr{R}$.
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 有人指出等价关系定义中的自反性可由对称性和传递性推出，因为“由对称性，从 $x\mathscr{R}y$ 推出 $y\mathscr{R}x$；又由传递性，从 $x\mathscr{R}y$ 及 $y\mathscr{R}x$ 推出 $x\mathscr{R}x$，故 $\mathscr{R}$ 有自反性。”
+	此推论正确吗？为什么？
+\end{exercise}
+
+
+\begin{exercise}
+	\item 设 $\mathscr{U}, \mathscr{V}$ 是 $\mathbb{R}$ 上的两个关系：
+	\[
+	\mathscr{U} = \{(x, y) \mid y = x + 1,\ 0 < x < 2\},\qquad
+	\mathscr{V} = \{(x, y) \mid y - x \in \mathbb{Z}\}.
+	\]
+	证明$\mathscr{U}\subset\mathscr{V}$，并且$\mathscr{V}$是$\mathbb{R}$上的一个等价关系，写出$\mathbb{R}$关于此等价关系的商集$\mathbb{R}/\mathscr{V}$
+\end{exercise}
+
+\begin{exercise}
+	\item 设$X$是任一非空集合， $\{X_\lambda\}_{\lambda\in\Lambda}$ 是 $X$的子集组成的一个集族，使得
+	\[
+	\bigcup_{\lambda \in \Lambda} X_{\lambda} = X,\quad X_{\alpha} \cap X_{\beta} = \emptyset\ (\alpha,\beta \in \Lambda,\alpha\neq\beta).
+	\]
+	在 $X$ 上定义关系 $\mathscr{R}$ 如下：
+	\[
+	x, y \in X,\ x \mathscr{R} y \iff x,y\text{ 属于同一 }X_\lambda.
+	\]
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明 $\mathscr{R}$ 是$X$上的一个等价关系。
+		\item 写出每一个元素$x\in X$的$\mathscr{R}$等价类以及$X$关于$\mathscr{R}$的商集$X/\mathscr{R}$
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	设$\mathscr{R}$是$X$上的任一关系。证明：如果$\mathscr{R}$是$X$上的一个偏序关系（序关系），则$\mathscr{R}^{-1}$也是一个偏序关系(序关系)。
+\end{exercise}
+
+\begin{exercise}
+	设$\preceq$是$X$上的任一偏序关系。$A,B$是偏序集$(X,\preceq)$的两个子集使得，
+	\[
+		A \cup B = X, A\cap B =\varnothing \land x \in A, y \in B \Rightarrow x \prec y 
+	\]
+	这时称$(A,B)$是集$X$关于$\preceq$的一个分割，证明：如果$(A_1,B_1)$与$(A_2,B_2)$是集$(X,\preceq)$的两个分割，那么$A_1 \subset A_2 \lor A_2 \subset A_1$。
+	
+\end{exercise}
+
+
+\begin{exercise}
+	\item 设 $\mathbb{Q}$ 是本节例 9 所定义的有理数集。在 $\mathbb{Q}$ 上定义加法“$+$”与乘法“$\cdot$”如下：
+	对 $\frac{b}{a},\frac{d}{c} \in \mathbb{Q}$，
+	\[
+	\frac{b}{a} + \frac{d}{c} = \frac{bc + ad}{ac},\qquad
+	\frac{b}{a} \cdot \frac{d}{c} = \frac{bd}{ac}.
+	\]
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明上述加法与乘法定义与代表元的选择无关，即定义是合理的。
+		\item 证明加法与乘法运算具有下列各性质：
+		\begin{enumerate}[label=\alph*)]
+			\item 加法构成交换群：
+			\[
+			\frac{b}{a} + \frac{d}{c} = \frac{d}{c} + \frac{b}{a},\quad
+			\left(\frac{b}{a} + \frac{d}{c}\right) + \frac{m}{n} = \frac{b}{a} + \left(\frac{d}{c} + \frac{m}{n}\right),
+			\]
+			存在零元 $0$ 使得 $\frac{b}{a} + 0 = \frac{b}{a}$；
+			对每一个 $\frac{b}{a}$，存在逆元 $\frac{-b}{a}$ 使得 $\frac{b}{a} + \frac{-b}{a} = 0$。
+			\item $\mathbb{Q}\setminus\{0\}$ 关于乘法构成交换群：
+			\[
+			\frac{b}{a} \cdot \frac{d}{c} = \frac{d}{c} \cdot \frac{b}{a},\quad
+			\left(\frac{b}{a} \cdot \frac{d}{c}\right) \cdot \frac{m}{n} = \frac{b}{a} \cdot \left(\frac{d}{c} \cdot \frac{m}{n}\right),
+			\]
+			存在单位元 $1$ 使得 $\frac{b}{a} \cdot 1 = \frac{b}{a}$；
+			对每一个 $\frac{b}{a} \neq 0$，存在逆元 $\frac{a}{b}$ 使得 $\frac{b}{a} \cdot \frac{a}{b} = 1$。
+			\item 乘法对加法满足分配律：
+			\[
+			\frac{b}{a} \cdot \left(\frac{d}{c} + \frac{m}{n}\right) = \frac{b}{a} \cdot \frac{d}{c} + \frac{b}{a} \cdot \frac{m}{n}.
+			\]
+		\end{enumerate}
+		\item 令 $\mathbb{Q}^+ = \left\{ \frac{b}{a} \in \mathbb{Q} \mid ab \le 0 ,a \ne 0 \right\}$。在 $\mathbb{Q}$ 上定义关系 $\le$ 如下：
+		\[
+		\frac{b}{a}, \frac{d}{c} \in \mathbb{Q},\quad
+		\frac{b}{a} \leq \frac{d}{c} \iff \frac{d}{c} - \frac{b}{a} \triangleq \frac{d}{c} + \frac{-b}{a} \in \mathbb{Q}^+,
+		\]
+		\[
+		\frac{b}{a} < \frac{d}{c} \iff \frac{b}{a} \leq \frac{d}{c}\ \text{且}\ \frac{b}{a} \neq \frac{d}{c}.
+		\]
+		证明 $\leq$ 是 $\mathbb{Q}$ 上的一个序关系，因此$(\mathbb{Q},\le)$是一个全序集。
+		
+		\item 对每一个 $\frac{b}{a} \in \mathbb{Q}$，定义绝对值 $\left| \frac{b}{a} \right|$ 为：
+		\[
+		\left| \frac{b}{a} \right| = 
+		\begin{cases}
+			\frac{b}{a}, & \text{若 } \frac{b}{a} > 0, \\
+			0, & \text{若 } \frac{b}{a} = 0, \\
+			-\frac{b}{a}, & \text{若 } \frac{b}{a} < 0.
+		\end{cases}
+		\]
+		证明绝对值的下列性质成立：
+		\[
+		\left| \frac{b}{a} \right| = 0 \Longrightarrow \frac{b}{a} = 0,
+		\]
+		\[
+		\left| \frac{b}{a} - \frac{d}{c} \right| = \left| \frac{d}{c} - \frac{b}{a} \right|,
+		\]
+		\[
+		\left| \frac{b}{a} - \frac{d}{c} \right| \leqslant \left| \frac{b}{a} - \frac{m}{n} \right| + \left| \frac{m}{n} - \frac{d}{c} \right|.
+		\]
+	\end{enumerate}
+\end{exercise}
+
+\section{映 射}
+
+在数学分析中,“映射”是我们的一个主要研究对象.因此我们首先介绍映射的概念.
+
+\subsection{映射的一般概念}
+	\label{sec:1-3-1}
+
+\begin{mydef*}{}
+
+设f是任一关系,令
+
+\[\operatorname{Dom}(f) = X , \operatorname{Ran}(f) \subset Y \]
+
+如果$f$具有下述性质:
+
+\(\forall x \in \operatorname{Dom}(f), xfy_1, xfy_2 \Longrightarrow y_1 = y_2,\)
+
+则我们称$f$是从$X$到$Y$的一个\textbf{函数关系}或\textbf{映射}。
+
+
+\end{mydef*}
+
+通常用下列各记号表示从$X$到$Y$的映射$f$:
+
+\begin{align*}
+	& f: X \longrightarrow Y,  X \xrightarrow{f} Y  \\
+	& x \longmapsto f(x) \in Y, x \in X, y = f(x) \in Y, x\in X \\
+	& \{(x, f(x)) \mid x \in X\} , \{(x, y) \mid x \in X,\ x f y\}
+\end{align*}
+
+\begin{sourceexample}{1}
+
+考虑下列各关系\(f_i(i=1, 2, 3)\) :
+
+\[f_1 = \{(x, \sin x) \mid x \in \mathbb{R}\};\]
+
+\[x \longmapsto f_2(x) = \begin{cases} x \sin \frac{1}{x}, & x \neq 0, \\ 0, \quad  x = 0, \end{cases}\]
+
+\[f_3 = \{(x, \pm \sqrt{x}) | x \geqslant 0\}.\]
+
+显然,\(f_1\) ,\(f_2\) 是映射,而\(f_3\) 不是映射.因 为
+
+\(\forall x \in \mathbb{R}, x f_1 y_1, x f_1 y_2 \Longrightarrow y_1 = \sin x, y_2 = \sin x \Longrightarrow y_1 = y_2\)
+
+\(\forall x \in \mathbb{R}, x f_2 y_1, x f_2 y_2 \Longrightarrow y_1 = 0, y_2 = 0\),若$x=0$
+
+若\(x \ne 0\),
+\[
+y_1 = x \sin \frac{1}{x} ,y_2 = x \sin \frac{1}{x} \Rightarrow y_1 = y_2 
+\]
+
+
+故\(f_1\),\(f_2\)是从$\mathbb{R}$到$\mathbb{R}$的映射.而对\(f_3\) , 由于
+
+\((x, \sqrt{x}) \in f_3, (x, -\sqrt{x}) \in f_3\) 但\(\sqrt{x} \neq -\sqrt{x}\) (\(x \ge 0\) ),故\(f_3\) 不是映射.
+
+\end{sourceexample}
+
+
+
+上面我们用关系概念给映射下的定义与在中学里所学的映射 定义是一致的:
+
+“设$A$、$B$是两个集合,如果按照某种对应法则$f$,对于集合$A$中的任何一个元素,在集合$B$中都有唯一的元素和它对应，这样的对应(包括集合$A,B$及从$A$到$B$的对应法则$f$)叫做从集合$A$到集合$B$的映射"\footnote[1]{《代数》(上册)(高级中学课本),人民教育出版社,1990年10月第1版.}.
+
+现在设\(f: X \to Y\)是任一映射$f$，$f$的图形,记为$\operatorname{Gr}(f)$\footnote[2]{Gr是英文单词graph(图形)的头两个字母.},定义为乘积\(X \times Y\) 的下述子集合:
+
+\[Gr(f) = \{(x, y) \in X \times Y | x \in X, y = f(x)\}.\]
+
+由此可知,映射的图形(\rfig{fig:1-2})与我们的映射定义完全统一起来了。
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}
+\begin{axis}[
+  width=10cm,
+  height=5.5cm,
+  axis lines=middle,
+  xlabel={$x$},
+  ylabel={$y$},
+  xlabel style={at={(ticklabel cs:1)},anchor=north west},
+  ylabel style={at={(ticklabel cs:1)},anchor=south east},
+  xmin=-0.8, xmax=3.5,
+  ymin=-0.6, ymax=2.2,
+  xtick={1,2},
+  xticklabels={\footnotesize$X$,\footnotesize$x$},
+  ytick={0.8},
+  yticklabels={\footnotesize$f(x)$},
+  tick label style={font=\footnotesize},
+  samples=200,
+  domain=-0.3:3.2,
+]
+% 曲线 Gr(f)
+\addplot {1.6+0.6*sin(deg(x-0.8))};
+% 标注 Gr(f)
+\node at (axis cs:2.6,1.7) {\footnotesize$\mathrm{Gr}(f)$};
+% 水平虚线 f(x)
+\draw[dashed] (axis cs:-0.3,0.8) -- (axis cs:2.0,0.8);
+% 竖直虚线 x
+\draw[dashed] (axis cs:2.0,0.8) -- (axis cs:2.0,-0.1);
+% 实心点 (x, f(x))
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(2.0,0.8)};
+\end{axis}
+\end{tikzpicture}
+	\caption{}
+	\label{fig:1-2}
+\end{figure}
+
+对于任一映射\(f: X \rightarrow Y\) ,设\(A \subset X\) 是一非空集合.显然关系\(g = \{(x, y) | x \in A, xfy\}\)是从A到Y的一个映射.
+
+\begin{mydef*}{}
+
+映射\(g:A\to Y\) 称为映射\(f:X\to Y\) 在$A$上的限制,记为\(f|_A\) 如果一个映射\(h:A\to Y\) 是映射\(f:X\to Y\) 在\(A(\subset X)\) 上的限制,则我们称$f$为$h$的扩张.
+
+\end{mydef*}
+
+
+例如考虑如下两个映射:
+
+\(g = \{(x, x^2) | x \in \mathbb{R}^+\}, f = \{(x, x^2) | x \in \mathbb{R}\},\)
+
+则$g$是$f$在$\mathbb{R}^{+}$上的限制,而$f$是$g$的扩张。
+
+\subsection{单射、满射与一一映射}
+	\label{sec:1-3-2}
+% 2026.08.08
+首先我们介绍映射的象集与逆象集概念，
+
+
+\begin{mydef*}{}
+
+设\(f: X \to Y\) 是任一映射.\(A \subset X\) ,\(B \subset Y\) 是任意两个集合.
+\begin{enumerate}[label=\arabic*)]
+	\item \(f(A) \stackrel{\triangle}{=} \{y \in Y \mid \exists x \in A \notin y = f(x)\}\) 称为$A$在$f$下的\textbf{象集}。
+	\item \(f^{-1}(B) \stackrel{\triangle}{=} \{x \in X | f(x) \in B\}\) 称为$B$关于$f$的\textbf{逆象集}。
+\end{enumerate}
+\end{mydef*}
+
+
+
+显然, 当 $A=X, B=Y$时,\(f(X)=\operatorname{Ran}(f)\) ,\(f^{-1}(Y)=\operatorname{Dom}(f)=X\) .
+
+可能出现这种情形:
+
+\[
+A \subseteq X, \quad f(A) = \operatorname{Ran}(f), \quad B \subseteq Y, \quad f^{-1}(B) = \varnothing
+\] 
+
+并且一般我们只能有下述包含关系式成立:
+\[A \subset f^{-1}(f(A)), f(f^{-1}(B)) \subset B\]
+
+例如，对上述映射 \(f = \{(x, x^2) \mid x \in \mathbb{R}\}\)，若取 \(A = \mathbb{R}^{+}\)，\(B = \mathbb{R}^{-}_{\star}\)，则
+\[
+f(\mathbb{R}^{+}) = \operatorname{Ran}(f) = \mathbb{R}^{+},
+\quad
+f^{-1}(\mathbb{R}^{-}_{\star}) = \varnothing. \quad 
+\mathbb{R}^{+} \subset f^{-1}(f(\mathbb{R}^{+})) = \mathbb{R}
+\]
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}[>=stealth,scale=0.9]
+% 上半部分：A ⊂ X 映射到 f(A) ⊂ Y
+\begin{scope}[yshift=2.8cm]
+  % X 大圆
+  \draw (0,0) circle (1.6);
+  \node[font=\footnotesize] at (-1.9,0.2) {$X$};
+  % Y 大圆
+  \draw (5,0) circle (1.2);
+  \node[font=\footnotesize] at (6.3,0.8) {$Y$};
+  % A 椭圆（阴影）
+  \fill[pattern=north east lines] (0,0) ellipse (0.9 and 0.6);
+  \draw (0,0) ellipse (0.9 and 0.6);
+  \node[font=\footnotesize] at (0,0.05) {$A$};
+  % f(A) 椭圆（阴影）
+  \fill[pattern=north east lines] (5,0) ellipse (0.6 and 0.45);
+  \draw (5,0) ellipse (0.6 and 0.45);
+  \node[font=\footnotesize] at (5,0.05) {$f(A)$};
+  % 映射箭头 f
+  \draw[->] (1.7,0.3) -- (3.8,0.3);
+  \node[font=\footnotesize] at (2.75,0.55) {$f$};
+  % 指示线 f^{-1}(f(A))
+  \draw[->] (2.5,-1.6) .. controls (2.5,-0.8) and (1.2,-0.5) .. (0.6,-0.2);
+  \node[font=\footnotesize] at (2.5,-1.85) {$f^{-1}(f(A))$};
+\end{scope}
+
+% 下半部分：f^{-1}(B) ⊂ X 与 B ⊂ Y
+\begin{scope}[yshift=-1.2cm]
+  % X 大圆
+  \draw (0,0) circle (1.2);
+  \node[font=\footnotesize] at (-1.5,0.2) {$X$};
+  % Y 大圆
+  \draw (5,0) circle (1.6);
+  \node[font=\footnotesize] at (6.6,0.9) {$Y$};
+  % f^{-1}(B) 椭圆（阴影）
+  \fill[pattern=north east lines] (0,0) ellipse (0.6 and 0.45);
+  \draw (0,0) ellipse (0.6 and 0.45);
+  \node[font=\footnotesize] at (0,0.05) {$f^{-1}(B)$};
+  % B 椭圆
+  \draw (5,0) ellipse (0.9 and 0.6);
+  \node[font=\footnotesize] at (5.3,0.05) {$B$};
+  % f(f^{-1}(B)) 区域：B 与 f^{-1}(B) 像的重叠
+  % 先画 B 的边界，再画 f(f^{-1}(B)) 阴影（B 的左半部分与椭圆相交区）
+  % 用 clip 画出 f(f^{-1}(B)) 的交集阴影
+  \begin{scope}
+    \clip (5,0) ellipse (0.9 and 0.6);
+    \fill[pattern=north east lines] (4.2,-1.6) rectangle (5.9,1.6);
+  \end{scope}
+  % 重画 B 边界
+  \draw (5,0) ellipse (0.9 and 0.6);
+  % 映射箭头 f
+  \draw[->] (1.3,0.3) -- (3.7,0.5);
+  \node[font=\footnotesize] at (2.5,0.7) {$f$};
+  % 水平指示线（穿过 f^{-1}(B) 指向 f(f^{-1}(B))）
+  \draw[->] (0.7,0) -- (4.4,0);
+  % 指示线 f(f^{-1}(B))
+  \draw[->] (2.5,-1.8) .. controls (2.5,-1.0) and (3.8,-0.6) .. (4.5,-0.25);
+  \node[font=\footnotesize] at (2.5,-2.05) {$f(f^{-1}(B))$};
+\end{scope}
+\end{tikzpicture}
+	\caption{}
+	\label{fig:1-3}
+\end{figure}
+
+关于映射\(f: X \to Y\) 的值域\(f(X) \subset Y\) ,有下列三种情形值得我们特别考虑:
+
+\begin{enumerate}[label=\arabic*)]
+\tightlist
+\item \(f(X) \subseteq Y\)
+\item \(f(X) = Y\)
+\item \(\forall y \in f(X), f^{-1}(y) \stackrel{\triangle}{\longrightarrow} f^{-1}(\{y\})\) 是单点集
+\end{enumerate}
+
+与这三种情形对应的映射分类是:
+
+\begin{mydef*}{}
+
+对映射 \(f: X \to Y\)，
+
+\begin{enumerate}[label=\arabic*)]
+		\item 若 \(f(X) \subseteq Y\)，则称 \(f\) 是\textbf{内射}；
+		\item 若 \(f(X) = Y\)，则称 \(f\) 是\textbf{满射}或\textbf{全射}；
+		\item 若 \(\forall y \in f(X)\)，\(f^{-1}(y)\) 是单点集，则称 \(f\) 是单射。
+		\item 若$f$既是单射,又是满射,则称$f$是\textbf{一一映射}或\textbf{满单射}. 
+\end{enumerate}
+\end{mydef*}
+
+从单射的定义容易验证下面三个结论互相等价：
+\begin{enumerate}[label=\arabic*)]
+	\item \(f: X \to Y\) 是单射；
+	\item 若 \(x_1, x_2 \in X\) 且 \(x_1 = x_2\)，则 \(f(x_1) = f(x_2)\)；
+	\item 若 \(x_1, x_2 \in X\) 且 \(f(x_1) = f(x_2)\)，则 \(x_1 = x_2\)。
+\end{enumerate}
+
+
+
+\begin{sourceexample}{2}
+	对任一映射\(f:X\to Y\) , 映射\(f:X\to f(X)\) 是满射。
+\end{sourceexample}
+
+\begin{sourceexample}{3}
+	对任一非空集合$X$, 映射\(x \mapsto x\) ,\(x \in X\) 是一一映射, 称为从$X$到$X$上的恒等映射, 记为\(id_X: X \to X\)。
+\end{sourceexample}
+
+\begin{sourceexample}{4}
+
+	前面考虑过的映射
+	
+	\[f = \{(x, x^2) | x \in \mathbb{R}\}\]
+	
+	不是单射,因为\(f(x) = f(-x) = x^2\) ,\(\forall x \in \mathbb{R}\) ,但是f在\(\mathbb{R}^+\) 上的 限制\(f|_{\mathbb{R}^{+}}\)是从\(\mathbb{R}^+\) 到\(\mathbb{R}^+\) 上的一一映射。
+
+\end{sourceexample}
+
+
+
+对于两个映射,如何判断它们是同一映射,下面的命题给出了两个映射相等的充分必要条件.
+
+\begin{myprop*}{}
+
+设$f,g$是任意两个映射, 则
+\[
+f = g \iff \operatorname{Dom}(f) = \operatorname{Dom}(g), \ \forall x \in \operatorname{Dom}(f), \ f(x) = g(x).
+\]
+
+\end{myprop*}
+
+
+
+\begin{proof}
+	首先由映射的定义，记$\exists ! x$表示“存在唯一的$x$”，则
+	\[
+	f = \{(x, y) \mid xfy\},\quad
+	\operatorname{Dom}(f) = \{x \mid \exists!\, y,\, xfy\},
+	\]
+	\[
+	g = \{(x, y) \mid xgy\},\quad
+	\operatorname{Dom}(g) = \{x \mid \exists!\, y,\, xgy\}.
+	\]
+	
+	现设 \(f = g\)。
+	那么\(\forall x \in \operatorname{Dom}(f)\)，存在唯一的 \(y\) 使得 \(xfy\)（即 \(y = f(x)\)），
+	从而 \((x, y) \in f\)。由 \(f=g\) 知 \((x, y) \in g\)，
+	故 \(x \in \operatorname{Dom}(g)\) 且 \(y = g(x)\)。
+	因此 \(\operatorname{Dom}(f) \subset \operatorname{Dom}(g)\)，且 \(\forall x \in \operatorname{Dom}(f),\; f(x) = g(x)\)。
+	
+	由对称性，同理可证 \(\operatorname{Dom}(g) \subset \operatorname{Dom}(f)\)，
+	且 \(\forall x \in \operatorname{Dom}(g),\; g(x) = f(x)\)。
+	此即表明 \(\operatorname{Dom}(f) = \operatorname{Dom}(g)\)，且 \(\forall x \in \operatorname{Dom}(f),\; f(x) = g(x)\)。
+	
+	反之，设 \(\operatorname{Dom}(f) = \operatorname{Dom}(g)\)，且 \(\forall x \in \operatorname{Dom}(f),\; f(x) = g(x)\)。
+	则 \(\forall (x, y) \in f\)，有 \(x \in \operatorname{Dom}(f)\) 且 \(y = f(x)\)。
+	从而 \(x \in \operatorname{Dom}(g)\) 且 \(y = g(x)\)，故 \((x, y) \in g\)，即 \(f \subset g\)。
+	同理可证 \(g \subset f\)，因此 \(f = g\)。命题证毕。
+\end{proof}
+
+下面我们介绍用逆关系与复合关系定义的逆映射与复合映射。
+
+\subsection{逆映射与复合映射}
+% 2026.08.09
+
+\begin{mydef*}{}
+
+设\(f: X \rightarrow Y\) 是任一映射.如果$f(X) = Y$ 并且 $f$的逆关系\(f^{-1} = \{(y, x) | xfy\}\) 也是一个映射,则我们称$f$是可逆的,\(f^{-1}\) 称为$f$的逆映射.
+
+\end{mydef*}
+
+由上述定义可知, 若映射\(f:X\to Y\) 可逆, 则
+
+\begin{enumerate}[label=\arabic*)]
+	\item \(f^{-1}\) 是从Y到X上的映射,因为\(\operatorname{Dom}(f^{-1}) = \operatorname{Ran}(f) = Y\)。
+	\item \(f^{-1}:Y\to X\) 也是可逆的,并且\((f^{-1})^{-1}=f\)
+\end{enumerate}
+
+
+
+
+\begin{sourceexample}{5}
+
+考虑\(f = \{(x, x+1) \mid x \in \mathbb{R}\}\)。显然f是从R到R上的映射,并且由于\(f^{-1} = \{(y, x) | xfy\}\)
+
+\[= \{(y, x) | x \in \mathbb{R}, y = x + 1\}\]
+
+\(= \{(y, y - 1) | y \in \mathbb{R}\},\) 及\(\forall y \in \mathbb{R}\) ,\(yf^{-1}x_1\) ,\(yf^{-1}x_2 \Longrightarrow x_1 = y - 1\) ,\(x_2 = y - 1 \Longrightarrow x_1 = x_2\) , 故\(f^{-1}\) 也是一个映射,因此$f$是可逆的。
+
+\end{sourceexample}
+
+
+
+\begin{sourceexample}{6}
+
+考虑\(f = \{(x, x^2 + 1) | x \in \mathbb{R}\}.\)
+
+容易验证$f$是从$R$到\(Y = \operatorname{Ran}(f) = \{y \in R \mid y = x^2 + 1. x \in R\} = \{y \in R \mid y - 1 \ge 0\} = \{y \in R \mid y \ge 1\}\) 上的映射.
+
+由于
+
+\[f^{-1} = \{ (y, x) | xfy \}\]
+
+\[= \{ (y, x) | x \in \mathbb{R}, y = x^2 + 1 \}\]
+
+\[= \{ (y, \pm \sqrt{y-1}) | y \ge 1 \}\]
+
+及\(\forall y > 1\) ,\(yf^{-1}(\sqrt{y-1})\) ,\(yf^{-1}(-\sqrt{y-1})\) , 但\(\sqrt{y-1} \approx -\sqrt{y-1}\) , 故\(f^{-1}\) 不是一个映射,从而$f$不可逆。
+
+\end{sourceexample}
+
+
+
+关于映射的复合,我们首先证明下述定理。
+
+\begin{mythm}{}{composition-of-maps}
+	设$f,g$是任意两个映射, 则
+	\begin{enumerate}[label=\arabic*)]
+		\item \(g \circ f\) 也是一个映射;
+		\item \(g \circ f\) 在x 处有定义当且仅当f 在x 处有定义,g 在f(x) 处有定义,于是
+		\[
+			\operatorname{Dom}(g \circ f) = \operatorname{Dom}(f) \cap f^{-1}(\operatorname{Dom}(g))
+		\]
+		\item \(\forall x \in \text{Dom}(g \circ f), g \circ f(x) = g(f(x))\)
+	\end{enumerate}
+\end{mythm}
+
+
+
+
+\begin{proof}
+	\begin{enumerate}[label=\arabic*)]
+		\item 我们只需证明
+		\[
+		\forall x,\; x(g \circ f)z_1,\; x(g \circ f)z_2 \Longrightarrow z_1 = z_2.
+		\]
+		根据复合关系的定义，$\exists y_1, y_2$ 使得
+		\[
+		xfy_1,\; y_1gz_1,\; xfy_2,\; y_2gz_2.
+		\]
+		因为 $f$ 是映射，故 $y_1 = y_2$；又因为 $g$ 是映射，故由 $y_1gz_1$，$y_1gz_2$ 推得 $z_1 = z_2$。
+		
+		\item 
+		\begin{align*}
+			x \in \operatorname{Dom}(g \circ f) 
+			&\iff \exists z \text{ 使 } x(g \circ f)z \\
+			&\iff \exists y\, \exists z \text{ 使 } xfy, ygz \\
+			&\implies x \in \operatorname{Dom}(f),\; y = f(x) \in \operatorname{Dom}(g) \\
+			&\iff x \in \operatorname{Dom}(f) \cap f^{-1}(\operatorname{Dom}(g)).
+		\end{align*}
+		
+		\item 由 2) 的证明推出。
+	\end{enumerate}
+\end{proof}
+
+根据此定理,我们可以引进下述定义:
+
+\begin{mydef*}{}
+
+设$f,g$是任意两个映射, 则\(g \circ f\) 称为$f$与$g$的\textbf{复合映射}。
+
+\end{mydef*}
+
+从\rfig{fig:1-4}可以理解\(g \circ f\) 的意义.
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}[line cap=round,line join=round,>=stealth,scale=1.0]
+% 集合 X
+\draw (0,0) circle (1cm);
+\node at (0,0) {$X$};
+% 集合 Y
+\draw (3.2,0) circle (1cm);
+\node at (3.2,0) {$Y$};
+% 集合 Z（与 Y 相交）
+\draw (4.6,0) circle (1cm);
+\node at (4.6,0) {$Z$};
+% 集合 W
+\draw (7.8,0) circle (1cm);
+\node at (7.8,0) {$W$};
+% X 与 Y 的交集阴影（竖线填充）
+\begin{scope}
+  \clip (0,0) circle (1cm);
+  \fill[pattern=north east lines] (3.2,0) circle (1cm);
+\end{scope}
+% Y 与 Z 的交集阴影（竖线填充）
+\begin{scope}
+  \clip (3.2,0) circle (1cm);
+  \fill[pattern=north east lines] (4.6,0) circle (1cm);
+\end{scope}
+% 箭头 f: X -> Y（从左交集指向右）
+\draw[->] (0.75,0.45) -- (2.45,0.45);
+\node[font=\footnotesize] at (1.6,0.65) {$f$};
+% 箭头 f^{-1}: Y -> X（上方弧线）
+\draw[->] (2.45,1.05) to[out=120,in=60] (0.75,1.05);
+\node[font=\footnotesize] at (1.6,1.45) {$f^{-1}$};
+% 箭头 g: Z -> W
+\draw[->] (5.6,0) -- (6.8,0);
+\node[font=\footnotesize] at (6.2,0.25) {$g$};
+% 箭头 g\circ f: X -> W（下方弧线）
+\draw[->] (0.3,-0.95) to[out=-60,in=-120] (7.5,-0.95);
+\node[font=\footnotesize] at (3.9,-1.35) {$g\circ f$};
+\end{tikzpicture}
+	\caption{}
+	\label{fig:1-4}
+\end{figure}
+
+
+
+\begin{sourceexample}{7}
+
+设 \(f = \{(x, x^2 + 1) \mid x \in \mathbb{R}\},\; g = \{(y, \sqrt{y}) \mid y \in \mathbb{R}^+\}\)。
+
+\begin{align*}
+	\operatorname{Dom}(g \circ f) &= \operatorname{Dom}(f) \cap f^{-1}(\operatorname{Dom}(g)) \\
+	&= \mathbb{R} \cap f^{-1}(\mathbb{R}^+) \\
+	&= \mathbb{R} \cap \mathbb{R} = \mathbb{R},
+\end{align*}
+
+\begin{align*}
+	\operatorname{Dom}(f \circ g) &= \operatorname{Dom}(g) \cap g^{-1}(\operatorname{Dom}(f)) \\
+	&= \mathbb{R}^+ \cap g^{-1}(\mathbb{R}) \\
+	&= \mathbb{R}^+ \cap \mathbb{R}^+ = \mathbb{R}^+;
+\end{align*}
+
+\begin{align*}
+	g \circ f &= \{(x, z) \mid x \in \mathbb{R} \text{ 并且存在 } y \text{ 使得 } x f y,\; y g z\} \\
+	&= \{(x, z) \mid x \in \mathbb{R},\; y = x^2 + 1,\; z = \sqrt{y}\} \\
+	&= \{(x, \sqrt{x^2+1}) \mid x \in \mathbb{R}\},
+\end{align*}
+
+\begin{align*}
+	f \circ g &= \{(x, z) \mid x \in \mathbb{R}^+ \text{，并且存在 } y \text{ 使得 } x g y,\; y f z\} \\
+	&= \{(x, z) \mid x \in \mathbb{R}^+,\; y = \sqrt{x},\; z = y^2 + 1\} \\
+	&= \{(x, x+1) \mid x \in \mathbb{R}^+\}.
+\end{align*}
+
+\end{sourceexample}
+
+
+
+利用映射的复合可以判断映射的单射性与满射性,即成立下面的定理,
+
+\begin{mythm}{}{composition-injectivity-surjectivity}
+设\(f: X \rightarrow Y \text{与} g:Y \rightarrow X\) 是任意两个映射,
+	\begin{enumerate}[label=\arabic*)]
+		\item 若\(g \circ f = id_X\) , 则$f$是单射, $g$是满射;
+		\item 若\(g \circ f = id_X, f \circ g = id_Y\) , 则$f$与$g$是一一映射, 并且$f^{-1}=g,g^{-1}=f$ 
+ 	\end{enumerate}
+\end{mythm}
+
+\begin{proof}
+
+\begin{enumerate}[label=\arabic*)]
+\item 设\(x_1\) ,\(x_2 \in X\) 使得\(f(x_1) = f(x_2)\) . 那末\(x_1 = id_X(x_1) = g \circ f(x_1) = g(f(x_1))\)\(= g(f(x_2)) = g \circ f(x_2) = id_X(x_2) = x_2\) , 因此f是单射。
+
+为了证明$g$是满射,设\(x \in X\) ,令$y = f(x)$.则\(x = id_X(x) = g \circ f(x) = g(f(x)) = g(y),\)
+
+因此$g$是满射.
+
+\item 若 $g \circ f = id_X$，$f \circ g = id_Y$，则由 1) 知 $f, g$ 都是一一映射。为了证明 $f^{-1} = g$，$g^{-1} = f$，我们只需证明
+\[
+f^{-1}(y) = g(y), \quad y \in Y, \quad g^{-1}(x) = f(x), \quad x \in X
+\]
+
+事实上，由于 $f^{-1} \circ f = id_X$，$g^{-1} \circ g = id_Y$，故
+\begin{align*}
+	g(y) &= (f^{-1} \circ f)(g(y)) = f^{-1}(f(g(y))) = f^{-1}(y), \quad y \in Y, \\
+	f(x) &= (g^{-1} \circ g)(f(x)) = g^{-1}(g(f(x))) = g^{-1}(x), \quad x \in X
+\end{align*}
+。
+
+\end{enumerate}
+\end{proof}
+
+最后作为映射的一个应用,我们来介绍集合的可数性。
+
+
+
+\subsection{集合的可数性}
+	\label{sec:1-3-4}
+
+\begin{mydef*}{}
+
+设 \(X\) 是任一集合。
+
+\begin{enumerate}[label=\arabic*)]
+	\item 我们称 \(X\) 是\textbf{有限集}，如果 \(X\) 是空集，或者存在 \(n \in \mathbb{N}\) 及一个一一映射 \(f: \{1, 2, \dots, n\} \to X\)。在第一种情形下称 \(X\) 有 0 个元素，在第二种情形下称 \(X\) 有 \(n\) 个元素。
+	
+	\item 我们称 \(X\) 是\textbf{无限集}，如果它不是有限集。
+	
+	\item 我们称 \(X\) 是\textbf{可数无限集}，如果存在一一映射 \(f: \mathbb{N} \to X\)。
+	
+	\item 我们称 \(X\) 是\textbf{可数集}，如果 \(X\) 是有限集或可数无限集。
+	
+	\item 我们称 \(X\) 是\textbf{不可数集}，如果 \(X\) 不是可数集。
+\end{enumerate}
+
+\end{mydef*}
+
+\begin{sourceexample}{8}
+
+对每一个\(n \in \mathbb{N}\) , 集合\(\{1, 2, \dots, n\}\) 是有 n 个元素的有限集, 而集合\(\mathbb{N}\) 是可数 无限集.
+
+\end{sourceexample}
+
+\begin{sourceexample}{9}
+
+整数集 \(\mathbb{Z}\) 是可数无限集，因为我们有一一映射 \(f: \mathbb{N} \to \mathbb{Z}\)：
+\[
+f(n) =
+\begin{cases}
+	k,   & \text{若 } n = 2k+1 \ (k = 0, 1, 2, \dots); \\
+	-k, & \text{若 } n = 2k \ (k = 1, 2, \dots).
+\end{cases}
+\]
+\end{sourceexample}
+
+
+\begin{mythm}{}{countable-surjection-characterization}
+
+设$X$是任一非空集合，$X$是可数集的充分必要条件是存在一个满射\(f: \mathbb{N} \rightarrow X\) .
+
+\end{mythm}
+
+\begin{proof}
+	\textbf{必要性}\quad 设 \(X\) 是可数集。如果 \(X\) 是无限集，则由定义，存在一一映射 \(f: \mathbb{N} \to X\)；如果 \(X\) 是有 \(n\) 个元素的有限集，则存在一一映射 \(g: \{1, 2, \dots, n\} \to X\)。现在定义映射 \(f: \mathbb{N} \to X\) 为：
+	\[
+	f(m) =
+	\begin{cases}
+		g(m), & m = 1, 2, \dots, n; \\
+		g(1), & m = n+1, n+2, \dots
+	\end{cases}
+	\]
+	显然 \(f\) 是满射。
+	
+	\textbf{充分性}\quad 设存在满射 \(f: \mathbb{N} \to X\)。如果 \(X\) 是有限集，则充分性成立。因此不妨设 \(X\) 是无限集。
+	
+	在 \(\mathbb{N}\) 上定义关系 \(\mathscr{R}\) 如下：
+	\[
+	n, m \in \mathbb{N},\; n \mathscr{R} m \iff f(n) = f(m).
+	\]
+	容易验证 \(\mathscr{R}\) 是 \(\mathbb{N}\) 上的一个等价关系。
+	
+	下面我们定义两个映射 \(h: \mathbb{N} \to \mathbb{N}/\mathscr{R}\) 与 \(g: \mathbb{N}/\mathscr{R} \to X\)。
+	
+	首先定义映射 \(g: \mathbb{N}/\mathscr{R} \to X\) 如下：
+	\[
+	g(\tilde{n}) = f(n),\; \forall \tilde{n} \in \mathbb{N}/\mathscr{R}.
+	\]
+	显然 \(g\) 是单射。
+	
+	其次我们归纳地定义映射 \(h: \mathbb{N} \to \mathbb{N}/\mathscr{R}\)。
+	\[
+	h(1) = \widetilde{k_1} = \widetilde{1}.
+	\]
+	\(h(2) = \widetilde{k_2}\)，这里 \(k_2\) 是不属于 \(\widetilde{1}\) 的最小自然数。
+	
+	现在假设 \(h(1) = \widetilde{k_1}, h(2) = \widetilde{k_2}, \dots, h(m) = \widetilde{k_m}\) 已经定义好了，我们令
+	\[
+	h(m+1) = \widetilde{k}_{m+1},
+	\]
+	这里 \(k_{m+1}\) 是不属于 \(\widetilde{k}_1, \widetilde{k}_2, \dots, \widetilde{k}_m\) 的最小自然数。
+	
+	由于 \(X\) 是无限集，\(g\) 是单射，故 \(\mathbb{N}/\mathscr{R}\) 也是无限集，因此上述定义 \(h\) 的过程可以无限地继续下去，从而映射 \(h: \mathbb{N} \to \mathbb{N}/\mathscr{R}\) 就完全归纳地定义了。
+	
+	现在我们来证明复合映射 \(g \circ h: \mathbb{N} \to X\) 是一一映射，从而 \(X\) 是可数无限集。
+	
+	首先证明 \(g \circ h\) 是单射。为此设 \(n, m \in \mathbb{N}\) 且 \(n \neq m\)。那么
+	\[
+	g \circ h = g(\widetilde{k_n}),\quad g \circ h(m) = g(\widetilde{k_m}).
+	\]
+	由于 \(\widetilde{k_n} \neq \widetilde{k_m}\)，且 \(g\) 是单射，所以 \(g \circ h(n) \neq g \circ h(m)\)。
+	
+	为了证明 \(g \circ h\) 是满射，设 \(a \in X\)。由于 \(f\) 是满射，故存在 \(n \in \mathbb{N}\) 使得 \(f(n) = a\)。令 \(k_m\) 是 \(\tilde{n}\) 中最小自然数，那么
+	\[
+	g \circ h(m) = g(\tilde{k}_m) = f(k_m) = f(n) = a.
+	\]
+\end{proof}
+
+\begin{mycor*}{1}
+
+若X是可数集,\(Y \subset X\) 是任一子集,则$Y$也是可数集.
+
+\end{mycor*}
+
+\begin{proof}
+
+如果$Y$是空集,则推论成立.因此不妨设\(Y \neq \emptyset\) .令\(x_0 \in Y\) .由于$X$可数,故存在满射\(g: \mathbb{N} \rightarrow X\) .现在定义映射\(f: \mathbb{N} \rightarrow Y\) 为:
+
+\[
+f(n) = 
+	\begin{cases} 
+	g(n) & \text{若}g(n) \in Y; \\ 
+	x_0 \quad &\text{若 }g(n) \notin Y. 
+	\end{cases}
+\]
+
+则$f$是满射,因此$Y$是可数集。
+
+\end{proof}
+
+\begin{mycor*}{2}
+
+若$X_1 ,X_2 , \ldots,X_n , \ldots\ldots$是可数多个可数集，则\(\bigcup_{k=1}^n X_k\)，\(\bigcup_{k\in\mathbb{N}} X_k\) 也是可数集。
+
+\end{mycor*}
+
+\begin{proof}
+	由于对任意的 \(n \in \mathbb{N}\)，\(\bigcup_{k=1}^{n} X_{k} \subset \bigcup_{k \in \mathbb{N}} X_{k}\)，根据推论 1，我们只需证明 \(\bigcup_{k \in \mathbb{N}} X_k\) 是可数集。
+	
+	不妨设每一个 \(X_k \neq \emptyset\)（否则可以把那些空集删去）。由于 \(X_k\) 是可数集，故存在满射 \(f_k: \mathbb{N} \to X_k\)。下面我们定义映射 \(f: \mathbb{N} \to \bigcup_{k \in \mathbb{N}} X_k\) 如下：
+	
+	首先，对每一个 \(n \in \mathbb{N}\)，可唯一地分解成 \(n = 2^{k-1}(2m-1)\)（其中 \(k, m \in \mathbb{N}\)）的形式。我们令 \(f(n) = f_k(m)\)，则 \(f\) 是满射。事实上，设 \(x \in \bigcup_{k \in \mathbb{N}} X_k\)，于是存在 \(k \in \mathbb{N}\) 使得 \(x \in X_k\)，从而存在 \(m \in \mathbb{N}\) 使得 \(x = f_k(m)\)。若令 \(n = 2^{k-1}(2m-1)\)，则
+	\[
+	f(n) = f\bigl(2^{k-1}(2m-1)\bigr) = f_k(m) = x,
+	\]
+	因此 \(f\) 是满射。故 \(\bigcup_{k \in \mathbb{N}} X_k\) 是可数集。
+\end{proof}
+
+\begin{sourceexample}{10}
+
+有理数集$\mathbb{Q}$是可数集。
+
+事实上,对每一个\(n \in \N\) ,令
+
+\[\mathbb{Q}_n = \left\{ \frac{m}{n} \mid m \in \mathbb{Z}, \quad \text{且} - n^2 \leqslant m \leqslant n^2 \right\},\]
+
+则\(\mathbb{Q}_n\) 是有限集,并且\(\mathbb{Q} = \bigcup_{n\in\N} \mathbb{Q}_n\) ,因此由推论2知\(\mathbb{Q}\) 是可数集。
+
+\end{sourceexample}
+
+
+
+\begin{mycor*}{3}
+
+岩$X_1,X_2,\ldots,X_n$是可数集, 则乘积$X_1 \times X_2 \times \dots \times X_n$也是可数集。
+
+\end{mycor*}
+
+\begin{proof}
+	不妨设每一个 \(X_k \neq \emptyset\)，否则 \(X_1 \times X_2 \times \cdots \times X_n = \emptyset\)，它显然是可数集。
+	
+	首先，由分解式 \(n = 2^{k-1}(2m-1)\) 及映射 \(h: \mathbb{N} \to \mathbb{N} \times \mathbb{N}\)，
+	\[
+	h(n) = (k, m) \quad (n \in \mathbb{N}),
+	\]
+	知 \(h\) 是一一映射，因此 \(\mathbb{N} \times \mathbb{N}\) 是可数集。
+	
+	设 \(A, B\) 是两个可数集，于是存在满射
+	\[
+	f_1: \mathbb{N} \to A, \quad f_2: \mathbb{N} \to B.
+	\]
+	定义映射 \(g: \mathbb{N} \times \mathbb{N} \to A \times B\) 为
+	\[
+	g(n, m) = \bigl(f_1(n), f_2(m)\bigr),\quad (n, m) \in \mathbb{N} \times \mathbb{N},
+	\]
+	则 \(g\) 是满射。因此 \(g \circ h: \mathbb{N} \to A \times B\) 也是满射，从而 \(A \times B\) 是可数集。
+	
+	现在假设 \(X_1 \times X_2 \times \cdots \times X_{n-1}\) 是可数集，那么 \((X_1 \times X_2 \times \cdots \times X_{n-1}) \times X_n\) 是可数集，从而存在满射
+	\[
+	f: \mathbb{N} \to (X_1 \times X_2 \times \cdots \times X_{n-1}) \times X_n.
+	\]
+	另一方面，若定义映射
+	\[
+	g: (X_1 \times X_2 \times \cdots \times X_{n-1}) \times X_n \longrightarrow X_1 \times X_2 \times \cdots \times X_n,
+	\]
+	\[
+	g\bigl((x_1, x_2, \dots, x_{n-1}), x_n\bigr) = (x_1, x_2, \dots, x_{n-1}, x_n),
+	\]
+	则 \(g\) 是一一映射，从而 \(g \circ f: \mathbb{N} \to X_1 \times X_2 \times \dots \times X_n\) 是满射，因此 \(X_1 \times X_2 \times \dots \times X_n\) 是可数集。
+\end{proof}
+
+不可数集的一个简单例子就是下面的例子。
+
+\begin{sourceexample}{11}
+
+$\mathbb{N}$的幂集$2^{\N}$是不可数集。
+
+为此我们只需证明不存在任何满射 \(f: \mathbb{N} \to 2^{\mathbb{N}}\)。
+设 \(f: \mathbb{N} \to 2^{\mathbb{N}}\) 是任一映射。对每一个 \(n \in \mathbb{N}\)，\(f(n)\) 是 \(\mathbb{N}\) 的一个子集，于是必有 \(n \in f(n)\) 或 \(n \notin f(n)\)。
+
+构造 \(\mathbb{N}\) 的一个子集 \(E\) 如下：
+\[
+E = \{\, n \in \mathbb{N} \mid n \notin f(n) \,\}.
+\]
+显然 \(E \in 2^{\mathbb{N}}\)。
+
+下面证明 \(E \notin f(\mathbb{N})\)。用反证法，假设存在 \(n_0 \in \mathbb{N}\)，使得 \(f(n_0) = E\)。那么由 \(E\) 的定义知
+\[
+n_0 \in E \iff n_0 \notin f(n_0) = E,
+\]
+这显然是矛盾的。因此 \(f\) 不是满射，故由\rthm{thm:countable-surjection-characterization}知 \(2^{\mathbb{N}}\) 是不可数集。
+
+
+\end{sourceexample}
+
+
+
+\subsection{习 题}
+
+
+\begin{exercise}
+  \item 指出下列关系中哪些是函数关系：
+  \begin{enumerate}[label=\arabic*)]
+    \item \(f_1=\{(x,y)\mid x\in\mathbb{R},\ y\in\mathbb{N}\}\)；
+    \item \(f_2=\{(x,y)\mid 0\le x\le 1,\ 0\le y\le 1\}\)；
+    \item \(f_3=\left\{(x,y)\mid x\in\mathbb{R}\setminus\{0\},\ y=\dfrac{1}{x^2}\right\}\)；
+    \item \(f_4=\{(x,y)\mid x\in\mathbb{R},\ y=|x|\}\)。
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  \item 设
+  \[
+  f=\{(x,x^2-1)\mid x\in\mathbb{R}\},\qquad
+  g=\{(y,\sqrt{y})\mid y\in\mathbb{R}^{+}\}.
+  \]
+  分别写出 \(\operatorname{Dom}(g\circ f)\)、\(\operatorname{Dom}(f\circ g)\)、\(g\circ f\) 与 \(f\circ g\)。
+\end{exercise}
+
+\begin{exercise}
+  \item 设映射 \(f_1,f_2,f_3\) 定义如下：
+  \begin{align*}
+    f_1&=\{(x,y)\mid x\in\mathbb{R},\ y=x+1\},\\
+    f_2&=\{(x,y)\mid x\in\mathbb{R}^{+},\ y=\sqrt{x}\},\\
+    f_3&=\{(x,y)\mid x\in\mathbb{R},\ y=\sqrt[3]{x}\}.
+  \end{align*}
+  试确定下列各复合映射，并写出各自的定义域：
+  \[
+  f_2\circ f_1,\quad f_1\circ f_2,\quad
+  f_1\circ f_3,\quad f_3\circ f_1,\quad
+  f_2\circ f_3,\quad f_3\circ f_2.
+  \]
+\end{exercise}
+
+\begin{exercise}
+  \item 设 \(f:X\to Y\) 是任一映射。
+  \begin{enumerate}[label=\arabic*)]
+    \item 设 \(A,B\subset X\)，证明
+    \begin{align*}
+      f(A\cup B)&=f(A)\cup f(B),\\
+      f(A\cap B)&\subset f(A)\cap f(B),\\
+      f(A-B)&\supset f(A)-f(B).
+    \end{align*}
+    若 \(f\) 为单射，$f(A\cup B)=f(A)\cup f(B), f(A-B) = f(A)-f(B)$。
+    \item 设 \(C,D\subset Y\)，证明
+    \begin{align*}
+      f^{-1}(C\cup D)&=f^{-1}(C)\cup f^{-1}(D),\\
+      f^{-1}(C\cap D)&=f^{-1}(C)\cap f^{-1}(D),\\
+      f^{-1}(C-D)&=f^{-1}(C)-f^{-1}(D).
+    \end{align*}
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  \item 设 \(f:X\to Y\) 是任一映射，\(A\subset X\)，\(B\subset Y\)。证明：
+  \begin{enumerate}[label=\arabic*)]
+    \item \(f(A)=\varnothing\iff A=\varnothing\)；
+    \item \(f^{-1}(B)=\varnothing\iff B\cap f(X)=\varnothing\)；若 \(f\) 是满射，则
+    \(f^{-1}(B)=\varnothing\iff B=\varnothing\)；
+    \item \((f|_A)^{-1}(B)=A\cap f^{-1}(B)\)；
+    \item \(A\subset f^{-1}(f(A))\)，\(f(f^{-1}(B))\subset B\)；
+    \item \(f\) 是单射，当且仅当对每一个 \(A\subset X\)，都有 \(f^{-1}(f(A))=A\)；
+    \item \(f\) 是满射，当且仅当对每一个 \(B\subset Y\)，都有 \(f(f^{-1}(B))=B\)；
+    \item \(f\) 是一一映射，当且仅当对每一个 \(A\subset X\)、\(B\subset Y\)，都有
+    \[
+    f^{-1}(f(A))=A,\qquad f(f^{-1}(B))=B.
+    \]
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  \item 证明第 3 题中的映射 \(f_1,f_2,f_3\) 都是可逆的，并写出它们的逆映射 \(f_i^{-1}\)（\(i=1,2,3\)）。证明
+  \[
+  \operatorname{Dom}(f_i)=\operatorname{Ran}(f_i^{-1}),\qquad
+  \operatorname{Ran}(f_i)=\operatorname{Dom}(f_i^{-1})
+  \quad(i=1,2,3).
+  \]
+\end{exercise}
+
+\begin{exercise}
+  \item 设 \(f\) 是任一映射。证明：如果存在映射 \(g\) 与 \(h\)，使得
+  \[
+  g\circ f=\operatorname{id}_{\operatorname{Dom}(f)},\qquad
+  f\circ h=\operatorname{id}_{\operatorname{Ran}(f)},
+  \]
+  则 \(f\) 可逆，并且 \(f^{-1}=h=g\)。
+\end{exercise}
+
+\begin{exercise}
+  \item 证明：若 \(f\) 与 \(g\) 是一一映射，则 \(g\circ f\) 也是一一映射，并且
+  \[
+  (g\circ f)^{-1}=f^{-1}\circ g^{-1}.
+  \]
+\end{exercise}
+
+\begin{exercise}
+  \item 设 \(f,g:X\to\mathbb{R}\) 是任意两个映射，定义映射 \(f+g,fg:X\to\mathbb{R}\) 为
+  \[
+  (f+g)(x)=f(x)+g(x),\qquad (fg)(x)=f(x)g(x),\qquad x\in X.
+  \]
+  设 \(E\subset X\)，映射 \(\chi_E:X\to\{0,1\}\) 定义为
+  \[
+  \chi_E(x)=
+  \begin{cases}
+    1,&x\in E,\\
+    0,&x\notin E,
+  \end{cases}
+  \]
+  称为 \(E\) 的特征函数。证明：对任意的 \(A,B\subset X\)，
+  \begin{enumerate}[label=\arabic*)]
+    \item \(\chi_{A\cap B}=\chi_A\chi_B\)；
+    \item \(\chi_{A\cup B}=\chi_A+\chi_B-\chi_{A\cap B}\)；
+    \item \(\chi_{A-B}=\chi_A(1-\chi_B)\)。
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  \item 设 \(f:X\to X\) 是任一映射，\(A\subset X\) 是任一非空集合。如果 \(f(A)=A\)，则称 \(A\) 关于 \(f\) 不变。构造 \(X\) 的子集
+  \[
+  B=\left\{x\in X\ \middle|\
+  \begin{array}{l}
+  \text{存在 }X\text{ 中的一列元素 }x_1,x_2,\ldots,\\
+  \text{使得 }x=x_1,\ x_n=f(x_{n+1})\ (n\in\mathbb{N})
+  \end{array}
+  \right\}.
+  \]
+  证明：\(B\) 是 \(X\) 中关于 \(f\) 不变的最大子集。
+\end{exercise}
+
+\begin{exercise}
+  \item 设 \(\mathscr{E}\) 是 \(\mathbb{N}\) 的所有有限子集组成的集合，定义映射 \(f:\mathscr{E}\to\mathbb{N}\) 为
+  \[
+  f(A)=
+  \begin{cases}
+    0,&A=\varnothing,\\
+    \displaystyle\sum_{x\in A}x,&A\ne\varnothing.
+  \end{cases}
+  \]
+  \begin{enumerate}[label=\arabic*)]
+    \item 令 \(A_n=\{1,2,\ldots,n\}\)，计算 \(f(A_n)\)；
+    \item 证明 \(f\) 不是单射；
+    \item 证明 \(f\) 是满射；
+    \item 计算集合 \(f^{-1}(4)\) 的元素个数。
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  \item 证明：任一可数集的所有有限子集所组成的集合是可数集。
+\end{exercise}
+
+\begin{exercise}
+  \item 设 \(A,B\) 是任意两个集合。如果存在一一映射 \(f:A\to B\)，则称 \(A\) 与 \(B\) 等势，记作 \(A\sim B\)。证明：
+  \begin{enumerate}[label=\arabic*)]
+    \item 对任一非空集合 \(X\)，\(X\) 与 \(2^X\) 不等势；
+    \item 区间 \((0,1)\)、\((0,1]\)、\([0,1)\)、\([0,1]\)、\((0,+\infty)\)、\([0,+\infty)\) 互相等势(这些集合的定义可参见第2章$\S$5)；
+    \item 若 \(S^2\) 表示 \(\mathbb{R}^3\) 中的球面，则对每一个 \(a\in S^2\)，\(S^2\setminus\{a\}\) 与 \(\mathbb{R}^2\) 等势。
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  \item 设 \((X,\preceq)\) 是任一全序集，\(f:X\to X\) 是满足
+  \[
+  x\prec y\Longrightarrow f(x)\prec f(y)
+  \]
+  的映射。证明：
+  \begin{enumerate}[label=\arabic*)]
+    \item \(f\) 是单射；
+    \item 若 \(f(x)\prec f(y)\)，则 \(x\prec y\)。
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  \item 设 \(X,Y\) 是任意两个集合，用 \(\mathscr{E}\) 表示所有定义域包含于 \(X\)、值域包含于 \(Y\) 的映射所组成的集合。在 \(\mathscr{E}\) 上定义关系 \(\mathscr{R}\) 如下：
+  \[
+  f,g\in\mathscr{E},\qquad
+  f\mathscr{R}g\iff
+  \operatorname{Dom}(f)\subset\operatorname{Dom}(g)
+  \text{ 且 }g\text{ 是 }f\text{ 的扩张}.
+  \]
+  试问：
+  \begin{enumerate}[label=\arabic*)]
+    \item \(\mathscr{R}\) 是 \(\mathscr{E}\) 上的偏序关系吗？
+    \item \(\mathscr{R}\) 是 \(\mathscr{E}\) 上的序关系吗？
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  \item 设 \(X_1,X_2\) 是两个集合，\(\mathscr{R}_i\) 是 \(X_i\) 上的等价关系。定义投影映射
+  \[
+  p_i:X_i\to X_i/\mathscr{R}_i,\qquad
+  p_i(x)=[x]_{\mathscr{R}_i},\qquad i=1,2.
+  \]
+  设映射 \(f:X_1\to X_2\) 满足
+  \[
+  x',x''\in X_1,\quad x'\mathscr{R}_1x''
+  \Longrightarrow f(x')\mathscr{R}_2f(x'').
+  \]
+  证明：
+  \begin{enumerate}[label=\arabic*)]
+    \item 存在映射 \(F:X_1/\mathscr{R}_1\to X_2/\mathscr{R}_2\)，使下图可交换：
+    \[
+    \begin{array}{ccc}
+      X_1 & \xrightarrow{\ f\ } & X_2\\
+      {\scriptstyle p_1}\downarrow & & \downarrow{\scriptstyle p_2}\\
+      X_1/\mathscr{R}_1 & \xrightarrow{\ F\ } & X_2/\mathscr{R}_2
+    \end{array}
+    \]
+    即 \(F\circ p_1=p_2\circ f\)；
+    \item 如果 \(f\) 是满射，则 \(F\) 也是满射。
+  \end{enumerate}
+\end{exercise}

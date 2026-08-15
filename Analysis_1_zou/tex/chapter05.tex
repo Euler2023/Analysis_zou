@@ -1,0 +1,3817 @@
+\chapter{一元实值函数的积分}
+
+这一章我们介绍一元实值函数的Riemann 积分理论。利用积分函数我们严格定义了对数函数、指数函数及幂函数等基本初等函数.
+
+\section{阶梯函数的积分}
+
+\subsection{区间的分割}
+	\label{sec:5-1-1}
+
+\begin{mydef*}{}
+
+	设 \([a,b]\subset\R\) 是任一有限闭区间，\([a,b]\) 的一个分割就是一组实数 \(\sigma=(a_0,a_1,\cdots,a_n)\) 使得
+	\[
+	a=a_0<a_1<\cdots<a_{n-1}<a_n=b,
+	\]
+	\(a_i\ (i=0,1,2,\cdots,n)\) 称为 \(\sigma\) 的分点。
+	\[
+	\delta(\sigma)=\max_{0\le i\le n-1}(a_{i+1}-a_i)
+	\]
+	称为分割 \(\sigma\) 的步长。
+
+\end{mydef*}
+
+\begin{sourceexample}{1}
+
+	\(\forall\,n\in\N\)，
+	\[
+	\sigma_n=\left(a,a+\frac{b-a}{n},a+2\frac{b-a}{n},\cdots,a+(n-1)\frac{b-a}{n},b\right)
+	\]
+	是 \([a,b]\) 的一个等步长分割，且 \(\delta(\sigma_n)=\dfrac{b-a}{n}\)。
+
+\end{sourceexample}
+
+\begin{sourceexample}{2}
+
+	设 \(\sigma\) 与 \(\sigma'\) 是 \([a,b]\) 的任意两个分割。合并 \(\sigma\) 与 \(\sigma'\) 的分点后所得到的 \([a,b]\) 的一个分割记为 \(\sigma\vee\sigma'\)。
+
+\end{sourceexample}
+
+显然 \(\sigma\vee\sigma'\) 可以通过在 \(\sigma\ (\sigma')\) 上逐步添加 \(\sigma'\ (\sigma)\) 的一个分点的方法来得到。
+
+设
+\[
+\sigma=(a_0,a_1,\cdots,a_n),\quad \sigma'=(a_0',a_1',\cdots,a_m'),
+\]
+\[
+\sigma\vee\sigma'=(b_0,b_1,\cdots,b_k),\quad \text{则}
+\]
+\[
+\forall\,i=0,1,\cdots,k-1,\quad \exists\,j\in\{0,1,\cdots,n-1\},\quad s\in\{0,1,\cdots,m-1\}
+\]
+使得
+\[
+[b_i,b_{i+1}]\subset[a_j,a_{j+1}],\qquad [b_i,b_{i+1}]\subset[a_s',a_{s+1}'].
+\]
+
+\subsection{阶梯函数的积分}
+	\label{sec:5-1-2}
+
+\begin{mydef*}{}
+
+	设 \(f:[a,b]\to\R\) 是一函数。如果存在 \([a,b]\) 的一个分割 \(\sigma=(a_0,a_1,\cdots,a_n)\) 及一个向量 \(\xi=[c_0,c_1,\cdots,c_{n-1}]\in\R^n\) 使得
+	\[
+	f(x)=c_i,\quad \forall\,x\in\ ]a_i,a_{i+1}[\ \ (i=0,1,\cdots,n-1),
+	\]
+	则我们称 \(f\) 是阶梯函数。
+
+\end{mydef*}
+
+\([\sigma,\xi]\triangleq[a_0,a_1,\cdots,a_n;\ c_0,c_1,\cdots,c_{n-1}]\) 称为适合于 \(f\) 的二元组。
+
+\begin{sourceexample}{3}
+
+	\(\forall\,a,b,c\in\R,\ 0<a<b\)，常值函数 \(x\longmapsto c,\ x\in[a,b]\) 是阶梯函数；符号函数 \(x\longmapsto\operatorname{sgn}(x),\ x\in[-a,b]\) 是阶梯函数；函数 \(x\longmapsto[x],\ x\in[1,3.5]\) 也是阶梯函数。
+
+\end{sourceexample}
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}
+\begin{axis}[
+  width=4cm,height=3.5cm,
+  axis lines=middle,
+  xlabel={$x$},ylabel={$y$},
+  xmin=-1.5,xmax=1.5,
+  ymin=-1.5,ymax=1.5,
+  xtick={-1,0,1},
+  xticklabels={$-a$,$O$,$b$},
+  ytick=\empty,
+  enlargelimits=false,
+  clip=false,
+]
+\addplot[domain=-1.5:0,samples=2,thick] {-1};
+\addplot[domain=0:1.5,samples=2,thick] {1};
+\addplot[only marks,mark=*,mark options={fill=white,draw=black,thick}] coordinates {(-1.5,-1) (0,1)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0,-1) (1.5,1)};
+\end{axis}
+\end{tikzpicture}
+\hfill
+\begin{tikzpicture}
+\begin{axis}[
+  width=4cm,height=3.5cm,
+  axis lines=middle,
+  xlabel={$x$},ylabel={$y$},
+  xmin=-0.3,xmax=4,
+  ymin=-0.5,ymax=3.5,
+  xtick={0,1,2,3,3.5},
+  xticklabels={$O$,$1$,$2$,$3$,$3.5$},
+  ytick=\empty,
+  enlargelimits=false,
+  clip=false,
+]
+\addplot[domain=-0.3:1,samples=2,thick] {0};
+\addplot[domain=1:2,samples=2,thick] {1};
+\addplot[domain=2:3,samples=2,thick] {2};
+\addplot[domain=3:4,samples=2,thick] {3};
+\addplot[only marks,mark=*,mark options={fill=white,draw=black,thick}] coordinates {(1,0) (2,1) (3,2)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(1,1) (2,2) (3,3)};
+\end{axis}
+\end{tikzpicture}
+\hfill
+\begin{tikzpicture}
+\begin{axis}[
+  width=4cm,height=3.5cm,
+  axis lines=middle,
+  xlabel={$x$},ylabel={$y$},
+  xmin=-0.3,xmax=3,
+  ymin=-0.5,ymax=2,
+  xtick={0,1,2.5},
+  xticklabels={$O$,$a$,$b$},
+  ytick={1},
+  yticklabels={$c$},
+  enlargelimits=false,
+  clip=false,
+]
+\addplot[domain=1:2.5,samples=2,thick] {1};
+\addplot[only marks,mark=*,mark options={fill=white,draw=black,thick}] coordinates {(1,1)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(1,1.3) (2.5,1)};
+\end{axis}
+\end{tikzpicture}
+	\caption{}
+	\label{fig:5-1}
+\end{figure}
+
+\textbf{附注}\quad 适合于阶梯函数 \(f\) 的二元组 \([\sigma,\xi]\) 不是唯一的。例如若 \([\sigma,\xi]=[a_0,a_1,\cdots,a_n;\ c_0,c_1,\cdots,c_{n-1}]\) 适合于阶梯函数 \(f\)，则在 \(]a_i,a_{i+1}[\) 上任意加入一个分点 \(\bar x\) 后，我们得到 \([a,b]\) 的另一个分割 \(\sigma'=(a_0,a_1,\cdots,a_i,\bar x,a_{i+1},\cdots,a_n)\) 及另一个向量 \(\xi'=[c_0,c_1,\cdots,c_i,c_i,c_{i+1},\cdots,c_{n-1}]\) 满足
+\[
+f(x)=c_k,\quad \forall\,x\in\ ]a_k,a_{k+1}[,\ k=0,1,\cdots,i-1,i+1,\cdots,n-1,
+\]
+\[
+f(x)=c_i,\quad \forall\,x\in\ ]a_i,\bar x[\ \cup\ ]\bar x,a_{i+1}[.
+\]
+因此 \([\sigma',\xi']\) 也适合于 \(f\)。
+
+另一方面，如果分割 \(\sigma=(a_0,a_1,\cdots,a_i,\cdots,a_n)\) 的分点 \(a_i\) 满足 \(c_{i-1}=c_i=f(a_i)\)，则删去 \(\sigma\) 的分点 \(a_i\) 后得到 \([a,b]\) 的另一分割 \(\sigma''=(a_0,a_1,\cdots,a_{i-1},a_{i+1},\cdots,a_n)\) 及另一向量 \(\xi''=[c_0,c_1,\cdots,c_{i-1},c_{i+1},\cdots,c_{n-1}]\) 满足
+\[
+f(x)=c_k,\quad \forall\,x\in\ ]a_k,a_{k+1}[,\ k=0,1,\cdots,i-2,i+1,\cdots,n-1,
+\]
+\[
+f(x)=c_i,\quad \forall\,x\in\ ]a_{i-1},a_{i+1}[.
+\]
+因此 \([\sigma'',\xi'']\) 也适合于 \(f\)。
+
+\begin{mylemma*}{}
+
+	设 \(f:[a,b]\to\R\) 是任一阶梯函数，\([\sigma,\xi]\) 适合于 \(f\)，\(\sigma'\) 是 \([a,b]\) 的任一分割，则存在向量 \(\eta\) 使得 \([\sigma\vee\sigma',\eta]\) 适合于 \(f\)。
+
+\end{mylemma*}
+
+\begin{proof}
+
+	设 \([\sigma,\xi]=[a_0,a_1,\cdots,a_n;\ c_0,c_1,\cdots,c_{n-1}]\)。由于 \(\sigma\vee\sigma'\) 也是 \([a,b]\) 的一个分割，故若令
+	\[
+	\sigma\vee\sigma'=(b_0,b_1,\cdots,b_m),
+	\]
+	则 \(\forall\,i=0,1,\cdots,m-1\)，存在 \(j(i)\in\{0,1,\cdots,n-1\}\) 使得 \(]b_i,b_{i+1}[\subset\ ]a_{j(i)},a_{j(i)+1}[\)，于是
+	\[
+	f(x)=c_{j(i)},\quad \forall\,x\in\ ]b_i,b_{i+1}[,\quad \forall\,i=0,1,\cdots,m-1.
+	\]
+	令 \(d_i=c_{j(i)}\ (i=0,1,\cdots,m-1)\) 及 \(\eta=[d_0,d_1,\cdots,d_{m-1}]\)，则 \([\sigma\vee\sigma',\eta]\) 适合于 \(f\)。
+
+\end{proof}
+
+\begin{myprop*}{}
+
+	设 \(f:[a,b]\to\R\) 是任一阶梯函数，\([\sigma,\xi]=[a_0,a_1,\cdots,a_n;\ c_0,c_1,\cdots,c_{n-1}]\) 与 \([\sigma',\xi']=[a_0',a_1',\cdots,a_m';\ c_0',c_1',\cdots,c_{m-1}']\) 都适合于 \(f\)，则
+	\[
+	\sum_{i=0}^{n-1}c_i(a_{i+1}-a_i)=\sum_{j=0}^{m-1}c_j'(a_{j+1}'-a_j').
+	\]
+
+\end{myprop*}
+
+\begin{proof}
+
+	我们记
+	\[
+	I[\sigma,\xi]=\sum_{i=0}^{n-1}c_i(a_{i+1}-a_i),
+	\]
+	\[
+	I[\sigma',\xi']=\sum_{j=0}^{m-1}c_j'(a_{j+1}'-a_j').
+	\]
+	根据引理，存在一个向量 \(\eta\) 使得 \([\sigma\vee\sigma',\eta]\) 适合于 \(f\)。只需要证明 \(I[\sigma,\xi]=I[\sigma\vee\sigma',\eta]=I[\sigma',\xi']\)。
+
+	我们首先假设 \(\sigma\vee\sigma'\) 比 \(\sigma\) 多一个分点 \(\bar x\)。令 \(\bar x\in\ ]a_i,a_{i+1}[\)。那末
+	\[
+	\sigma\vee\sigma'=(a_0,a_1,\cdots,a_i,\bar x,a_{i+1},\cdots,a_n),
+	\]
+	\[
+	\eta=[c_0,c_1,\cdots,c_i,c_i,c_{i+1},\cdots,c_{n-1}],
+	\]
+	于是
+	\[
+	\begin{aligned}
+	I[\sigma\vee\sigma',\eta]&=c_0(a_1-a_0)+c_1(a_2-a_1)+\cdots+c_i(\bar x-a_i)\\
+	&\qquad+c_i(a_{i+1}-\bar x)+\cdots+c_{n-1}(a_n-a_{n-1})\\
+	&=c_0(a_1-a_0)+c_1(a_2-a_1)+\cdots+c_i(a_{i+1}-a_i)\\
+	&\qquad+\cdots+c_{n-1}(a_n-a_{n-1})\\
+	&=I[\sigma,\xi].
+	\end{aligned}
+	\]
+	对一般的 \(\sigma\) 与 \(\sigma'\)，由于 \(\sigma\vee\sigma'\) 可以通过在 \(\sigma\) 上逐步添加 \(\sigma'\) 的分点的方法来得到，故由归纳法我们有 \(I[\sigma\vee\sigma',\eta]=I[\sigma,\xi]\)。
+
+	同理，存在向量 \(\eta'\) 使得 \([\sigma'\vee\sigma,\eta']\) 也适合于 \(f\)，并且 \(I[\sigma'\vee\sigma,\eta']=I[\sigma',\xi']\)。
+
+	由于 \(\sigma\vee\sigma'=\sigma'\vee\sigma\)，故 \(\eta=\eta'\)。因此 \(I[\sigma\vee\sigma',\eta]=I[\sigma'\vee\sigma,\eta']\)，从而 \(I[\sigma,\xi]=I[\sigma\vee\sigma',\eta]=I[\sigma',\xi']\)。
+
+\end{proof}
+
+上述命题表明，\(I[\sigma,\xi]\) 是一个只与 \(f\) 有关而与适合于 \(f\) 的二元组 \([\sigma,\xi]\) 的选择无关的定数。因此我们可以引入下述定义。
+
+\begin{mydef*}{}
+
+	设 \(f:[a,b]\to\R\) 是任一阶梯函数，\([\sigma,\xi]=[a_0,a_1,\cdots,a_n;\ c_0,c_1,\cdots,c_{n-1}]\) 适合于 \(f\)。则实数
+	\[
+	I(f)=c_0(a_1-a_0)+c_1(a_2-a_1)+\cdots+c_{n-1}(a_n-a_{n-1})
+	\]
+	称为 \(f\) 在 \([a,b]\) 上的积分，记为 \(\displaystyle\int_a^b f(x)dx\)。于是
+	\[
+	\int_a^b f(x)dx=\sum_{i=0}^{n-1}c_i(a_{i+1}-a_i).
+	\]
+
+\end{mydef*}
+
+\begin{sourceexample}{4}
+
+	\(\forall\,c\in\R\)，常值函数 \(x\longmapsto c,\ x\in[a,b]\ (a<b)\) 的积分
+	\[
+	\int_a^b c\,dx=c\,(b-a).
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{5}
+
+	符号函数 \(x\longmapsto\operatorname{sgn}(x),\ x\in[a,b]\ (a<b)\) 的积分
+	\[
+	\int_a^b\operatorname{sgn}(x)dx=
+	\begin{cases}
+	b-a, & \text{若}\ 0\le a<b, \\
+	a+b, & \text{若}\ a<0<b, \\
+	a-b, & \text{若}\ a<b\le0.
+	\end{cases}
+	\]
+
+\end{sourceexample}
+
+从阶梯函数积分的定义可知，积分值 \(\displaystyle\int_a^b f(x)dx\) 与 \(f\) 在分点 \(a_i\) 的值 \(f(a_i)\ (i=0,1,\cdots,n)\) 无关。因此改变阶梯函数 \(f\) 在分点 \(a_i\) 的值所得新的阶梯函数 \(g\) 与 \(f\) 在 \([a,b]\) 上有相同的积分值。
+
+从几何上看，阶梯函数 \(f\) 的积分 \(\displaystyle\int_a^b f(x)dx\) 表示在平面直角坐标系 \(\{O;x,y\}\) 的 \(x\) 轴上以 \([a_i,a_{i+1}]\) 为底边，以 \(c_i\) 为“高”的长方形“面积”的代数和。
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}
+  % 坐标轴
+  \draw[->] (-0.5,0) -- (7,0) node[right] {$x$};
+  \draw[->] (0,-2.5) -- (0,3.5) node[above] {$y$};
+  \node[font=\footnotesize] at (-0.2,-0.2) {$O$};
+
+  % 刻度与标签
+  \foreach \x/\xl in {1/$a_1$,2/$a_2$,3/$a_3$,4/$a_4$,5/$a_5=b$,6.5/} {
+    \draw (\x,0.08) -- (\x,-0.08);
+  }
+  \node[font=\footnotesize] at (0.5,-0.25) {$a=a_0$};
+  \node[font=\footnotesize] at (1,-0.25) {$a_1$};
+  \node[font=\footnotesize] at (2,-0.25) {$a_2$};
+  \node[font=\footnotesize] at (3,-0.25) {$a_3$};
+  \node[font=\footnotesize] at (4,-0.25) {$a_4$};
+  \node[font=\footnotesize] at (5,-0.25) {$a_5=b$};
+
+  % y 轴刻度与标签（c 值）
+  \foreach \y/\yl in {3/$c_1$,2/$c_2$,1/$c_4$,-1/$c_0$,-2/$c_3$} {
+    \draw (0.08,\y) -- (-0.08,\y);
+    \node[font=\footnotesize] at (-0.35,\y) {\yl};
+  }
+
+  % 虚线水平线
+  \draw[dashed] (0,3) -- (2,3);
+  \draw[dashed] (0,2) -- (3,2);
+  \draw[dashed] (0,1) -- (5.5,1);
+  \draw[dashed] (0,-1) -- (1,-1);
+  \draw[dashed] (0,-2) -- (4,-2);
+
+  % 矩形条填充（灰色）
+  % [a0,a1] 高度 c0（负值）
+  \fill[gray!25] (0.5,-1) rectangle (1,0);
+  % [a1,a2] 高度 c1
+  \fill[gray!25] (1,0) rectangle (2,3);
+  % [a2,a3] 高度 c2
+  \fill[gray!25] (2,0) rectangle (3,2);
+  % [a3,a4] 高度 c3（负值）
+  \fill[gray!25] (3,-2) rectangle (4,0);
+  % [a4,a5] 高度 c4
+  \fill[gray!25] (4,0) rectangle (5,1);
+
+  % 矩形边框
+  \draw (0.5,-1) rectangle (1,0);
+  \draw (1,0) rectangle (2,3);
+  \draw (2,0) rectangle (3,2);
+  \draw (3,-2) rectangle (4,0);
+  \draw (4,0) rectangle (5,1);
+\end{tikzpicture}
+	\caption{}
+	\label{fig:5-2}
+\end{figure}
+
+\subsection{阶梯函数积分的性质}
+	\label{sec:5-1-3}
+
+我们用 \(\mathscr{E}[a,b]\) 表示所有定义在 \([a,b]\) 上的阶梯函数的集合。
+
+\begin{mythm}{}{step-function-integral-properties}
+
+	设 \(f,g\in\mathscr{E}[a,b]\)，\(\alpha,\beta\in\R\)，则
+
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\alpha f+\beta g\in\mathscr{E}[a,b]\)，并且
+		\[
+		\int_a^b[\alpha f+\beta g](x)dx=\alpha\int_a^b f(x)dx+\beta\int_a^b g(x)dx.
+		\]
+
+		\item 若 \(f\ge0\)，则 \(\displaystyle\int_a^b f(x)dx\ge0\)。
+
+		\item 若 \(f\ge g\)，则 \(\displaystyle\int_a^b f(x)dx\ge\int_a^b g(x)dx\)。
+
+		\item \(|f|\in\mathscr{E}[a,b]\)，并且 \(\displaystyle\left|\int_a^b f(x)dx\right|\le\int_a^b|f(x)|dx\)。
+	\end{enumerate}
+
+\end{mythm}
+
+\begin{proof}
+
+	1) 设 \([\sigma,\xi]\) 与 \([\sigma',\xi']\) 分别适合于 \(f\) 与 \(g\)。令 \(\sigma\vee\sigma'=(a_0,a_1,\cdots,a_n)\)。由引理知存在两个向量
+	\[
+	\eta=[c_0,c_1,\cdots,c_{n-1}],\quad \zeta=[d_0,d_1,\cdots,d_{n-1}],
+	\]
+	使得 \([\sigma\vee\sigma',\eta]\) 与 \([\sigma\vee\sigma',\zeta]\) 分别适合于 \(f\) 与 \(g\)。
+
+	若令
+	\[
+	\alpha\eta+\beta\zeta=[\alpha c_0+\beta d_0,\ \alpha c_1+\beta d_1,\ \cdots,\ \alpha c_{n-1}+\beta d_{n-1}],
+	\]
+	则 \([\sigma\vee\sigma',\alpha\eta+\beta\zeta]\) 适合于 \(\alpha f+\beta g\)，因此 \(\alpha f+\beta g\in\mathscr{E}[a,b]\)。由阶梯函数积分定义，我们有
+	\[
+	\begin{aligned}
+	\int_a^b[\alpha f+\beta g](x)dx
+	&=\sum_{i=0}^{n-1}(\alpha c_i+\beta d_i)(a_{i+1}-a_i)\\
+	&=\alpha\sum_{i=0}^{n-1}c_i(a_{i+1}-a_i)+\beta\sum_{i=0}^{n-1}d_i(a_{i+1}-a_i)\\
+	&=\alpha\int_a^b f(x)dx+\beta\int_a^b g(x)dx.
+	\end{aligned}
+	\]
+
+	2) 若 \(f\ge0\)，则 \(c_i\ge0\ (i=0,1,\cdots,n-1)\)，因此
+	\[
+	\int_a^b f(x)dx=\sum_{i=0}^{n-1}c_i(a_{i+1}-a_i)\ge0.
+	\]
+
+	3) 若 \(f\ge g\)，则 \(c_i\ge d_i\ (i=0,1,2,\cdots,n-1)\)，因此
+	\[
+	\begin{aligned}
+	\int_a^b f(x)dx
+	&=\sum_{i=0}^{n-1}c_i(a_{i+1}-a_i)\ge\sum_{i=0}^{n-1}d_i(a_{i+1}-a_i)\\
+	&=\int_a^b g(x)dx.
+	\end{aligned}
+	\]
+
+	4) 令
+	\[
+	|\eta|=[|c_0|,|c_1|,\cdots,|c_{n-1}|],
+	\]
+	则 \([\sigma\vee\sigma',|\eta|]\) 适合于 \(|f|\)，因此 \(|f|\in\mathscr{E}[a,b]\)，并且
+	\[
+	\left|\int_a^b f(x)dx\right|=\left|\sum_{i=0}^{n-1}c_i(a_{i+1}-a_i)\right|\le\sum_{i=0}^{n-1}|c_i|(a_{i+1}-a_i)=\int_a^b|f(x)|dx.
+	\]
+
+\end{proof}
+
+现在设 \(f:[a,b]\to\R\) 是任一阶梯函数。我们作下述约定：
+\[
+\int_a^a f(x)dx=0,\qquad \int_b^b f(x)dx=0.
+\]
+
+\begin{mythm}{}{step-integral-interval-additivity}
+
+	设 \(f\in\mathscr{E}[a,b]\)，则 \(\forall\,c\in[a,b]\)，
+	\[
+	f|_{[a,c]}\in\mathscr{E}[a,c],\qquad f|_{[c,b]}\in\mathscr{E}[c,b],
+	\]
+	并且
+	\[
+	\int_a^b f(x)dx=\int_a^c f|_{[a,c]}(x)dx+\int_c^b f|_{[c,b]}(x)dx.
+	\]
+
+\end{mythm}
+
+\begin{proof}
+
+	设 \([\sigma,\xi]=[a_0,a_1,\cdots,a_n;\ c_0,c_1,\cdots,c_{n-1}]\) 适合于 \(f\)。令 \(c\in[a_{i_0},a_{i_0+1}]\)。
+
+	不妨设 \(c\in\ ]a,b[\)，因为若 \(c=a\) 或 \(c=b\)，则根据上述约定，定理显然成立。
+
+	1) 若 \(c=a_{i_0}\)，则存在 \([a,c]\) 的一个分割 \(\sigma_1=(a_0,a_1,\cdots,a_{i_0})\) 及相应向量 \(\xi_1=[c_0,c_1,\cdots,c_{i_0-1}]\)、\([c,b]\) 的一个分割 \(\sigma_2=(a_{i_0},a_{i_0+1},\cdots,a_n)\) 及相应向量 \(\xi_2=[c_{i_0},c_{i_0+1},\cdots,c_{n-1}]\) 使得
+	\[
+	f|_{[a,c]}(x)=c_i,\quad \forall\,x\in\ ]a_i,a_{i+1}[,\quad i=0,1,\cdots,i_0-1,
+	\]
+	\[
+	f|_{[c,b]}(x)=c_i,\quad \forall\,x\in\ ]a_i,a_{i+1}[,\quad i=i_0,i_0+1,\cdots,n-1.
+	\]
+	因此 \([\sigma_1,\xi_1]\) 适合于 \(f|_{[a,c]}\)，\([\sigma_2,\xi_2]\) 适合于 \(f|_{[c,b]}\)。从而 \(f|_{[a,c]}\in\mathscr{E}[a,c]\)，\(f|_{[c,b]}\in\mathscr{E}[c,b]\)，并且由积分定义有
+	\[
+	\int_a^b f(x)dx=\sum_{i=0}^{n-1}c_i(a_{i+1}-a_i)
+	=\sum_{i=0}^{i_0-1}c_i(a_{i+1}-a_i)+\sum_{i=i_0}^{n-1}c_i(a_{i+1}-a_i)
+	\]
+	\[
+	=\int_a^c f|_{[a,c]}(x)dx+\int_c^b f|_{[c,b]}(x)dx.
+	\]
+
+	2) 若 \(c\in\ ]a_{i_0},a_{i_0+1}[\)，则存在 \([a,c]\) 的一个分割 \(\sigma_1=(a_0,a_1,\cdots,a_{i_0},c)\) 及相应向量 \(\xi_1=[c_0,c_1,\cdots,c_{i_0}]\)、\([c,b]\) 的一个分割 \(\sigma_2=(c,a_{i_0+1},\cdots,a_n)\) 及相应向量 \(\xi_2=[c_{i_0},c_{i_0+1},\cdots,c_{n-1}]\) 使得
+	\[
+	f|_{[a,c]}(x)=c_i,\quad \forall\,x\in\ ]a_i,a_{i+1}[,\quad i=0,1,\cdots,i_0-1,
+	\]
+	\[
+	f|_{[a,c]}(x)=c_{i_0},\quad \forall\,x\in\ ]a_{i_0},c[,
+	\]
+	\[
+	f|_{[c,b]}(x)=c_i,\quad \forall\,x\in\ ]a_i,a_{i+1}[,\quad i=i_0+1,i_0+2,\cdots,n-1,
+	\]
+	\[
+	f|_{[c,b]}(x)=c_{i_0},\quad \forall\,x\in\ ]c,a_{i_0+1}[.
+	\]
+	因此 \([\sigma_1,\xi_1]\) 适合于 \(f|_{[a,c]}\)，\([\sigma_2,\xi_2]\) 适合于 \(f|_{[c,b]}\)，从而 \(f|_{[a,c]}\in\mathscr{E}[a,c]\)，\(f|_{[c,b]}\in\mathscr{E}[c,b]\)，并且
+	\[
+	\int_a^b f(x)dx=\sum_{i=0}^{n-1}c_i(a_{i+1}-a_i)
+	=\sum_{i=0}^{i_0-1}c_i(a_{i+1}-a_i)+c_{i_0}(a_{i_0+1}-a_{i_0})+\sum_{i=i_0+1}^{n-1}c_i(a_{i+1}-a_i)
+	\]
+	\[
+	=\sum_{i=0}^{i_0-1}c_i(a_{i+1}-a_i)+c_{i_0}(c-a_{i_0})+c_{i_0}(a_{i_0+1}-c)+\sum_{i=i_0+1}^{n-1}c_i(a_{i+1}-a_i)
+	\]
+	\[
+	=\int_a^c f|_{[a,c]}(x)dx+\int_c^b f|_{[c,b]}(x)dx.
+	\]
+
+\end{proof}
+
+为简单起见，今后一律用 \(\displaystyle\int_a^c f(x)dx\) 表示 \(\displaystyle\int_a^c f|_{[a,c]}(x)dx\)，用 \(\displaystyle\int_c^b f(x)dx\) 表示 \(\displaystyle\int_c^b f|_{[c,b]}(x)dx\)。
+
+\subsection*{习 题}
+
+\begin{exercise}
+	\item 考虑如下定义的函数 \(f:[0,1]\to\R\)：
+	\[
+	f(x)=\frac1n,\quad \forall\,x\in\left]\frac1{n+1},\frac1n\right]\quad(\forall\,n\in\N).
+	\]
+	\(f\) 是 \([0,1]\) 上的阶梯函数吗？
+\end{exercise}
+
+\begin{exercise}
+	\item 只取有限个值的函数 \(f:[a,b]\to\R\) 一定是阶梯函数吗？考虑定义在 \([a,b]\) 上的 Dirichlet 函数
+	\[
+	x\longmapsto D(x)=\begin{cases} 1, & x\in[a,b]\cap\Q; \\ 0, & x\in[a,b]\cap\Q^c. \end{cases}
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f,g\in\mathscr{E}[a,b]\)。证明：\(fg\in\mathscr{E}[a,b]\)；若 \(g\neq0\)，则 \(\dfrac fg\in\mathscr{E}[a,b]\)。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f\in\mathscr{E}[a,b]\)，\(g:[c,d]\to\R\) 是任一函数，且 \(f([a,b])\subset[c,d]\)。证明：复合函数 \(g\circ f\in\mathscr{E}[a,b]\)。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f\in\mathscr{E}[a,b]\)，\(\forall\,M\in\R\)，我们定义 \(f^*:[a,b]\to\R\) 如下：
+	\[
+	f^*(x)=\begin{cases} f(x), & \text{若}\ f(x)\le M, \\ M, & \text{若}\ f(x)>M, \end{cases}\qquad\forall\,x\in[a,b].
+	\]
+	证明：\(f^*\in\mathscr{E}[a,b]\)，并且 \(f^*\le f\)。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f,g\in\mathscr{E}[a,b]\)，定义函数 \(m,M:[a,b]\to\R\) 如下：
+	\[
+	m(x)=\min(f(x),g(x)),\qquad M(x)=\max(f(x),g(x)),\qquad\forall\,x\in[a,b].
+	\]
+	证明：\(m,M\in\mathscr{E}[a,b]\)。特别地若令 \(f^+,f^-:[a,b]\to\R\) 为
+	\[
+	f^+(x)=\max(f(x),0),\qquad f^-(x)=\max(-f(x),0),\qquad\forall\,x\in[a,b],
+	\]
+	则 \(f^+,f^-\in\mathscr{E}[a,b]\)，并且 \(f^+\ge0,\ f^-\ge0,\ f=f^+-f^-\)。
+\end{exercise}
+
+\section{Riemann可积函数}
+
+现在我们来介绍一般一元实值函数的 Riemann 积分理论。
+
+\subsection{问题的提出}
+
+设 \(f:[a,b]\to\R\) 是任一有界正函数。我们用 \(G\) 表示平面上由直线 \(x=a\)，\(x=b\)，\(x\) 轴以及 \(f\) 的曲线 \(\Gamma\) 所围的“曲边梯形”。
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}[font=\footnotesize,>=stealth,scale=1]
+  % Axes
+  \draw[->] (-0.5,0) -- (8,0) node[right] {$x$};
+  \draw[->] (0,-0.5) -- (0,4.5) node[above] {$y$};
+  \node[below left] at (0,0) {$O$};
+
+  % Partition points
+  \def\a{1}
+  \def\b{7}
+  \def\xone{3}
+  \def\xtwo{5}
+  \def\xthree{6}
+
+  % Tick labels
+  \node[below] at (\a,0) {$a$};
+  \node[below] at (\b,0) {$b$};
+  \node[below] at (\xone,0) {$x_i$};
+
+  % Heights for lower (phi), middle (f), upper (psi)
+  % Interval 1: [a, x1] where x1 approx 2
+  \def\xfirst{2}
+  \def\hphiA{1.2}
+  \def\hfA{2.0}
+  \def\hpsiA{2.4}
+
+  % Interval 2: [x1, x2] where x2 approx 4
+  \def\xsecond{4}
+  \def\hphiB{2.2}
+  \def\hfB{2.8}
+  \def\hpsiB{3.3}
+
+  % Interval 3: [x2, x3] where x3 approx 5.5
+  \def\xthird{5.5}
+  \def\hphiC{1.6}
+  \def\hfC{2.1}
+  \def\hpsiC{2.5}
+
+  % Interval 4: [x3, b]
+  \def\hphiD{1.0}
+  \def\hfD{1.4}
+  \def\hpsiD{1.7}
+
+  % Fill lower rectangles A_i (white with border)
+  \draw[fill=white] (\a,0) rectangle (\xfirst,\hphiA);
+  \draw[fill=white] (\xfirst,0) rectangle (\xsecond,\hphiB);
+  \draw[fill=white] (\xsecond,0) rectangle (\xthird,\hphiC);
+  \draw[fill=white] (\xthird,0) rectangle (\b,\hphiD);
+
+  % Fill middle band (phi to f) with gray
+  \draw[fill=gray!25] (\a,\hphiA) rectangle (\xfirst,\hfA);
+  \draw[fill=gray!25] (\xfirst,\hphiB) rectangle (\xsecond,\hfB);
+  \draw[fill=gray!25] (\xsecond,\hphiC) rectangle (\xthird,\hfC);
+  \draw[fill=gray!25] (\xthird,\hphiD) rectangle (\b,\hfD);
+
+  % Fill upper band (f to psi) with pattern
+  \draw[pattern=north east lines] (\a,\hfA) rectangle (\xfirst,\hpsiA);
+  \draw[pattern=north east lines] (\xfirst,\hfB) rectangle (\xsecond,\hpsiB);
+  \draw[pattern=north east lines] (\xsecond,\hfC) rectangle (\xthird,\hpsiC);
+  \draw[pattern=north east lines] (\xthird,\hfD) rectangle (\b,\hpsiD);
+
+  % Curves
+  % phi (lower curve)
+  \draw[thick] plot[smooth,tension=0.7] coordinates {(\a,\hphiA) (1.6,1.5) (\xfirst,\hphiB) (3.3,2.5) (\xsecond,\hphiC) (5.2,1.8) (\xthird,\hphiD) (6.6,1.1) (\b,\hphiD)};
+  % f (middle curve)
+  \draw[thick] plot[smooth,tension=0.7] coordinates {(\a,\hfA) (1.6,1.9) (\xfirst,\hfB) (3.3,2.9) (\xsecond,\hfC) (5.2,2.2) (\xthird,\hfD) (6.6,1.5) (\b,\hfD)};
+  % psi (upper curve)
+  \draw[thick] plot[smooth,tension=0.7] coordinates {(\a,\hpsiA) (1.6,2.3) (\xfirst,\hpsiB) (3.3,3.2) (\xsecond,\hpsiC) (5.2,2.6) (\xthird,\hpsiD) (6.6,1.9) (\b,\hpsiD)};
+
+  % Labels on curves
+  \node[right] at (6.8,2.6) {$\psi$};
+  \node[right] at (6.8,1.5) {$f$};
+  \node[right] at (6.8,0.9) {$\varphi$};
+
+  % Labels A_1, A_i, A_m inside lower rectangles
+  \node at ({(\a+\xfirst)/2},{\hphiA/2}) {$A_1$};
+  \node at ({(\xfirst+\xsecond)/2},{\hphiB/2}) {$A_i$};
+  \node at ({(\xthird+\b)/2},{\hphiD/2}) {$A_m$};
+
+  % Labels B_1, B_i, B_m inside upper patterned bands
+  \node at ({(\a+\xfirst)/2},{(\hfA+\hpsiA)/2}) {$B_1$};
+  \node at ({(\xfirst+\xsecond)/2},{(\hfB+\hpsiB)/2}) {$B_i$};
+  \node at ({(\xthird+\b)/2},{(\hfD+\hpsiD)/2}) {$B_m$};
+\end{tikzpicture}
+	\caption{}
+	\label{fig:5-3}
+\end{figure}
+
+对于这样的一个曲边梯形 \(G\)，当 \(\Gamma\) 不是一条线段时，如何定义 \(G\) 是可求“面积”的？又如何定义 \(G\) 的“面积”？这是我们非常关心的一个实际问题。很自然的一个想法就是：用若干直线 \(x=x_i\ (a\le x_i\le b)\) 去分割 \(G\) 以得到若干个子曲边梯形 \(G\)，例如
+\[
+G=G_1\cup G_2\cup\cdots\cup G_m.
+\]
+对每一个 \(G_i\)，我们找两个长方形 \(A_i,B_i\) 使得 \(A_i\subset G_i\subset B_i\ (i=1,2,\cdots,m)\)。\(A_i\) 与 \(B_i\) 的面积，记为 \(|A_i|\) 与 \(|B_i|\)，是我们会计算的。
+
+现在我们可以想象的是：如果对任意的 \(\varepsilon>0\)，可适当的分割 \(G\) 为 \(G=\bigcup_{i=1}^m G_i\)，并且对每一个 \(G_i\) 可适当地选择 \(A_i,B_i\) 使得
+\[
+\bigcup_{i=1}^m A_i\subset G\subset\bigcup_{i=1}^m B_i,\qquad 0\le\sum_{i=1}^m|B_i|-\sum_{i=1}^m|A_i|<\varepsilon,
+\]
+那末曲边梯形 \(G\) 应该认为是可以求“面积”的，并且可以把 \(\sum_{i=1}^m|A_i|\) 或 \(\sum_{i=1}^m|B_i|\) 当作 \(G\) 的“面积”的近似值。
+
+由于 \(\sum_{i=1}^m|A_i|\) 与 \(\sum_{i=1}^m|B_i|\) 实际上就是某两个阶梯函数 \(\varphi:[a,b]\to\R\) 与 \(\psi:[a,b]\to\R\) 的积分值，即 \(\int_a^b\varphi(x)dx=\sum_{i=1}^m|A_i|\)，\(\int_a^b\psi(x)dx=\sum_{i=1}^m|B_i|\)，故上面我们所说的 \(G\) 是可求面积的，就等价于：
+\[
+\forall\,\varepsilon>0,\quad\exists\,\varphi,\psi\in\mathscr{E}[a,b]\ \text{使得}\ \varphi(x)\le f(x)\le\psi(x)\quad\forall\,x\in[a,b],
+\]
+\[
+\int_a^b[\psi(x)-\varphi(x)]dx<\varepsilon,
+\]
+并且这时积分值 \(\int_a^b\varphi(x)dx\) 或 \(\int_a^b\psi(x)dx\) 就是 \(G\) 的面积的近似值。
+
+上述这种十分自然的想法就是我们下面要介绍的，一般一元实值有界函数 Riemann 可积性概念的基础。
+
+\subsection{Riemann可积性定义}
+	\label{sec:5-2-2}
+
+\begin{mydef*}{}
+
+	设 \([a,b]\) 是任一有限闭区间，\(f:[a,b]\to\R\) 是任一函数，我们称 \(f\) 在 \([a,b]\) 上是 Riemann 可积的（简称为可积），如果 \(\forall\,\varepsilon>0\)，\(\exists\,\varphi,\psi\in\mathscr{E}[a,b]\) 使得
+	\[
+	\varphi(x)\le f(x)\le\psi(x),\quad\forall\,x\in[a,b],
+	\]
+	\[
+	\int_a^b[\psi(x)-\varphi(x)]dx<\varepsilon.
+	\]
+
+\end{mydef*}
+
+因此从分析的角度来看，函数 \(f\) 在 \([a,b]\) 上 Riemann 可积，等价于：可以分别从 \(f\) 的上方与下方用阶梯函数 \(\psi\) 与 \(\varphi\) 来逼近 \(f\)，并且这两个阶梯函数 \(\psi\) 与 \(\varphi\) 在 \([a,b]\) 上的积分之差 \(\int_a^b[\psi(x)-\varphi(x)]dx\) 能够任意的小。
+
+\begin{sourceexample}{1}
+
+	任意一个阶梯函数 \(f:[a,b]\to\R\) 在 \([a,b]\) 上是 Riemann 可积的。因为我们可以取 \(\varphi=\psi=f\)。
+
+\end{sourceexample}
+
+\begin{sourceexample}{2}
+
+	Dirichlet 函数
+	\[
+	x\longmapsto D(x)=\begin{cases} 1, & \text{若}\ x\in[a,b]\cap\Q, \\ 0, & \text{若}\ x\in[a,b]\cap\Q^c, \end{cases}
+	\]
+	在 \([a,b]\) 上不是 Riemann 可积的。
+
+	事实上，设 \(\varphi,\psi\in\mathscr{E}[a,b]\) 并且满足不等式
+	\[
+	\varphi(x)\le D(x)\le\psi(x),\quad\forall\,x\in[a,b].
+	\]
+	由 §1 的引理知，存在 \([a,b]\) 的一个分割 \(\sigma=(a_0,a_1,\cdots,a_n)\) 及两个向量 \(\xi=[c_0,c_1,\cdots,c_{n-1}]\)，\(\eta=[d_0,d_1,\cdots,d_{n-1}]\) 使得 \([\sigma,\xi]\) 适合于 \(\varphi\)，\([\sigma,\eta]\) 适合于 \(\psi\)。因此
+	\[
+	\forall\,i=0,1,\cdots,n-1,\ \forall\,x\in\ ]a_i,a_{i+1}[,\qquad c_i=\varphi(x)\le D(x)\le\psi(x)=d_i.
+	\]
+	但 \(D(x)=1\) 若 \(x\in\ ]a_i,a_{i+1}[\ \cap\Q\)；\(D(x)=0\) 若 \(x\in\ ]a_i,a_{i+1}[\ \cap\Q^c\)，故
+	\[
+	c_i\le0,\qquad 1\le d_i,\qquad\forall\,i=0,1,\cdots,n-1.
+	\]
+	从而
+	\[
+	\int_a^b[\psi(x)-\varphi(x)]dx=\sum_{i=1}^{n-1}(d_i-c_i)(a_{i+1}-a_i)\ge\sum_{i=1}^{n-1}(a_{i+1}-a_i)=b-a.
+	\]
+	由此可知，Dirichlet 函数 \(D\) 在 \([a,b]\) 上不是 Riemann 可积的。
+
+\end{sourceexample}
+
+Riemann 可积定义的一个直接推论是下述定理。
+
+\begin{mythm}{}{riemann-integrable-bounded}
+
+	若函数 \(f:[a,b]\to\R\) 在 \([a,b]\) 上 Riemann 可积，则 \(f\) 在 \([a,b]\) 上有界。
+
+\end{mythm}
+
+\begin{proof}
+
+	因为 \(f\) 在 \([a,b]\) 上 Riemann 可积，故由定义知，对 \(\varepsilon=1\)，存在 \(\varphi,\psi\in\mathscr{E}[a,b]\) 使得
+	\[
+	\varphi(x)\le f(x)\le\psi(x),\quad\forall\,x\in[a,b].
+	\]
+	若令 \(M=\sup_{x\in[a,b]}(|\varphi(x)|,|\psi(x)|)\)，则
+	\[
+	|f(x)|\le M,\quad\forall\,x\in[a,b].
+	\]
+	此即表明 \(f\) 在 \([a,b]\) 上有界。
+
+\end{proof}
+
+下面定理给出函数 Riemann 可积的一个充分必要条件。
+
+\begin{mythm}{}{riemann-integrability-criterion}
+
+	设 \(f:[a,b]\to\R\) 是任一有界函数，则下述结论互相等价：
+
+	\begin{enumerate}[label=\arabic*)]
+		\item \(f\) 在 \([a,b]\) 上 Riemann 可积。
+
+		\item \(\forall\,\varepsilon>0\)，\(\exists\,h,k\in\mathscr{E}[a,b]\)，使得
+		\[
+		|f(x)-h(x)|\le k(x),\quad\forall\,x\in[a,b],\qquad\int_a^b k(x)dx<\varepsilon.
+		\]
+
+		\item 存在阶梯函数族 \(\{h_n,k_n\}_{n\in\N}\)，这里 \(h_n,k_n\in\mathscr{E}[a,b]\ (\forall\,n\in\N)\) 使得
+		\[
+		|f(x)-h_n(x)|\le k_n(x),\quad\forall\,x\in[a,b],\ \forall\,n\in\N,
+		\]
+		\[
+		\lim_{n\to+\infty}\int_a^b k_n(x)dx=0.
+		\]
+		（\(\{h_n,k_n\}_{n\in\N}\) 称为适合于 \(f\) 的阶梯函数族）
+	\end{enumerate}
+
+\end{mythm}
+
+\begin{proof}
+
+	2) \(\Longleftrightarrow\) 3) 显然。我们证明 1) \(\Longleftrightarrow\) 2)。
+
+	首先设 \(f\) 在 \([a,b]\) 上 Riemann 可积。由定义知，\(\forall\,\varepsilon>0\)，\(\exists\,\varphi,\psi\in\mathscr{E}[a,b]\) 使得
+	\[
+	\varphi(x)\le f(x)\le\psi(x),\quad\forall\,x\in[a,b],
+	\]
+	\[
+	\int_a^b[\psi(x)-\varphi(x)]dx<\varepsilon.
+	\]
+	于是
+	\[
+	0\le f(x)-\varphi(x)\le\psi(x)-\varphi(x),\quad\forall\,x\in[a,b].
+	\]
+	令 \(h(x)=\varphi(x)\)，\(k(x)=\psi(x)-\varphi(x)\)，\(\forall\,x\in[a,b]\)，则 \(h,k\in\mathscr{E}[a,b]\)，并且
+	\[
+	|f(x)-h(x)|\le k(x),\quad\forall\,x\in[a,b],\qquad\int_a^b k(x)dx<\varepsilon.
+	\]
+	反之假设 \(\forall\,\varepsilon>0\)，\(\exists\,h,k\in\mathscr{E}[a,b]\)，使得
+	\[
+	|f(x)-h(x)|\le k(x),\quad\forall\,x\in[a,b],\qquad\int_a^b k(x)dx<\varepsilon.
+	\]
+	于是
+	\[
+	h(x)-k(x)\le f(x)\le h(x)+k(x),\quad\forall\,x\in[a,b].
+	\]
+	若令 \(\varphi(x)=h(x)-k(x)\)，\(\psi(x)=h(x)+k(x)\)，\(\forall\,x\in[a,b]\)，则 \(\varphi,\psi\in\mathscr{E}[a,b]\)，并且
+	\[
+	\varphi(x)\le f(x)\le\psi(x),\quad\forall\,x\in[a,b],
+	\]
+	\[
+	\int_a^b[\psi(x)-\varphi(x)]dx=2\int_a^b k(x)dx<2\varepsilon.
+	\]
+	因此 \(f\) 在 \([a,b]\) 上 Riemann 可积。
+
+\end{proof}
+
+\subsection{Riemann积分的定义}
+
+在未给出函数的 Riemann 积分定义之前，我们首先来研究由上述\rthm{thm:riemann-integrability-criterion} 给出的阶梯函数族 \(\{h_n,k_n\}_{n\in\N}\) 的下述重要性质。
+
+\begin{mylemma*}{}
+
+	设 \(f:[a,b]\to\R\) 是任一 Riemann 可积函数，\(\{h_n,k_n\}_{n\in\N}\) 与 \(\{\tilde h_n,\tilde k_n\}_{n\in\N}\) 是适合于 \(f\) 的任意两个阶梯函数族。则
+
+	\begin{enumerate}[label=\arabic*)]
+		\item 实数序列 \(\left\langle\int_a^b h_n(x)dx\right\rangle\) 与 \(\left\langle\int_a^b\tilde h_n(x)dx\right\rangle\) 都收敛。
+
+		\item \(\displaystyle\lim_{n\to+\infty}\int_a^b h_n(x)dx=\lim_{n\to+\infty}\int_a^b\tilde h_n(x)dx\)。
+	\end{enumerate}
+
+\end{mylemma*}
+
+\begin{proof}
+
+	我们首先证明 \(\left\langle\int_a^b h_n(x)dx\right\rangle\) 收敛。
+
+	事实上，由于 \(\{h_n,k_n\}_{n\in\N}\) 与 \(\{\tilde h_n,\tilde k_n\}_{n\in\N}\) 满足\rthm{thm:riemann-integrability-criterion} 的性质 3)，所以
+	\[
+	(\forall\,\varepsilon>0)(\exists\,N\in\N)(\forall\,n\in\N,\ n\ge N)\Longrightarrow
+	\]
+	\[
+	|f(x)-h_n(x)|\le k_n(x),\quad |f(x)-\tilde h_n(x)|\le\tilde k_n(x),\quad\forall\,x\in[a,b],
+	\]
+	\[
+	\int_a^b k_n(x)dx<\varepsilon/2,\qquad\int_a^b\tilde k_n(x)dx<\varepsilon/2.
+	\]
+	于是
+	\[
+	\forall\,n,m\in\N,\ n,m\ge N,\ \forall\,x\in[a,b]
+	\]
+	\[
+	\Longrightarrow|h_n(x)-h_m(x)|\le|h_n(x)-f(x)|+|f(x)-h_m(x)|\le k_n(x)+k_m(x).
+	\]
+	从而
+	\[
+	\forall\,n,m\in\N,\ n,m\ge N\Longrightarrow\left|\int_a^b h_n(x)dx-\int_a^b h_m(x)dx\right|
+	\]
+	\[
+	\le\int_a^b|h_n(x)-h_m(x)|dx<\int_a^b k_n(x)dx+\int_a^b k_m(x)dx<\varepsilon/2+\varepsilon/2=\varepsilon.
+	\]
+	此即表明 \(\left\langle\int_a^b h_n(x)dx\right\rangle\) 是实数 Cauchy 序列，由 Cauchy 收敛准则知 \(\left\langle\int_a^b h_n(x)dx\right\rangle\) 收敛。
+
+	同理可证 \(\left\langle\int_a^b\tilde h_n(x)dx\right\rangle\) 收敛。
+
+	下面我们来证明 \(\displaystyle\lim_{n\to+\infty}\int_a^b h_n(x)dx=\lim_{n\to+\infty}\int_a^b\tilde h_n(x)dx\)。
+
+	事实上，\(\forall\,n\in\N,\ n\ge N\) 我们有
+	\[
+	|h_n(x)-\tilde h_n(x)|\le|h_n(x)-f(x)|+|f(x)-\tilde h_n(x)|\le k_n(x)+\tilde k_n(x),\quad\forall\,x\in[a,b].
+	\]
+	由此推得 \(\forall\,n\in\N,\ n\ge N\)，
+	\[
+	\left|\int_a^b h_n(x)dx-\int_a^b\tilde h_n(x)dx\right|\le\int_a^b|h_n(x)-\tilde h_n(x)|dx
+	\]
+	\[
+	\le\int_a^b k_n(x)dx+\int_a^b\tilde k_n(x)dx<\varepsilon/2+\varepsilon/2=\varepsilon.
+	\]
+	此即表明 \(\displaystyle\lim_{n\to+\infty}\left(\int_a^b h_n(x)dx-\int_a^b\tilde h_n(x)dx\right)=0\)，因此
+	\[
+	\lim_{n\to+\infty}\int_a^b h_n(x)dx=\lim_{n\to+\infty}\int_a^b\tilde h_n(x)dx.
+	\]
+
+\end{proof}
+
+引理说明极限 \(\displaystyle\lim_{n\to+\infty}\int_a^b h_n(x)dx\) 是一个只与 \(f\) 有关而与适合于 \(f\) 的阶梯函数族 \(\{h_n,k_n\}_{n\in\N}\) 的选择无关的定数。因此，我们引入下述定义就是合理的。
+
+\begin{mydef*}{}
+
+	设 \(f:[a,b]\to\R\) 是任一 Riemann 可积函数，\(\{h_n,k_n\}_{n\in\N}\) 是适合于 \(f\) 的任一阶梯函数族。对于 \(\{h_n\}_{n\in\N}\)，实数序列 \(\left\langle\int_a^b h_n(x)dx\right\rangle\) 的极限称为 \(f\) 在 \([a,b]\) 上的 Riemann 积分（简称为积分），记为 \(\displaystyle\int_a^b f(x)dx\)。于是
+	\[
+	\int_a^b f(x)dx=\lim_{n\to+\infty}\int_a^b h_n(x)dx.
+	\]
+
+\end{mydef*}
+
+\textbf{附注}\quad 若 \(f:[a,b]\to\R\) 是一个阶梯函数，我们知道 \(f\) 是 Riemann 可积的。现在我们要问，\(f\) 作为阶梯函数的积分与 \(f\) 作为 Riemann 可积函数的积分是否一致？答案是肯定的。
+
+为此，我们不妨用 \((E)\displaystyle\int_a^b g(x)dx\) 表示阶梯函数 \(g\) 的积分，令 \(h_n=f,\ k_n=0,\ \forall\,n\in\N\)，则阶梯函数族 \(\{h_n,k_n\}_{n\in\N}\) 适合于函数 \(f\)，根据定义，\(f\) 的 Riemann 积分
+\[
+\int_a^b f(x)dx=\lim_{n\to+\infty}(E)\int_a^b h_n(x)dx=\lim_{n\to+\infty}(E)\int_a^b f(x)dx=(E)\int_a^b f(x)dx,
+\]
+即
+\[
+\int_a^b f(x)dx=(E)\int_a^b f(x)dx.
+\]
+这也就是我们在上述 Riemann 积分的定义中仍用符号 \(\displaystyle\int_a^b f(x)dx\) 表示一般 Riemann 可积函数的 Riemann 积分的缘故。
+
+\subsection{Riemann可积函数类}
+
+\begin{mythm}{}{continuous-integrable}
+
+	任何一个连续函数 \(f:[a,b]\to\R\) 在 \([a,b]\) 上是可积的。
+
+\end{mythm}
+
+\begin{proof}
+
+	因为 \(f\) 在 \([a,b]\) 上连续，所以 \(f\) 在 \([a,b]\) 上一致连续。从而
+	\[
+	(\forall\,\varepsilon>0)(\exists\,\eta>0)(\forall\,x,x'\in[a,b],\ |x-x'|<\eta)\Longrightarrow|f(x)-f(x')|<\varepsilon/(b-a).
+	\]
+	设 \(\sigma=(a_0,a_1,\cdots,a_n)\) 是 \([a,b]\) 的一个分割，使得 \(\delta(\sigma)<\eta\)。令
+	\[
+	m_i=\inf_{x\in\ ]a_i,a_{i+1}[}f(x),\qquad M_i=\sup_{x\in\ ]a_i,a_{i+1}[}f(x),\qquad i=0,1,\cdots,n-1.
+	\]
+	于是 \(0\le M_i-m_i<\dfrac{\varepsilon}{b-a}\ (i=0,1,\cdots,n-1)\)。
+
+	下面我们定义阶梯函数 \(\varphi,\psi:[a,b]\to\R\) 如下：
+	\[
+	\varphi(x)=\begin{cases} m_i, & \text{若}\ x\in\ ]a_i,a_{i+1}[,\ i=0,1,\cdots,n-1, \\ f(a_i), & \text{若}\ x=a_i,\ i=0,1,\cdots,n. \end{cases}
+	\]
+	\[
+	\psi(x)=\begin{cases} M_i, & \text{若}\ x\in\ ]a_i,a_{i+1}[,\ i=0,1,\cdots,n-1, \\ f(a_i), & \text{若}\ x=a_i,\ i=0,1,\cdots,n. \end{cases}
+	\]
+	显然我们有
+	\[
+	\varphi(x)\le f(x)\le\psi(x),\quad\forall\,x\in[a,b],
+	\]
+	\[
+	\int_a^b(\psi-\varphi)(x)dx=\sum_{i=0}^{n-1}(M_i-m_i)(a_{i+1}-a_i)<\frac{\varepsilon}{b-a}\sum_{i=0}^{n-1}(a_{i+1}-a_i)=\varepsilon.
+	\]
+	因此 \(f\) 在 \([a,b]\) 上可积。
+
+\end{proof}
+
+\textbf{推论}\quad 若函数 \(f:[a,b]\to\R\) 只有有限多个第一类间断点，则 \(f\) 在 \([a,b]\) 上可积。
+
+\textbf{证明}\quad 设 \(a_1,a_2,\cdots,a_n\) 是 \(f\) 在 \(]a,b[\) 内的所有间断点，并且假设
+\[
+a=a_0<a_1<a_2<\cdots<a_n<a_{n+1}=b.
+\]
+\(\forall\,\varepsilon>0\)，取 \(\delta>0\) 充分小使得 \(0<\delta<\varepsilon\)，并且
+\[
+a_i+\delta<a_{i+1}-\delta\quad(i=0,1,\cdots,n).
+\]
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}[>=stealth,line join=round,line cap=round,scale=1]
+% 数轴主线
+\draw[->] (-0.8,0) -- (12.5,0);
+
+% 刻度与竖线
+% a
+\draw (0,0.15) -- (0,-0.15);
+\node[below,font=\footnotesize] at (0,-0.15) {$a$};
+
+% a+delta
+\draw (0.8,0.15) -- (0.8,-0.15);
+\node[below,font=\footnotesize] at (0.8,-0.15) {$a+\delta$};
+
+% a1-delta
+\draw (2.2,0.15) -- (2.2,-0.15);
+\node[below,font=\footnotesize] at (2.2,-0.15) {$a_1-\delta$};
+
+% a1
+\draw (3.0,0.15) -- (3.0,-0.15);
+\node[below,font=\footnotesize] at (3.0,-0.15) {$a_1$};
+
+% a1+delta
+\draw (3.8,0.15) -- (3.8,-0.15);
+\node[below,font=\footnotesize] at (3.8,-0.15) {$a_1+\delta$};
+
+% ai
+\draw (5.6,0.15) -- (5.6,-0.15);
+\node[below,font=\footnotesize] at (5.6,-0.15) {$a_i$};
+
+% ai+delta
+\draw (6.4,0.15) -- (6.4,-0.15);
+\node[below,font=\footnotesize] at (6.4,-0.15) {$a_i+\delta$};
+
+% ai+1-delta
+\draw (7.6,0.15) -- (7.6,-0.15);
+\node[below,font=\footnotesize] at (7.6,-0.15) {$a_{i+1}-\delta$};
+
+% ai+1+delta
+\draw (8.4,0.15) -- (8.4,-0.15);
+\node[below,font=\footnotesize] at (8.4,-0.15) {$a_{i+1}+\delta$};
+
+% an-delta
+\draw (9.6,0.15) -- (9.6,-0.15);
+\node[below,font=\footnotesize] at (9.6,-0.15) {$a_n-\delta$};
+
+% an
+\draw (10.4,0.15) -- (10.4,-0.15);
+\node[below,font=\footnotesize] at (10.4,-0.15) {$a_n$};
+
+% an+delta
+\draw (11.2,0.15) -- (11.2,-0.15);
+\node[below,font=\footnotesize] at (11.2,-0.15) {$a_n+\delta$};
+
+% b-delta
+\draw (11.8,0.15) -- (11.8,-0.15);
+\node[below,font=\footnotesize] at (11.8,-0.15) {$b-\delta$};
+
+% b
+\draw (12.2,0.15) -- (12.2,-0.15);
+\node[below,font=\footnotesize] at (12.2,-0.15) {$b$};
+
+% 区间括号（上方）
+% [a, a+delta]
+\draw[thick] (0,0.35) -- (0,0.55);
+\draw[thick] (0.8,0.35) -- (0.8,0.55);
+\draw[thick] (0,0.45) -- (0.8,0.45);
+
+% [a1-delta, a1+delta]
+\draw[thick] (2.2,0.35) -- (2.2,0.55);
+\draw[thick] (3.8,0.35) -- (3.8,0.55);
+\draw[thick] (2.2,0.45) -- (3.8,0.45);
+
+% [ai+delta, ai+1-delta]（中间空白区间）
+\draw[thick] (6.4,0.35) -- (6.4,0.55);
+\draw[thick] (7.6,0.35) -- (7.6,0.55);
+\draw[thick] (6.4,0.45) -- (7.6,0.45);
+\node[above,font=\footnotesize] at (7.0,0.55) {$a_{i+1}-\delta\quad a_{i+1}+\delta$};
+
+% [an-delta, an+delta]
+\draw[thick] (9.6,0.35) -- (9.6,0.55);
+\draw[thick] (11.2,0.35) -- (11.2,0.55);
+\draw[thick] (9.6,0.45) -- (11.2,0.45);
+
+% [b-delta, b]
+\draw[thick] (11.8,0.35) -- (11.8,0.55);
+\draw[thick] (12.2,0.35) -- (12.2,0.55);
+\draw[thick] (11.8,0.45) -- (12.2,0.45);
+
+% 省略号
+\node[font=\footnotesize] at (4.7,0) {$\cdots$};
+\node[font=\footnotesize] at (8.9,0) {$\cdots$};
+\end{tikzpicture}
+	\caption{}
+	\label{fig:5-4}
+\end{figure}
+
+在每一个闭区间 \([a_i+\delta,a_{i+1}-\delta]\) 上，\(f\) 是连续的，于是 \(f\) 在 \([a_i+\delta,a_{i+1}-\delta]\) 上可积，从而存在阶梯函数 \(\varphi_i,\psi_i:[a_i+\delta,a_{i+1}-\delta]\to\R\)，使得
+\[
+\varphi_i(x)\le f(x)\le\psi_i(x),\quad\forall\,x\in[a_i+\delta,a_{i+1}-\delta]\quad(i=0,1,\cdots,n),
+\]
+\[
+\int_{a_i+\delta}^{a_{i+1}-\delta}(\psi_i-\varphi_i)(x)dx<\varepsilon\quad(i=0,1,\cdots,n).
+\]
+另一方面，函数 \(f\) 在 \([a,b]\) 上显然有界，故存在 \(m,M\in\R\) 使得
+\[
+m\le f(x)\le M,\quad\forall\,x\in[a,b].
+\]
+现在我们定义阶梯函数 \(\varphi,\psi:[a,b]\to\R\) 如下：
+\[
+\varphi(x)=\begin{cases}
+m, & \text{若}\ x\in\bigl([a,a+\delta[\ \cup\ ]b-\delta,b]\bigr)\cup\bigcup_{i=1}^n\ ]a_i-\delta,a_i+\delta[, \\
+\varphi_i(x), & \text{若}\ x\in\ ]a_i+\delta,a_{i+1}-\delta[,\ i=0,1,\cdots,n, \\
+f(a_i-\delta), & \text{若}\ x=a_i-\delta,\ i=1,2,\cdots,n+1, \\
+f(a_i+\delta), & \text{若}\ x=a_i+\delta,\ i=0,1,\cdots,n.
+\end{cases}
+\]
+\[
+\psi(x)=\begin{cases}
+M, & \text{若}\ x\in\bigl([a,a+\delta[\ \cup\ ]b-\delta,b]\bigr)\cup\bigcup_{i=1}^n\ ]a_i-\delta,a_i+\delta[, \\
+\psi_i(x), & \text{若}\ x\in\ ]a_i+\delta,a_{i+1}-\delta[,\ i=0,1,\cdots,n, \\
+f(a_i-\delta), & \text{若}\ x=a_i-\delta,\ i=1,2,\cdots,n+1, \\
+f(a_i+\delta), & \text{若}\ x=a_i+\delta,\ i=0,1,\cdots,n.
+\end{cases}
+\]
+显然我们有
+\[
+\varphi(x)\le f(x)\le\psi(x),\quad\forall\,x\in[a,b],
+\]
+\[
+\begin{aligned}
+\int_a^b(\psi-\varphi)(x)dx
+&=\int_a^{a+\delta}(\psi-\varphi)(x)dx+\int_{b-\delta}^b(\psi-\varphi)(x)dx\\
+&\quad+\sum_{i=1}^n\int_{a_i-\delta}^{a_i+\delta}(\psi-\varphi)(x)dx+\sum_{i=0}^n\int_{a_i+\delta}^{a_{i+1}-\delta}(\psi-\varphi)(x)dx
+\end{aligned}
+\]
+\[
+\le(M-m)\delta+(M-m)\delta+2n(M-m)\delta+(n+1)\varepsilon<[2(n+1)(M-m)+n+1]\varepsilon.
+\]
+由此可知 \(f\) 在 \([a,b]\) 上可积。
+
+\begin{mythm}{}{monotone-integrable}
+
+	任何一个单调函数 \(f:[a,b]\to\R\) 在 \([a,b]\) 上是可积的。
+
+\end{mythm}
+
+\begin{proof}
+
+	不失一般性，我们假设 \(f\) 是单调上升函数。
+
+	若 \(f(a)=f(b)\)，则 \(f\) 为常值函数，它显然在 \([a,b]\) 上可积。下面我们设 \(f(a)<f(b)\)。
+	\[
+	\forall\,\varepsilon>0,\ \text{取}\ n\ \text{充分大使得}\ \frac{(b-a)(f(b)-f(a))}{n}<\varepsilon.
+	\]
+	设 \(\sigma=\left(a,a+\dfrac{b-a}{n},a+2\dfrac{b-a}{n},\cdots,a+(n-1)\dfrac{b-a}{n},b\right)\) 是 \([a,b]\) 的等步长 \(\dfrac{b-a}{n}\) 的分割，于是我们有
+	\[
+	f(a_i)\le m_i=\inf_{x\in[a_i,a_{i+1}]}f(x)\le M_i=\sup_{x\in[a_i,a_{i+1}]}f(x)=f(a_{i+1})
+	\]
+	\[
+	(i=0,1,2,\cdots,n-1).
+	\]
+	现在定义阶梯函数 \(\varphi:[a,b]\to\R\) 如下：
+	\[
+	\varphi(x)=\begin{cases} m_i & (\text{若}\ x\in\ ]a_i,a_{i+1}[,\ i=0,1,\cdots,n-1), \\ f(a_i) & (\text{若}\ x=a_i,\ i=0,1,\cdots,n), \end{cases}
+	\]
+	\[
+	\psi(x)=\begin{cases} M_i & (\text{若}\ x\in\ ]a_i,a_{i+1}[,\ i=0,1,\cdots,n-1), \\ f(a_i) & (\text{若}\ x=a_i,\ i=0,1,\cdots,n). \end{cases}
+	\]
+	显然
+	\[
+	\varphi(x)\le f(x)\le\psi(x),\quad\forall\,x\in[a,b],
+	\]
+	\[
+	\int_a^b(\psi-\varphi)(x)dx=\sum_{i=0}^{n-1}(M_i-m_i)(a_{i+1}-a_i)=\sum_{i=0}^{n-1}[f(a_{i+1})-f(a_i)]\frac{b-a}{n}
+	\]
+	\[
+	=\frac{b-a}{n}[f(b)-f(a)]<\varepsilon.
+	\]
+	因此 \(f\) 在 \([a,b]\) 上可积。
+
+\end{proof}
+
+\begin{sourceexample}{3}
+
+	考虑如下定义的函数 \(f:[0,1]\to\R\)：
+	\[
+	f(0)=0,\qquad f(x)=\frac1n,\quad\forall\,x\in\left]\frac1{n+1},\frac1n\right],\quad(n\in\N).
+	\]
+	显然函数 \(f\) 在 \([0,1]\) 上是单调上升的，因此 \(f\) 在 \([0,1]\) 上可积。
+
+\end{sourceexample}
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}
+\begin{axis}[
+  width=8cm,
+  height=8cm,
+  axis lines=middle,
+  xlabel={$x$},
+  ylabel={$y$},
+  xmin=-0.05, xmax=1.15,
+  ymin=-0.15, ymax=1.15,
+  xtick={0,0.25,0.3333,0.5,1},
+  xticklabels={$0$,$\frac14$,$\frac13$,$\frac12$,$1$},
+  ytick={0,0.25,0.3333,0.5,1},
+  yticklabels={$0$,$\frac14$,$\frac13$,$\frac12$,$1$},
+  axis line style={->},
+  x label style={at={(axis description cs:1,0)},anchor=north},
+  y label style={at={(axis description cs:0,1)},anchor=east},
+]
+% 阶梯函数：在 x=1/n 处跳跃，左闭右开
+% n=2: [1/2,1) -> 1
+\addplot[domain=0.5:1,samples=2,thick] {1};
+% n=3: [1/3,1/2) -> 1/2
+\addplot[domain=0.3333:0.5,samples=2,thick] {0.5};
+% n=4: [1/4,1/3) -> 1/3
+\addplot[domain=0.25:0.3333,samples=2,thick] {0.3333};
+% n=5: [1/5,1/4) -> 1/4
+\addplot[domain=0.2:0.25,samples=2,thick] {0.25};
+% n=6: [1/6,1/5) -> 1/5
+\addplot[domain=0.1667:0.2,samples=2,thick] {0.2};
+% n=7: [1/7,1/6) -> 1/6
+\addplot[domain=0.1429:0.1667,samples=2,thick] {0.1667};
+% n=8: [1/8,1/7) -> 1/7
+\addplot[domain=0.125:0.1429,samples=2,thick] {0.1429};
+% n=9: [1/9,1/8) -> 1/8
+\addplot[domain=0.1111:0.125,samples=2,thick] {0.125};
+% n=10: [1/10,1/9) -> 1/9
+\addplot[domain=0.1:0.1111,samples=2,thick] {0.1111};
+% 更小的阶梯用密集线段近似
+\addplot[domain=0.02:0.1,samples=2,thick] {0.05};
+% 原点附近的基线
+\addplot[domain=0:0.02,samples=2,thick] {0};
+
+% 空心点（右端点）
+\addplot[only marks,mark=*,mark options={fill=white,draw=black,thick}] coordinates {(1,1)};
+\addplot[only marks,mark=*,mark options={fill=white,draw=black,thick}] coordinates {(0.5,1)};
+\addplot[only marks,mark=*,mark options={fill=white,draw=black,thick}] coordinates {(0.3333,0.5)};
+\addplot[only marks,mark=*,mark options={fill=white,draw=black,thick}] coordinates {(0.25,0.3333)};
+\addplot[only marks,mark=*,mark options={fill=white,draw=black,thick}] coordinates {(0.2,0.25)};
+\addplot[only marks,mark=*,mark options={fill=white,draw=black,thick}] coordinates {(0.1667,0.1667)};
+\addplot[only marks,mark=*,mark options={fill=white,draw=black,thick}] coordinates {(0.1429,0.1429)};
+\addplot[only marks,mark=*,mark options={fill=white,draw=black,thick}] coordinates {(0.125,0.125)};
+\addplot[only marks,mark=*,mark options={fill=white,draw=black,thick}] coordinates {(0.1111,0.1111)};
+\addplot[only marks,mark=*,mark options={fill=white,draw=black,thick}] coordinates {(0.1,0.1)};
+
+% 实心点（左端点）
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.5,1)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.3333,0.5)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.25,0.3333)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.2,0.25)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.1667,0.1667)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.1429,0.1429)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.125,0.125)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.1111,0.1111)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.1,0.1)};
+
+% 虚线跳跃线
+\draw[dashed] (axis cs:0.5,0.5) -- (axis cs:0.5,1);
+\draw[dashed] (axis cs:0.3333,0.3333) -- (axis cs:0.3333,0.5);
+\draw[dashed] (axis cs:0.25,0.25) -- (axis cs:0.25,0.3333);
+\draw[dashed] (axis cs:0.2,0.2) -- (axis cs:0.2,0.25);
+\draw[dashed] (axis cs:0.1667,0.125) -- (axis cs:0.1667,0.1667);
+\draw[dashed] (axis cs:0.1429,0.1111) -- (axis cs:0.1429,0.1429);
+\draw[dashed] (axis cs:0.125,0.1) -- (axis cs:0.125,0.125);
+\draw[dashed] (axis cs:0.1111,0.0909) -- (axis cs:0.1111,0.1111);
+\draw[dashed] (axis cs:0.1,0.0833) -- (axis cs:0.1,0.1);
+
+% 原点标记
+\node[anchor=north east,font=\footnotesize] at (axis cs:0,0) {$O$};
+\end{axis}
+\end{tikzpicture}
+	\caption{}
+	\label{fig:5-5}
+\end{figure}
+
+下面我们介绍有界函数 \(f:[a,b]\to\R\) Riemann 可积的第三个定理。它是\rthm{thm:continuous-integrable} 及其推论的推广。
+
+为此先介绍零测度集的概念。
+
+\begin{mydef*}{}
+
+	设 \(E\subset\R\) 是任一集合，我们称 \(E\) 是零测度集，如果
+	\[
+	\forall\,\varepsilon>0,\ \text{存在有限多个有界闭区间}\ [a_i,b_i]\ (i=1,2,\cdots,m)\ \text{使得}
+	\]
+	\[
+	E\subset\bigcup_{i=1}^m[a_i,b_i],\quad \text{并且}\ \sum_{i=1}^m(b_i-a_i)<\varepsilon.
+	\]
+
+\end{mydef*}
+
+直接由此定义可推出下面几个简单结论：
+
+1) \(\R\) 的任何有限点集是零测度集。
+
+2) 若 \(\langle x_n\rangle\) 是 \(\R\) 的收敛点序列，则 \(\{x_n\mid n\in\N\}\) 是零测度集。
+
+3) 若 \(E\) 是零测度集，则 \(E\) 的任一子集 \(F\) 也是零测度集，\(\overline E\) 也是零测度集。
+
+4) 若 \(E_1,E_2,\cdots,E_n\) 是零测度集，则 \(\bigcup_{i=1}^n E_i\) 也是零测度集。
+
+\begin{mythm}{}{zero-measure-discontinuity-integrable}
+
+	若有界函数 \(f:[a,b]\to\R\) 的间断点集是零测度集，则 \(f\) 在 \([a,b]\) 上 Riemann 可积。
+
+\end{mythm}
+
+这个定理我们暂不在这里证明，因为它是第 19 章定理 19·3·6 \(n=1\) 的情形。
+
+但我们提醒读者注意：\rthm{thm:zero-measure-discontinuity-integrable} 的逆不成立，因此 \(f\) 的间断点集是零测度集不是 \(f\) Riemann 可积的充分必要条件。下面就是一个反例。
+
+\begin{sourceexample}{4}
+
+	考虑定义在 \([0,1]\) 上的 Riemann 函数
+	\[
+	x\longmapsto R(x)=\begin{cases} 0, & \text{若}\ x\in[0,1]\cap\Q^c; \\ 1, & \text{若}\ x=0; \\ \dfrac1p, & \text{若}\ x\in\ ]0,1]\cap\Q,\ x=\dfrac qp,\ p,q\ \text{互质}. \end{cases}
+	\]
+	我们知道此函数的间断点集 \(E=[0,1]\cap\Q\)，但它不是零测度集，因为如果 \(E\) 是零测度集，则 \(\overline E=[0,1]\) 也是零测度集，这显然矛盾。
+
+	下面证明此函数在 \([0,1]\) 上 Riemann 可积，并且 \(\displaystyle\int_0^1 R(x)dx=0\)。
+
+	\(\forall\,n\in\N\)，由 \(\dfrac1p>\dfrac1n\) 知 \(p<n\)。故在 \([0,1]\) 中满足 \(\dfrac1p>\dfrac1n\) 的有理数只有有限个，记它们为 \(0=x_0<x_1<x_2<\cdots<x_{m-1}<x_m=1\)。定义阶梯函数 \(h_n,k_n:[0,1]\to\R\) 为：
+	\[
+	h_n(x)=\begin{cases} 0, & \text{若}\ x\in\ ]x_i,x_{i+1}[,\ i=0,1,\cdots,m-1, \\ R(x), & \text{若}\ x=x_i,\ i=0,1,\cdots,m; \end{cases}
+	\]
+	\[
+	k_n(x)=\frac1n,\quad\forall\,x\in[0,1].
+	\]
+	显然我们有
+	\[
+	|R(x)-h_n(x)|\le k_n(x),\quad\forall\,x\in[0,1],\ \forall\,n\in\N,
+	\]
+	\[
+	\lim_{n\to+\infty}\int_0^1 k_n(x)dx=\lim_{n\to+\infty}\frac1n=0.
+	\]
+	因此由\rthm{thm:riemann-integrability-criterion} 知，\(R\) 在 \([0,1]\) 上可积，并且
+	\[
+	\int_0^1 R(x)dx=\lim_{n\to+\infty}\int_0^1 h_n(x)dx=\lim_{n\to+\infty}\sum_{i=0}^{m-1}\int_{x_i}^{x_{i+1}}h_n(x)dx=0.
+	\]
+
+\end{sourceexample}
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}
+\begin{axis}[
+  width=9cm,
+  height=8cm,
+  axis lines=middle,
+  xlabel={$x$},
+  ylabel={$y$},
+  xmin=-0.05, xmax=1.15,
+  ymin=-0.05, ymax=1.15,
+  xtick={0,0.125,0.25,0.375,0.5,0.625,0.75,0.875,1},
+  xticklabels={$0$,$\frac18$,$\frac14$,$\frac38$,$\frac12$,$\frac58$,$\frac34$,$\frac78$,$1$},
+  ytick={0,0.125,0.25,0.5,1},
+  yticklabels={$0$,$\frac18$,$\frac14$,$\frac12$,$1$},
+  tick label style={font=\footnotesize},
+  label style={font=\footnotesize},
+  axis line style={->},
+]
+% Riemann function: f(x)=1/q for x=p/q in lowest terms, f(0)=0, f(1)=1
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0,0)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(1,1)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.5,0.5)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.25,0.25)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.75,0.25)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.125,0.125)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.375,0.125)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.625,0.125)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.875,0.125)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.1666667,0.1666667)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.3333333,0.3333333)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.6666667,0.3333333)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.8333333,0.1666667)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.2,0.2)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.4,0.2)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.6,0.2)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.8,0.2)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.1428571,0.1428571)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.2857143,0.1428571)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.4285714,0.1428571)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.5714286,0.1428571)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.7142857,0.1428571)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.8571429,0.1428571)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.1111111,0.1111111)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.2222222,0.1111111)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.4444444,0.1111111)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.5555556,0.1111111)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.7777778,0.1111111)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.8888889,0.1111111)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.0909091,0.0909091)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.1818182,0.0909091)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.2727273,0.0909091)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.3636364,0.0909091)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.4545455,0.0909091)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.5454545,0.0909091)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.6363636,0.0909091)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.7272727,0.0909091)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.8181818,0.0909091)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.9090909,0.0909091)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.0769231,0.0769231)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.1538462,0.0769231)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.2307692,0.0769231)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.3076923,0.0769231)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.3846154,0.0769231)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.4615385,0.0769231)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.5384615,0.0769231)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.6153846,0.0769231)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.6923077,0.0769231)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.7692308,0.0769231)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.8461538,0.0769231)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.9230769,0.0769231)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.0666667,0.0666667)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.1333333,0.0666667)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.2,0.0666667)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.2666667,0.0666667)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.3333333,0.0666667)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.4,0.0666667)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.4666667,0.0666667)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.5333333,0.0666667)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.6,0.0666667)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.6666667,0.0666667)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.7333333,0.0666667)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.8,0.0666667)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.8666667,0.0666667)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.9333333,0.0666667)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.0588235,0.0588235)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.1176471,0.0588235)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.1764706,0.0588235)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.2352941,0.0588235)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.2941176,0.0588235)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.3529412,0.0588235)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.4117647,0.0588235)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.4705882,0.0588235)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.5294118,0.0588235)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.5882353,0.0588235)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.6470588,0.0588235)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.7058824,0.0588235)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.7647059,0.0588235)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.8235294,0.0588235)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.8823529,0.0588235)};
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0.9411765,0.0588235)};
+\end{axis}
+\end{tikzpicture}
+	\caption{}
+	\label{fig:5-6}
+\end{figure}
+
+现在我们要问：是否存在使 \(f\) Riemann 可积的充分必要条件呢？回答是肯定的。为此必须推广零测度集概念，这一工作将在第 19 章进行。
+
+\subsection{Riemann可积函数的性质}
+	\label{sec:5-2-5}
+
+我们用 \(\mathscr{R}[a,b]\) 表示由定义在 \([a,b]\) 上 Riemann 可积函数组成的集合，它是非空的，因 \(\mathscr{E}[a,b]\subset\mathscr{R}[a,b]\)。
+
+\begin{mythm}{}{riemann-integral-properties}
+
+	设 \(f,g\in\mathscr{R}[a,b]\)，\(\alpha,\beta\in\R\)，则
+
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\alpha f+\beta g\in\mathscr{R}[a,b]\)，且
+		\[
+		\int_a^b(\alpha f+\beta g)(x)dx=\alpha\int_a^b f(x)dx+\beta\int_a^b g(x)dx.
+		\]
+
+		\item 若 \(f\ge0\)，则 \(\displaystyle\int_a^b f(x)dx\ge0\)。
+
+		\item 若 \(f\ge g\)，则 \(\displaystyle\int_a^b f(x)dx\ge\int_a^b g(x)dx\)。
+
+		\item \(|f|\in\mathscr{R}[a,b]\)，且 \(\displaystyle\left|\int_a^b f(x)dx\right|\le\int_a^b|f(x)|dx\)。
+	\end{enumerate}
+
+\end{mythm}
+
+\begin{proof}
+
+	1) 因为 \(f,g\in\mathscr{R}[a,b]\)，所以存在两个阶梯函数族 \(\{h_n,k_n\}_{n\in\N}\)，\(\{\tilde h_n,\tilde k_n\}_{n\in\N}\) 使得
+	\[
+	|f(x)-h_n(x)|\le k_n(x),\quad\forall\,x\in[a,b],\ \forall\,n\in\N,
+	\]
+	\[
+	\lim_{n\to+\infty}\int_a^b k_n(x)dx=0,
+	\]
+	\[
+	|g(x)-\tilde h_n(x)|\le\tilde k_n(x),\quad\forall\,x\in[a,b],\ \forall\,n\in\N,
+	\]
+	\[
+	\lim_{n\to+\infty}\int_a^b\tilde k_n(x)dx=0,
+	\]
+	\[
+	\int_a^b f(x)dx=\lim_{n\to+\infty}\int_a^b h_n(x)dx,\qquad
+	\int_a^b g(x)dx=\lim_{n\to+\infty}\int_a^b\tilde h_n(x)dx.
+	\]
+	于是 \(\alpha h_n+\beta\tilde h_n,\ \alpha k_n+\beta\tilde k_n\in\mathscr{E}[a,b],\ \forall\,n\in\N\)，并且
+	\[
+	|[\alpha f+\beta g](x)-[\alpha h_n+\beta\tilde h_n](x)|\le[\alpha k_n+\beta\tilde k_n](x),\quad\forall\,x\in[a,b],\ \forall\,n\in\N.
+	\]
+	\[
+	\lim_{n\to+\infty}\int_a^b[\alpha k_n+\beta\tilde k_n](x)dx=\alpha\lim_{n\to+\infty}\int_a^b k_n(x)dx+\beta\lim_{n\to+\infty}\int_a^b\tilde k_n(x)dx=0.
+	\]
+	因此由\rthm{thm:riemann-integrability-criterion} 知，\(\alpha f+\beta g\in\mathscr{R}[a,b]\)，并且
+	\[
+	\int_a^b[\alpha f+\beta g](x)dx=\lim_{n\to+\infty}\int_a^b[\alpha h_n+\beta\tilde h_n](x)dx
+	\]
+	\[
+	=\alpha\lim_{n\to+\infty}\int_a^b h_n(x)dx+\beta\lim_{n\to+\infty}\int_a^b\tilde h_n(x)dx=\alpha\int_a^b f(x)dx+\beta\int_a^b g(x)dx.
+	\]
+
+	2) 因为 \(f\ge0\)，所以若令
+	\[
+	h_n^*(x)=\begin{cases} h_n(x), & \text{若}\ h_n(x)\ge0, \\ 0, & \text{若}\ h_n(x)<0, \end{cases}\qquad\forall\,x\in[a,b],
+	\]
+	则 \(h_n^*\in\mathscr{E}[a,b]\) 并且由 \(|f(x)-h_n(x)|\le k_n(x)\) 得到
+	\[
+	h_n^*(x)-k_n(x)\le f(x)\le h_n^*(x)+k_n(x),\quad\forall\,x\in[a,b].
+	\]
+	因此
+	\[
+	|f(x)-h_n^*(x)|\le k_n(x),\quad\forall\,x\in[a,b],\ \forall\,n\in\N,
+	\]
+	\[
+	\lim_{n\to+\infty}\int_a^b k_n(x)dx=0.
+	\]
+	此即表明阶梯函数族 \(\{h_n^*,k_n\}_{n\in\N}\) 适合函数 \(f\)，由积分定义，
+	\[
+	\int_a^b f(x)dx=\lim_{n\to+\infty}\int_a^b h_n^*(x)dx\ge0.
+	\]
+
+	3) 若 \(f\ge g\)，则 \(f-g\ge0\)，从而由 1) 及 2) 知
+	\[
+	0\le\int_a^b(f-g)(x)dx=\int_a^b f(x)dx-\int_a^b g(x)dx,
+	\]
+	即 \(\displaystyle\int_a^b f(x)dx\ge\int_a^b g(x)dx\)。
+
+	4) 由于
+	\[
+	||f(x)|-|h_n(x)||\le|f(x)-h_n(x)|\le k_n(x),\quad\forall\,x\in[a,b],\ \forall\,n\in\N,
+	\]
+	\[
+	\lim_{n\to+\infty}\int_a^b k_n(x)dx=0,
+	\]
+	故阶梯函数族 \(\{|h_n|,k_n\}_{n\in\N}\) 适合于函数 \(|f|\)，由\rthm{thm:riemann-integrability-criterion}，\(|f|\in\mathscr{R}[a,b]\)，并且由积分定义及\rthm{thm:step-function-integral-properties} 知
+	\[
+	\int_a^b|f(x)|dx=\lim_{n\to+\infty}\int_a^b|h_n(x)|dx\ge\lim_{n\to+\infty}\left|\int_a^b h_n(x)dx\right|=\left|\int_a^b f(x)dx\right|.
+	\]
+
+\end{proof}
+
+\begin{mythm}{}{riemann-product-integrable}
+
+	若 \(f,g\in\mathscr{R}[a,b]\)，则 \(fg\in\mathscr{R}[a,b]\)。
+
+\end{mythm}
+
+\begin{proof}
+
+	1) 首先假设 \(f\ge0,\ g\ge0\)。因 \(f,g\) 有界，故存在 \(M>0\)，使得
+	\[
+	0\le f(x)\le M,\quad 0\le g(x)\le M,\quad\forall\,x\in[a,b].
+	\]
+	由于 \(f,g\in\mathscr{R}[a,b]\)，故由定义知，\(\forall\,\varepsilon>0\)，存在 \(\varphi,\psi,\tilde\varphi,\tilde\psi\in\mathscr{E}[a,b]\)，使得
+	\[
+	\varphi(x)\le f(x)\le\psi(x),\quad\forall\,x\in[a,b],
+	\]
+	\[
+	\int_a^b[\psi(x)-\varphi(x)]dx<\frac{\varepsilon}{2M},
+	\]
+	\[
+	\tilde\varphi(x)\le g(x)\le\tilde\psi(x),\quad\forall\,x\in[a,b],
+	\]
+	\[
+	\int_a^b[\tilde\psi(x)-\tilde\varphi(x)]dx<\frac{\varepsilon}{2M}.
+	\]
+	我们定义函数 \(h,k,\tilde h,\tilde k:[a,b]\to\R\) 如下：\(\forall\,x\in[a,b]\)
+	\[
+	h(x)=\begin{cases} \varphi(x), & \text{若}\ \varphi(x)\ge0, \\ 0, & \text{若}\ \varphi(x)<0; \end{cases}
+	\qquad
+	k(x)=\begin{cases} \psi(x), & \text{若}\ \psi(x)\le M, \\ M, & \text{若}\ \psi(x)>M; \end{cases}
+	\]
+	\[
+	\tilde h(x)=\begin{cases} \tilde\varphi(x), & \text{若}\ \tilde\varphi(x)\ge0, \\ 0, & \text{若}\ \tilde\varphi(x)<0; \end{cases}
+	\qquad
+	\tilde k(x)=\begin{cases} \tilde\psi(x), & \text{若}\ \tilde\psi(x)\le M, \\ M, & \text{若}\ \tilde\psi(x)>M. \end{cases}
+	\]
+	则 \(h,k,\tilde h,\tilde k\in\mathscr{E}[a,b]\) 并且
+	\[
+	\varphi(x)\le h(x)\le f(x)\le k(x)\le\psi(x),\quad\forall\,x\in[a,b],
+	\]
+	\[
+	\int_a^b[k(x)-h(x)]dx\le\int_a^b[\psi(x)-\varphi(x)]dx<\frac{\varepsilon}{2M},
+	\]
+	\[
+	\tilde\varphi(x)\le\tilde h(x)\le g(x)\le\tilde k(x)\le\tilde\psi(x),\quad\forall\,x\in[a,b],
+	\]
+	\[
+	\int_a^b[\tilde k(x)-\tilde h(x)]dx\le\int_a^b[\tilde\psi(x)-\tilde\varphi(x)]dx<\frac{\varepsilon}{2M}.
+	\]
+	由于 \(h\tilde h,\ k\tilde k\in\mathscr{E}[a,b]\)，并且 \(f\ge0,\ g\ge0\)，故我们有
+	\[
+	(h\tilde h)(x)\le(fg)(x)\le(k\tilde k)(x),\quad\forall\,x\in[a,b],
+	\]
+	\[
+	\int_a^b[k\tilde k-h\tilde h](x)dx=\int_a^b\tilde k(x)[k-h](x)dx+\int_a^b h(x)[\tilde k-\tilde h](x)dx
+	\]
+	\[
+	\le M\int_a^b[k(x)-h(x)]dx+M\int_a^b[\tilde k(x)-\tilde h(x)]dx<M\cdot\frac{\varepsilon}{2M}+M\cdot\frac{\varepsilon}{2M}=\varepsilon.
+	\]
+	因此 \(fg\in\mathscr{R}[a,b]\)。
+
+	2) 对一般的 \(f,g\)，令
+	\[
+	m=\inf_{x\in[a,b]}f(x),\quad \tilde m=\inf_{x\in[a,b]}g(x),\quad f^*=f-m,\quad g^*=g-\tilde m,
+	\]
+	则 \(f^*,g^*\ge0\)，并且 \(f^*,g^*\in\mathscr{R}[a,b]\)，由 1) 所证 \(f^*g^*\in\mathscr{R}[a,b]\)，于是由
+	\[
+	f^*g^*=(f-m)(g-\tilde m)=fg-\tilde m f-mg+m\tilde m
+	\]
+	知，\(fg\in\mathscr{R}[a,b]\)。
+
+\end{proof}
+
+\begin{mythm}{}{riemann-interval-additivity}
+
+	设 \(f:[a,b]\to\R\) 是任一函数，\(c\in[a,b]\)。那末 \(f\in\mathscr{R}[a,b]\) 的充分必要条件是 \(f|_{[a,c]}\in\mathscr{R}[a,c]\)，\(f|_{[c,b]}\in\mathscr{R}[c,b]\)\footnote{像对阶梯函数一样，我们约定：若 \(a=b\)，则 \(f:[a,a]\to\R\) 是可积的，并且 \(\int_a^a f(x)dx=0\)。}。并且这时
+	\[
+	\int_a^b f(x)dx=\int_a^c f(x)dx+\int_c^b f(x)dx.
+	\]
+
+\end{mythm}
+
+\begin{proof}
+
+	1) 必要性 设 \(f\in\mathscr{R}[a,b]\)。若 \(c=a\) 或 \(c=b\)，则由我们的约定知，定理显然成立。因此我们设 \(c\in\ ]a,b[\)。由\rthm{thm:riemann-integrability-criterion} 知，存在阶梯函数族 \(\{h_n,k_n\}_{n\in\N}\)，使得
+	\[
+	|f(x)-h_n(x)|\le k_n(x),\quad\forall\,x\in[a,b],\ \forall\,n\in\N,
+	\]
+	\[
+	\lim_{n\to+\infty}\int_a^b k_n(x)dx=0,
+	\]
+	\[
+	\int_a^b f(x)dx=\lim_{n\to+\infty}\int_a^b h_n(x)dx.
+	\]
+	现在我们令
+	\[
+	\tilde h_n=h_n|_{[a,c]},\quad \tilde k_n=k_n|_{[a,c]},\quad h_n^*=h_n|_{[c,b]},\quad k_n^*=k_n|_{[c,b]}\quad(n\in\N),
+	\]
+	则 \(\tilde h_n,\tilde k_n\in\mathscr{E}[a,c],\ h_n^*,k_n^*\in\mathscr{E}[c,b]\ (\forall\,n\in\N)\)，并且
+	\[
+	|f|_{[a,c]}(x)-\tilde h_n(x)|\le\tilde k_n(x),\quad\forall\,x\in[a,c],\ \forall\,n\in\N,
+	\]
+	\[
+	\int_a^c\tilde k_n(x)dx\le\int_a^b k_n(x)dx,
+	\]
+	\[
+	|f|_{[c,b]}(x)-h_n^*(x)|\le k_n^*(x),\quad\forall\,x\in[c,b],\ \forall\,n\in\N,
+	\]
+	\[
+	\int_c^b k_n^*(x)dx\le\int_a^b k_n(x)dx.
+	\]
+	因此 \(\displaystyle\lim_{n\to+\infty}\int_a^c\tilde k_n(x)dx=0\)，\(\displaystyle\lim_{n\to+\infty}\int_c^b k_n^*(x)dx=0\)，
+
+	从而 \(f|_{[a,c]}\in\mathscr{R}[a,c],\ f|_{[c,b]}\in\mathscr{R}[c,b]\)，并且
+	\[
+	\int_a^c f(x)dx\triangleq\int_a^c f|_{[a,c]}(x)dx=\lim_{n\to+\infty}\int_a^c\tilde h_n(x)dx,
+	\]
+	\[
+	\int_c^b f(x)dx\triangleq\int_c^b f|_{[c,b]}(x)dx=\lim_{n\to+\infty}\int_c^b h_n^*(x)dx.
+	\]
+	由于对阶梯函数 \(h_n\in\mathscr{E}[a,b]\)，我们有
+	\[
+	\int_a^b h_n(x)dx=\int_a^c\tilde h_n(x)dx+\int_c^b h_n^*(x)dx,
+	\]
+	两边令 \(n\to+\infty\) 取极限得到
+	\[
+	\int_a^b f(x)dx=\int_a^c f(x)dx+\int_c^b f(x)dx.
+	\]
+
+	2) 充分性 设 \(f|_{[a,c]}\in\mathscr{R}[a,c]\)，\(f|_{[c,b]}\in\mathscr{R}[c,b]\)。不妨设 \(c\in\ ]a,b[\)。于是 \(\forall\,\varepsilon>0\)，存在 \(\varphi_1,\psi_1\in\mathscr{E}[a,c]\) 及 \(\varphi_2,\psi_2\in\mathscr{E}[c,b]\) 使得
+	\[
+	\varphi_1(x)\le f|_{[a,c]}(x)\le\psi_1(x),\quad\forall\,x\in[a,c],
+	\]
+	\[
+	\int_a^c[\psi_1(x)-\varphi_1(x)]dx<\varepsilon/2,
+	\]
+	\[
+	\varphi_2(x)\le f|_{[c,b]}(x)\le\psi_2(x),\quad\forall\,x\in[c,b],
+	\]
+	\[
+	\int_c^b[\psi_2(x)-\varphi_2(x)]dx<\varepsilon/2.
+	\]
+	定义函数 \(\varphi,\psi:[a,b]\to\R\) 如下：
+	\[
+	\varphi(x)=\begin{cases} \varphi_1(x), & x\in[a,c[, \\ f(c), & x=c, \\ \varphi_2(x), & x\in\ ]c,b]; \end{cases}
+	\qquad
+	\psi(x)=\begin{cases} \psi_1(x), & x\in[a,c[, \\ f(c), & x=c, \\ \psi_2(x), & x\in\ ]c,b]. \end{cases}
+	\]
+	则 \(\varphi,\psi\in\mathscr{E}[a,b]\)，并且
+	\[
+	\varphi(x)\le f(x)\le\psi(x),\quad\forall\,x\in[a,b],
+	\]
+	\[
+	\int_a^b[\psi(x)-\varphi(x)]dx=\int_a^c[\psi_1(x)-\varphi_1(x)]dx+\int_c^b[\psi_2(x)-\varphi_2(x)]dx<\varepsilon.
+	\]
+	因此 \(f\in\mathscr{R}[a,b]\)。
+
+\end{proof}
+
+现在我们作如下约定：
+
+若 \(f\in\mathscr{R}[a,b]\)，则 \(\forall\,c,d\in[a,b]\) 且 \(c<d\)，
+\[
+\int_d^c f(x)dx\triangleq-\int_c^d f(x)dx.
+\]
+
+\begin{mycor*}{}
+
+	设 \(a,b,c\in\R\) 并且
+	\[
+	f:[\min(a,b,c),\max(a,b,c)]\to\R
+	\]
+	Riemann 可积。则 \(f\) 在由 \(a,b,c\) 确定的每一个有限闭区间上 Riemann 可积，并且成立下述等式：
+	\[
+	\int_a^b f(x)dx=\int_a^c f(x)dx+\int_c^b f(x)dx.
+	\]
+
+\end{mycor*}
+
+\begin{proof}
+
+	我们只对 \(a<b<c\) 的情形进行证明。其他情形的证明完全类似。
+
+	由\rthm{thm:riemann-interval-additivity} 知，\(f|_{[a,b]}\in\mathscr{R}[a,b]\)，\(f|_{[b,c]}\in\mathscr{R}[b,c]\)，并且
+	\[
+	\int_a^c f(x)dx=\int_a^b f(x)dx+\int_b^c f(x)dx.
+	\]
+	由此得到
+	\[
+	\int_a^b f(x)dx=\int_a^c f(x)dx-\int_b^c f(x)dx.
+	\]
+	根据我们的约定，\(-\int_b^c f(x)dx=\int_c^b f(x)dx\)，因此
+	\[
+	\int_a^b f(x)dx=\int_a^c f(x)dx+\int_c^b f(x)dx.
+	\]
+
+\end{proof}
+
+\begin{sourceexample}{5}
+
+	设 \(f:[a,b]\to\R\) 是任一 Riemann 可积函数。\(a_0\in[a,b]\) 是任一固定实数。根据\rthm{thm:riemann-interval-additivity} 及我们的约定，\(\forall\,x\in[a,b]\)，\(\int_{a_0}^x f(t)dt\) 有意义。因此我们可以定义一个函数 \(F:[a,b]\to\R\) 如下：
+	\[
+	\forall\,x\in[a,b],\qquad F(x)=\int_{a_0}^x f(t)dt.
+	\]
+	函数 \(F\) 称为 \(f\) 的积分函数。证明：\(F\) 在 \([a,b]\) 上一致连续。
+
+	事实上，\(\forall\,x_1,x_2\in[a,b]\)，由上述推论我们有
+	\[
+	|F(x_1)-F(x_2)|=\left|\int_{a_0}^{x_1}f(t)dt-\int_{a_0}^{x_2}f(t)dt\right|
+	\]
+	\[
+	=\left|\int_{x_2}^{x_1}f(t)dt\right|\le|x_1-x_2|\cdot\sup_{t\in[a,b]}|f(t)|.
+	\]
+	由于 \(f\) 在 \([a,b]\) 上有界，故 \(M=\sup_{a\le t\le b}|f(t)|<+\infty\)。
+
+	\(\forall\,\varepsilon>0\)，由 \((1+M)|x_1-x_2|<\varepsilon\) 得到 \(|x_1-x_2|<\dfrac{\varepsilon}{1+M}\)。若令 \(\delta=\dfrac{\varepsilon}{1+M}\)，则
+	\[
+	\forall\,x_1,x_2\in[a,b]\ \text{且}\ |x_1-x_2|<\delta\Longrightarrow|F(x_1)-F(x_2)|<M|x_1-x_2|<\varepsilon.
+	\]
+	因此 \(F\) 在 \([a,b]\) 上一致连续。
+
+\end{sourceexample}
+
+可积函数的积分函数，在我们后面的 §4 中有重要应用。
+
+\begin{mythm}{第一积分中值公式}{first-integral-mean-value}
+
+	设 \(f,g\in\mathscr{R}[a,b]\) 并且 \(g\) 在 \([a,b]\) 上不变号。令
+	\[
+	m=\inf_{x\in[a,b]}f(x),\qquad M=\sup_{x\in[a,b]}f(x),
+	\]
+	则存在 \(\lambda\in[m,M]\) 使得
+	\[
+	\int_a^b f(x)g(x)dx=\lambda\int_a^b g(x)dx.
+	\]
+	特别地，若 \(f\) 在 \([a,b]\) 上连续，则存在 \(c\in[a,b]\) 使得
+	\[
+	\int_a^b f(x)g(x)dx=f(c)\int_a^b g(x)dx.
+	\]
+
+\end{mythm}
+
+\begin{proof}
+
+	首先由于 \(f\) 在 \([a,b]\) 上有界，故 \(m,M\in\R\) 并且
+	\[
+	m\le f(x)\le M,\quad\forall\,x\in[a,b].
+	\]
+	由于 \(g\) 在 \([a,b]\) 上不变号，不妨设 \(g\ge0\)，将上述不等式乘以 \(g\) 得到
+	\[
+	m g(x)\le f(x)g(x)\le M g(x),\quad\forall\,x\in[a,b].
+	\]
+	由\rthm{thm:riemann-integral-properties} 有
+	\[
+	m\int_a^b g(x)dx\le\int_a^b f(x)g(x)dx\le M\int_a^b g(x)dx.
+	\]
+	1) 若 \(\displaystyle\int_a^b g(x)dx=0\)，则 \(\displaystyle\int_a^b f(x)g(x)dx=0\)，从而任取 \(\lambda\in[m,M]\)，成立
+	\[
+	\int_a^b f(x)g(x)dx=\lambda\int_a^b g(x)dx.
+	\]
+	2) 若 \(\displaystyle\int_a^b g(x)dx\neq0\)，则由 \(g\ge0\) 知 \(\displaystyle\int_a^b g(x)dx>0\)。于是
+	\[
+	m\le\frac{\int_a^b f(x)g(x)dx}{\int_a^b g(x)dx}\le M. \tag{*}
+	\]
+	令
+	\[
+	\lambda=\int_a^b f(x)g(x)dx\Big/\int_a^b g(x)dx,
+	\]
+	则 \(\lambda\in[m,M]\)，并且
+	\[
+	\int_a^b f(x)g(x)dx=\lambda\int_a^b g(x)dx.
+	\]
+	特别地，若 \(f\) 在 \([a,b]\) 上连续，则在 \(\displaystyle\int_a^b g(x)dx=0\) 时，\(\forall\,c\in[a,b]\) 都有
+	\[
+	\int_a^b f(x)g(x)dx=f(c)\int_a^b g(x)dx.
+	\]
+	在 \(\displaystyle\int_a^b g(x)dx\neq0\) 时，由连续函数的 Weierstrass 定理及上述不等式 \((*)\) 知，存在 \(c\in[a,b]\) 使得
+	\[
+	f(c)=\int_a^b f(x)g(x)dx\Big/\int_a^b g(x)dx,
+	\]
+	因此
+	\[
+	\int_a^b f(x)g(x)dx=f(c)\int_a^b g(x)dx.
+	\]
+
+\end{proof}
+
+如果我们在上述定理中取 \(g=1\)，则
+
+1) 存在 \(\lambda\in[m,M]\)，使得 \(\displaystyle\int_a^b f(x)dx=\lambda(b-a)\)。
+
+2) 特别地若 \(f\) 连续，则存在 \(c\in[a,b]\) 使得
+\[
+\int_a^b f(x)dx=f(c)(b-a).
+\]
+
+\subsection{积分的推广}
+
+前面我们介绍的是一元实值函数的 Riemann 积分概念，下面我们要把它推广到一元复值函数上去。
+
+设 \(f:[a,b]\to\mathbb{C}\) 是任一复值函数。\(\forall\,x\in[a,b]\)，令
+\[
+f(x)=f_1(x)+if_2(x),
+\]
+于是我们得到与 \(f\) 对应的两个一元实值函数 \(f_1,f_2:[a,b]\to\R\)。
+
+\begin{mydef*}{}
+
+	我们称 \(f\) 在 \([a,b]\) 上可积，如果 \(f_1,f_2\) 在 \([a,b]\) 上可积。并且这时 \(f\) 在 \([a,b]\) 上的积分，记为 \(\displaystyle\int_a^b f(x)dx\)，定义为：
+	\[
+	\int_a^b f(x)dx=\int_a^b f_1(x)dx+i\int_a^b f_2(x)dx.
+	\]
+
+\end{mydef*}
+
+我们用 \(\widetilde{\mathscr{R}}[a,b]\) 表示所有定义在 \([a,b]\) 上的可积复值函数的集合。\(\widetilde{\mathscr{R}}[a,b]\neq\varnothing\)，因为 \(\mathscr{R}[a,b]\subset\widetilde{\mathscr{R}}[a,b]\)。下面我们简单列出可积复值函数的两个基本性质，读者自己补充其证明。
+
+1) 若 \(f,g\in\widetilde{\mathscr{R}}[a,b]\)，\(\alpha,\beta\in\mathbb{C}\)，则 \(\alpha f+\beta g\in\widetilde{\mathscr{R}}[a,b]\)，并且
+\[
+\int_a^b(\alpha f+\beta g)(x)dx=\alpha\int_a^b f(x)dx+\beta\int_a^b g(x)dx.
+\]
+
+2) 设 \(c\in[a,b]\)，则 \(f\in\widetilde{\mathscr{R}}[a,b]\Longleftrightarrow f|_{[a,c]}\in\widetilde{\mathscr{R}}[a,c]\)，\(f|_{[c,b]}\in\widetilde{\mathscr{R}}[c,b]\)，且
+\[
+\int_a^b f(x)dx=\int_a^c f(x)dx+\int_c^b f(x)dx.
+\]
+
+\subsection*{习 题}
+
+\begin{exercise}
+	\item 设 \(f:[a,b]\to\R\) 是任一函数。证明下述两个结论等价：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(f\) 在 \([a,b]\) 上 Riemann 可积。
+		\item \(\forall\,\varepsilon>0\)，存在 \(\varphi,\psi\in\mathscr{R}[a,b]\) 使得
+		\[
+		\varphi(x)\le f(x)\le\psi(x),\quad\forall\,x\in[a,b],\qquad\int_a^b[\psi(x)-\varphi(x)]dx<\varepsilon.
+		\]
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f,g\in\mathscr{R}[a,b]\)，\(\forall\,x\in[a,b]\) 令
+	\[
+	m(x)=\min(f(x),g(x)),\qquad M(x)=\max(f(x),g(x)),
+	\]
+	证明：函数 \(m,M:[a,b]\to\R\) 在 \([a,b]\) 上 Riemann 可积。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f\in\mathscr{R}[a,b]\)，并且存在 \(m>0\) 使得 \(|f(x)|\ge m\ \forall\,x\in[a,b]\)。证明：\(\dfrac1f\in\mathscr{R}[a,b]\)。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f\in\mathscr{R}[a,b]\)，并且 \(f\ge0\)。证明 \(\sqrt f\in\mathscr{R}[a,b]\)。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:[a,b]\to\R\) 是任一有界函数。考虑下列两对集合：
+	\[
+	\Phi=\{\varphi\in\mathscr{E}[a,b]\mid\varphi\le f\},\qquad \Psi=\{\psi\in\mathscr{E}[a,b]\mid f\le\psi\};
+	\]
+	\[
+	H=\left\{\int_a^b\varphi(x)dx\ \middle|\ \varphi\in\Phi\right\},\qquad K=\left\{\int_a^b\psi(x)dx\ \middle|\ \psi\in\Psi\right\}.
+	\]
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：\(\Phi\neq\varnothing\)，\(\Psi\neq\varnothing\)。
+		\item 证明：\(H\) 是上有界集，\(K\) 是下有界集，并且 \(\sup H\le\inf K\)。我们记 \(i(f)=\sup H\)，\(s(f)=\inf K\)，并分别称 \(i(f)\) 与 \(s(f)\) 为 \(f\) 在 \([a,b]\) 上的下积分与上积分。于是 \(i(f)\le s(f)\)。
+		\item 证明：\(f\) 在 \([a,b]\) 上 Riemann 可积的充分必要条件是 \(i(f)=s(f)\)，并且这时 \(\displaystyle\int_a^b f(x)dx=i(f)=s(f)\)。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:[a,b]\to\R\) 是任一有界函数。我们称 \(f\) 是正规的，如果下述性质成立：
+	\[
+	\forall\,x\in\ ]a,b],\ \lim_{y\to x^-}f(y)=f(x^-)\ \text{存在},
+	\]
+	\[
+	\forall\,x\in[a,b[,\ \lim_{y\to x^+}f(y)=f(x^+)\ \text{存在}.
+	\]
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：若 \(f\) 是单调函数，则 \(f\) 是正规函数。
+		\item 证明：Riemann 函数在 \([0,1]\) 上是正规函数。
+		\item 设 \(f:[a,b]\to\R\) 是任一正规函数，
+		\begin{enumerate}[label=\alph*)]
+			\item 证明：\(\forall\,\varepsilon>0\)，存在 \([a,b]\) 的一个分割 \(\sigma=(a_0,a_1,\cdots,a_n)\) 使得 \(\forall\,x,y\in\ ]a_i,a_{i+1}[,\ i=0,1,\cdots,n-1,\ |f(x)-f(y)|<\varepsilon\)。
+			\item 证明：\(\forall\,\varepsilon>0\)，存在 \(h\in\mathscr{E}[a,b]\)，使得
+			\[
+			|f(x)-h(x)|<\varepsilon,\quad\forall\,x\in[a,b].
+			\]
+			\item 由此推出 \(f\) 在 \([a,b]\) 上 Riemann 可积。
+		\end{enumerate}
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(I\subset\R\) 是任一区间，\(f:I\to\R\) 是任一函数。我们称 \(f\) 在 \(I\) 上局部 Riemann 可积，若 \(\forall\,[\alpha,\beta]\subset I\)，\(f|_{[\alpha,\beta]}\) 在 \([\alpha,\beta]\) 上是 Riemann 可积的。
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：若函数 \(f:[a,b]\to\R\) 有界并且在 \(]a,b[\) 上局部 Riemann 可积，则 \(f\) 在 \([a,b]\) 上 Riemann 可积。
+		\item 证明：函数 \(x\longmapsto f(x)=\begin{cases} \sin\dfrac1x & x\in\ ]0,1] \\ 0 & x=0 \end{cases}\) 在 \([0,1]\) 上不是正规的，但 \(f\) 在 \([0,1]\) 上 Riemann 可积。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:[a,b]\to\R\) 是任一有界函数，并且 \(f\) 的间断点集只有有限个聚点。证明 \(f\) 在 \([a,b]\) 上 Riemann 可积。
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(f:[a,b]\to\R\) 在 \([a,b]\) 上 Riemann 可积。证明：\(\forall\,\varepsilon>0\)，存在连续函数 \(g:[a,b]\to\R\) 使得 \(\displaystyle\int_a^b|f(x)-g(x)|dx<\varepsilon\)。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:[a,b]\to\R\) 是任一函数。证明：
+	\begin{enumerate}[label=\arabic*)]
+		\item 若 \(f\ge0\)，并且 \(f\) 在 \([a,b]\) 上 Riemann 可积，\(f\) 在连续点 \(x\) 处满足 \(f(x)>0\)。则 \(\displaystyle\int_a^b f(x)dx>0\)。
+		\item 若 \(f\ge0\)，\(f\) 在 \([a,b]\) 上 Riemann 可积，并且 \(\displaystyle\int_a^b f(x)dx=0\)，则 \(f\) 在连续点 \(x\) 处满足 \(f(x)=0\)。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:[a,b]\to\R\) 是任一 Riemann 可积函数。证明：\(\forall\,[\alpha,\beta]\subset[a,b]\)，
+	\[
+	\lim_{h\to0}\int_\alpha^\beta|f(x+h)-f(x)|dx=0.
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:[a,b]\to\R\) 在 \([a,b]\) 上 Riemann 可积，证明：存在 \(\xi\in[a,b]\) 使得 \(\displaystyle\int_a^\xi f(x)dx=\int_\xi^b f(x)dx\)。
+\end{exercise}
+
+\begin{exercise}
+	\item 我们用 \(C([a,b],\R)\) 表示由所有定义在 \([a,b]\) 上的连续函数组成的集合。\(f\in C([a,b],\R)\)。证明：
+	\begin{enumerate}[label=\arabic*)]
+		\item 若 \(\forall\,g\in C([a,b],\R)\)，\(\displaystyle\int_a^b f(x)g(x)dx=0\)，则 \(f=0\)。
+		\item 若 \(\forall\,g\in C([a,b],\R)\) 且 \(g(a)=g(b)=0\)，\(\displaystyle\int_a^b f(x)g(x)dx=0\)，则 \(f=0\)。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:[0,+\infty[\to\R\) 是任一连续函数，并且 \(\lim_{x\to+\infty}f(x)=A>0\) 及 \(\forall\,n\in\N\)，\(f(0)+f(1)+\cdots+f(n)\neq0\)。证明：
+	\[
+	\lim_{n\to+\infty}\frac{\int_0^n f(x)dx}{f(0)+f(1)+\cdots+f(n)}=1.
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:[0,+\infty[\to[0,+\infty[\) 是任一严格单调上升的连续函数，并且 \(f([0,+\infty[)=[0,+\infty[\)。证明：
+	\[
+	\forall\,a>0,\ b>0,\qquad\int_0^a f(x)dx+\int_0^b f^{-1}(x)dx\ge ab.
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f,g\in\mathscr{R}[a,b]\)，证明下述两个不等式：
+	\begin{enumerate}[label=\arabic*)]
+		\item Cauchy 不等式
+		\[
+		\left(\int_a^b f(x)g(x)dx\right)^2\le\int_a^b f^2(x)dx\cdot\int_a^b g^2(x)dx.
+		\]
+		\item Minkowski 不等式
+		\[
+		\left(\int_a^b[f(x)+g(x)]^2dx\right)^{\frac12}\le\left(\int_a^b f^2(x)dx\right)^{\frac12}+\left(\int_a^b g^2(x)dx\right)^{\frac12}.
+		\]
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f,g:[a,b]\to\R\) 是两个可积函数，令
+	\[
+	M(f)=\sup_{x\in[a,b]}f(x),\quad m(f)=\inf_{x\in[a,b]}f(x),
+	\]
+	\[
+	M(g)=\sup_{x\in[a,b]}g(x),\quad m(g)=\inf_{x\in[a,b]}g(x).
+	\]
+	试利用 Cauchy 积分不等式证明：
+	\[
+	\begin{aligned}
+	&\left|\frac1{b-a}\int_a^b f(x)g(x)dx-\frac1{(b-a)^2}\int_a^b f(x)dx\cdot\int_a^b g(x)dx\right|\\
+	&\qquad\le\frac14\bigl(M(f)-m(f)\bigr)\bigl(M(g)-m(g)\bigr).
+	\end{aligned}
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item \(\forall\,x\in[0,1]\)，我们用 \(0.e_1e_2e_3\cdots\) 表示 \(x\) 的十进制记法，定义函数 \(f:[0,1]\to[0,1]\) 如下：
+	\[
+	f(x)=0.e_2e_1e_3\cdots,\qquad\forall\,x=0.e_1e_2e_3\cdots.
+	\]
+	\begin{enumerate}[label=\arabic*)]
+		\item 研究函数 \(f\) 在 \([0,1]\) 上的连续性，证明 \(f\) 的间断点都是第一类的，并画出 \(f\) 的图形。
+		\item 证明：\(f\) 在 \([0,1]\) 上可积，并且 \(\displaystyle\int_0^1 f(x)dx=\frac12\)。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(f:[a,b]\to\R\) 在 \([a,b]\) 上可积。证明：
+	\[
+	\lim_{n\to+\infty}\int_a^b f(x)|\sin nx|dx=\frac2\pi\int_a^b f(x)dx.
+	\]
+	（提示：先假设 \(f\) 为在 \([\alpha,\beta]\subset[a,b]\) 上取常值 \(A\) 而在 \([a,b]-[\alpha,\beta]\) 上取 \(0\) 值的阶梯函数，然后利用 \(f\) 的可积性，有阶梯函数 \(h\in\mathscr{E}[a,b]\)，使得 \(\displaystyle\int_a^b|f(x)-h(x)|dx<\varepsilon\)。）
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:[a,b]\to\R\) 可积，\(g:[a,b]\to\R\) 连续并且以 \(T\) 为周期。证明：
+	\[
+	\lim_{n\to+\infty}\int_a^b f(x)g(nx)dx=\frac1T\int_a^b f(x)dx\cdot\int_0^T g(x)dx.
+	\]
+\end{exercise}
+
+\section{Riemann和}
+
+在 §2 里我们把 Riemann 可积函数的积分定义为一列阶梯函数积分的极限。现在我们要把它表示成仅依赖于函数本身的另一种形式的极限。为此引入下述定义。
+
+\begin{mydef*}{}
+
+	设 \(f:[a,b]\to\R\) 是任一函数。\(\sigma=(a_0,a_1,\cdots,a_n)\) 是 \([a,b]\) 的任一分割。\(\xi=\langle\xi_0,\xi_1,\cdots,\xi_{n-1}\rangle\) 是一组实数，使得 \(\xi_i\in[a_i,a_{i+1}]\ (i=0,1,\cdots,n-1)\)。
+
+	\begin{enumerate}[label=\arabic*)]
+		\item \((\sigma,\xi)\) 称为 \([a,b]\) 的一个带点分割，并用 \(\mathscr{B}\) 表示 \([a,b]\) 的所有带点分割的集合。
+
+		\item 实数
+		\[
+		S(f,\sigma,\xi)=\sum_{i=0}^{n-1}f(\xi_i)(a_{i+1}-a_i)
+		\]
+		称为函数 \(f\) 关于 \((\sigma,\xi)\) 的 Riemann 和。
+
+		\item 我们称实数 \(A\) 是 \(f\) 的 Riemann 和关于 \(\mathscr{B}\) 的极限，如果下述性质成立：
+		\[
+		(\forall\,\varepsilon>0)(\exists\,\eta>0)(\forall\,(\sigma,\xi)\in\mathscr{B},\ \delta(\sigma)<\eta)\Longrightarrow|S(f,\sigma,\xi)-A|<\varepsilon.
+		\]
+		这时，我们记作
+		\[
+		\lim_{\mathscr{B}}S(f,\sigma,\xi)=A.
+		\]
+	\end{enumerate}
+
+\end{mydef*}
+
+注意，上述 Riemann 和关于 \(\mathscr{B}\) 的极限与函数极限的定义有点不一样，这里 \(|S(f,\sigma,\xi)-A|<\varepsilon\) 不仅要求 \(\delta(\sigma)<\eta\)，而且 \(\xi\) 在 \(\sigma\) 确定后也可以任意选择。因此 Riemann 和极限过程是比函数极限过程更复杂的一种极限过程。
+
+\begin{mythm}{}{riemann-sum-characterization}
+
+	设 \(f:[a,b]\to\R\) 是任一有界函数。则下述两个结论等价：
+
+	\begin{enumerate}[label=\arabic*)]
+		\item \(f\) 在 \([a,b]\) 上 Riemann 可积。
+
+		\item 存在常数 \(A\) 使得 \(\displaystyle\lim_{\mathscr{B}}S(f,\sigma,\xi)=A\)。
+	\end{enumerate}
+
+	因此若 \(f\in\mathscr{R}[a,b]\)，则
+	\[
+	\int_a^b f(x)dx=\lim_{\mathscr{B}}S(f,\sigma,\xi).
+	\]
+
+\end{mythm}
+
+\begin{proof}
+
+	1) \(\Longrightarrow\) 2)。设 \(f\in\mathscr{R}[a,b]\)。于是 \(\forall\,\varepsilon>0\)，\(\exists\,h,k\in\mathscr{E}[a,b]\) 使得
+	\[
+	|f(x)-h(x)|\le k(x),\quad\forall\,x\in[a,b],\qquad\int_a^b k(x)dx<\varepsilon/4.
+	\]
+	令 \(\sigma_0=(b_0,b_1,\cdots,b_m)\) 为同时适合于 \(h\)、\(k\) 的 \([a,b]\) 的一个分割。设 \(|f(x)|\le M\)，\(\forall\,x\in[a,b]\)。
+
+	取
+	\[
+	\eta=\min\left(\frac13\delta(\sigma_0),\ \frac{\varepsilon}{16(M+1)(m+1)}\right),
+	\]
+	则 \(\eta>0\)。
+
+	对 \(\sigma_0\) 的每一个分点 \(b_j\)，用闭区间 \([b_j-\eta,b_j+\eta]\) 把 \(b_j\) 包围起来。
+
+	\begin{figure}[htbp]
+		\centering
+			\begin{tikzpicture}[>=stealth,scale=1.0,line cap=round,line join=round]
+  % 主数轴线
+  \draw[->] (-0.3,0) -- (12.5,0);
+
+  % 刻度点与竖线（下方小竖线）
+  \foreach \x/\name in {
+    0/a_1, 0.6/a_2, 1.8/a_i, 2.4/a_{i+1}, 4.8/a_i, 5.4/a_{i+1}, 7.2/a_{i+2}, 9.0/a_{s-1}
+  } {
+    \draw (\x,-0.08) -- (\x,0.08);
+  }
+  % 额外刻度点（无标注）
+  \foreach \x in {3.0, 3.6, 6.0, 6.6, 7.8, 8.4, 9.6, 10.2, 10.8, 11.4, 12.0} {
+    \draw (\x,-0.08) -- (\x,0.08);
+  }
+
+  % 区间括号与标注
+  % [a, a1 a2]
+  \draw (0,0.25) -- (0,0.35) -- (0.6,0.35) -- (0.6,0.25);
+  \node[font=\footnotesize] at (0.3,0.55) {$a$};
+  \node[font=\footnotesize] at (0,-0.35) {$a_1$};
+  \node[font=\footnotesize] at (0.6,-0.35) {$a_2$};
+
+  % [b1, ai ai+1]
+  \draw (1.2,0.25) -- (1.2,0.35) -- (2.4,0.35) -- (2.4,0.25);
+  \node[font=\footnotesize] at (1.8,0.55) {$b_1$};
+  \node[font=\footnotesize] at (1.8,-0.35) {$a_i$};
+  \node[font=\footnotesize] at (2.4,-0.35) {$a_{i+1}$};
+
+  % 点 bi-η
+  \node[font=\footnotesize] at (3.0,0.55) {$b_i-\eta$};
+
+  % [bi, ai ai+1]
+  \draw (3.6,0.25) -- (3.6,0.35) -- (4.8,0.35) -- (4.8,0.25);
+  \node[font=\footnotesize] at (4.2,0.55) {$b_i$};
+  \node[font=\footnotesize] at (4.8,-0.35) {$a_i$};
+  \node[font=\footnotesize] at (5.4,-0.35) {$a_{i+1}$};
+
+  % 点 bi+η
+  \node[font=\footnotesize] at (6.0,0.55) {$b_i+\eta$};
+
+  % [bs, ai+2]
+  \draw (6.6,0.25) -- (6.6,0.35) -- (7.2,0.35) -- (7.2,0.25);
+  \node[font=\footnotesize] at (6.9,0.55) {$b_s$};
+  \node[font=\footnotesize] at (7.2,-0.35) {$a_{i+2}$};
+
+  % [bm-1, as-1]
+  \draw (8.4,0.25) -- (8.4,0.35) -- (9.0,0.35) -- (9.0,0.25);
+  \node[font=\footnotesize] at (8.7,0.55) {$b_{m-1}$};
+  \node[font=\footnotesize] at (9.0,-0.35) {$a_{s-1}$};
+
+  % [b, ...]
+  \draw (10.8,0.25) -- (10.8,0.35) -- (12.0,0.35) -- (12.0,0.25);
+  \node[font=\footnotesize] at (11.4,0.55) {$b$};
+
+  % 省略号
+  \node[font=\footnotesize] at (1.05,0) {$\cdots$};
+  \node[font=\footnotesize] at (3.15,0) {$\cdots$};
+  \node[font=\footnotesize] at (5.55,0) {$\cdots$};
+  \node[font=\footnotesize] at (7.95,0) {$\cdots$};
+  \node[font=\footnotesize] at (9.75,0) {$\cdots$};
+  \node[font=\footnotesize] at (10.65,0) {$\cdots$};
+\end{tikzpicture}
+		\caption{}
+		\label{fig:5-7}
+	\end{figure}
+
+	现在设 \((\sigma,\xi)\in\mathscr{B}\)，并且 \(\delta(\sigma)<\eta\)。令
+	\[
+	\sigma=(a_0,a_1,\cdots,a_n),\quad\xi=\langle\xi_0,\xi_1,\cdots,\xi_{n-1}\rangle.
+	\]
+	我们定义下面两个集合：
+	\[
+	I=\{i\in\{0,1,\cdots,n-1\}\mid\forall\,j\in\{0,1,\cdots,m\},\ [a_i,a_{i+1}]\cap[b_j-\eta,b_j+\eta]=\varnothing\},
+	\]
+	\[
+	J=\{i\in\{0,1,\cdots,n-1\}\mid\exists\,j\in\{0,1,\cdots,m\},\ [a_i,a_{i+1}]\cap[b_j-\eta,b_j+\eta]\neq\varnothing\}.
+	\]
+	显然 \(I\cap J=\varnothing\)，\(I\cup J=\{0,1,\cdots,n-1\}\)。并且 \(\forall\,i\in J\)，\([a_i,a_{i+1}]\subset\ ]b_j-\eta,b_j+\eta[\) 或者 \([a_i,a_{i+1}]\) 与 \([b_j-\eta,b_j+\eta]\) 有交点 \(b_j-\eta\) 或 \(b_j+\eta\)（如图 5-7 所示）。因此所有这种闭区间 \([a_i,a_{i+1}]\) 的长度之和 \(\sum_{i\in J}(a_{i+1}-a_i)\) 满足下述不等式：
+	\[
+	\sum_{i\in J}(a_{i+1}-a_i)\le2\eta(m+1)+2\delta(\sigma)(m+1)
+	\]
+	\[
+	<4\eta(m+1)<4(m+1)\cdot\frac{\varepsilon}{16(M+1)(m+1)}=\frac{\varepsilon}{4(M+1)}. \tag{*}
+	\]
+	下面我们来证明 \(\left|S(f,\sigma,\xi)-\int_a^b f(x)dx\right|<\varepsilon\)。
+
+	由于
+	\[
+	\begin{aligned}
+	\left|S(f,\sigma,\xi)-\int_a^b f(x)dx\right|
+	&=\left|\sum_{i=0}^{n-1}f(\xi_i)(a_{i+1}-a_i)-\sum_{i=0}^{n-1}\int_{a_i}^{a_{i+1}}f(x)dx\right|\\
+	&=\left|\sum_{i=0}^{n-1}\int_{a_i}^{a_{i+1}}f(\xi_i)dx-\sum_{i=0}^{n-1}\int_{a_i}^{a_{i+1}}f(x)dx\right|\\
+	&=\left|\sum_{i=0}^{n-1}\int_{a_i}^{a_{i+1}}[f(\xi_i)-f(x)]dx\right|\\
+	&\le\left|\sum_{i\in I}\int_{a_i}^{a_{i+1}}[f(\xi_i)-f(x)]dx\right|\\
+	&\qquad+\left|\sum_{i\in J}\int_{a_i}^{a_{i+1}}[f(\xi_i)-f(x)]dx\right|,
+	\end{aligned}
+	\]
+	故我们分 \(\left|\sum_{i\in I}\right|\) 与 \(\left|\sum_{i\in J}\right|\) 两部分来估计。
+
+	i) \(\left|\sum_{i\in I}\int_{a_i}^{a_{i+1}}[f(\xi_i)-f(x)]dx\right|\) 的估计：
+
+	我们注意到 \(\forall\,i\in I\)，\(\exists\,j\in\{0,1,\cdots,m-1\}\) 使得 \([a_i,a_{i+1}]\subset\ ]b_j,b_{j+1}[\)。于是由 \(x,\xi_i\in[a_i,a_{i+1}]\) 知 \(x,\xi_i\in\ ]b_j,b_{j+1}[\)。因此
+	\[
+	\forall\,x\in[a_i,a_{i+1}],\qquad h(x)=h(\xi_i),\quad k(x)=k(\xi_i).
+	\]
+	由于
+	\[
+	|f(\xi_i)-h(\xi_i)|\le k(\xi_i),\qquad |f(x)-h(x)|\le k(x),\quad\forall\,x\in[a_i,a_{i+1}],
+	\]
+	故
+	\[
+	\left|\int_{a_i}^{a_{i+1}}[f(\xi_i)-f(x)]dx\right|
+	\le\int_{a_i}^{a_{i+1}}|f(\xi_i)-h(\xi_i)|dx+\int_{a_i}^{a_{i+1}}|h(\xi_i)-f(x)|dx
+	\]
+	\[
+	\le\int_{a_i}^{a_{i+1}}k(\xi_i)dx+\int_{a_i}^{a_{i+1}}k(x)dx=2\int_{a_i}^{a_{i+1}}k(x)dx.
+	\]
+	由此得到
+	\[
+	\left|\sum_{i\in I}\int_{a_i}^{a_{i+1}}[f(\xi_i)-f(x)]dx\right|
+	\le\sum_{i\in I}\left|\int_{a_i}^{a_{i+1}}[f(\xi_i)-f(x)]dx\right|
+	\]
+	\[
+	\le2\sum_{i\in I}\int_{a_i}^{a_{i+1}}k(x)dx\le2\int_a^b k(x)dx<2\cdot\frac{\varepsilon}{4}=\frac{\varepsilon}{2}.
+	\]
+
+	ii) \(\left|\sum_{i\in J}\int_{a_i}^{a_{i+1}}[f(\xi_i)-f(x)]dx\right|\) 的估计：
+
+	\(\forall\,i\in J\)，我们有
+	\[
+	\left|\int_{a_i}^{a_{i+1}}[f(\xi_i)-f(x)]dx\right|
+	\le\int_{a_i}^{a_{i+1}}|f(\xi_i)-f(x)|dx\le2M(a_{i+1}-a_i).
+	\]
+	从而由不等式 \((*)\) 得到
+	\[
+	\left|\sum_{i\in J}\int_{a_i}^{a_{i+1}}[f(\xi_i)-f(x)]dx\right|
+	\le\sum_{i\in J}\left|\int_{a_i}^{a_{i+1}}[f(\xi_i)-f(x)]dx\right|
+	\]
+	\[
+	\le\sum_{i\in J}2M(a_{i+1}-a_i)\le2M\cdot\frac{\varepsilon}{4(M+1)}<\frac{\varepsilon}{2}.
+	\]
+	现在由 i) 和 ii) 的估计得到
+	\[
+	\left|S(f,\sigma,\xi)-\int_a^b f(x)dx\right|
+	\le\left|\sum_{i\in I}\int_{a_i}^{a_{i+1}}[f(\xi_i)-f(x)]dx\right|
+	\]
+	\[
+	+\left|\sum_{i\in J}\int_{a_i}^{a_{i+1}}[f(\xi_i)-f(x)]dx\right|<\frac{\varepsilon}{2}+\frac{\varepsilon}{2}=\varepsilon.
+	\]
+	因此 \(\displaystyle\lim_{\mathscr{B}}S(f,\sigma,\xi)=\int_a^b f(x)dx\)。
+
+	2) \(\Longrightarrow\) 1)。设存在常数 \(A\) 使得 \(\displaystyle\lim_{\mathscr{B}}S(f,\sigma,\xi)=A\)，即
+	\[
+	(\forall\,\varepsilon>0)(\exists\,\eta>0)(\forall\,(\sigma,\xi)\in\mathscr{B},\ \delta(\sigma)<\eta)\Longrightarrow|S(f,\sigma,\xi)-A|<\varepsilon.
+	\]
+	设 \(\sigma=(a_0,a_1,\cdots,a_n)\) 是 \([a,b]\) 的任一分割且 \(\delta(\sigma)<\eta\)。
+
+	令
+	\[
+	m_i=\inf_{x\in[a_i,a_{i+1}]}f(x),\quad M_i=\sup_{x\in[a_i,a_{i+1}]}f(x),\quad i=0,1,\cdots,n-1.
+	\]
+	构造函数 \(\varphi,\psi:[a,b]\to\R\) 如下：
+	\[
+	\varphi(x)=\begin{cases} m_i, & x\in\ ]a_i,a_{i+1}[,\ i=0,1,\cdots,n-1, \\ f(a_i), & x=a_i,\ i=0,1,\cdots,n, \end{cases}
+	\]
+	\[
+	\psi(x)=\begin{cases} M_i, & x\in\ ]a_i,a_{i+1}[,\ i=0,1,\cdots,n-1, \\ f(a_i), & x=a_i,\ i=0,1,\cdots,n. \end{cases}
+	\]
+	则 \(\varphi,\psi\in\mathscr{E}[a,b]\)，并且
+	\[
+	\varphi(x)\le f(x)\le\psi(x),\quad\forall\,x\in[a,b].
+	\]
+	另一方面，利用确界特征性质，存在 \(\xi_i',\xi_i''\in[a_i,a_{i+1}]\) 使得
+	\[
+	m_i\le f(\xi_i')<m_i+\frac{\varepsilon}{4(b-a)},\qquad M_i-\frac{\varepsilon}{4(b-a)}<f(\xi_i'')\le M_i,
+	\]
+	\[
+	(i=0,1,\cdots,n-1).
+	\]
+	于是
+	\[
+	|f(\xi_i')-m_i|<\frac{\varepsilon}{4(b-a)},\qquad |f(\xi_i'')-M_i|<\frac{\varepsilon}{4(b-a)},\qquad(i=0,1,\cdots,n-1).
+	\]
+	令 \(\xi'=\langle\xi_0',\xi_1',\cdots,\xi_{n-1}'\rangle\)，\(\xi''=\langle\xi_0'',\xi_1'',\cdots,\xi_{n-1}''\rangle\)，则我们有 \((\sigma,\xi')\in\mathscr{B}\)，\((\sigma,\xi'')\in\mathscr{B}\) 并且 \(\delta(\sigma)<\eta\)。因此
+	\[
+	|S(f,\sigma,\xi')-A|<\frac{\varepsilon}{4},\qquad |S(f,\sigma,\xi'')-A|<\frac{\varepsilon}{4}.
+	\]
+	现在
+	\[
+	\left|S(f,\sigma,\xi')-\int_a^b\varphi(x)dx\right|
+	=\left|\sum_{i=0}^{n-1}f(\xi_i')(a_{i+1}-a_i)-\sum_{i=0}^{n-1}m_i(a_{i+1}-a_i)\right|
+	\]
+	\[
+	\le\sum_{i=0}^{n-1}|f(\xi_i')-m_i|(a_{i+1}-a_i)<\frac{\varepsilon}{4(b-a)}(b-a)=\frac{\varepsilon}{4},
+	\]
+	\[
+	\left|S(f,\sigma,\xi'')-\int_a^b\psi(x)dx\right|
+	=\left|\sum_{i=0}^{n-1}f(\xi_i'')(a_{i+1}-a_i)-\sum_{i=0}^{n-1}M_i(a_{i+1}-a_i)\right|
+	\]
+	\[
+	\le\sum_{i=0}^{n-1}|f(\xi_i'')-M_i|(a_{i+1}-a_i)<\frac{\varepsilon}{4(b-a)}(b-a)=\frac{\varepsilon}{4}.
+	\]
+	因此最后我们得到
+	\[
+	0\le\int_a^b[\psi(x)-\varphi(x)]dx=\left|\int_a^b\psi(x)dx-\int_a^b\varphi(x)dx\right|
+	\]
+	\[
+	\le\left|\int_a^b\psi(x)dx-S(f,\sigma,\xi'')\right|+|S(f,\sigma,\xi'')-A|
+	\]
+	\[
+	+|A-S(f,\sigma,\xi')|+\left|S(f,\sigma,\xi')-\int_a^b\varphi(x)dx\right|
+	\]
+	\[
+	<\frac{\varepsilon}{4}+\frac{\varepsilon}{4}+\frac{\varepsilon}{4}+\frac{\varepsilon}{4}=\varepsilon.
+	\]
+	此即表明 \(f\) 在 \([a,b]\) 上 Riemann 可积。并且这时 \(A=\displaystyle\int_a^b f(x)dx\)。
+
+\end{proof}
+
+\begin{mycor*}{}
+
+	若 \(f\in\mathscr{R}[a,b]\)，则
+	\[
+	\lim_{n\to+\infty}\sum_{i=0}^{n-1}f\left(a+i\frac{b-a}{n}\right)\frac{b-a}{n}=\int_a^b f(x)dx,
+	\]
+	\[
+	\lim_{n\to+\infty}\sum_{i=1}^n f\left(a+i\frac{b-a}{n}\right)\frac{b-a}{n}=\int_a^b f(x)dx.
+	\]
+
+\end{mycor*}
+
+从这个推论来看，函数 \(f:[a,b]\to\R\) 的 Riemann 积分 \(\int_a^b f(x)dx\) 的几何意义就十分明显。
+
+将 \([a,b]\) \(n\) 等分，作出以 \(\dfrac{b-a}{n}\) 为底、以 \(f\left(a+i\dfrac{b-a}{n}\right)\) 为“高”的矩形 \(S_i\)，则 \(S_i\) 的“面积”为 \(f\left(a+i\dfrac{b-a}{n}\right)\dfrac{b-a}{n}\)（这里我们规定当 \(f\left(a+i\dfrac{b-a}{n}\right)>0\) 时 \(S_i\) 的“面积”\(>0\)，当 \(f\left(a+i\dfrac{b-a}{n}\right)<0\) 时 \(S_i\) 的“面积”\(<0\)），因此
+\[
+\sum_{i=0}^{n-1}f\left(a+i\frac{b-a}{n}\right)\frac{b-a}{n}=S_0,S_1,\cdots,S_{n-1}\ \text{的“面积”之和},
+\]
+\[
+\sum_{i=1}^n f\left(a+i\frac{b-a}{n}\right)\frac{b-a}{n}=S_1,S_2,\cdots,S_n\ \text{的“面积”之和}.
+\]
+上述推论表明，当 \(n\to+\infty\) 时，\(S_0,S_1,\cdots,S_{n-1}\) 的“面积”之和或 \(S_1,S_2,\cdots,S_n\) 的“面积”之和的极限存在，并且等于 \(f\) 在 \([a,b]\) 上的 Riemann 积分 \(\int_a^b f(x)dx\)，因此 \(\int_a^b f(x)dx\) 就是由函数 \(f\) 的图形 \(Gr(f)\)、\(x\) 轴及直线 \(x=a,x=b\) 所围平面区域的面积（如图 5-8 所示）。
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}[font=\footnotesize]
+  % Axis
+  \draw[->] (-0.3,0) -- (8.5,0) node[right] {$x$};
+  \draw[->] (0,-0.3) -- (0,4.5) node[above] {$y$};
+  \node[below left] at (0,0) {$O$};
+
+  % Partition points
+  \coordinate (a0) at (1,0);
+  \coordinate (a1) at (2.2,0);
+  \coordinate (a2) at (3.4,0);
+  \coordinate (ai) at (5.2,0);
+  \coordinate (ai1) at (6.2,0);
+  \coordinate (an) at (7.8,0);
+
+  % Tick labels on x-axis
+  \node[below] at (a0) {$a=a_0$};
+  \node[below] at (a1) {$a_1$};
+  \node[below] at (a2) {$a_2$};
+  \node[below] at (ai) {$a_i$};
+  \node[below] at (ai1) {$a_{i+1}$};
+  \node[below] at (an) {$a_n=b$};
+
+  % Dashed vertical lines at partition points
+  \foreach \x in {a0,a1,a2,ai,ai1,an} {
+    \draw[dashed] (\x) -- (\x |- 0,4.2);
+  }
+
+  % The curve (a smooth downward arc from left to right)
+  % Control points chosen to mimic the scanned figure
+  \draw[thick] (1,3.6) .. controls (2.5,4.3) and (4.5,4.3) .. (5.5,2.8)
+               .. controls (6.2,2.0) and (7.0,1.6) .. (7.8,1.9);
+
+  % Rectangle heights (read from the curve / figure)
+  % s0: [a0,a1], height ~1.6
+  % s1: [a1,a2], height ~2.4 (lower) and ~3.3 (upper)
+  % s2: [a2,ai], height ~3.3 (lower) and ~4.0 (upper)
+  % si: [ai,ai1], height ~2.8 (lower) and ~3.5 (upper)
+  % s_{n-1}: [ai1,an], height ~1.5 (lower) and ~2.0 (upper)
+
+  % Lower rectangles (filled with gray)
+  \fill[gray!25] (a0) rectangle (a1 |- 0,1.6);
+  \fill[gray!25] (a1) rectangle (a2 |- 0,2.4);
+  \fill[gray!25] (a2) rectangle (ai |- 0,3.3);
+  \fill[gray!25] (ai) rectangle (ai1 |- 0,2.8);
+  \fill[gray!25] (ai1) rectangle (an |- 0,1.5);
+
+  % Upper rectangles (filled with north east lines)
+  \fill[pattern=north east lines] (a0) rectangle (a1 |- 0,2.4);
+  \fill[pattern=north east lines] (a1) rectangle (a2 |- 0,3.3);
+  \fill[pattern=north east lines] (a2) rectangle (ai |- 0,4.0);
+  \fill[pattern=north east lines] (ai) rectangle (ai1 |- 0,3.5);
+  \fill[pattern=north east lines] (ai1) rectangle (an |- 0,2.0);
+
+  % Redraw rectangle borders
+  \draw (a0) rectangle (a1 |- 0,1.6);
+  \draw (a1) rectangle (a2 |- 0,2.4);
+  \draw (a2) rectangle (ai |- 0,3.3);
+  \draw (ai) rectangle (ai1 |- 0,2.8);
+  \draw (ai1) rectangle (an |- 0,1.5);
+
+  \draw (a0) rectangle (a1 |- 0,2.4);
+  \draw (a1) rectangle (a2 |- 0,3.3);
+  \draw (a2) rectangle (ai |- 0,4.0);
+  \draw (ai) rectangle (ai1 |- 0,3.5);
+  \draw (ai1) rectangle (an |- 0,2.0);
+
+  % Labels inside lower rectangles
+  \node at ($(a0)!0.5!(a1) + (0,0.8)$) {$s_0$};
+  \node at ($(a1)!0.5!(a2) + (0,1.2)$) {$s_1$};
+  \node at ($(a2)!0.5!(ai) + (0,1.65)$) {$s_2$};
+  \node at ($(ai)!0.5!(ai1) + (0,1.4)$) {$s_i$};
+  \node at ($(ai1)!0.5!(an) + (0,0.75)$) {$s_{n-1}$};
+
+  % Labels inside upper rectangles (with prime)
+  \node at ($(a0)!0.5!(a1) + (0,2.0)$) {$s'_1$};
+  \node at ($(a1)!0.5!(a2) + (0,2.85)$) {$s'_2$};
+  \node at ($(a2)!0.5!(ai) + (0,3.65)$) {$s'_3$};
+  \node at ($(ai)!0.5!(ai1) + (0,3.15)$) {$s'_{n-2}$};
+  \node at ($(ai1)!0.5!(an) + (0,1.75)$) {$s'_n$};
+
+  % Small ticks on x-axis for a0..an
+  \foreach \x in {1,2.2,3.4,5.2,6.2,7.8} {
+    \draw (\x,0) -- (\x,-0.08);
+  }
+\end{tikzpicture}
+	\caption{}
+	\label{fig:5-8}
+\end{figure}
+
+\begin{sourceexample}{1}
+
+	计算 \(\displaystyle\int_0^1 xdx\) 与 \(\displaystyle\int_0^1 x^2dx\) 的值。
+
+	定义函数 \(f,g:[0,1]\to\R\) 如下：
+	\[
+	\forall\,x\in[0,1],\qquad f(x)=x,\quad g(x)=x^2.
+	\]
+	则函数 \(f,g\) 在 \([0,1]\) 上连续，因而在 \([0,1]\) 上 Riemann 可积。根据上述推论有
+	\[
+	\int_0^1 xdx=\lim_{n\to+\infty}\sum_{i=0}^{n-1}f\left(0+i\frac1n\right)\cdot\frac1n
+	=\lim_{n\to+\infty}\sum_{i=0}^{n-1}\frac{i}{n^2}=\lim_{n\to+\infty}\frac{n(n-1)}{2n^2}=\frac12.
+	\]
+	\[
+	\int_0^1 x^2dx=\lim_{n\to+\infty}\sum_{i=0}^{n-1}g\left(0+i\frac1n\right)\cdot\frac1n
+	=\lim_{n\to+\infty}\sum_{i=0}^{n-1}\frac{i^2}{n^3}=\lim_{n\to+\infty}\frac{(n-1)n(2n-1)}{6n^3}=\frac13.
+	\]
+	从图形上看，积分 \(\displaystyle\int_0^1 xdx\) 与 \(\displaystyle\int_0^1 x^2dx\) 分别表示图 5-9 中两个阴影部分的面积。
+
+\end{sourceexample}
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}
+\begin{axis}[
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-0.2, xmax=1.4,
+    ymin=-0.2, ymax=1.4,
+    xtick={0,1},
+    ytick={},
+    xticklabels={$0$,$1$},
+    axis equal image,
+    width=8cm,
+    height=8cm,
+    clip=false,
+]
+\addplot[domain=0:1, samples=150, thick] {x};
+\fill[pattern=north east lines, pattern color=black] (axis cs:0,0) -- (axis cs:1,0) -- (axis cs:1,1) -- cycle;
+\node[font=\footnotesize] at (axis cs:0.35,0.65) {$\int_0^1 x\,dx$};
+\node[font=\footnotesize] at (axis cs:-0.08,-0.08) {$O$};
+\end{axis}
+\end{tikzpicture}\quad
+		\begin{tikzpicture}
+\begin{axis}[
+  axis lines=middle,
+  xlabel={$x$},
+  ylabel={$y$},
+  xmin=-0.2, xmax=1.3,
+  ymin=-0.2, ymax=1.3,
+  xtick={0,1},
+  xticklabels={$0$,$1$},
+  ytick={},
+  width=8cm,
+  height=7cm,
+  clip=false,
+]
+% 曲线下方面积（x=0 到 1）斜线填充
+\addplot[name path=A, draw=none, domain=0:1, samples=150] {x^2};
+\path[name path=B] (axis cs:0,0) -- (axis cs:1,0);
+\addplot[pattern=north east lines, pattern color=black] fill between[of=A and B];
+% 曲线 y=x^2
+\addplot[domain=0:1.1, samples=150, thick] {x^2};
+% 标注积分
+\node[font=\footnotesize] at (axis cs:0.32,0.38) {$\displaystyle\int_0^1 x^2\,dx$};
+% 原点
+\node[font=\footnotesize, anchor=north east] at (axis cs:0,0) {$O$};
+\end{axis}
+\end{tikzpicture}
+	\caption{}
+	\label{fig:5-9}
+\end{figure}
+
+\begin{sourceexample}{2}
+
+	证明：\(\forall\,a>0,\ b>0\)，
+	\[
+	\int_1^b\frac1x dx=\int_a^{ab}\frac1x dx.
+	\]
+	首先设 \(b>1\)：由于函数 \(x\longmapsto f(x)=\dfrac1x\)，\(x\in\ ]0,+\infty[\) 连续，故 \(f\) 在 \([1,b]\) 及 \([a,ab]\) 可积，根据上述推论我们有
+	\[
+	\int_1^b\frac1x dx=\lim_{n\to+\infty}\sum_{i=0}^{n-1}\frac{1}{1+i\dfrac{b-1}{n}}\cdot\frac{b-1}{n}
+	\]
+	\[
+	=\lim_{n\to+\infty}\sum_{i=0}^{n-1}\frac{1}{a+i\dfrac{ab-a}{n}}\cdot\frac{ab-a}{n}=\int_a^{ab}\frac1x dx.
+	\]
+	再设 \(b<1\)：根据约定，\(\displaystyle\int_1^b\frac1x dx=-\int_b^1\frac1x dx\)，因此由 \(b>1\) 时所证结论我们有
+	\[
+	\int_1^b\frac1x dx=-\int_b^1\frac1x dx=-\int_b^{b\cdot\frac1b}\frac1x dx=-\int_1^{\frac1b}\frac1x dx
+	\]
+	\[
+	=-\int_{ab}^{ab\cdot\frac1b}\frac1x dx=-\int_{ab}^a\frac1x dx=\int_a^{ab}\frac1x dx.
+	\]
+	最后设 \(b=1\)：这时，由约定 \(\displaystyle\int_1^1\frac1x dx=\int_a^a\frac1x dx=0\)。
+
+\end{sourceexample}
+
+\begin{sourceexample}{3}
+
+	证明实数序列 \(\left\langle\dfrac1{n^3}\sum_{k=0}^{n-1}k^2\sin\dfrac{k\pi}{n}\right\rangle\) 收敛，并求其极限。
+
+	事实上，考虑函数 \(x\longmapsto f(x)=x^2\sin\pi x\)，\(x\in[0,1]\)。它在 \([0,1]\) 上连续，因此 \(f\) 在 \([0,1]\) 上 Riemann 可积。根据上述推论，我们有
+	\[
+	\int_0^1 f(x)dx=\lim_{n\to+\infty}\sum_{k=0}^{n-1}f\left(0+k\frac1n\right)\frac1n
+	=\lim_{n\to+\infty}\sum_{k=0}^{n-1}\left(\frac kn\right)^2\sin\frac{k\pi}{n}\cdot\frac1n
+	\]
+	\[
+	=\lim_{n\to+\infty}\frac1{n^3}\sum_{k=0}^{n-1}k^2\sin\frac{k\pi}{n}.
+	\]
+	此即表明实数序列 \(\left\langle\dfrac1{n^3}\sum_{k=0}^{n-1}k^2\sin\dfrac{k\pi}{n}\right\rangle\) 收敛，其极限为
+	\[
+	\int_0^1 x^2\sin\pi x\,dx.
+	\]
+
+\end{sourceexample}
+
+\subsection*{习 题}
+
+\begin{exercise}
+	\item 设 \(f:\R\to\R\) 在任意有限区间 \([\alpha,\beta]\) 上 Riemann 可积，直接用 Riemann 积分定义证明下列等式：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\displaystyle\int_a^b f(x)dx=\int_{a+c}^{b+c}f(x-c)dx,\quad\forall\,c\in\R\)。
+		\item \(\displaystyle\int_{ac}^{bc}f(x)dx=c\int_a^b f(cx)dx,\quad\forall\,c\in\R\)。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 证明\rthm{thm:riemann-sum-characterization} 的推论。
+\end{exercise}
+
+\begin{exercise}
+	\item 证明下列各极限存在，并求其极限。
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\displaystyle\lim_{n\to+\infty}\left(\frac1{n+1}+\frac1{n+2}+\cdots+\frac1{n+n}\right)\)。
+		\item \(\displaystyle\lim_{n\to+\infty}\left(\frac{n}{n^2+1}+\frac{n}{n^2+2^2}+\cdots+\frac{n}{n^2+n^2}\right)\)。
+		\item \(\displaystyle\lim_{n\to+\infty}\frac1n\left(\sin\frac\pi n+\sin\frac{2\pi}{n}+\cdots+\sin\frac{n\pi}{n}\right)\)。
+		\item \(\displaystyle\lim_{n\to+\infty}\frac{1^a+2^a+\cdots+n^a}{n^{a+1}}\quad(a>0)\)。
+		\item \(\displaystyle\lim_{n\to+\infty}\sin\frac\pi n\sum_{k=0}^{n-1}\frac1{2+\cos\dfrac{k\pi}{n}}\)。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:[a,b]\to\R\) 是任一有界函数。\(\sigma=(a_0,a_1,\cdots,a_n)\) 是 \([a,b]\) 的任一分割。令
+	\[
+	m_i=\inf_{x\in[a_i,a_{i+1}]}f(x),\qquad M_i=\sup_{x\in[a_i,a_{i+1}]}f(x),
+	\]
+	\[
+	D_i(f,\sigma)=\sum_{i=0}^{n-1}m_i(a_{i+1}-a_i),\qquad D_s(f,\sigma)=\sum_{i=0}^{n-1}M_i(a_{i+1}-a_i).
+	\]
+	我们分别称 \(D_i(f,\sigma)\) 与 \(D_s(f,\sigma)\) 为 \(f\) 关于 \(\sigma\) 的 Darboux 下和与 Darboux 上和。证明下述结论等价：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(f\) 在 \([a,b]\) 上 Riemann 可积。
+		\item \(\forall\,\varepsilon>0\)，\(\exists\,\sigma\) 使得 \(0\le D_s(f,\sigma)-D_i(f,\sigma)<\varepsilon\)。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 我们用 \(\mathscr{A}\) 表示 \([a,b]\) 的所有分割的集合。\(\forall\,\sigma_1,\sigma_2\in\mathscr{A}\)，我们称 \(\sigma_2\) 比 \(\sigma_1\) 细，如果 \(\sigma_1\) 的分点也是 \(\sigma_2\) 的分点。这时记为 \(\sigma_1\prec\sigma_2\)。
+
+	这个题目的目的是证明：
+	\[
+	\forall\,\sigma,\sigma'\in\mathscr{A},\qquad D_i(f,\sigma)\le D_s(f,\sigma').
+	\]
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：\(\forall\,\sigma\in\mathscr{A}\)，若 \(\sigma'\) 是比 \(\sigma\) 多一个分点的分割，则
+		\[
+		D_i(f,\sigma)\le D_i(f,\sigma'),\qquad D_s(f,\sigma')\le D_s(f,\sigma).
+		\]
+		\item 证明：若 \(\sigma,\sigma'\in\mathscr{A}\) 且 \(\sigma\prec\sigma'\)，则
+		\[
+		D_i(f,\sigma)\le D_i(f,\sigma'),\qquad D_s(f,\sigma')\le D_s(f,\sigma).
+		\]
+		\item 证明：若 \(\sigma,\sigma'\in\mathscr{A}\)，则 \(\sigma\prec\sigma\vee\sigma'\)，\(\sigma'\prec\sigma\vee\sigma'\)。
+		\item 由此推得：\(D_i(f,\sigma)\le D_s(f,\sigma')\)。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:[a,b]\to\R\) 是任一有界函数，令
+	\[
+	E=\{D_i(f,\sigma)\mid\sigma\in\mathscr{A}\},\qquad F=\{D_s(f,\sigma)\mid\sigma\in\mathscr{A}\}.
+	\]
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：\(E\) 是上有界集，\(F\) 是下有界集。
+		\item 若令 \(D_i(f)=\sup E\)，\(D_s(f)=\inf F\)，则 \(D_i(f)\le D_s(f)\)。
+		\item 证明：\(f\) 在 \([a,b]\) 上的上积分 \(S(f)\) 与下积分 \(i(f)\)（上、下积分定义见 §2 习题 5）满足下述等式：
+		\[
+		i(f)=D_i(f),\qquad S(f)=D_s(f).
+		\]
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:[a,b]\to\R\) 是任一有界函数。证明下述各结论等价：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(f\in\mathscr{R}[a,b]\)。
+		\item \(\displaystyle\lim_{\|\sigma\|\to0}S(f,\sigma,\xi)=A\ (A\in\R)\)。
+		\item \(D_i(f)=D_s(f)\)。
+		\item \(i(f)=S(f)\)。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:[a,b]\to[c,d]\) 是任一严格单调上升的连续函数。\(f^{-1}:[c,d]\to[a,b]\) 是 \(f\) 的反函数。
+	\begin{enumerate}[label=\arabic*)]
+		\item 设 \(\sigma=(c_0,c_1,\cdots,c_n)\) 是 \([c,d]\) 的任一分割，\(\sigma^{-1}=(f^{-1}(c_0),f^{-1}(c_1),\cdots,f^{-1}(c_n))\) 是对应于 \(\sigma\) 的 \([a,b]\) 的一个分割。证明：
+		\[
+		D_i(f^{-1},\sigma)+D_i(f,\sigma^{-1})=bd-ac.
+		\]
+		\item 利用上述等式，证明：
+		\[
+		\int_c^d f^{-1}(x)dx+\int_a^b f(x)dx=bd-ac.
+		\]
+		\item 利用 2) 的公式计算积分 \(\displaystyle\int_0^1\sqrt x\,dx\)。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:[a,b]\to\R\) 是任一有界函数。这个题目的目的是要证明：若 \(f\in\mathscr{R}[a,b]\)，则 \(f\) 在 \([a,b]\) 上的连续点集是一个无限集。
+	\begin{enumerate}[label=\arabic*)]
+		\item 设 \(\sigma=(a_0,a_1,\cdots,a_m)\) 是 \([a,b]\) 的一个分割，使得 \(0\le D_s(f,\sigma)-D_i(f,\sigma)<b-a\)，证明：存在 \(i\in\{0,1,\cdots,m-1\}\) 使得
+		\[
+		0\le M_i-m_i<1,
+		\]
+		这里 \(m_i=\inf_{x\in[a_i,a_{i+1}]}f(x)\)，\(M_i=\sup_{x\in[a_i,a_{i+1}]}f(x)\)。
+		\item 证明：存在实数 \(a_1,b_1\) 使得 \(a<a_1<b_1<b\)，并且
+		\[
+		0\le\sup_{x\in[a_1,b_1]}f(x)-\inf_{x\in[a_1,b_1]}f(x)<1.
+		\]
+		\item 证明：存在实数 \(a_2,b_2\) 使得 \(a<a_1<a_2<b_2<b_1<b\)，并且
+		\[
+		0\le\sup_{x\in[a_2,b_2]}f(x)-\inf_{x\in[a_2,b_2]}f(x)<\frac12.
+		\]
+		\item 将此过程无限地继续下去，我们得到一闭区间族 \(\{[a_n,b_n]\}_{n\in\N}\)，使得
+		\[
+		[a_{n+1},b_{n+1}]\subset[a_n,b_n],\qquad 0\le\sup_{x\in[a_n,b_n]}f(x)-\inf_{x\in[a_n,b_n]}f(x)<\frac1n,
+		\]
+		\[
+		\forall\,n\in\N.
+		\]
+		由此推得存在一点 \(x\in[a,b]\) 使得 \(f\) 在 \(x\) 处连续。
+		\item 证明：\(f\) 在 \([a,b]\) 上有无限多个连续点。
+		\item 假设 \(f\in\mathscr{R}[a,b]\)，并且 \(f>0\)，证明 \(\displaystyle\int_a^b f(x)dx>0\)。
+	\end{enumerate}
+\end{exercise}
+
+\section{基本初等函数的定义}
+
+现在我们利用积分函数来定义对数函数、指数函数、幂函数等基本初等函数，并研究它们的基本性质及其图形。
+
+在定义基本初等函数之前，我们先介绍如下概念。
+
+\subsection{函数图形的无穷远分支及其渐近线}
+
+\begin{mydef*}{}
+
+	设 \(X\subset\R\) 是任一非空集合，\(f:X\to\R\) 是任一函数。
+
+	\begin{enumerate}[label=\arabic*)]
+		\item 若 \(+\infty\) 或 \(-\infty\) 是 \(X\) 的聚点，并且存在直线 \(L:y=kx+b\) 使得
+		\[
+		f(x)-(kx+b)\to0\quad(x\to+\infty\ \text{或}\ -\infty),
+		\]
+		则我们称函数 \(f\) 的图形 \(Gr(f)\) 有无穷远分支 \(\Gamma_{+\infty}\) 或 \(\Gamma_{-\infty}\)，而直线 \(L\) 称为此无穷远分支的渐近线，特别地，当 \(k=0\) 时，直线 \(L:y=b\) 又称为水平渐近线。
+
+		\item 若 \(a\in\R\) 是 \(X\) 的有限聚点，使得
+		\[
+		f(x)\to+\infty\ \text{或}\ -\infty\quad(x\to a^+\ \text{或}\ x\to a^-),
+		\]
+		则我们称函数 \(f\) 的图形 \(Gr(f)\) 有无穷远分支 \(\Gamma_{a^+}\) 或 \(\Gamma_{a^-}\)，而直线 \(x=a\) 称为此无穷远分支的垂直渐近线。
+	\end{enumerate}
+
+\end{mydef*}
+
+由上述渐近线的定义可知，直线 \(L:y=kx+b\) 是无穷远分支 \(\Gamma_{+\infty}\) 或 \(\Gamma_{-\infty}\) 的渐近线，当且仅当：
+\[
+k=\lim_{\substack{x\to+\infty\\(-\infty)}}\frac{f(x)}{x},\qquad b=\lim_{\substack{x\to+\infty\\(-\infty)}}[f(x)-kx].
+\]
+
+\subsection{基本初等函数的定义及性质}
+	\label{sec:5-4-2}
+
+\subsubsection*{1) 自然对数函数}
+
+由于函数 \(x\longmapsto\dfrac1x\)，\(x\in\ ]0,+\infty[\) 连续，故它的积分函数
+\[
+x\longmapsto\int_1^x\frac1t\,dt,\quad x\in\ ]0,+\infty[\ \text{存在}.
+\]
+
+\begin{mydef*}{}
+
+	函数 \(x\longmapsto\displaystyle\int_1^x\frac1t\,dt\)，\(x\in\ ]0,+\infty[\) 称为自然对数函数，记为 \(\log\)（或 \(\ln\)）。\(\forall\,x\in\ ]0,+\infty[\)，\(\log x\) 称为 \(x\) 的自然对数。
+
+\end{mydef*}
+
+于是
+\[
+\log x=\int_1^x\frac1t\,dt,\quad\forall\,x\in\ ]0,+\infty[.
+\]
+\[
+\log 1=0.
+\]
+
+自然对数函数的基本性质可综述如下。
+
+\begin{mythm}{}{natural-logarithm-properties}
+
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\forall\,x,y\in\ ]0,+\infty[,\ \forall\,n\in\Z\)，
+		\[
+		\log xy=\log x+\log y,
+		\]
+		\[
+		\log\frac xy=\log x-\log y,
+		\]
+		\[
+		\log x^n=n\log x.
+		\]
+
+		\item \(\log\) 是严格单调上升的连续函数，并且
+		\[
+		\lim_{x\to0^+}\log x=-\infty,\qquad\lim_{x\to+\infty}\log x=+\infty.
+		\]
+		因此 \(\log\) 是从乘法群 \((\R_*^+,\cdot)\) 到加法群 \((\R,+)\) 上的同构映射。
+
+		\item \(\log\) 的图形有无穷远分支 \(\Gamma_{0^+}\) 及垂直渐近线 \(x=0\)。
+	\end{enumerate}
+
+\end{mythm}
+
+\begin{proof}
+
+	1) \(\forall\,x,y\in\ ]0,+\infty[\)，由 §3 例 2 知
+	\[
+	\log xy=\int_1^{xy}\frac1t\,dt=\int_1^x\frac1t\,dt+\int_x^{xy}\frac1t\,dt=\int_1^x\frac1t\,dt+\int_1^y\frac1t\,dt=\log x+\log y.
+	\]
+	特别地取 \(y=\dfrac1x\)，我们得到
+	\[
+	0=\log1=\log x\cdot\frac1x=\log x+\log\frac1x.
+	\]
+	从而 \(\log\dfrac1x=-\log x\)，因此
+	\[
+	\log\frac xy=\log x+\log\frac1y=\log x-\log y.
+	\]
+	现在设 \(n\in\Z\)。
+
+	若 \(n\in\N\)：则
+	\[
+	\log x^n=\log\underbrace{x\cdot x\cdot\cdots\cdot x}_{n\text{ 个}}=\log x+\log x+\cdots+\log x=n\log x.
+	\]
+	若 \(-n\in\N\)：则令 \(m=-n\)。从而
+	\[
+	\log x^n=\log x^{-m}=\log\frac1{x^m}=-\log x^m=-m\log x=n\log x.
+	\]
+	若 \(n=0\)：则
+	\[
+	\log x^0=\log1=0=0\cdot\log x.
+	\]
+	因此 \(\forall\,n\in\Z\)，\(\log x^n=n\log x\)。
+
+	2) 因为积分函数连续，所以自然对数函数 \(\log\) 在 \(]0,+\infty[\) 上连续。
+
+	现在设 \(x_1,x_2\in\ ]0,+\infty[\)，并且 \(x_1<x_2\)。则
+	\[
+	\log x_2-\log x_1=\int_{x_1}^{x_2}\frac1t\,dt>0.
+	\]
+	因此 \(\log x_2>\log x_1\)，从而 \(\log\) 在 \(]0,+\infty[\) 上严格单调上升。
+
+	另一方面，由于
+	\[
+	\log2^n=n\log2,\qquad \log2>\log1=0,
+	\]
+	故
+	\[
+	\lim_{x\to+\infty}\log x=+\infty;
+	\]
+	\[
+	\lim_{x\to0^+}\log x=-\lim_{x\to0^+}\log\frac1x=-\lim_{y\to+\infty}\log y=-\infty.
+	\]
+	由此并结合性质 1) 知 \(\log\) 是从乘法群 \((\R_*^+,\cdot)\) 到加法群 \((\R,+)\) 上的同构映射。
+
+	3) 因为 \(\lim_{x\to0^+}\log x=-\infty\)，故 \(\log\) 的图形有无穷远分支 \(\Gamma_{0^+}\)，并且负 \(y\) 轴是它的垂直渐近线。
+
+\end{proof}
+
+根据上述分析，自然对数函数 \(\log\) 的图形可描述如下：
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}
+\begin{axis}[
+    width=8cm,
+    height=8cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-0.5,
+    xmax=4.5,
+    ymin=-3,
+    ymax=2.5,
+    xtick={0,1,2,3,4},
+    ytick={-3,-2,-1,0,1,2},
+    xticklabels={$0$,$1$,$2$,$3$,$4$},
+    yticklabels={$-3$,$-2$,$-1$,$0$,$1$,$2$},
+    label style={font=\footnotesize},
+    tick label style={font=\footnotesize},
+    x label style={at={(ticklabel* cs:1)},anchor=north west,font=\footnotesize},
+    y label style={at={(ticklabel* cs:1)},anchor=south east,font=\footnotesize},
+    samples=200,
+    domain=0.02:4.5,
+    restrict y to domain=-3:2.5,
+]
+\addplot[smooth] {ln(x)};
+\node[font=\footnotesize] at (axis cs:2.5,1.3) {$y=\log x$};
+\end{axis}
+\end{tikzpicture}
+	\caption{}
+	\label{fig:5-10}
+\end{figure}
+
+\textbf{附注}\quad 由于 \(\log\) 是从 \(]0,+\infty[\) 到 \(]-\infty,+\infty[\) 上的严格单调上升连续函数，故存在唯一的 \(\bar x\in\ ]0,+\infty[\) 使得 \(\log\bar x=1\)，我们习惯地记 \(\bar x=e\)，于是
+\[
+\log e=1.
+\]
+
+\subsubsection*{2) 以 \(a\ (0<a\neq1)\) 为底的对数函数}
+
+由于 \(0<a\neq1\)，故 \(\log a\neq0\)。
+
+\begin{mydef*}{}
+
+	函数 \(x\longmapsto\dfrac{\log x}{\log a}\)，\(x\in\ ]0,+\infty[\) 称为以 \(a\) 为底的对数函数，记为 \(\log_a\)。\(\forall\,x\in\ ]0,+\infty[\)，\(\log_a x\) 称为 \(x\) 的以 \(a\) 为底的对数。
+
+\end{mydef*}
+
+若 \(a=10\)，则 \(\log_a x\) 称为 \(x\) 的常用对数。
+
+由于 \(\log e=1\)，故
+\[
+\log_e x=\log x\quad(x\in\ ]0,+\infty[).
+\]
+因此自然对数函数 \(\log\) 就是以 \(e\) 为底的对数函数。
+
+利用 \(\log_a\) 的定义及\rthm{thm:natural-logarithm-properties} 可证明关于 \(\log_a\) 的下述性质。
+
+\begin{mythm}{}{general-logarithm-properties}
+
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\forall\,x,y\in\ ]0,+\infty[\)，\(\forall\,n\in\Z\)，
+		\[
+		\log_a xy=\log_a x+\log_a y,
+		\]
+		\[
+		\log_a\frac xy=\log_a x-\log_a y,
+		\]
+		\[
+		\log_a x^n=n\log_a x.
+		\]
+
+		\item 若 \(a>1\ (0<a<1)\)，则 \(\log_a\) 是严格单调上升（下降）的连续函数，并且
+		\[
+		\lim_{x\to0^+}\log_a x=-\infty,\quad\lim_{x\to+\infty}\log_a x=+\infty.
+		\]
+		\[
+		\left(\lim_{x\to0^+}\log_a x=+\infty,\quad\lim_{x\to+\infty}\log_a x=-\infty.\right)
+		\]
+		因此 \(\log_a\) 是从乘法群 \((\R_*^+,\cdot)\) 到加法群 \((\R,+)\) 上的同构映射。
+
+		\item 当 \(a>1\ (0<a<1)\) 时，\(\log_a\) 的图形有无穷远分支 \(\Gamma_{0^+}\)，并且负（正）\(y\) 轴是 \(\Gamma_{0^+}\) 的垂直渐近线。
+	\end{enumerate}
+
+\end{mythm}
+
+定理的证明留给读者作为练习。
+
+\(\log_a\) 的图形如图 5-11 所示。
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}
+\begin{axis}[
+    width=8cm,
+    height=8cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-0.5,
+    xmax=5,
+    ymin=-4,
+    ymax=4,
+    xtick={1},
+    ytick=\empty,
+    xlabel style={at={(ticklabel cs:1)},anchor=north west},
+    ylabel style={at={(ticklabel cs:1)},anchor=south east},
+    samples=200,
+    domain=0.02:5,
+]
+\addplot {ln(x)/ln(3)};
+\addplot {ln(x)/ln(0.3)};
+\node at (axis cs:3.5,2.5) {\footnotesize $y=\log_a x\ (a>1)$};
+\node at (axis cs:3.5,-2.5) {\footnotesize $y=\log_a x\ (0<a<1)$};
+\node at (axis cs:0.15,-0.35) {\footnotesize $O$};
+\node at (axis cs:1,-0.35) {\footnotesize $1$};
+\end{axis}
+\end{tikzpicture}
+	\caption{}
+	\label{fig:5-11}
+\end{figure}
+
+\subsubsection*{3) 以 \(e\) 为底的指数函数}
+
+由于自然对数函数 \(x\longmapsto\log x\)，\(x\in\ ]0,+\infty[\) 是从 \(]0,+\infty[\) 到 \(\R\) 上的严格单调上升的连续函数，根据\rthm{thm:inverse-function-continuity} 知，它有反函数存在，并且是从 \(\R\) 到 \(]0,+\infty[\) 上的严格单调上升的连续函数。我们记这个反函数为：
+\[
+x\longmapsto\exp x,\quad x\in\R.
+\]
+于是我们有
+\[
+\log(\exp x)=x,\quad\forall\,x\in\R,
+\]
+\[
+\exp(\log x)=x,\quad\forall\,x\in\R_*^+.
+\]
+现在我们特别地取 \(x=n\in\Z\)，由 \(\log\) 的性质有
+\[
+\log(\exp n)=n=n\log e=\log e^n.
+\]
+从而
+\[
+\exp n=e^n.
+\]
+这启发我们引入下述定义及记号。
+
+\begin{mydef*}{}
+
+	\(\forall\,x\in\R\)，我们令
+	\[
+	e^x\triangleq\exp x.
+	\]
+	函数 \(x\longmapsto e^x\)，\(x\in\R\) 称为以 \(e\) 为底 \(x\) 为指数的指数函数。
+
+\end{mydef*}
+
+关于此函数的性质，我们有下述定理。
+
+\begin{mythm}{}{exponential-function-properties}
+
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\forall\,x,y\in\R\)，
+		\[
+		e^{x+y}=e^x\cdot e^y,\qquad e^{x-y}=\frac{e^x}{e^y},
+		\]
+		\[
+		e^0=1,\qquad y=e^x\Longleftrightarrow x=\log y.
+		\]
+
+		\item \(x\longmapsto e^x\)，\(x\in\R\) 是严格单调上升的连续函数并且
+		\[
+		\lim_{x\to-\infty}e^x=0,\qquad\lim_{x\to+\infty}e^x=+\infty.
+		\]
+		因此它是从加法群 \((\R,+)\) 到乘法群 \((\R_*^+,\cdot)\) 上的同构映射。
+
+		\item 此函数的图形有无穷远分支 \(\Gamma_{-\infty}\)，并且 \(y=0\) 是 \(\Gamma_{-\infty}\) 的水平渐近线。
+	\end{enumerate}
+
+\end{mythm}
+
+\begin{proof}
+
+	1) \(\forall\,x,y\in\R\)，由于 \(\log(e^x)=x\)，故
+	\[
+	\log(e^{x+y})=x+y,\qquad\log(e^{x-y})=x-y,
+	\]
+	\[
+	\log(e^x\cdot e^y)=\log e^x+\log e^y=x+y,
+	\]
+	\[
+	\log\frac{e^x}{e^y}=\log e^x-\log e^y=x-y.
+	\]
+	由 \(\log\) 的单射性推知，
+	\[
+	e^{x+y}=e^x\cdot e^y,\qquad e^{x-y}=\frac{e^x}{e^y},\qquad e^0=1.
+	\]
+	同样由 \(\log e^x=x\) 推得
+	\[
+	y=e^x\Longleftrightarrow\log y=\log e^x=x.
+	\]
+
+	2) 由于 \(x\longmapsto e^x\)，\(x\in\R\) 是自然对数函数 \(\log\) 的反函数，故它是从 \(\R\) 到 \(\R_*^+\) 上的严格单调上升的连续函数，从而
+	\[
+	\lim_{x\to-\infty}e^x=0,\qquad\lim_{x\to+\infty}e^x=+\infty.
+	\]
+	因此结合性质 1) 知以 \(e\) 为底的指数函数是从加法群 \((\R,+)\) 到乘法群 \((\R_*^+,\cdot)\) 上的同构映射。
+
+	3) 由于 \(\lim_{x\to-\infty}e^x=0\)，故此函数的图形有无穷远分支 \(\Gamma_{-\infty}\)，它以 \(y=0\) 为其水平渐近线。
+
+\end{proof}
+
+由于以 \(e\) 为底的指数函数是自然对数函数的反函数，故这两个函数的图形关于直线 \(y=x\) 对称，从而由 \(\log\) 的图形得到函数 \(x\longmapsto e^x\)，\(x\in\R\) 的图形，如图 5-12 所示。
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}
+\begin{axis}[
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-3.5,
+    xmax=2,
+    ymin=-0.5,
+    ymax=4,
+    xtick={-3,-2,-1,0,1},
+    ytick={1,2,3},
+    tick label style={font=\footnotesize},
+    label style={font=\footnotesize},
+    width=7cm,
+    height=7cm,
+    samples=200,
+    domain=-3.5:1.5,
+]
+\addplot {exp(x)};
+\node[font=\footnotesize] at (axis cs:1.2,2.8) {$y=\mathrm{e}^{x}$};
+\end{axis}
+\end{tikzpicture}
+	\caption{}
+	\label{fig:5-12}
+\end{figure}
+
+\subsubsection*{4) 以 \(a\ (a>0)\) 为底的指数函数}
+
+\begin{mydef*}{}
+
+	\(\forall\,x\in\R\)，令
+	\[
+	a^x\triangleq e^{x\log a}.
+	\]
+	函数 \(x\longmapsto a^x\)，\(x\in\R\) 称为以 \(a\) 为底 \(x\) 为指数的指数函数。
+
+\end{mydef*}
+
+由以 \(e\) 为底的指数函数的性质可推得以 \(a\) 为底的指数函数的下述性质。
+
+\begin{mythm}{}{general-exponential-properties}
+
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\forall\,x,y\in\R\)，
+		\[
+		\log a^x=x\log a,\qquad a^0=1,
+		\]
+		\[
+		a^{x+y}=a^x\cdot a^y,\qquad a^{-x}=\frac1{a^x}=\left(\frac1a\right)^x,
+		\]
+		\[
+		a^{x-y}=\frac{a^x}{a^y},\qquad (a^x)^y=a^{xy},
+		\]
+		\[
+		(ab)^x=a^x\cdot b^x\ (b>0),\qquad y=a^x\Longleftrightarrow x=\log_a y.
+		\]
+
+		\item 若 \(a>1\)，则 \(x\longmapsto a^x\)，\(x\in\R\) 是严格单调上升的连续函数，并且
+		\[
+		\lim_{x\to-\infty}a^x=0,\qquad\lim_{x\to+\infty}a^x=+\infty.
+		\]
+		若 \(0<a<1\)，则 \(x\longmapsto a^x\)，\(x\in\R\) 是严格单调下降的连续函数，并且
+		\[
+		\lim_{x\to-\infty}a^x=+\infty,\qquad\lim_{x\to+\infty}a^x=0.
+		\]
+		若 \(a=1\)，则 \(1^x=1\)，\(\forall\,x\in\R\)。
+
+		因此 \(\forall\,a>0\) 且 \(a\neq1\)，\(x\longmapsto a^x\)，\(x\in\R\) 是从加法群 \((\R,+)\) 到乘法群 \((\R_*^+,\cdot)\) 上的同构映射。
+
+		\item 若 \(a>1\ (0<a<1)\)，函数 \(x\longmapsto a^x\)，\(x\in\R\) 的图形有无穷远分支 \(\Gamma_{-\infty}\ (\Gamma_{+\infty})\)，它以 \(y=0\) 为水平渐近线。
+	\end{enumerate}
+
+\end{mythm}
+
+定理的证明留给读者。
+
+由性质 1) 可知，函数 \(x\longmapsto a^x\)，\(x\in\R\) 是对数函数 \(x\longmapsto\log_a x\)，\(x\in\R_*^+\) 的反函数，故它的图形如图 5-13 所示。
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}
+\begin{axis}[
+    width=10cm,
+    height=7cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xlabel style={at={(ticklabel cs:1)},anchor=north west,font=\footnotesize},
+    ylabel style={at={(ticklabel cs:1)},anchor=south east,font=\footnotesize},
+    xmin=-3.5,
+    xmax=3.5,
+    ymin=-0.5,
+    ymax=4.5,
+    xtick={\empty},
+    ytick={1},
+    yticklabels={$1$},
+    tick label style={font=\footnotesize},
+    samples=200,
+    domain=-3.5:3.5,
+    restrict y to domain=-0.5:4.5,
+]
+% 指数函数 a>1 (例如 a=2)
+\addplot {2^x};
+\node[font=\footnotesize] at (axis cs:2.2,3.8) {$y=a^x\ (a>1)$};
+
+% 指数函数 0<a<1 (例如 a=1/2)
+\addplot {0.5^x};
+\node[font=\footnotesize] at (axis cs:-2.8,3.8) {$y=a^x$};
+\node[font=\footnotesize] at (axis cs:-2.8,3.2) {$(0<a<1)$};
+
+% 水平渐近线 y=0 (x轴)
+\draw[dashed] (axis cs:-3.5,0) -- (axis cs:3.5,0);
+
+% 直线 y=1 (a=1)
+\draw (axis cs:-3.5,1) -- (axis cs:3.5,1);
+\node[font=\footnotesize] at (axis cs:2.5,1.3) {$y=1\ (a=1)$};
+
+% 原点标记
+\node[font=\footnotesize] at (axis cs:-0.2,-0.3) {$O$};
+\end{axis}
+\end{tikzpicture}
+	\caption{}
+	\label{fig:5-13}
+\end{figure}
+
+\subsubsection*{5) 幂函数}
+
+我们知道
+
+i) 若 \(n\in\N\)，则 \(\forall\,x\in\R\)，\(x^n\triangleq\underbrace{x\cdot x\cdot\cdots\cdot x}_{n\text{ 个}}\)。
+
+ii) 若 \(-n\in\N\)，则 \(\forall\,x\in\R-\{0\}\)，\(x^n\triangleq\dfrac1{x^{-n}}=\left(\dfrac1x\right)^{-n}\)。
+
+iii) 若 \(n=0\)，则 \(\forall\,x\in\R-\{0\}\)，\(x^0=1\)。
+
+下面我们考虑 \(\alpha\in\R-\Z\)。
+
+\begin{mydef*}{}
+
+	设 \(\alpha\in\R-\Z\)，\(\forall\,x\in\ ]0,+\infty[\)，令
+	\[
+	x^\alpha\triangleq e^{\alpha\log x}.
+	\]
+	函数 \(x\longmapsto x^\alpha\)，\(x\in\ ]0,+\infty[\) 称为以 \(\alpha\) 为指数的幂函数。
+
+\end{mydef*}
+
+关于幂函数 \(x\longmapsto x^\alpha\)，\(x\in\ ]0,+\infty[\) 的性质，我们有下述定理。
+
+\begin{mythm}{}{power-function-properties}
+
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\forall\,\alpha,\beta\in\R-\Z\)，\(\forall\,x,y\in\ ]0,+\infty[\)，
+		\[
+		(xy)^\alpha=x^\alpha\cdot y^\alpha,\qquad(x^\alpha)^\beta=x^{\alpha\beta},\qquad x^{-\alpha}=\frac1{x^\alpha}=\left(\frac1x\right)^\alpha.
+		\]
+
+		\item 若 \(\alpha>0\ (<0)\)，则幂函数 \(x\longmapsto x^\alpha\)，\(x\in\ ]0,+\infty[\) 是严格单调上升（下降）的连续函数，并且
+		\[
+		\lim_{x\to0^+}x^\alpha=0,\qquad\lim_{x\to+\infty}x^\alpha=+\infty.
+		\]
+		\[
+		\left(\lim_{x\to0^+}x^\alpha=+\infty,\qquad\lim_{x\to+\infty}x^\alpha=0.\right)
+		\]
+		因此幂函数 \(x\longmapsto x^\alpha\)，\(x\in\ ]0,+\infty[\) 是从乘法群 \((\R_*^+,\cdot)\) 到乘法群 \((\R_*^+,\cdot)\) 上的同构映射。
+
+		\item 当 \(\alpha<0\) 时，幂函数 \(x\longmapsto x^\alpha\)，\(x\in\ ]0,+\infty[\) 的图形有两个无穷远分支 \(\Gamma_{0^+}\) 与 \(\Gamma_{+\infty}\)，并且 \(\Gamma_{0^+}\) 以正 \(y\) 轴为垂直渐近线，而 \(\Gamma_{+\infty}\) 以正 \(x\) 轴为水平渐近线。
+	\end{enumerate}
+
+\end{mythm}
+
+此定理可由\rthm{thm:natural-logarithm-properties} 及\rthm{thm:exponential-function-properties} 推出，详细证明过程由读者补充。
+
+幂函数 \(x\longmapsto x^\alpha\)，\(x\in\ ]0,+\infty[\) 的图形如图 5-14 所示。
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}
+\begin{axis}[
+  width=8cm,
+  height=7cm,
+  axis lines=middle,
+  xlabel={$x$},
+  ylabel={$y$},
+  xmin=-0.5,
+  xmax=4.5,
+  ymin=-0.5,
+  ymax=4.5,
+  xtick={0,1},
+  ytick={0,1},
+  xticklabels={$0$,$1$},
+  yticklabels={$0$,$1$},
+  domain=0.01:4.5,
+  samples=200,
+  clip=true,
+]
+% 幂函数 y=x^α 的几种情形
+
+% α>1（例如 α=2, α=3）
+\addplot {x^2};
+\addplot {x^3};
+
+% α=1
+\addplot {x};
+
+% 0<α<1（例如 α=1/2, α=1/3）
+\addplot {x^(1/2)};
+\addplot {x^(1/3)};
+
+% α=0（水平直线 y=1，x>0）
+\addplot[domain=0.01:4.5] {1};
+
+% α<0（例如 α=-1, α=-2）
+\addplot[domain=0.25:4.5] {x^(-1)};
+\addplot[domain=0.35:4.5] {x^(-2)};
+
+% 标注
+\node at (axis cs:3.2,3.6) {\footnotesize $\alpha=1$};
+\node at (axis cs:3.2,1.15) {\footnotesize $0<\alpha<1$};
+\node at (axis cs:3.2,0.35) {\footnotesize $\alpha<0$};
+\node at (axis cs:1.35,3.8) {\footnotesize $\alpha>1$};
+
+% 公共点 (1,1)
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(1,1)};
+
+% 原点
+\addplot[only marks,mark=*,mark options={fill=black,draw=black}] coordinates {(0,0)};
+
+% 虚线 x=1
+\addplot[dashed,domain=0:4.5] ({1},{x});
+
+\end{axis}
+\end{tikzpicture}
+	\caption{}
+	\label{fig:5-14}
+\end{figure}
+
+\subsubsection*{6) 双曲函数}
+
+\begin{mydef*}{}
+
+	函数
+	\[
+	x\longmapsto\operatorname{sh}x\triangleq\frac{e^x-e^{-x}}2,\quad x\in\R;
+	\]
+	\[
+	x\longmapsto\operatorname{ch}x\triangleq\frac{e^x+e^{-x}}2,\quad x\in\R;
+	\]
+	\[
+	x\longmapsto\operatorname{th}x\triangleq\frac{e^x-e^{-x}}{e^x+e^{-x}},\quad x\in\R;
+	\]
+	\[
+	x\longmapsto\operatorname{cth}x\triangleq\frac{e^x+e^{-x}}{e^x-e^{-x}},\quad x\in\R-\{0\}
+	\]
+	分别称为双曲正弦函数、双曲余弦函数、双曲正切函数与双曲余切函数。
+
+\end{mydef*}
+
+这些函数的基本性质可由下面两个定理来表述。
+
+\begin{mythm}{}{hyperbolic-identities}
+
+	1) 双曲正弦、双曲余弦、双曲正切、双曲余切函数都是在各自定义域上的连续函数。
+
+	2) 下述等式成立：
+	\[
+	\operatorname{ch}^2x-\operatorname{sh}^2x=1,\qquad 1-\operatorname{th}^2x=\frac1{\operatorname{ch}^2x},
+	\]
+	\[
+	\operatorname{cth}^2x-1=\frac1{\operatorname{sh}^2x},
+	\]
+	\[
+	\operatorname{sh}(-x)=-\operatorname{sh}x,\qquad\operatorname{ch}(-x)=\operatorname{ch}x,
+	\]
+	\[
+	\operatorname{th}(-x)=-\operatorname{th}x,\qquad\operatorname{cth}(-x)=-\operatorname{cth}x,
+	\]
+	\[
+	\operatorname{sh}(x+y)=\operatorname{sh}x\operatorname{ch}y+\operatorname{ch}x\operatorname{sh}y,
+	\]
+	\[
+	\operatorname{ch}(x+y)=\operatorname{ch}x\operatorname{ch}y+\operatorname{sh}x\operatorname{sh}y.
+	\]
+
+\end{mythm}
+
+\begin{proof}
+
+	性质 1) 直接由双曲函数的定义推出，2) 的各等式直接计算即可验证。
+
+\end{proof}
+
+\begin{mythm}{}{hyperbolic-monotonicity}
+
+	关于双曲函数的单调性及其图形，我们有下述各结论：
+
+	\begin{enumerate}[label=\arabic*)]
+		\item 双曲正弦函数在 \(\R\) 上严格单调上升，并且
+		\[
+		\lim_{x\to-\infty}\operatorname{sh}x=-\infty,\qquad\lim_{x\to+\infty}\operatorname{sh}x=+\infty.
+		\]
+		它的图形关于原点对称，无渐近线。
+
+		\item 双曲余弦函数在 \([0,+\infty[\) 上严格单调上升，而在 \(]-\infty,0]\) 上是严格单调下降的，并且
+		\[
+		\lim_{x\to0}\operatorname{ch}x=1,\qquad\lim_{x\to\pm\infty}\operatorname{ch}x=+\infty.
+		\]
+		它的图形关于 \(y\) 轴对称，无渐近线。
+
+		\item 双曲正切函数在 \(\R\) 上严格单调上升，并且
+		\[
+		\lim_{x\to-\infty}\operatorname{th}x=-1,\qquad\lim_{x\to+\infty}\operatorname{th}x=1.
+		\]
+		它的图形关于原点对称，并且有无穷远分支 \(\Gamma_{+\infty}\) 与 \(\Gamma_{-\infty}\)，\(\Gamma_{+\infty}\) 以 \(y=1\) 为水平渐近线，\(\Gamma_{-\infty}\) 以 \(y=-1\) 为水平渐近线。
+
+		\item 双曲余切函数在 \(\R-\{0\}\) 上严格单调下降，并且
+		\[
+		\lim_{x\to-\infty}\operatorname{cth}x=-1,\qquad\lim_{x\to0^-}\operatorname{cth}x=-\infty,
+		\]
+		\[
+		\lim_{x\to0^+}\operatorname{cth}x=+\infty,\qquad\lim_{x\to+\infty}\operatorname{cth}x=1.
+		\]
+		它的图形关于原点对称，并且有四个无穷远分支 \(\Gamma_{-\infty}\)，\(\Gamma_{0^-}\)，\(\Gamma_{0^+}\)，\(\Gamma_{+\infty}\)。\(\Gamma_{-\infty}\) 以 \(y=-1\) 为水平渐近线，\(\Gamma_{0^-}\) 以负 \(y\) 轴为垂直渐近线，\(\Gamma_{0^+}\) 以正 \(y\) 轴为垂直渐近线，而 \(\Gamma_{+\infty}\) 以 \(y=1\) 为水平渐近线。
+	\end{enumerate}
+
+\end{mythm}
+
+\begin{proof}
+
+	1) 设 \(x_1,x_2\in\R-\{0\}\)，并且 \(x_1<x_2\)。
+
+	由以 \(e\) 为底的指数函数的严格单调上升性，\(e^{2x_1}<e^{2x_2}\)，从而 \(1-e^{-2x_2}>1-e^{-2x_1}\)，于是
+	\[
+	\frac{\operatorname{sh}x_2}{\operatorname{sh}x_1}=\frac{e^{x_2}-e^{-x_2}}{e^{x_1}-e^{-x_1}}=e^{x_2-x_1}\left(\frac{1-e^{-2x_2}}{1-e^{-2x_1}}\right)>1.
+	\]
+	此即表明双曲正弦函数在 \(\R-\{0\}\) 上严格单调上升。
+
+	现设 \(x_1,x_2\in\R\)，并且 \(x_1<0<x_2\)。由定义知
+	\[
+	\operatorname{sh}x_1<\operatorname{sh}0=0<\operatorname{sh}x_2.
+	\]
+	因此双曲正弦函数在 \(\R\) 上是严格单调上升的。直接计算得到
+	\[
+	\lim_{x\to-\infty}\operatorname{sh}x=-\infty,\qquad\lim_{x\to+\infty}\operatorname{sh}x=+\infty.
+	\]
+	由此可知双曲正弦函数的图形无渐近线，并且由 \(\operatorname{sh}(-x)=-\operatorname{sh}x,\ \forall\,x\in\R\) 知，此函数图形关于原点对称。
+
+	2) 因为 \(\operatorname{ch}^2x-\operatorname{sh}^2x=1\ (\forall\,x\in\R)\)，并且 \(\operatorname{ch}x>0\)，所以 \(\operatorname{ch}x=\sqrt{1+\operatorname{sh}^2x}\ (\forall\,x\in\R)\)，由此，并根据双曲正弦函数的严格单调上升性和 \(\operatorname{sh}x<0\ (\forall\,x\in\R_*^-)\) 及 \(\operatorname{sh}x>0\ (\forall\,x\in\R_*^+)\) 推知，双曲余弦函数 \(\operatorname{ch}\) 在 \([0,+\infty[\) 上严格单调上升，而在 \(]-\infty,0]\) 上严格单调下降。
+
+	现在直接由 \(\operatorname{ch}x\) 的表达式计算得到
+	\[
+	\lim_{x\to0}\operatorname{ch}x=1,\qquad\lim_{x\to\pm\infty}\operatorname{ch}x=+\infty.
+	\]
+	由此可知 \(\operatorname{ch}\) 的图形无渐近线，并且由 \(\operatorname{ch}(-x)=\operatorname{ch}x\ (\forall\,x\in\R)\) 推知，双曲余弦函数 \(\operatorname{ch}\) 的图形关于 \(y\) 轴对称。
+
+	3) 由公式 \(\operatorname{th}^2x=1-\dfrac1{\operatorname{ch}^2x}\) 及双曲余弦的单调性推知，双曲正切 \(\operatorname{th}\) 在 \(\R\) 上是严格单调上升的。
+
+	直接由 \(\operatorname{th}x\) 的表达式计算得到
+	\[
+	\lim_{x\to-\infty}\operatorname{th}x=-1,\qquad\lim_{x\to+\infty}\operatorname{th}x=1.
+	\]
+	由此可知双曲正切 \(\operatorname{th}\) 图形有无穷远分支 \(\Gamma_{-\infty}\) 与 \(\Gamma_{+\infty}\)，并且 \(\Gamma_{-\infty}\) 以 \(y=-1\) 为水平渐近线，\(\Gamma_{+\infty}\) 以 \(y=1\) 为水平渐近线。
+
+	由于 \(\operatorname{th}(-x)=-\operatorname{th}x,\ \forall\,x\in\R\)，故此函数图形关于原点对称。
+
+	4) 由公式 \(\operatorname{cth}^2x=1+\dfrac1{\operatorname{sh}^2x}\) 及双曲正弦的严格单调上升性推知，双曲余切函数在 \(\R-\{0\}\) 上是严格单调下降的。
+
+	直接由 \(\operatorname{cth}x\) 的表达式计算得到
+	\[
+	\lim_{x\to-\infty}\operatorname{cth}x=-1,\qquad\lim_{x\to0^-}\operatorname{cth}x=-\infty,
+	\]
+	\[
+	\lim_{x\to0^+}\operatorname{cth}x=+\infty,\qquad\lim_{x\to+\infty}\operatorname{cth}x=1.
+	\]
+	由此可知，双曲余切函数的图形有四个无穷远分支 \(\Gamma_{-\infty}\)，\(\Gamma_{0^-}\)，\(\Gamma_{0^+}\) 及 \(\Gamma_{+\infty}\)，并且 \(\Gamma_{-\infty}\) 以 \(y=-1\) 为水平渐近线，\(\Gamma_{0^-}\) 以负 \(y\) 轴为垂直渐近线，\(\Gamma_{0^+}\) 以正 \(y\) 轴为垂直渐近线，而 \(\Gamma_{+\infty}\) 以 \(y=1\) 为水平渐近线。
+
+	最后由于 \(\operatorname{cth}(-x)=-\operatorname{cth}x\)，故此函数图形关于原点对称。
+
+\end{proof}
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}
+\begin{axis}[
+  width=5.2cm,height=5.2cm,
+  axis lines=middle,
+  xlabel={$x$},ylabel={$y$},
+  xmin=-3,xmax=3,
+  ymin=-3,ymax=3,
+  xtick=\empty,ytick=\empty,
+  enlargelimits=false,
+]
+\addplot[domain=-3:3,samples=200]{sinh(x)};
+\addplot[domain=-3:3,samples=2,dashed]{x};
+\node at (axis cs:1.8,2.2) {\footnotesize $y=x$};
+\node at (axis cs:1.5,-2.5) {\footnotesize $y=\operatorname{sh}x$};
+\end{axis}
+\end{tikzpicture}%
+\hfill%
+\begin{tikzpicture}
+\begin{axis}[
+  width=5.2cm,height=5.2cm,
+  axis lines=middle,
+  xlabel={$x$},ylabel={$y$},
+  xmin=-3,xmax=3,
+  ymin=0.5,ymax=4,
+  xtick=\empty,ytick={1},
+  yticklabels={$1$},
+  enlargelimits=false,
+]
+\addplot[domain=-3:3,samples=200]{cosh(x)};
+\node at (axis cs:1.5,0.7) {\footnotesize $y=\operatorname{ch}x$};
+\end{axis}
+\end{tikzpicture}
+
+\vspace{0.8cm}
+
+\begin{tikzpicture}
+\begin{axis}[
+  width=5.2cm,height=5.2cm,
+  axis lines=middle,
+  xlabel={$x$},ylabel={$y$},
+  xmin=-3,xmax=3,
+  ymin=-1.5,ymax=1.5,
+  xtick=\empty,ytick={-1,1},
+  yticklabels={$-1$,$1$},
+  enlargelimits=false,
+]
+\addplot[domain=-3:3,samples=200]{tanh(x)};
+\addplot[domain=-3:3,samples=2,dashed]{x};
+\node at (axis cs:1.8,1.2) {\footnotesize $y=x$};
+\node at (axis cs:1.5,-1.3) {\footnotesize $y=\operatorname{th}x$};
+\end{axis}
+\end{tikzpicture}%
+\hfill%
+\begin{tikzpicture}
+\begin{axis}[
+  width=5.2cm,height=5.2cm,
+  axis lines=middle,
+  xlabel={$x$},ylabel={$y$},
+  xmin=-3,xmax=3,
+  ymin=-3,ymax=3,
+  xtick=\empty,ytick={-1,1},
+  yticklabels={$-1$,$1$},
+  enlargelimits=false,
+  restrict y to domain=-5:5,
+]
+\addplot[domain=-3:-0.08,samples=200]{cosh(x)/sinh(x)};
+\addplot[domain=0.08:3,samples=200]{cosh(x)/sinh(x)};
+\node at (axis cs:1.5,-2.5) {\footnotesize $y=\operatorname{cth}x$};
+\end{axis}
+\end{tikzpicture}
+	\caption{}
+	\label{fig:5-15}
+\end{figure}
+
+图 5-15 是各双曲函数的大致图形。
+
+\subsubsection*{7) 反双曲函数}
+
+由\rthm{thm:hyperbolic-monotonicity} 知，双曲正弦、余弦、正切、余切分别是从 \(\R\) 到 \(\R\)、从 \([0,+\infty[\) 到 \([1,+\infty[\)、从 \(\R\) 到 \(]-1,1[\)、从 \(\R-\{0\}\) 到 \(\R-[-1,1]\) 上的严格单调的连续函数，根据\rthm{thm:inverse-function-continuity}，它们都有反函数存在。
+
+\begin{mydef*}{}
+
+	\begin{enumerate}[label=\arabic*)]
+		\item 函数 \(\operatorname{sh}:\R\to\R\) 的反函数称为反双曲正弦函数，记为
+		\[
+		\operatorname{Arg}\operatorname{sh}:\R\to\R.
+		\]
+
+		\item 函数 \(\operatorname{ch}:[0,+\infty[\to[1,+\infty[\) 的反函数称为反双曲余弦函数，记为
+		\[
+		\operatorname{Arg}\operatorname{ch}:[1,+\infty[\to[0,+\infty[.
+		\]
+
+		\item 函数 \(\operatorname{th}:\R\to\ ]-1,1[\) 的反函数称为反双曲正切函数，记为
+		\[
+		\operatorname{Arg}\operatorname{th}:\ ]-1,1[\to\R.
+		\]
+
+		\item 函数 \(\operatorname{cth}:\R-\{0\}\to\R-[-1,1]\) 的反函数称为反双曲余切函数，记为
+		\[
+		\operatorname{Arg}\operatorname{cth}:\R-[-1,1]\to\R-\{0\}.
+		\]
+	\end{enumerate}
+
+\end{mydef*}
+
+\begin{mythm}{}{inverse-hyperbolic-functions}
+
+	\begin{enumerate}[label=\arabic*)]
+		\item 反双曲函数 \(\operatorname{Arg}\operatorname{sh}\)、\(\operatorname{Arg}\operatorname{ch}\)、\(\operatorname{Arg}\operatorname{th}\)、\(\operatorname{Arg}\operatorname{cth}\) 除 \(\operatorname{Arg}\operatorname{cth}\) 是严格单调下降外其余都是严格单调上升的连续函数。
+
+		\item 反双曲函数的显示表达式：
+		\[
+		\operatorname{Arg}\operatorname{sh}x=\log\left(x+\sqrt{x^2+1}\right),\quad x\in\R;
+		\]
+		\[
+		\operatorname{Arg}\operatorname{ch}x=\log\left(x+\sqrt{x^2-1}\right),\quad x\in[1,+\infty[;
+		\]
+		\[
+		\operatorname{Arg}\operatorname{th}x=\frac12\log\frac{1+x}{1-x},\quad x\in\ ]-1,1[;
+		\]
+		\[
+		\operatorname{Arg}\operatorname{cth}x=\frac12\log\frac{x+1}{x-1},\quad x\in\R-[-1,1].
+		\]
+	\end{enumerate}
+
+\end{mythm}
+
+\begin{proof}
+
+	性质 1) 显然，下面我们来证明反双曲函数的显示表达式。
+
+	对 \(\operatorname{Arg}\operatorname{sh}x\)：由 \(y=\operatorname{Arg}\operatorname{sh}x\) 得到 \(x=\operatorname{sh}y\)。因为
+	\[
+	\operatorname{ch}y=\sqrt{\operatorname{sh}^2y+1}=\sqrt{x^2+1},
+	\]
+	所以
+	\[
+	e^y=\operatorname{sh}y+\operatorname{ch}y=x+\sqrt{x^2+1},
+	\]
+	从而
+	\[
+	\operatorname{Arg}\operatorname{sh}x=y=\log\left(x+\sqrt{x^2+1}\right).
+	\]
+	对 \(\operatorname{Arg}\operatorname{ch}x\)：由 \(y=\operatorname{Arg}\operatorname{ch}x\) 得到 \(x=\operatorname{ch}y\)。于是
+	\[
+	\operatorname{sh}y=\sqrt{\operatorname{ch}^2y-1}=\sqrt{x^2-1},
+	\]
+	从而
+	\[
+	e^y=\operatorname{ch}y+\operatorname{sh}y=x+\sqrt{x^2-1},
+	\]
+	因此
+	\[
+	\operatorname{Arg}\operatorname{ch}x=y=\log\left(x+\sqrt{x^2-1}\right).
+	\]
+	对 \(\operatorname{Arg}\operatorname{th}x\)：由 \(y=\operatorname{Arg}\operatorname{th}x\) 得到 \(x=\operatorname{th}y\)。因为
+	\[
+	\operatorname{th}y=\frac{e^y-e^{-y}}{e^y+e^{-y}}=\frac{e^{2y}-1}{e^{2y}+1},
+	\]
+	所以
+	\[
+	e^{2y}=\frac{1+x}{1-x},
+	\]
+	从而
+	\[
+	\operatorname{Arg}\operatorname{th}x=y=\frac12\log\frac{1+x}{1-x}.
+	\]
+	对 \(\operatorname{Arg}\operatorname{cth}x\)：由 \(y=\operatorname{Arg}\operatorname{cth}x\) 得到 \(x=\operatorname{cth}y\)。因为
+	\[
+	\operatorname{cth}y=\frac{e^y+e^{-y}}{e^y-e^{-y}}=\frac{e^{2y}+1}{e^{2y}-1},
+	\]
+	所以
+	\[
+	e^{2y}=\frac{x+1}{x-1},
+	\]
+	因此
+	\[
+	\operatorname{Arg}\operatorname{cth}x=y=\frac12\log\frac{x+1}{x-1}.
+	\]
+
+\end{proof}
+
+\textbf{附注}\quad 反双曲函数 \(\operatorname{Arg}\operatorname{sh}\)、\(\operatorname{Arg}\operatorname{ch}\)、\(\operatorname{Arg}\operatorname{th}\)、\(\operatorname{Arg}\operatorname{cth}\) 的图形可由相应双曲函数 \(\operatorname{sh}\)、\(\operatorname{ch}\)、\(\operatorname{th}\)、\(\operatorname{cth}\) 的图形关于直线 \(y=x\) 对称而得到。图 5-16 是它们的图形。
+
+\begin{figure}[htbp]
+	\centering
+		\begin{tikzpicture}
+  % 左上：y = Argsh x
+  \begin{axis}[
+    at={(0,0)},
+    width=5.2cm,height=5.2cm,
+    axis lines=middle,
+    xlabel={$x$},ylabel={$y$},
+    xmin=-3,xmax=3,ymin=-3,ymax=3,
+    xtick={\empty},ytick={\empty},
+    samples=200,
+    clip=true,
+  ]
+    \addplot[domain=-3:3]{ln(x+sqrt(x^2+1))};
+    \addplot[dashed,domain=-3:3]{x};
+    \node[below left] at (axis cs:0,0){$O$};
+  \end{axis}
+  \node[below] at (2.6,-0.3){\footnotesize $y=\operatorname{Argsh}x$};
+
+  % 右上：y = Argch x
+  \begin{axis}[
+    at={(6.2cm,0)},
+    width=5.2cm,height=5.2cm,
+    axis lines=middle,
+    xlabel={$x$},ylabel={$y$},
+    xmin=-1,xmax=4,ymin=-2,ymax=4,
+    xtick={1},ytick={1},
+    samples=200,
+    clip=true,
+  ]
+    \addplot[domain=1:4]{ln(x+sqrt(x^2-1))};
+    \addplot[dashed,domain=-1:4]{x};
+    \addplot[dashed,domain=-1:4]{-x};
+    \addplot[dashed,domain=0.1:4]{sqrt(x^2-1)};
+    \addplot[dashed,domain=0.1:4]{-sqrt(x^2-1)};
+    \node[below left] at (axis cs:0,0){$O$};
+  \end{axis}
+  \node[below] at (8.8,-0.3){\footnotesize $y=\operatorname{Argch}x$};
+
+  % 左下：y = Argth x
+  \begin{axis}[
+    at={(0,-5.8cm)},
+    width=5.2cm,height=5.2cm,
+    axis lines=middle,
+    xlabel={$x$},ylabel={$y$},
+    xmin=-2,xmax=2,ymin=-3,ymax=3,
+    xtick={-1,1},ytick={\empty},
+    samples=200,
+    clip=true,
+  ]
+    \addplot[domain=-0.99:0.99]{0.5*ln((1+x)/(1-x))};
+    \draw[dashed] (axis cs:-1,-3) -- (axis cs:-1,3);
+    \draw[dashed] (axis cs:1,-3) -- (axis cs:1,3);
+    \node[below left] at (axis cs:0,0){$O$};
+  \end{axis}
+  \node[below] at (2.6,-6.1){\footnotesize $y=\operatorname{Argth}x$};
+
+  % 右下：y = Argcth x
+  \begin{axis}[
+    at={(6.2cm,-5.8cm)},
+    width=5.2cm,height=5.2cm,
+    axis lines=middle,
+    xlabel={$x$},ylabel={$y$},
+    xmin=-2,xmax=2,ymin=-3,ymax=3,
+    xtick={-1,1},ytick={\empty},
+    samples=200,
+    clip=true,
+  ]
+    \addplot[domain=-2:-1.01]{0.5*ln((x+1)/(x-1))};
+    \addplot[domain=1.01:2]{0.5*ln((x+1)/(x-1))};
+    \draw[dashed] (axis cs:-1,-3) -- (axis cs:-1,3);
+    \draw[dashed] (axis cs:1,-3) -- (axis cs:1,3);
+    \node[below left] at (axis cs:0,0){$O$};
+  \end{axis}
+  \node[below] at (8.8,-6.1){\footnotesize $y=\operatorname{Argcth}x$};
+\end{tikzpicture}
+	\caption{}
+	\label{fig:5-16}
+\end{figure}
+
+的对称图形得到，有一点要注意。在作双曲余弦函数 \(\operatorname{ch}\) 的图形关于 \(y=x\) 的对称图形时，只有位于 \(y\ge0\) 上半平面的那一分支才是反双曲余弦 \(\operatorname{Arg}\operatorname{ch}\) 的图形。
+
+上面我们定义的七类函数连同有理整函数（多项式函数）、有理分式函数、三角函数、反三角函数一起统称为基本初等函数。
+
+由基本初等函数经过有限次加、减、乘、除四则运算及函数的复合所得到的函数称为有限形式的初等函数。
+
+作为初等函数的一个例子，我们介绍所谓的幂指数函数。
+
+\textbf{幂指数函数}\quad 设 \(u,v:X\to\R\) 是任意两个函数，使得 \(\forall\,x\in X\)，\(u(x)^{v(x)}\) 有定义，则函数
+\[
+x\longmapsto u(x)^{v(x)},\quad x\in X
+\]
+称为幂指数函数。我们设 \(a\in X\) 是一聚点。
+
+1) 若 \(\lim_{x\to a}u(x)=A>0\)，\(\lim_{x\to a}v(x)=B\)，则
+\[
+\lim_{x\to a}u(x)^{v(x)}=\lim_{x\to a}e^{v(x)\log u(x)}=e^{\lim_{x\to a}v(x)\log u(x)}=e^{B\log A}=A^B.
+\]
+
+2) 若 \(\lim_{x\to a}u(x)=0\)，但 \(\lim_{x\to a}v(x)\log u(x)=c\)，则
+\[
+\lim_{x\to a}u(x)^{v(x)}=\lim_{x\to a}e^{v(x)\log u(x)}=e^{\lim_{x\to a}v(x)\log u(x)}=\begin{cases} e^c, & \text{若}\ c\in\R, \\ +\infty, & \text{若}\ c=+\infty, \\ 0, & \text{若}\ c=-\infty. \end{cases}
+\]
+
+3) 若 \(\lim_{x\to a}u(x)=A\)，\(\lim_{x\to a}v(x)=B\) 出现下列三种情形：
+\[
+A=1,\ B=\pm\infty;\qquad A=0,\ B=0;\qquad A=\pm\infty,\ B=0.
+\]
+则 \(u(x)^{v(x)}\) 分别为 \(1^\infty\)，\(0^0\)，\(\pm\infty^0\) 不定型，这种不定型极限的一般研究我们将在以后进行。
+
+下面介绍一个典型的 \(1^\infty\) 不定型极限。
+
+\begin{sourceexample}{1}
+
+	证明
+
+	1) \(\displaystyle\lim_{x\to0}(1+x)^{\frac1x}=e\)。
+
+	2) \(\displaystyle\lim_{x\to\pm\infty}\left(1+\frac1x\right)^x=e\)，
+	\[
+	\lim_{n\to\pm\infty}\left(1+\frac1n\right)^n=e,\quad(n\in\Z).
+	\]
+
+	3) \(\displaystyle\lim_{h\to0}(1+hx)^{\frac1h}=e^x,\ \forall\,x\in\R\)。
+
+	首先，我们考虑 \(\displaystyle\lim_{x\to0}(1+x)^{\frac1x}\)。这是 \(1^\infty\) 不定型极限。当 \(|x|\) 充分小时，\(1+x>0\)，因此
+	\[
+	(1+x)^{\frac1x}=e^{\frac1x\log(1+x)}.
+	\]
+	由于 \(\log(1+x)=\displaystyle\int_1^{1+x}\frac1t\,dt\)，故由第一积分中值公式知，
+	\[
+	\log(1+x)=\frac1\xi\int_1^{1+x}dt=\frac x\xi.
+	\]
+	这里 \(\xi\) 介于 \(1\) 与 \(1+x\) 之间，从而 \(\xi\to1\ (x\to0)\)。因此
+	\[
+	\lim_{x\to0}(1+x)^{\frac1x}=\lim_{x\to0}e^{\frac1x\log(1+x)}=e^{\lim_{x\to0}\frac1x\log(1+x)}=e^{\lim_{x\to0}\frac1\xi}=e.
+	\]
+	现在我们令 \(y=\dfrac1x\)，则 \(y\to0\ (x\to\pm\infty)\)。从而
+	\[
+	\lim_{x\to\pm\infty}\left(1+\frac1x\right)^x=\lim_{y\to0}(1+y)^{\frac1y}=e.
+	\]
+	特别地取 \(x=n\in\Z\)，则
+	\[
+	\lim_{n\to\pm\infty}\left(1+\frac1n\right)^n=e.
+	\]
+	最后令 \(y=hx\)，当 \(x\neq0\) 时 \(y\neq0\)，并且 \(y\to0\ (h\to0)\)。因此
+	\[
+	\lim_{h\to0}(1+hx)^{\frac1h}=\lim_{y\to0}\left[(1+y)^{\frac1y}\right]^x=\left[\lim_{y\to0}(1+y)^{\frac1y}\right]^x=e^x.
+	\]
+	当 \(x=0\) 时，\(\displaystyle\lim_{h\to0}(1+hx)^{\frac1h}=1=e^0\)。
+
+\end{sourceexample}
+
+\begin{sourceexample}{2}
+
+	证明：\(\forall\,\alpha\in\R\)，\(\displaystyle\lim_{x\to0}\frac{(1+x)^\alpha-1}{x}=\alpha\)。
+
+	为此令 \((1+x)^\alpha-1=y\)，则 \(y\to0\ (x\to0)\)，并且 \((1+x)^\alpha=1+y\)。于是 \(\alpha\log(1+x)=\log(1+y)\)，从而
+	\[
+	\begin{aligned}
+	\lim_{x\to0}\frac{(1+x)^\alpha-1}{x}
+	&=\lim_{x\to0}\frac yx\\
+	&=\lim_{x\to0}\frac{y}{\log(1+y)}\cdot\frac{\alpha\log(1+x)}x\\
+	&=\lim_{y\to0}\frac1{\log(1+y)^{\frac1y}}\cdot\lim_{x\to0}\alpha\log(1+x)^{\frac1x}\\
+	&=\alpha\cdot\frac1{\log e}\cdot\log e\\
+	&=\alpha.
+	\end{aligned}
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{3}
+
+	计算 \(\displaystyle\lim_{x\to0}\left(\frac{1+\operatorname{tg}x}{1+\sin x}\right)^{\frac1{\sin x}}\)。
+
+	这是 \(1^\infty\) 不定型极限，我们把它化为 \(\displaystyle\lim_{x\to0}(1+x)^{\frac1x}\) 型极限进行计算。
+	\[
+	\begin{aligned}
+	&\lim_{x\to0}\left(\frac{1+\operatorname{tg}x}{1+\sin x}\right)^{\frac1{\sin x}}\\
+	=&\lim_{x\to0}\left(1+\frac{\operatorname{tg}x-\sin x}{1+\sin x}\right)^{\frac1{\sin x}}\\
+	=&\left[\lim_{y\to0}(1+y)^{\frac1y}\right]^{\lim_{x\to0}\frac{1-\cos x}{\cos x(1+\sin x)}}\\
+	=&\,e^0\\
+	=&\,1.
+	\end{aligned}
+	\]
+
+\end{sourceexample}
+
+最后作为这一节的结束，我们来考虑下面的一个重要极限。
+
+\begin{sourceexample}{4}
+
+	证明：\(\forall\,\alpha>0\)，\(\displaystyle\lim_{x\to+\infty}\frac{e^x}{x^\alpha}=+\infty\)。
+
+	我们只需证明 \(x=n\in\N\) 时极限成立即可。
+
+	事实上，如果 \(\displaystyle\lim_{n\to+\infty}\frac{e^n}{n^\alpha}=+\infty\)，那末由函数 \(x\longmapsto e^x\)，\(x\in\ ]0,+\infty[\) 及 \(x\longmapsto x^\alpha\)，\(x\in\ ]0,+\infty[\) 的严格单调上升性我们有：\(\forall\,x>0\)
+	\[
+	\frac{e^x}{x^\alpha}\ge\frac{e^{[x]}}{([x]+1)^\alpha}=\frac1e\cdot\frac{e^{[x]+1}}{([x]+1)^\alpha}.
+	\]
+	由于 \(\displaystyle\lim_{x\to+\infty}([x]+1)=+\infty\)，故 \(\displaystyle\lim_{x\to+\infty}\frac{e^{[x]+1}}{([x]+1)^\alpha}=+\infty\)，从而
+	\[
+	\lim_{x\to+\infty}\frac{e^x}{x^\alpha}=+\infty.
+	\]
+	下面我们就来证明 \(\displaystyle\lim_{n\to+\infty}\frac{e^n}{n^\alpha}=+\infty\)。
+
+	固定 \(k\in\N\) 使 \(k>\alpha\)。令 \(h=e-1\)，\(\forall\,n>k\)，有
+	\[
+	\frac{e^n}{n^\alpha}=\frac{(1+h)^n}{n^\alpha}>\frac{C_n^{k+1}h^{k+1}}{n^k}
+	\]
+	\[
+	=\frac{n(n-1)(n-2)\cdots(n-k)}{(k+1)!\,n^k}h^{k+1}
+	\]
+	\[
+	=n\left(1-\frac1n\right)\left(1-\frac2n\right)\cdots\left(1-\frac kn\right)\frac{h^{k+1}}{(k+1)!}.
+	\]
+	由于 \(\dfrac{h^{k+1}}{(k+1)!}>0\) 为常数，
+	\[
+	\lim_{n\to+\infty}\left(1-\frac1n\right)\left(1-\frac2n\right)\cdots\left(1-\frac kn\right)=1,
+	\]
+	故
+	\[
+	\lim_{n\to+\infty}n\left(1-\frac1n\right)\left(1-\frac2n\right)\cdots\left(1-\frac kn\right)\frac{h^{k+1}}{(k+1)!}=+\infty
+	\]
+	，从而 \(\displaystyle\lim_{n\to+\infty}\frac{e^n}{n^\alpha}=+\infty\)。
+
+\end{sourceexample}
+
+\subsection*{习 题}
+
+\begin{exercise}
+	\item 证明\rthm{thm:general-logarithm-properties}、\rthm{thm:general-exponential-properties}、\rthm{thm:power-function-properties}、\rthm{thm:hyperbolic-identities}。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:[a,b]\to\R^+\) 是任一连续函数。证明：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\displaystyle\left[\int_a^b f^n(x)dx\right]^{\frac1n}\le(b-a)^{\frac1n}\sup_{a\le x\le b}f(x),\quad\forall\,n\in\N\)。
+		\item 利用 \(f\) 的连续性及确界特性证明：
+		\[
+		(\forall\,\varepsilon>0)(\exists\,\delta>0)\Longrightarrow\left[\int_a^b f^n(x)dx\right]^{\frac1n}\ge\delta^{\frac1n}\left(\sup_{a\le x\le b}f(x)-\varepsilon\right).
+		\]
+		\item 由此推出 \(\displaystyle\lim_{n\to+\infty}\left[\int_a^b f^n(x)dx\right]^{\frac1n}=\sup_{a\le x\le b}f(x)\)。
+		\item 若 \(g:[a,b]\to\R^+\) 是任一 Riemann 可积函数，则
+		\[
+		\lim_{n\to+\infty}\left[\int_a^b f^n(x)g(x)dx\right]^{\frac1n}=\sup_{a\le x\le b}f(x).
+		\]
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设
+	\[
+	x_n=\sqrt[n]{\left[1+\left(\frac1n\right)^2\right]\left[1+\left(\frac2n\right)^2\right]\cdots\left[1+\left(\frac nn\right)^2\right]},
+	\]
+	\[
+	y_n=\left(\sqrt[n]{n}\cdot\sqrt[n]{2n}\cdot\ \cdots\ \cdot\sqrt[n]{n^2}\right)^{-\frac1{\log n}},
+	\]
+	试研究序列 \(\langle x_n\rangle\) 与 \(\langle y_n\rangle\) 的收敛性，并求其极限。
+\end{exercise}
+
+\begin{exercise}
+	\item 计算下列各极限：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\displaystyle\lim_{x\to0}\frac{\log_a(1+x)}x\ (0<a\neq1)\)；
+		\item \(\displaystyle\lim_{x\to0}\frac{a^x-1}x\ (a>0)\)；
+		\item \(\displaystyle\lim_{x\to0}\frac{\sqrt[n]{1+ax}-\sqrt[m]{1+bx}}x\)；
+		\item \(\displaystyle\lim_{x\to1}x^{\frac1{1-x}}\)；
+		\item \(\displaystyle\lim_{x\to\frac\pi4}(\operatorname{tg}x)^{\operatorname{tg}2x}\)；
+		\item \(\displaystyle\lim_{x\to1}(1+\sin\pi x)^{\operatorname{ctg}\pi x}\)；
+		\item \(\displaystyle\lim_{x\to0}\left(\frac{a_1^x+a_2^x+\cdots+a_n^x}{n}\right)^{\frac1x}\ (a_i>0)\)；
+		\item \(\displaystyle\lim_{h\to0}\frac{\log(x+h)+\log(x-h)-2\log x}{h^2}\)；
+		\item \(\displaystyle\lim_{x\to\pm\infty}\left(\sin\frac1x+\cos\frac1x\right)^x\)；
+		\item \(\displaystyle\lim_{x\to0}\frac{\operatorname{sh}x}{x}\)；
+		\item \(\displaystyle\lim_{x\to0}\frac{\operatorname{ch}2x-1}{x^2}\)；
+		\item \(\displaystyle\lim_{x\to0}\frac{e^{\sin2x}-e^{\sin x}}{\operatorname{th}x}\)；
+		\item \(\displaystyle\lim_{x\to0}\frac{\operatorname{sh}^2x}{\log(\operatorname{ch}2x)}\)；
+		\item \(\displaystyle\lim_{x\to\pm\infty}\left(\frac{\operatorname{ch}\dfrac\pi x}{\cos\dfrac\pi x}\right)^{x^2}\)。
+	\end{enumerate}
+\end{exercise}
+

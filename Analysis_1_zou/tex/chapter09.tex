@@ -1,0 +1,999 @@
+\chapter{广义积分}
+
+在第5章中我们研究的一元实值函数f的Riemann积分\(\int_{-a}^{b} f(x) dx\) 有两方面的限制:一是{[}a, b{]}为有限闭区间;二是函数f在{[}a,b{]}上有界.这一章我们取消这些限制,介绍函数的广义积分.
+
+\section{广义积分的定义}
+
+\subsection{\texorpdfstring{\(\int_c^{b^-}f(x)\,dx\) 型广义积分}{c 到 b- 型广义积分}}
+
+设 $c\in\R$，$c<b\leqslant+\infty$，假设函数 $f:[c,b[\to\R$ 满足下述条件：
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item $f$ 在 $[c,b[$ 的任一有限闭区间 $[\alpha,\beta]$ 上可积，
+\item 当 $b<+\infty$ 时，$\displaystyle\lim_{x\to b^-}f(x)=\pm\infty$（这时 $b$ 称为 $f$ 的奇点或瑕点）。
+\end{enumerate}
+
+于是 $\forall\,d\in[c,b[$，积分 $\int_c^df(x)\,dx$ 存在。我们定义函数 $F:[c,b[\to\R$ 如下：
+\[\forall\,d\in[c,b[,\quad F(d)=\int_c^df(x)\,dx.\]
+
+\begin{mydef*}{}
+
+设函数 $f:[c,b[\to\R$ 满足上面的条件，则 $f$ 在 $[c,b[$ 上的广义积分，记为 $\displaystyle\int_c^{b^-}f(x)\,dx$，定义为：
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item $\displaystyle\int_c^{b^-}f(x)\,dx$ 存在 $\Longleftrightarrow\displaystyle\lim_{d\to b^-}F(d)=\lim_{d\to b^-}\int_c^df(x)\,dx$ 存在（有限或 $\pm\infty$），并且这时
+\[\int_c^{b^-}f(x)\,dx\triangleq\lim_{d\to b^-}\int_c^df(x)\,dx;\]
+\item $\displaystyle\int_c^{b^-}f(x)\,dx$ 收敛 $\Longleftrightarrow\displaystyle\lim_{d\to b^-}\int_c^df(x)\,dx$ 有限；
+\item $\displaystyle\int_c^{b^-}f(x)\,dx$ 发散 $\Longleftrightarrow\displaystyle\lim_{d\to b^-}\int_c^df(x)\,dx$ 不存在或 $\pm\infty$。
+\end{enumerate}
+
+①当 $b=+\infty$ 时，$d\to b^-$ 就是 $d\to+\infty$，以下同。
+
+\end{mydef*}
+
+从几何意义上来看，
+
+$b=+\infty$：广义积分 $\displaystyle\int_c^{+\infty}f(x)\,dx$ 就是平面上由 $x$ 轴、直线 $x=c$ 及函数 $f:[c,+\infty[\to\R$ 的曲线 $\Gamma$ 所围的向右无限伸展的平面图形 $G$ 的“面积”。
+
+若 $\displaystyle\int_c^{+\infty}f(x)\,dx$ 收敛，则 $G$ 的“面积”存在且有限。
+
+若 $\displaystyle\int_c^{+\infty}f(x)\,dx$ 发散，则 $G$ 的“面积”存在但为正无穷大或负无穷大，或根本没有“面积”。
+
+\begin{center}
+	\begin{tikzpicture}
+  \begin{axis}[
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-0.5, xmax=9,
+    ymin=-1.2, ymax=1.6,
+    xtick={1,2,3,4,5,6,7,8},
+    ytick={-1,1},
+    tick label style={font=\footnotesize},
+    label style={font=\footnotesize},
+    width=12cm,
+    height=5cm,
+    axis equal image=false,
+    clip=false,
+    samples=200,
+    domain=0.5:8.5,
+  ]
+    % 衰减振荡曲线 y = e^{-0.25(x-1)} * sin(deg(x-1))
+    \addplot[thick, name path=A] {exp(-0.25*(x-1))*sin(deg(x-1))};
+    % x轴（零线）
+    \path[name path=B] (axis cs:0.5,0) -- (axis cs:8.5,0);
+
+    % 填充区域：曲线与x轴之间
+    \addplot[gray!25] fill between[of=A and B];
+
+    % 标注 c
+    \node[font=\footnotesize, below] at (axis cs:1,-0.08) {$c$};
+    % 标注 Γ
+    \node[font=\footnotesize] at (axis cs:4.6,0.55) {$\varGamma$};
+    % 标注 G
+    \node[font=\footnotesize] at (axis cs:5.8,0.35) {$G$};
+    % 原点 O
+    \node[font=\footnotesize, below left] at (axis cs:0,0) {$O$};
+  \end{axis}
+\end{tikzpicture}
+
+图 9-1
+\end{center}
+
+$b<+\infty$：广义积分 $\displaystyle\int_c^{b^-}f(x)\,dx$ 就是平面上由 $x$ 轴、直线 $x=c$ 与 $x=b$ 及函数 $f:[c,b[\to\R$ 的曲线 $\Gamma$ 所围的向正 $y$ 轴方向无限伸展的平面图形 $G$ 的“面积”（这里我们假设 $\displaystyle\lim_{x\to b^-}f(x)=+\infty$）。
+
+若 $\displaystyle\int_c^{b^-}f(x)\,dx$ 收敛，则 $G$ 的“面积”存在且有限。
+
+若 $\displaystyle\int_c^{b^-}f(x)\,dx$ 发散，则 $G$ 的“面积”存在但为正无穷大或负无穷大，或根本没有“面积”。
+
+\begin{center}
+	\begin{tikzpicture}[font=\footnotesize]
+  \begin{axis}[
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-0.5, xmax=4.5,
+    ymin=-0.5, ymax=4.5,
+    xtick={1,3.5},
+    xticklabels={$c$,$b$},
+    ytick={},
+    clip=false,
+    width=8cm,
+    height=6cm,
+    samples=200,
+  ]
+    % 曲线与 x 轴之间（c 到 b）斜线填充
+    \addplot[name path=A, draw=none, domain=1:3.5] {0.8 + 0.15*exp(1.2*(x-1))};
+    \path[name path=B] (axis cs:1,0) -- (axis cs:3.5,0);
+    \addplot[pattern=north east lines, pattern color=black] fill between[of=A and B];
+
+    % 曲线
+    \addplot[thick, domain=1:3.5] {0.8 + 0.15*exp(1.2*(x-1))};
+
+    % 左右边界线
+    \draw[thick] (axis cs:1,0) -- (axis cs:1,0.8);
+    \draw[thick] (axis cs:3.5,0) -- (axis cs:3.5,{0.8+0.15*exp(1.2*2.5)});
+
+    % 原点 O
+    \node at (axis cs:-0.25,-0.25) {$O$};
+    % 区域 G
+    \node at (axis cs:2.5,1.2) {$G$};
+    % 曲线 Γ
+    \node at (axis cs:2.6,3.0) {$\Gamma$};
+  \end{axis}
+\end{tikzpicture}
+
+图 9-2
+\end{center}
+
+\begin{sourceexample}{1}
+
+考虑广义积分 $\displaystyle\int_0^{+\infty}e^{-x}\,dx$。
+
+\end{sourceexample}
+
+函数 $x\longmapsto e^{-x}$，$x\in[0,+\infty[$ 连续，并且
+\[\lim_{d\to+\infty}\int_0^de^{-x}\,dx=\lim_{d\to+\infty}(1-e^{-d})=1,\]
+因此广义积分 $\displaystyle\int_0^{+\infty}e^{-x}\,dx$ 收敛，并且
+\[\int_0^{+\infty}e^{-x}\,dx=1.\]
+
+\begin{sourceexample}{2}
+
+考虑广义积分 $\displaystyle\int_1^{+\infty}\frac{1}{x}\,dx$。
+
+\end{sourceexample}
+
+函数 $x\longmapsto\dfrac{1}{x}$，$x\in[1,+\infty[$ 连续，并且
+\[\lim_{d\to+\infty}\int_1^d\frac{1}{x}\,dx=\lim_{d\to+\infty}\log d=+\infty,\]
+故广义积分 $\displaystyle\int_1^{+\infty}\frac{1}{x}\,dx$ 发散，但有值
+\[\int_1^{+\infty}\frac{1}{x}\,dx=+\infty.\]
+
+\begin{sourceexample}{3}
+
+考虑广义积分 $\displaystyle\int_0^{+\infty}\cos x\,dx$。
+
+\end{sourceexample}
+
+函数 $x\longmapsto\cos x$，$x\in[0,+\infty[$ 连续，并且
+\[\lim_{d\to+\infty}\int_0^d\cos x\,dx=\lim_{d\to+\infty}\sin d\ \text{不存在},\]
+故广义积分 $\displaystyle\int_0^{+\infty}\cos x\,dx$ 不存在，从而 $\displaystyle\int_0^{+\infty}\cos x\,dx$ 发散。
+
+\begin{sourceexample}{4}
+
+考虑广义积分 $\displaystyle\int_0^{1^-}\frac{1}{\sqrt{1-x}}\,dx$ 与 $\displaystyle\int_0^{1^-}\frac{1}{1-x}\,dx$。
+
+\end{sourceexample}
+
+这里两个函数 $x\longmapsto\dfrac{1}{\sqrt{1-x}}$，$x\longmapsto\dfrac{1}{1-x}$，$x\in[0,1[$ 都连续，$x=1$ 是 $f$ 的奇点，并且
+\[\lim_{c\to1^-}\int_0^c\frac{1}{\sqrt{1-x}}\,dx=\lim_{c\to1^-}\left[-2\sqrt{1-x}\right]_0^c=2-\lim_{c\to1^-}2\sqrt{1-c}=2,\]
+\[\lim_{c\to1^-}\int_0^c\frac{1}{1-x}\,dx=\lim_{c\to1^-}\left[-\log(1-x)\right]_0^c=-\lim_{c\to1^-}\log(1-c)=+\infty.\]
+因此广义积分 $\displaystyle\int_0^{1^-}\frac{1}{\sqrt{1-x}}\,dx$ 收敛，而广义积分 $\displaystyle\int_0^{1^-}\frac{1}{1-x}\,dx$ 发散，并且
+\[\int_0^{1^-}\frac{1}{\sqrt{1-x}}\,dx=2,\quad\int_0^{1^-}\frac{1}{1-x}\,dx=+\infty.\]
+
+\subsection{\texorpdfstring{\(\int_{a^+}^cf(x)\,dx\) 型广义积分}{a+ 到 c 型广义积分}}
+	\label{sec:9-1-2}
+
+设 $-\infty\leqslant a<c<+\infty$，函数 $f:]a,c]\to\R$ 满足下述条件：
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item $f$ 在 $]a,c]$ 的任一有限闭区间 $[\alpha,\beta]$ 上可积，
+\item 当 $a>-\infty$ 时，$\displaystyle\lim_{x\to a^+}f(x)=\pm\infty$（这时 $a$ 称为 $f$ 的奇点或瑕点）。
+\end{enumerate}
+
+这时，我们可以仿照 1，类似地定义 $f$ 在 $]a,c]$ 上的广义积分 $\displaystyle\int_{a^+}^cf(x)\,dx$ 为：
+
+$\displaystyle\int_{a^+}^cf(x)\,dx$ 存在 $\Longleftrightarrow\displaystyle\lim_{d\to a^+}\int_d^cf(x)\,dx$ 存在（有限或 $\pm\infty$），并且这时
+\[\int_{a^+}^cf(x)\,dx\triangleq\lim_{d\to a^+}\int_d^cf(x)\,dx,\]
+$\displaystyle\int_{a^+}^cf(x)\,dx$ 收敛 $\Longleftrightarrow\displaystyle\lim_{d\to a^+}\int_d^cf(x)\,dx$ 有限，
+$\displaystyle\int_{a^+}^cf(x)\,dx$ 发散 $\Longleftrightarrow\displaystyle\lim_{d\to a^+}\int_d^cf(x)\,dx$ 不存在或为 $\pm\infty$。
+
+①当 $a=-\infty$ 时，$d\to a^+$ 就是 $d\to-\infty$，以下同。
+
+\begin{sourceexample}{5}
+
+考虑广义积分 $\displaystyle\int_{0^+}^1\log x\,dx$。
+
+\end{sourceexample}
+
+这里函数 $x\longmapsto\log x$，$x\in\ ]0,1]$ 连续，$x=0$ 是它的唯一奇点，由于
+\[\lim_{d\to0^+}\int_d^1\log x\,dx=\lim_{d\to0^+}\left([x\log x]_d^1-\int_d^1dx\right)=-1,\]
+故广义积分 $\displaystyle\int_{0^+}^1\log x\,dx$ 收敛，其值
+\[\int_{0^+}^1\log x\,dx=-1.\]
+
+\begin{sourceexample}{6}
+
+考虑广义积分 $\displaystyle\int_{-\infty}^0e^{-x}\cos x\,dx$。
+
+\end{sourceexample}
+
+这里函数 $x\longmapsto e^{-x}\cos x$，$x\in\ ]-\infty,0]$ 连续。$\forall\,d<0$，直接计算得到
+\[\int_d^0e^{-x}\cos x\,dx=\frac{1}{2}e^{-d}(-\sin d+\cos d)-\frac{1}{2}.\]
+由此可知，极限 $\displaystyle\lim_{d\to-\infty}\int_d^0e^{-x}\cos x\,dx$ 不存在，因此广义积分 $\displaystyle\int_{-\infty}^0e^{-x}\cos x\,dx$ 不存在，从而发散。
+
+\subsection{\texorpdfstring{\(\int_{a^+}^{b^-}f(x)\,dx\) 型广义积分}{a+ 到 b- 型广义积分}}
+
+设 $-\infty\leqslant a<b\leqslant+\infty$，假设函数 $f:]a,b[\to\R$ 满足下述条件：
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item $f$ 在 $]a,b[$ 的任一有限闭区间 $[\alpha,\beta]$ 上可积，
+\item 当 $a>-\infty$，$b<+\infty$ 时，$\displaystyle\lim_{x\to a^+}f(x)=\pm\infty$，$\displaystyle\lim_{x\to b^-}f(x)=\pm\infty$（即 $a,b$ 是 $f$ 的奇点或瑕点）。
+\end{enumerate}
+
+现在我们假设对某一 $c\in\ ]a,b[$，广义积分之和 $\displaystyle\int_{a^+}^cf(x)\,dx+\int_c^{b^-}f(x)\,dx\in\overline{\R}$。于是由定义可推知下面两个简单结论成立：
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item $\forall\,c'\in\ ]a,b[$，都有
+\[\int_{a^+}^{c'}f(x)\,dx+\int_{c'}^{b^-}f(x)\,dx\in\overline{\R}.\]
+\item 对任意 $c,c'\in\ ]a,b[$，都有
+\[\int_{a^+}^{c}f(x)\,dx+\int_{c}^{b^-}f(x)\,dx=\int_{a^+}^{c'}f(x)\,dx+\int_{c'}^{b^-}f(x)\,dx.\]
+\end{enumerate}
+
+第二式表明 $\displaystyle\int_{a^+}^cf(x)\,dx+\int_c^{b^-}f(x)\,dx$ 的值与 $c$ 的选择无关，因此我们引入下述定义。
+
+\begin{mydef*}{}
+
+设函数 $f:]a,b[\to\R$ 满足上面所述条件，则 $f$ 在 $]a,b[$ 上的广义积分，记为 $\displaystyle\int_{a^+}^{b^-}f(x)\,dx$，定义如下：
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item $\displaystyle\int_{a^+}^{b^-}f(x)\,dx$ 存在，当且仅当对某一 $c\in\ ]a,b[$，
+\[\int_{a^+}^{c}f(x)\,dx+\int_c^{b^-}f(x)\,dx\]
+是有限实数或 $\pm\infty$。并且这时
+\[\int_{a^+}^{b^-}f(x)\,dx\triangleq\int_{a^+}^{c}f(x)\,dx+\int_{c}^{b^-}f(x)\,dx.\]
+\item $\displaystyle\int_{a^+}^{b^-}f(x)\,dx$ 收敛，当且仅当对某一 $c\in\ ]a,b[$，$\displaystyle\int_{a^+}^{c}f(x)\,dx$ 与 $\displaystyle\int_c^{b^-}f(x)\,dx$ 收敛。
+\item $\displaystyle\int_{a^+}^{b^-}f(x)\,dx$ 发散，当且仅当对某一 $c\in\ ]a,b[$，$\displaystyle\int_{a^+}^{c}f(x)\,dx$ 与 $\displaystyle\int_c^{b^-}f(x)\,dx$ 中至少有一个发散。特别地，若 $\displaystyle\int_{a^+}^{c}f(x)\,dx=+\infty\,(-\infty)$，$\displaystyle\int_c^{b^-}f(x)\,dx=-\infty\,(+\infty)$；或 $\displaystyle\int_{a^+}^{c}f(x)\,dx$ 与 $\displaystyle\int_c^{b^-}f(x)\,dx$ 中有一个不存在，则我们称 $\displaystyle\int_{a^+}^{b^-}f(x)\,dx$ 不存在。
+\end{enumerate}
+
+\end{mydef*}
+
+\begin{sourceexample}{7}
+
+考虑广义积分 $\displaystyle\int_{-1^+}^{1^-}\frac{1}{\sqrt{1-x^2}}\,dx$。
+
+\end{sourceexample}
+
+这里函数 $x\longmapsto\dfrac{1}{\sqrt{1-x^2}}$，$x\in\ ]-1,1[$ 连续，并且 $x=\pm1$ 是它的两个奇点。由于
+\[\lim_{d\to-1^+}\int_d^0\frac{1}{\sqrt{1-x^2}}\,dx+\lim_{d'\to1^-}\int_0^{d'}\frac{1}{\sqrt{1-x^2}}\,dx\]
+\[=\lim_{d\to-1^+}(-\arcsin d)+\lim_{d'\to1^-}(\arcsin d')=\frac{\pi}{2}+\frac{\pi}{2}=\pi,\]
+故广义积分 $\displaystyle\int_{-1^+}^{1^-}\frac{1}{\sqrt{1-x^2}}\,dx$ 收敛，并且
+\[\int_{-1^+}^{1^-}\frac{1}{\sqrt{1-x^2}}\,dx=\pi.\]
+
+\begin{sourceexample}{8}
+
+考虑广义积分 $\displaystyle\int_{-\infty}^{+\infty}\frac{1+x}{1+x^2}\,dx$。
+
+\end{sourceexample}
+
+这里函数 $x\longmapsto\dfrac{1+x}{1+x^2}$，$x\in\ ]-\infty,+\infty[$ 连续，由于
+\[\int_0^{+\infty}\frac{1+x}{1+x^2}\,dx=\lim_{d\to+\infty}\int_0^d\frac{1+x}{1+x^2}\,dx\]
+\[=\lim_{d\to+\infty}\left(\left[\operatorname{arctg}x\right]_0^d+\frac{1}{2}\left[\log(1+x^2)\right]_0^d\right)\]
+\[=\lim_{d\to+\infty}\left(\operatorname{arctg}d+\frac{1}{2}\log(1+d^2)\right)\]
+\[=+\infty,\]
+故广义积分 $\displaystyle\int_{-\infty}^{+\infty}\frac{1+x}{1+x^2}\,dx$ 发散，并且由于
+\[\int_{-\infty}^{0}\frac{1+x}{1+x^2}\,dx=\lim_{c\to-\infty}\int_c^0\frac{1+x}{1+x^2}\,dx\]
+\[=\lim_{c\to-\infty}\left(\left[\operatorname{arctg}x\right]_c^0+\frac{1}{2}\left[\log(1+x^2)\right]_c^0\right)\]
+\[=\lim_{c\to-\infty}\left(-\operatorname{arctg}c-\frac{1}{2}\log(1+c^2)\right)=-\infty,\]
+故广义积分 $\displaystyle\int_{-\infty}^{+\infty}\frac{1+x}{1+x^2}\,dx$ 实际上不存在。
+
+附注 1 如果我们在例 8 的第 2 个积分 $\displaystyle\int_{-\infty}^{0}\frac{1+x}{1+x^2}\,dx$ 计算过程中取 $c=-d$，并与第一个积分的极限计算过程合并在一起，则出现下述情形：
+\[\lim_{d\to+\infty}\left(\int_{-d}^{0}\frac{1+x}{1+x^2}\,dx+\int_{0}^{d}\frac{1+x}{1+x^2}\,dx\right)\]
+\[=\lim_{d\to+\infty}\left(\left[\operatorname{arctg}x\right]_{-d}^{d}+\frac{1}{2}\left[\log(1+x^2)\right]_{-d}^{d}\right)\]
+\[=\lim_{d\to+\infty}2\operatorname{arctg}d=\pi.\]
+由此似乎应推得
+\[\int_{-\infty}^{+\infty}\frac{1+x}{1+x^2}\,dx=\pi\]
+其实不然，因为根据广义积分 $\displaystyle\int_{a^+}^{b^-}f(x)\,dx$ 的定义，
+\[\int_{-\infty}^{0}\frac{1+x}{1+x^2}\,dx+\int_{0}^{+\infty}\frac{1+x}{1+x^2}\,dx=\lim_{c\to-\infty}\int_{c}^{0}\frac{1+x}{1+x^2}\,dx+\lim_{d\to+\infty}\int_{0}^{d}\frac{1+x}{1+x^2}\,dx\]
+的右边 $c\to-\infty$ 与 $d\to+\infty$ 是两个完全独立的极限过程，而在上面我们的计算 $\displaystyle\lim_{d\to+\infty}\left(\int_{-d}^{0}\frac{1+x}{1+x^2}\,dx+\int_{0}^{d}\frac{1+x}{1+x^2}\,dx\right)$ 中，已经通过令 $c=-d$ 而化为 $d\to+\infty$ 的一个极限过程，从而出现两种截然不同的结果。
+
+为了区别这种情形，我们特作下述定义。
+
+\begin{mydef*}{}
+
+对于广义积分 $\displaystyle\int_{a^+}^{b^-}f(x)\,dx$，
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item 若 $a=-\infty$，$b=+\infty$：则 $f$ 在 $]-\infty,+\infty[$ 上的 Cauchy 广义积分主值，记为 $(C)\displaystyle\int_{-\infty}^{+\infty}f(x)\,dx$，定义为：
+\[(C)\int_{-\infty}^{+\infty}f(x)\,dx=\lim_{d\to+\infty}\int_{-d}^{d}f(x)\,dx.\]
+\item 若 $a>-\infty$，$b<+\infty$：则 $f$ 在 $]a,b[$ 上的 Cauchy 广义积分主值，记为 $(C)\displaystyle\int_{a^+}^{b^-}f(x)\,dx$，定义为：
+\[(C)\int_{a^+}^{b^-}f(x)\,dx=\lim_{\eta\to0^+}\int_{a+\eta}^{b-\eta}f(x)\,dx.\]
+\end{enumerate}
+
+\end{mydef*}
+
+由上述定义可知，若广义积分 $\displaystyle\int_{a^+}^{b^-}f(x)\,dx$ 收敛则它的值就是 Cauchy 广义积分主值 $(C)\displaystyle\int_{a^+}^{b^-}f(x)\,dx$。
+
+于是我们有
+\[\int_{-1^+}^{1^-}\frac{1}{\sqrt{1-x^2}}\,dx=(C)\int_{-1^+}^{1^-}\frac{1}{\sqrt{1-x^2}}\,dx=\pi,\]
+\[\int_{-\infty}^{+\infty}\frac{1+x}{1+x^2}\,dx\text{ 发散，但 }(C)\int_{-\infty}^{+\infty}\frac{1+x}{1+x^2}\,dx=\pi.\]
+
+附注 2 如果出现下述形式的两个广义积分：
+\[\int_{a}^{c^-}f(x)\,dx,\ \int_{c^+}^{b}f(x)\,dx\quad(\text{这里 }a>-\infty,\ b<+\infty,\ c\in\R)\]
+则它们的和 $\displaystyle\int_{a}^{c^-}f(x)\,dx+\int_{c^+}^{b}f(x)\,dx$，记为 $\displaystyle\int_{a}^{b}f(x)\,dx$，自然应作如下规定：
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item 广义积分 $\displaystyle\int_a^bf(x)\,dx$ 存在 $\Longleftrightarrow\displaystyle\int_a^{c^-}f(x)\,dx+\int_{c^+}^bf(x)\,dx$ 为有限实数或 $\pm\infty$，
+并且这时
+\[\int_a^bf(x)\,dx\triangleq\int_a^{c^-}f(x)\,dx+\int_{c^+}^bf(x)\,dx.\]
+\item 广义积分 $\displaystyle\int_a^bf(x)\,dx$ 收敛 $\Longleftrightarrow\displaystyle\int_a^{c^-}f(x)\,dx$ 与 $\displaystyle\int_{c^+}^bf(x)\,dx$ 收敛。
+\item 广义积分 $\displaystyle\int_a^bf(x)\,dx$ 发散 $\Longleftrightarrow\displaystyle\int_a^{c^-}f(x)\,dx$ 与 $\displaystyle\int_{c^+}^bf(x)\,dx$ 中至少有一个发散。
+\item 广义积分 $\displaystyle\int_a^bf(x)\,dx$ 的 Cauchy 广义积分主值
+\[(C)\int_a^bf(x)\,dx\triangleq\lim_{\eta\to0^+}\left(\int_a^{c-\eta}f(x)\,dx+\int_{c+\eta}^bf(x)\,dx\right).\]
+\end{enumerate}
+
+此外，我们还可以将这种广义积分 $\displaystyle\int_a^bf(x)\,dx$ 推广到 $f$ 在 $]a,b[$ 上有有限个奇点的情形上去。具体的叙述留给读者。
+
+\begin{sourceexample}{9}
+
+考虑广义积分 $\displaystyle\int_0^2\frac{x}{\sqrt{|1-x^2|}}\,dx$。
+
+\end{sourceexample}
+
+这里函数 $x\longmapsto\dfrac{x}{\sqrt{|1-x^2|}}$，$x\in[0,2]-\{1\}$ 连续，并且 $x=1$ 是它的唯一奇点。由于
+\[\int_0^{1^-}\frac{x}{\sqrt{|1-x^2|}}\,dx=\lim_{c\to1^-}\int_0^c\frac{x}{\sqrt{1-x^2}}\,dx=1,\]
+\[\int_{1^+}^2\frac{x}{\sqrt{|1-x^2|}}\,dx=\lim_{d\to1^+}\int_d^2\frac{x}{\sqrt{x^2-1}}\,dx=\sqrt{3},\]
+故广义积分 $\displaystyle\int_0^2\frac{x}{\sqrt{|1-x^2|}}\,dx$ 收敛，并且
+\[\int_0^2\frac{x}{\sqrt{|1-x^2|}}\,dx=\int_0^{1^-}\frac{x}{\sqrt{|1-x^2|}}\,dx+\int_{1^+}^2\frac{x}{\sqrt{|1-x^2|}}\,dx\]
+\[=1+\sqrt{3}.\]
+
+\begin{sourceexample}{10}
+
+考虑广义积分 $\displaystyle\int_{-1}^{1}\frac{1}{x}\,dx$。
+
+\end{sourceexample}
+
+此函数 $x\longmapsto\dfrac{1}{x}$，$x\in[-1,1]-\{0\}$ 连续，$x=0$ 是它的唯一奇点。由于
+\[\int_{-1}^{0^-}\frac{1}{x}\,dx=\lim_{c\to0^-}\int_{-1}^{c}\frac{1}{x}\,dx=-\infty,\]
+\[\int_{0^+}^{1}\frac{1}{x}\,dx=\lim_{d\to0^+}\int_{d}^{1}\frac{1}{x}\,dx=+\infty,\]
+故广义积分 $\displaystyle\int_{-1}^{1}\frac{1}{x}\,dx$ 不存在，但是它的 Cauchy 广义积分主值
+\[(C)\int_{-1}^{1}\frac{1}{x}\,dx=\lim_{\eta\to0^+}\left(\int_{-1}^{-\eta}\frac{1}{x}\,dx+\int_{\eta}^{1}\frac{1}{x}\,dx\right)\]
+\[=0.\]
+
+\subsection{广义积分的两个计算方法}
+	\label{sec:9-1-4}
+
+对广义积分，也有类似于普通 Riemann 积分的变元替换法与分部积分法。下面我们只对 $\displaystyle\int_{a}^{b^-}f(x)\,dx$ 型广义积分叙述这两个计算方法，对另外两种类型的广义积分，读者可以自己补充。
+
+\begin{mythm}{变元替换法}{substitution-improper}
+
+设函数 $\varphi:[\alpha,\beta[\to\R$ 在 $[\alpha,\beta[$ 上是 $C^1$ 类的，$I\subset\R$ 是包含 $\varphi([\alpha,\beta[)$ 的一个区间，函数 $f:I\to\R$ 在 $I$ 上连续。那末广义积分 $\displaystyle\int_{\alpha}^{\beta^-}f(\varphi(t))\varphi'(t)\,dt$ 收敛，当且仅当极限
+\[\lim_{s\to\beta^-}\int_{\varphi(\alpha)}^{\varphi(s)}f(x)\,dx\]
+存在并且有限。并且这时
+\[\int_{\alpha}^{\beta^-}f(\varphi(t))\varphi'(t)\,dt=\lim_{s\to\beta^-}\int_{\varphi(\alpha)}^{\varphi(s)}f(x)\,dx.\]
+
+\end{mythm}
+
+\begin{proof}
+
+设 $s\in[\alpha,\beta[$，根据定积分的变元替换法（\rthm{thm:substitution-rule} 推论）我们有
+\[\int_{\alpha}^{s}f(\varphi(t))\varphi'(t)\,dt=\int_{\varphi(\alpha)}^{\varphi(s)}f(x)\,dx.\]
+两边令 $s\to\beta^-$ 取极限即得。$\blacksquare$
+
+\end{proof}
+
+\begin{sourceexample}{11}
+
+计算广义积分 $\displaystyle\int_0^{+\infty}\frac{\operatorname{arctg}x}{(1+x^2)^{3/2}}\,dx$。
+
+\end{sourceexample}
+
+令 $x=\varphi(t)=\operatorname{tg}t$，$t\in\left[0,\dfrac{\pi}{2}\right[$。显然 $\varphi$ 在 $\left[0,\dfrac{\pi}{2}\right[$ 上是 $C^1$ 类的，并且 $[0,+\infty[=\varphi\left(\left[0,\dfrac{\pi}{2}\right[\right)$。由于函数
+\[x\longmapsto f(x)=\frac{\operatorname{arctg}x}{(1+x^2)^{3/2}},\quad x\in[0,+\infty[\]
+在 $[0,+\infty[$ 上连续，故由上述定理知，
+\[\int_0^{+\infty}\frac{\operatorname{arctg}x}{(1+x^2)^{3/2}}\,dx\text{ 收敛}\Longleftrightarrow\int_0^{\frac{\pi}{2}}\frac{\operatorname{arctg}(\operatorname{tg}t)}{(1+\operatorname{tg}^2t)^{3/2}}(\operatorname{tg}t)'\,dt\text{ 收敛。}\]
+这里
+\[\int_0^{\frac{\pi}{2}}\frac{\operatorname{arctg}(\operatorname{tg}t)}{(1+\operatorname{tg}^2t)^{3/2}}(\operatorname{tg}t)'\,dt=\int_0^{\frac{\pi}{2}}t\cos t\,dt,\]
+显然收敛，因此
+\[\int_0^{+\infty}\frac{\operatorname{arctg}x}{(1+x^2)^{3/2}}\,dx=\int_0^{\frac{\pi}{2}}t\cos t\,dt\]
+\[=\left[t\sin t\right]_0^{\frac{\pi}{2}}-\int_0^{\frac{\pi}{2}}\sin t\,dt\]
+\[=\frac{\pi}{2}-1.\]
+
+\begin{mythm}{分部积分法}{integration-by-parts-improper}
+
+设函数 $u,v:[c,b[\to\R$ 在 $[c,b[$ 上是 $C^1$ 类的，如果
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item $\displaystyle\lim_{x\to b^-}u(x)v(x)$ 存在并且有限，
+\item 广义积分 $\displaystyle\int_{c}^{b^-}u'(x)v(x)\,dx$ 收敛，
+\end{enumerate}
+
+则广义积分 $\displaystyle\int_{c}^{b^-}u(x)v'(x)\,dx$ 也收敛，并且
+\[\int_{c}^{b^-}u(x)v'(x)\,dx=\lim_{x\to b^-}\left[u(x)v(x)-u(c)v(c)\right]-\int_{c}^{b^-}u'(x)v(x)\,dx.\]
+
+\end{mythm}
+
+\begin{proof}
+
+设 $d\in[c,b[$，由定积分的分部积分法（\rthm{thm:integration-by-parts} 推论）我们有
+\[\int_{c}^{d}u(x)v'(x)\,dx=u(d)v(d)-u(c)v(c)-\int_{c}^{d}u'(x)v(x)\,dx.\]
+两边令 $d\to b^-$ 取极限，由定理假设知左边极限 $\displaystyle\lim_{d\to b^-}\int_{c}^{d}u(x)v'(x)\,dx$ 存在并且有限，故广义积分 $\displaystyle\int_{c}^{b^-}u(x)v'(x)\,dx$ 收敛，并且定理的等式成立。
+
+习惯上我们把上述等式写成下述形式：
+\[\int_{c}^{b^-}u(x)v'(x)\,dx=\left[u(x)v(x)\right]_{c}^{b^-}-\int_{c}^{b^-}u'(x)v(x)\,dx.\]
+
+\end{proof}
+
+\begin{sourceexample}{12}
+
+计算广义积分 $\displaystyle\int_1^{+\infty}\frac{\log x}{x^2}\,dx$。
+
+\end{sourceexample}
+
+由于
+\[\int_1^{+\infty}\frac{\log x}{x^2}\,dx=\int_1^{+\infty}\log x\cdot\left(-\frac{1}{x}\right)'dx,\]
+若令函数 $u,v:[1,+\infty[\to\R$ 为
+\[\forall\,x\in[1,+\infty[,\quad u(x)=\log x,\ v(x)=-\frac{1}{x}.\]
+则 $u,v$ 满足分部积分法的两个条件，因此广义积分 $\displaystyle\int_1^{+\infty}\frac{\log x}{x^2}\,dx$ 收敛，并且
+\[\int_1^{+\infty}\frac{\log x}{x^2}\,dx=\left[-\frac{1}{x}\log x\right]_1^{+\infty}-\int_1^{+\infty}\left(-\frac{1}{x}\right)(\log x)'dx\]
+\[=\int_1^{+\infty}\frac{1}{x^2}\,dx\]
+\[=1.\]
+
+\subsection{两个重要的广义积分}
+
+下面两个广义积分对判断一般广义积分的收敛与发散性将起着重要作用，我们把它们作为一个命题列出。
+
+\begin{myprop*}{}
+
+对广义积分 $\displaystyle\int_{0^+}^1\frac{1}{x^{\lambda}}\,dx$ 与 $\displaystyle\int_1^{+\infty}\frac{1}{x^{\lambda}}\,dx$ 下述结论成立：
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item $\displaystyle\int_{0^+}^1\frac{1}{x^{\lambda}}\,dx\begin{cases} \text{收敛，若 }\lambda<1;\\ \text{发散，若 }\lambda\geqslant1. \end{cases}$
+\item $\displaystyle\int_1^{+\infty}\frac{1}{x^{\lambda}}\,dx\begin{cases} \text{收敛，若 }\lambda>1;\\ \text{发散，若 }\lambda\leqslant1. \end{cases}$
+\end{enumerate}
+
+\end{myprop*}
+
+\begin{proof}
+
+直接利用定义计算这两个积分，即可验证命题成立。
+
+\end{proof}
+
+最后作为这一节的结束，我们特作如下说明。
+
+\textbf{记号说明}\quad 为了书写简单起见，今后对广义积分 $\displaystyle\int_a^{b^-}f(x)\,dx$、$\displaystyle\int_{a^+}^bf(x)\,dx$ 及 $\displaystyle\int_{a^+}^{b^-}f(x)\,dx$，如无特别指明需要，我们一律删去上标“$+$”与“$-$”，读者从 $\displaystyle\int_a^bf(x)\,dx$ 的具体形式可以明了它是普通 Riemann 积分还是广义积分。
+
+\subsection*{习 题}
+
+\begin{exercise}
+	\item 计算下列各广义积分：
+	\begin{enumerate}[label=\arabic*)]
+		\item $\displaystyle\int_0^1\frac{x\log x}{(1+x^2)^2}\,dx$；
+		\item $\displaystyle\int_0^{+\infty}\frac{x^2+1}{x^4+1}\,dx$；
+		\item $\displaystyle\int_0^{+\infty}\frac{1}{1+x^4}\,dx$；
+		\item $\displaystyle\int_a^b\frac{1}{\sqrt{(x-a)(b-x)}}\,dx$；
+		\item $\displaystyle\int_0^1\frac{1}{x\sqrt{1+x^2}}\,dx$；
+		\item $\displaystyle\int_0^{+\infty}\frac{x^2\log x}{(1+x^4)^3}\,dx$。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：广义积分 $\displaystyle\int_0^{+\infty}\frac{x-2}{x^3-1}\,dx$ 不存在。
+		\item 证明：广义积分 $\displaystyle\int_1^{+\infty}\operatorname{arctg}\frac{1}{x}\,dx$ 存在但不收敛。
+		\item 证明：广义积分 $\displaystyle\int_1^{+\infty}\frac{x\log\left(1+\dfrac{1}{x}\right)}{1+x^2}\,dx$ 收敛。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 计算下列各 Cauchy 广义积分主值：
+	\begin{enumerate}[label=\arabic*)]
+		\item $(C)\displaystyle\int_0^{+\infty}\frac{1}{1-x^2}\,dx$；
+		\item $(C)\displaystyle\int_0^4\frac{1}{x^2-4x+3}\,dx$；
+		\item $(C)\displaystyle\int_{-\infty}^{+\infty}\sin x\,dx$；
+		\item $(C)\displaystyle\int_{1/2}^2\frac{1}{x\log x}\,dx$。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 计算广义积分 $I=\displaystyle\int_0^{+\infty}\frac{1}{(1+x^2)(1+x^{\lambda})}\,dx$ $(\lambda\geqslant0)$。
+\end{exercise}
+
+\begin{exercise}
+	\item 计算下列各广义积分：
+	\begin{enumerate}[label=\arabic*)]
+		\item $\displaystyle\int_0^{+\infty}\frac{\log x}{1+x}\,dx$；
+		\item $\displaystyle\int_0^{+\infty}\frac{\log x}{(1+x^2)^2}\,dx$；
+		\item $\displaystyle\int_0^{\pi}\log(1+\cos\theta)\,d\theta$；
+		\item $\displaystyle\int_0^{+\infty}\log\left(x+\frac{1}{x}\right)\frac{1}{1+x^2}\,dx$；
+		\item $\displaystyle\int_{-1}^{1}\frac{x^3}{\sqrt{1-x^2}}\log\frac{1+x}{1-x}\,dx$；
+		\item $\displaystyle\int_0^1\frac{1}{(1+x)^{3/2}\sqrt{x(1-x)}}\,dx$。
+	\end{enumerate}
+\end{exercise}
+
+\section{广义积分的收敛准则}
+
+在上一节，我们研究了三类广义积分：
+
+\begin{enumerate}[label=\roman{enumi})]
+\item $\displaystyle\int_a^{b^-}f(x)\,dx$；
+\item $\displaystyle\int_{a^+}^bf(x)\,dx$；
+\item $\displaystyle\int_{a^+}^{b^-}f(x)\,dx$。
+\end{enumerate}
+
+第 iii) 类广义积分 $\displaystyle\int_{a^+}^{b^-}f(x)\,dx$ 实际上是第 i) 类与第 ii) 类广义积分的组合。
+
+第 ii) 类广义积分 $\displaystyle\int_{a^+}^cf(x)\,dx$ 可通过变元替换 $x=-y$ 化为第 i) 类广义积分。因为我们有
+\[\int_{a^+}^cf(x)\,dx=-\int_{(-a)^-}^{-c}f(-y)\,dy=\int_{-c}^{(-a)^-}f(-y)\,dy.\]
+因此要研究一般广义积分的收敛与发散性，实际上我们只需研究第 i) 类型的广义积分 $\displaystyle\int_a^{b^-}f(x)\,dx$ 的收敛与发散性。
+
+下面我们就来研究广义积分 $\displaystyle\int_a^{b^-}f(x)\,dx$ 的收敛性与发散性。
+
+\subsection{广义积分的一般收敛准则}
+	\label{sec:9-2-1}
+
+\begin{mythm}{}{improper-linear}
+
+设 $\displaystyle\int_a^{b^-}f(x)\,dx$ 与 $\displaystyle\int_a^{b^-}g(x)\,dx$ 是任意两个广义积分。
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item 若 $\displaystyle\int_a^{b^-}f(x)\,dx$ 与 $\displaystyle\int_a^{b^-}g(x)\,dx$ 收敛，则广义积分 $\displaystyle\int_a^{b^-}[f(x)+g(x)]\,dx$ 也收敛，并且
+\[\int_a^{b^-}[f(x)+g(x)]\,dx=\int_a^{b^-}f(x)\,dx+\int_a^{b^-}g(x)\,dx.\]
+\item 若 $\displaystyle\int_a^{b^-}f(x)\,dx$ 收敛，则 $\forall\,\lambda\in\R$，广义积分 $\displaystyle\int_a^{b^-}(\lambda f)(x)\,dx$ 也收敛，并且
+\[\int_a^{b^-}(\lambda f)(x)\,dx=\lambda\int_a^{b^-}f(x)\,dx.\]
+\end{enumerate}
+
+\end{mythm}
+
+\begin{proof}
+
+直接由广义积分的定义及函数极限的性质推出。
+
+\end{proof}
+
+\begin{mythm}{Cauchy收敛准则}{cauchy-improper}
+
+广义积分 $\displaystyle\int_a^{b^-}f(x)\,dx$ 收敛的充分必要条件是：
+\[(\forall\,\varepsilon>0)(\exists\,B\geqslant a)(\forall\,c,c'\geqslant B)\Longrightarrow\left|\int_c^{c'}f(x)\,dx\right|<\varepsilon.\]
+
+\end{mythm}
+
+\begin{proof}
+
+因为广义积分 $\displaystyle\int_a^{b^-}f(x)\,dx$ 收敛当且仅当函数 $F:[a,b[\to\R$（$\forall\,c\in[a,b[$，$F(c)=\displaystyle\int_a^cf(x)\,dx$）当 $c\to b^-$ 时有有限的极限存在，而 $\forall\,c,c'\geqslant a$，
+\[F(c)-F(c')=\int_c^{c'}f(x)\,dx.\]
+因此上述广义积分 $\displaystyle\int_a^{b^-}f(x)\,dx$ 收敛的充要条件正好就是函数 $F$ 当 $c\to b^-$ 的 Cauchy 收敛准则。从而定理成立。
+
+\end{proof}
+
+\begin{mythm}{比较判别法}{comparison-improper}
+
+设 $\displaystyle\int_a^{b^-}f(x)\,dx$ 与 $\displaystyle\int_a^{b^-}g(x)\,dx$ 是任意两个广义积分，函数 $f,g:[a,b[\to\R$ 满足下述不等式：
+\[\forall\,x\in[a,b[,\quad 0\leqslant f(x)\leqslant g(x).\]
+\begin{enumerate}[label=\arabic{enumi})]
+\item 若 $\displaystyle\int_a^{b^-}g(x)\,dx$ 收敛，则 $\displaystyle\int_a^{b^-}f(x)\,dx$ 也收敛，并且
+\[\int_a^{b^-}f(x)\,dx\leqslant\int_a^{b^-}g(x)\,dx.\]
+\item 若 $\displaystyle\int_a^{b^-}f(x)\,dx$ 发散，则 $\displaystyle\int_a^{b^-}g(x)\,dx$ 也发散。
+\end{enumerate}
+
+\end{mythm}
+
+\begin{proof}
+
+因为 $\forall\,x\in[a,b[$，$0\leqslant f(x)\leqslant g(x)$，所以
+\[\forall\,c\in[a,b[,\quad 0\leqslant\int_a^cf(x)\,dx\leqslant\int_a^cg(x)\,dx.\]
+1) 若 $\displaystyle\int_a^{b^-}g(x)\,dx$ 收敛，则由于函数 $c\longmapsto F(c)=\displaystyle\int_a^cf(x)\,dx$，$c\in[a,b[$ 关于 $c$ 单调上升，并且
+\[\int_a^cf(x)\,dx\leqslant\int_a^cg(x)\,dx\leqslant\int_a^{b^-}g(x)\,dx<+\infty,\]
+故极限 $\displaystyle\lim_{c\to b^-}F(c)$ 存在且有限，从而广义积分 $\displaystyle\int_a^{b^-}f(x)\,dx$ 收敛。
+
+2) 若 $\displaystyle\int_a^{b^-}f(x)\,dx$ 发散，则由反证法及结论 1) 知，广义积分 $\displaystyle\int_a^{b^-}g(x)\,dx$ 必然发散。
+
+\end{proof}
+
+\begin{mycor*}{}
+
+若函数 $f,g:[a,b[\to\R$ 满足条件：$f\geqslant0$，$g\geqslant0$ 并且 $f(x)\sim g(x)\ (x\to b^-)$，
+则广义积分 $\displaystyle\int_a^{b^-}f(x)\,dx$ 与 $\displaystyle\int_a^{b^-}g(x)\,dx$ 有相同的收敛与发散性。
+
+\end{mycor*}
+
+\begin{proof}
+
+因为 $f(x)\sim g(x)\ (x\to b^-)$，所以存在 $B$，$a\leqslant B<b$ 使得
+\[\frac{1}{2}g(x)\leqslant f(x)\leqslant2g(x),\quad\forall\,x\in[B,b[.\]
+由此不等式及上述比较判别法立即推知此推论成立。
+
+\end{proof}
+
+\begin{sourceexample}{1}
+
+考虑广义积分 $\displaystyle\int_1^{+\infty}\frac{\log x}{\sqrt{x}}\,dx$。
+
+\end{sourceexample}
+
+由于函数 $x\longmapsto\dfrac{\log x}{\sqrt{x}}$，$x\in[1,+\infty[$ 在 $[1,+\infty[$ 上连续，并且
+\[\forall\,x\geqslant e,\quad\frac{\log x}{\sqrt{x}}\geqslant\frac{1}{\sqrt{x}},\]
+而广义积分 $\displaystyle\int_1^{+\infty}\frac{1}{\sqrt{x}}\,dx$ 发散，故由比较判别法知，广义积分
+\[\int_1^{+\infty}\frac{\log x}{\sqrt{x}}\,dx\]
+发散。
+
+\begin{sourceexample}{2}
+
+考虑广义积分 $\displaystyle\int_1^{+\infty}\frac{x}{\sqrt{x^5+x+1}}\,dx$。
+
+\end{sourceexample}
+
+函数 $x\longmapsto\dfrac{x}{\sqrt{x^5+x+1}}$，$x\in[1,+\infty[$ 在 $[1,+\infty[$ 上连续，并且由于
+\[x^5+x+1=x^5\left(1+\frac{1}{x^4}+\frac{1}{x^5}\right)\sim x^5\quad(x\to+\infty);\]
+故
+\[\frac{x}{\sqrt{x^5+x+1}}\sim x\cdot x^{-\frac{5}{2}}=\frac{1}{x^{3/2}}\quad(x\to+\infty).\]
+广义积分 $\displaystyle\int_1^{+\infty}\frac{1}{x^{3/2}}\,dx$ 收敛；故由上述推论知，广义积分
+\[\int_1^{+\infty}\frac{x}{\sqrt{x^5+x+1}}\,dx\]
+收敛。
+
+\begin{sourceexample}{3}
+
+考虑广义积分 $\displaystyle\int_0^{1^-}\frac{1}{\sqrt[4]{1-x^4}}\,dx$。
+
+\end{sourceexample}
+
+$x=1$ 是此广义积分的唯一奇点。并且
+\[\frac{1}{\sqrt[4]{1-x^4}}=1/[1-(x-1+1)^4]^{\frac{1}{4}}\]
+\[=1/[4(1-x)-6(1-x)^2+4(1-x)^3-(1-x)^4]^{\frac{1}{4}}\]
+\[=1/\left(\sqrt[4]{4}(1-x)^{\frac{1}{4}}\left[1-\frac{6}{4}(1-x)+(1-x)^2-\frac{1}{4}(1-x)^3\right]^{\frac{1}{4}}\right)\]
+\[\sim\frac{1}{\sqrt[4]{4}(1-x)^{\frac{1}{4}}}\quad(x\to1^-).\]
+而广义积分 $\displaystyle\int_0^{1^-}\frac{1}{(1-x)^{\frac{1}{4}}}\,dx$ 收敛，故广义积分 $\displaystyle\int_0^{1^-}\frac{1}{\sqrt[4]{1-x^4}}\,dx$ 收敛。
+
+\begin{sourceexample}{4}
+
+考虑广义积分 $\displaystyle\int_0^{+\infty}\frac{1}{x^{\alpha}(1+x^{\beta})}\,dx$ $(\alpha,\beta\in\R)$。
+
+\end{sourceexample}
+
+$\forall\,\alpha,\beta\in\R$，函数 $x\longmapsto\dfrac{1}{x^{\alpha}(1+x^{\beta})}$，$x\in[1,+\infty[$ 在 $[1,+\infty[$ 上连续。
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item $\beta\leqslant0$：这时
+\[\frac{1}{x^{\alpha}(1+x^{\beta})}\sim\frac{1}{x^{\alpha}}\quad(x\to+\infty),\ \text{若 }\beta<0,\]
+\[\frac{1}{x^{\alpha}(1+x^{\beta})}\sim\frac{1}{2x^{\alpha}}\quad(x\to+\infty),\ \text{若 }\beta=0.\]
+因此广义积分 $\displaystyle\int_1^{+\infty}\frac{1}{x^{\alpha}(1+x^{\beta})}\,dx$ 收敛当且仅当 $\alpha>1$。
+\item $\beta>0$：这时
+\[\frac{1}{x^{\alpha}(1+x^{\beta})}\sim\frac{1}{x^{\alpha+\beta}}\quad(x\to+\infty).\]
+因此广义积分 $\displaystyle\int_1^{+\infty}\frac{1}{x^{\alpha}(1+x^{\beta})}\,dx$ 收敛，当且仅当 $\alpha+\beta>1$。
+\end{enumerate}
+
+特别地，当 $\alpha=1$ 时，$\displaystyle\int_1^{+\infty}\frac{1}{x(1+x^{\beta})}\,dx$ 收敛当且仅当 $\beta>0$，并且这时
+\[\int_1^{+\infty}\frac{1}{x(1+x^{\beta})}\,dx=\int_1^{+\infty}\frac{x^{\beta-1}}{x^{\beta}(1+x^{\beta})}\,dx=\frac{1}{\beta}\int_1^{+\infty}\frac{1}{y(1+y)}\,dy=\frac{1}{\beta}\log2.\]
+
+\subsection{广义积分的绝对收敛与条件收敛}
+
+\begin{mydef*}{}
+
+设 $\displaystyle\int_a^{b^-}f(x)\,dx$ 是任一广义积分。
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item 若 $\displaystyle\int_a^{b^-}|f(x)|\,dx$ 收敛，则称广义积分 $\displaystyle\int_a^{b^-}f(x)\,dx$ 是\textbf{绝对收敛的}。
+\item 若 $\displaystyle\int_a^{b^-}|f(x)|\,dx$ 发散，但 $\displaystyle\int_a^{b^-}f(x)\,dx$ 收敛，则称广义积分 $\displaystyle\int_a^{b^-}f(x)\,dx$ 是\textbf{条件收敛的}。
+\end{enumerate}
+
+\end{mydef*}
+
+\begin{mythm}{}{absolute-improper}
+
+任何一个绝对收敛的广义积分 $\displaystyle\int_a^{b^-}f(x)\,dx$ 是收敛的。
+
+\end{mythm}
+
+\begin{proof}
+
+因为 $\displaystyle\int_a^{b^-}|f(x)|\,dx$ 收敛，所以由\rthm{thm:cauchy-improper}知，
+\[(\forall\,\varepsilon>0)(\exists\,B\geqslant a)(\forall\,c,c'\geqslant B)\Longrightarrow\left|\int_c^{c'}|f(x)|\,dx\right|<\varepsilon\]
+\[\Longrightarrow\left|\int_c^{c'}f(x)\,dx\right|<\varepsilon.\]
+从而由同一定理知广义积分 $\displaystyle\int_a^{b^-}f(x)\,dx$ 收敛。$\blacksquare$
+
+\end{proof}
+
+\begin{sourceexample}{5}
+
+广义积分 $\displaystyle\int_a^{+\infty}\frac{\sin x}{x^2}\,dx$ $(a>0)$ 是绝对收敛的。这是因为
+\[\left|\frac{\sin x}{x^2}\right|\leqslant\frac{1}{x^2},\quad\int_a^{+\infty}\frac{1}{x^2}\,dx\ \text{收敛}\quad(a>0).\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{6}
+
+广义积分 $\displaystyle\int_{0^+}^1\frac{\cos(x^2)}{\sqrt{x}}\,dx$ 是绝对收敛的。
+
+因为
+\[\left|\frac{\cos(x^2)}{\sqrt{x}}\right|\leqslant\frac{1}{\sqrt{x}},\quad\int_{0^+}^1\frac{1}{\sqrt{x}}\,dx\ \text{收敛}.\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{7}
+
+广义积分 $\displaystyle\int_{0^+}^{+\infty}\frac{\sin x}{x^{3/2}}\,dx$ 是绝对收敛的。
+
+因为
+\begin{enumerate}[label=\roman{enumi})]
+\item 在 $]0,1]$ 上：$\dfrac{\sin x}{x^{3/2}}\sim\dfrac{1}{\sqrt{x}}\ (x\to0^+)$，广义积分 $\displaystyle\int_{0^+}^1\frac{1}{\sqrt{x}}\,dx$ 收敛，故广义积分 $\displaystyle\int_{0^+}^1\frac{\sin x}{x^{3/2}}\,dx$ 收敛。
+\item 在 $[1,+\infty[$ 上：$\left|\dfrac{\sin x}{x^{3/2}}\right|\leqslant\dfrac{1}{x^{3/2}}$。而广义积分 $\displaystyle\int_1^{+\infty}\frac{1}{x^{3/2}}\,dx$ 收敛，故广义积分 $\displaystyle\int_1^{+\infty}\left|\frac{\sin x}{x^{3/2}}\right|dx$ 收敛。
+\end{enumerate}
+
+因此，广义积分 $\displaystyle\int_{0^+}^{+\infty}\left|\frac{\sin x}{x^{3/2}}\right|dx$ 收敛，从而原广义积分 $\displaystyle\int_{0^+}^{+\infty}\frac{\sin x}{x^{3/2}}\,dx$ 绝对收敛。
+
+\end{sourceexample}
+
+\begin{sourceexample}{8}
+
+广义积分 $\displaystyle\int_a^{+\infty}\frac{\sin x}{x}\,dx$ 是条件收敛的 $(a>0)$。
+
+1) 首先证明 $\displaystyle\int_a^{+\infty}\frac{\sin x}{x}\,dx$ 收敛。
+
+为此由分部积分法，$\forall\,B\geqslant a$ 我们有
+\[\int_a^B\frac{\sin x}{x}\,dx=\left[-\frac{\cos x}{x}\right]_a^B-\int_a^B\frac{\cos x}{x^2}\,dx=\frac{\cos a}{a}-\frac{\cos B}{B}-\int_a^B\frac{\cos x}{x^2}\,dx.\]
+由于 $\displaystyle\lim_{B\to+\infty}\frac{\cos B}{B}=0$，$\displaystyle\lim_{B\to+\infty}\int_a^B\frac{\cos x}{x^2}\,dx=\int_a^{+\infty}\frac{\cos x}{x^2}\,dx$ 是绝对收敛的（见例 5）。所以
+\[\int_a^{+\infty}\frac{\sin x}{x}\,dx=\lim_{B\to+\infty}\int_a^B\frac{\sin x}{x}\,dx\]
+收敛。
+
+2) 证明 $\displaystyle\int_a^{+\infty}\left|\frac{\sin x}{x}\right|dx$ 发散。
+
+用反证法。假设 $\displaystyle\int_a^{+\infty}\left|\frac{\sin x}{x}\right|dx$ 收敛。那末由
+\[\left|\frac{\sin x}{x}\right|\geqslant\frac{\sin^2x}{x}=\frac{1-\cos2x}{2x},\quad\forall\,x\geqslant a,\]
+及比较判别法知广义积分 $\displaystyle\int_a^{+\infty}\frac{1-\cos2x}{2x}\,dx$ 收敛。
+
+由于类似可证广义积分 $\displaystyle\int_a^{+\infty}\frac{\cos2x}{2x}\,dx$ 收敛，故由\rthm{thm:improper-linear}知，广义积分
+\[\int_a^{+\infty}\frac{1}{2x}\,dx=\int_a^{+\infty}\frac{1-\cos2x}{2x}\,dx+\int_a^{+\infty}\frac{\cos2x}{2x}\,dx\]
+应该收敛，这显然是矛盾的，因为广义积分 $\displaystyle\int_a^{+\infty}\frac{1}{x}\,dx$ 发散。因此广义积分 $\displaystyle\int_a^{+\infty}\left|\frac{\sin x}{x}\right|dx$ 发散。
+
+由 1)、2) 讨论知，广义积分 $\displaystyle\int_a^{+\infty}\frac{\sin x}{x}\,dx$ 是条件收敛的。
+
+\end{sourceexample}
+
+为了确定这种非绝对收敛的广义积分的收敛性，下面我们来介绍更精细的判别法。
+
+\subsection{广义积分的Abel与Dirichlet判别法}
+	\label{sec:9-2-3}
+
+为此我们首先证明下述一般性结论。
+
+\begin{mythm}{}{abel-dirichlet-general}
+
+设函数 $f:[a,b[\to\R$ 在 $[a,b[$ 上连续，函数 $g:[a,b[\to\R$ 在 $[a,b[$ 上是 $C^1$ 类的，并且还满足下述条件：
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item 广义积分 $\displaystyle\int_a^{b^-}|g'(x)|\,dx$ 收敛。
+\item 函数 $c\longmapsto F(c)=\displaystyle\int_a^cf(x)\,dx$，$c\in[a,b[$ 在 $[a,b[$ 上有界。
+\item $\displaystyle\lim_{c\to b^-}g(c)F(c)$ 存在并且有限。
+\end{enumerate}
+
+则广义积分 $\displaystyle\int_a^{b^-}f(x)g(x)\,dx$ 收敛。
+
+\end{mythm}
+
+\begin{proof}
+
+由分部积分法，$\forall\,c\geqslant a$，我们得到
+\[\int_a^cf(x)g(x)\,dx=\int_a^cg(x)F'(x)\,dx\]
+\[=\left[g(x)F(x)\right]_a^c-\int_a^cF(x)g'(x)\,dx\]
+\[=g(c)F(c)-g(a)F(a)-\int_a^cF(x)g'(x)\,dx.\qquad(*)\]
+由假设 2)，存在常数 $M>0$ 使得
+\[\forall\,x\in[a,b[,\quad|F(x)|\leqslant M.\]
+于是
+\[\forall\,x\in[a,b[,\quad|F(x)g'(x)|\leqslant M\,|g'(x)|.\]
+而由假设 1)，积分 $\displaystyle\int_a^{b^-}|g'(x)|\,dx$ 收敛，故广义积分
+\[\int_a^{b^-}|F(x)g'(x)|\,dx=\lim_{c\to b^-}\int_a^c|F(x)g'(x)|\,dx\]
+收敛，从而广义积分 $\displaystyle\int_a^{b^-}F(x)g'(x)\,dx$ 收敛。即极限
+\[\lim_{c\to b^-}\int_a^cF(x)g'(x)\,dx\text{ 存在且有限。}\]
+另一方面，由假设 3)，极限 $\displaystyle\lim_{c\to b^-}g(c)F(c)$ 有限。因此由上述 $(*)$ 式立即推知极限
+\[\lim_{c\to b^-}\int_a^cf(x)g(x)\,dx=\lim_{c\to b^-}g(c)F(c)-g(a)F(a)-\lim_{c\to b^-}\int_a^cF(x)g'(x)\,dx\]
+存在并且有限，此即表明广义积分 $\displaystyle\int_a^{b^-}f(x)g(x)\,dx$ 收敛。$\blacksquare$
+
+\end{proof}
+
+\begin{mycor*}{1}
+
+（Abel 判别法）设函数 $f:[a,b[\to\R$ 在 $[a,b[$ 上连续，函数 $g:[a,b[\to\R$ 在 $[a,b[$ 上是 $C^1$ 类的，并且满足下述条件：
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item 函数 $g$ 在 $[a,b[$ 上单调下降且有下界。
+\item 广义积分 $\displaystyle\int_a^{b^-}f(x)\,dx$ 收敛。
+\end{enumerate}
+
+则广义积分 $\displaystyle\int_a^{b^-}f(x)g(x)\,dx$ 收敛。
+
+\end{mycor*}
+
+\begin{proof}
+
+为此我们只需验证上述定理的条件 1)、2)、3) 满足即可。
+
+事实上，由于 $g$ 在 $[a,b[$ 上单调下降有下界，所以
+\[\lim_{c\to b^-}g(c)=l\in\R,\quad g'(x)\leqslant0,\quad\forall\,x\in[a,b[.\]
+从而 $\forall\,c\geqslant a$，
+\[\int_a^c|g'(x)|\,dx=-\int_a^cg'(x)\,dx=g(a)-g(c).\]
+因此
+\[\lim_{c\to b^-}\int_a^c|g'(x)|\,dx=g(a)-\lim_{c\to b^-}g(c)=g(a)-l.\]
+此即表明广义积分 $\displaystyle\int_a^{b^-}|g'(x)|\,dx$ 收敛。
+
+其次，由于广义积分 $\displaystyle\int_a^{b^-}f(x)\,dx$ 收敛，并且
+\[\int_a^{b^-}f(x)\,dx=\lim_{c\to b^-}F(c),\]
+故存在 $B$，$a\leqslant B<b$ 使得函数 $F$ 在 $]B,b[$ 上有界。而函数 $F$ 连续，故 $F$ 在有界闭区间 $[a,B]$ 上有界，从而函数 $F$ 在 $[a,b[$ 上有界。
+
+最后，极限
+\[\lim_{c\to b^-}g(c)F(c)=\lim_{c\to b^-}g(c)\cdot\lim_{c\to b^-}F(c)=l\int_a^{b^-}f(x)\,dx\in\R.\]
+因此\rthm{thm:abel-dirichlet-general}的条件全部满足，故广义积分 $\displaystyle\int_a^{b^-}f(x)g(x)\,dx$ 收敛。
+
+\end{proof}
+
+\begin{sourceexample}{9}
+
+考虑广义积分 $\displaystyle\int_2^{+\infty}\frac{x\cos(x^2)}{x^2-1}\,dx$。
+
+我们首先将它写成下述形式
+\[\int_2^{+\infty}\frac{x\cos(x^2)}{x^2-1}\,dx=\int_2^{+\infty}\frac{x^2}{x^2-1}\cdot\frac{\cos(x^2)}{x}\,dx.\]
+令 $g(x)=\dfrac{x^2}{x^2-1}$，$f(x)=\dfrac{\cos(x^2)}{x}$，$\forall\,x\in[2,+\infty[$。
+
+由于
+\[g'(x)=\left(\frac{x^2}{x^2-1}\right)'=-\frac{2x}{(x^2-1)^2}<0,\quad\lim_{x\to+\infty}g(x)=1,\]
+故 $g$ 在 $[2,+\infty[$ 上单调下降有下界。
+
+另一方面，对于广义积分 $\displaystyle\int_2^{+\infty}f(x)\,dx=\int_2^{+\infty}\frac{\cos(x^2)}{x}\,dx$，作变元替换 $x^2=y$，则
+\[\int_2^{+\infty}\frac{\cos(x^2)}{x}\,dx=\frac{1}{2}\int_4^{+\infty}\frac{\cos y}{y}\,dy.\]
+用类似于例 8 的方法可证广义积分 $\displaystyle\int_4^{+\infty}\frac{\cos y}{y}\,dy$ 收敛，因此广义积分 $\displaystyle\int_2^{+\infty}f(x)\,dx=\int_2^{+\infty}\frac{\cos(x^2)}{x}\,dx$ 收敛。
+
+根据 Abel 判别法知，广义积分 $\displaystyle\int_2^{+\infty}\frac{x\cos(x^2)}{x^2-1}\,dx$ 收敛。
+
+\end{sourceexample}
+
+\begin{mycor*}{2}
+
+（Dirichlet 判别法）设函数 $f:[a,b[\to\R$ 在 $[a,b[$ 上连续，函数 $g:[a,b[\to\R$ 在 $[a,b[$ 上是 $C^1$ 类的，并且满足下述条件：
+
+\begin{enumerate}[label=\arabic{enumi})]
+\item 函数 $g$ 在 $[a,b[$ 上单调下降且 $\displaystyle\lim_{x\to b^-}g(x)=0$。
+\item 函数 $c\longmapsto F(c)=\displaystyle\int_a^cf(x)\,dx$，$c\in[a,b[$ 在 $[a,b[$ 上有界。
+\end{enumerate}
+
+则广义积分 $\displaystyle\int_a^{b^-}f(x)g(x)\,dx$ 收敛。
+
+\end{mycor*}
+
+\begin{proof}
+
+与推论 1 的证明一样，我们来验证定理的条件全部满足。
+
+事实上，因为 $g$ 单调下降且 $\displaystyle\lim_{x\to b^-}g(x)=0$，所以
+\[\lim_{c\to b^-}\int_a^c|g'(x)|\,dx=\lim_{c\to b^-}\int_a^c-g'(x)\,dx=g(a)-\lim_{c\to b^-}g(c)=g(a).\]
+因此广义积分 $\displaystyle\int_a^{b^-}|g'(x)|\,dx$ 收敛。
+
+其次由于函数 $F$ 在 $[a,b[$ 上有界，所以
+\[\lim_{c\to b^-}g(c)F(c)=0.\]
+因此\rthm{thm:abel-dirichlet-general}的全部条件满足，故广义积分
+\[\int_a^{b^-}f(x)g(x)\,dx\text{ 收敛。}\quad\blacksquare\]
+
+\end{proof}
+
+\begin{sourceexample}{10}
+
+考虑 Fresnel 积分
+\[\int_0^{+\infty}\sin(x^2)\,dx\quad\text{与}\quad\int_0^{+\infty}\cos(x^2)\,dx.\]
+设 $0<c<b$。对积分 $\displaystyle\int_0^b\sin(x^2)\,dx$ 作变元替换 $x^2=y$ 得到
+\[\int_0^{+\infty}\sin(x^2)\,dx=\frac{1}{2}\int_0^{+\infty}\frac{\sin y}{\sqrt{y}}\,dy.\]
+由此可知，我们只需讨论广义积分 $\displaystyle\int_0^{+\infty}\frac{\sin y}{\sqrt{y}}\,dy$ 的收敛性。
+
+对于广义积分 $\displaystyle\int_1^{+\infty}\frac{\sin y}{\sqrt{y}}\,dy$：
+
+由于函数 $y\longmapsto g(y)=\dfrac{1}{\sqrt{y}}$，$y\in[1,+\infty[$ 在 $[1,+\infty[$ 上单调下降且 $\displaystyle\lim_{y\to+\infty}g(y)=0$，而函数 $c\longmapsto F(c)=\displaystyle\int_1^c\sin y\,dy$ $c\in[1,+\infty[$ 在 $[1,+\infty[$ 上以 $2$ 为界，故根据 Dirichlet 判别法知，广义积分
+\[\int_1^{+\infty}\frac{\sin y}{\sqrt{y}}\,dy\]
+收敛。
+
+对于广义积分 $\displaystyle\int_{0^+}^1\frac{\sin y}{\sqrt{y}}\,dy$：
+
+由于 $\displaystyle\left|\frac{\sin y}{\sqrt{y}}\right|\leqslant\frac{1}{\sqrt{y}}$，$\forall\,y\in\ ]0,1]$，而广义积分 $\displaystyle\int_{0^+}^1\frac{1}{\sqrt{y}}\,dy$ 收敛，故广义积分 $\displaystyle\int_{0^+}^1\frac{\sin y}{\sqrt{y}}\,dy$ 也收敛。
+
+因此广义积分 $\displaystyle\int_{0^+}^{+\infty}\frac{\sin y}{\sqrt{y}}\,dy$ 收敛，从而 Fresnel 积分
+\[\int_0^{+\infty}\sin(x^2)\,dx\]
+收敛。
+
+同理可证，Fresnel 积分 $\displaystyle\int_0^{+\infty}\cos(x^2)\,dx$ 收敛。
+
+\end{sourceexample}
+
+\subsection*{习 题}
+
+\begin{exercise}
+	\item 研究下列各广义积分的收敛性。
+	\begin{enumerate}[label=\arabic*)]
+		\item $\displaystyle\int_0^1\frac{1}{x^2}\sin\left(\frac{1}{x^2}\right)\,dx$；
+		\item $\displaystyle\int_0^1\frac{1}{\log x}\,dx$；
+		\item $\displaystyle\int_0^1\frac{\operatorname{tg}x-1}{\sqrt{x}\,\sin x}\,dx$；
+		\item $\displaystyle\int_0^1\frac{\log x}{1-x^2}\,dx$；
+		\item $\displaystyle\int_0^{\pi/2}\frac{\log(\sin x)}{\sqrt{x}}\,dx$；
+		\item $\displaystyle\int_0^{+\infty}\frac{\sin x}{\sqrt{x+\cos x}}\,dx$；
+		\item $\displaystyle\int_0^{+\infty}\frac{\log(1+x)}{x^n}\,dx$；
+		\item $\displaystyle\int_1^{+\infty}\frac{1}{x}\left(e^{-\frac{1}{x}}-\cos\frac{1}{x}\right)\,dx$。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $\lambda\in\R$。试讨论广义积分 $\displaystyle\int_0^1\frac{x^{\lambda}-1}{\log x}\,dx$ 的收敛性。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $I=\displaystyle\int_0^{\pi/2}\cos x\log(\operatorname{tg}x)\,dx$。
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明广义积分 $I$ 收敛。
+		\item 计算广义积分 $I$（提示作变换 $y=\sin x$）。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $\lambda\in\R$，$I=\displaystyle\int_1^{+\infty}x^{\lambda-1}\cos x\,dx$。
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：对 $\lambda<0$，广义积分 $I$ 绝对收敛。
+		\item 由此推出广义积分 $J=\displaystyle\int_1^{+\infty}x^{\lambda}\sin x\,dx$ 对 $\lambda<0$ 收敛。$J$ 绝对收敛吗？
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设
+	\[I=\int_0^{\pi/2}\log(\sin x)\,dx,\quad J=\int_0^{\pi/2}\log(\cos x)\,dx.\]
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明广义积分 $I$ 与 $J$ 收敛。
+		\item 推导出 $I$ 与 $J$ 之间的关系式，从而计算出 $I$ 与 $J$ 的值。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $f:[0,+\infty[\to\R$ 满足下列条件：
+	\begin{enumerate}[label=\arabic*)]
+		\item $f\in C^2([0,+\infty[,\R)$，
+		\item $\displaystyle\int_0^{+\infty}f^4(x)\,dx$ 与 $\displaystyle\int_0^{+\infty}[f''(x)]^2\,dx$ 收敛。
+	\end{enumerate}
+	试证明广义积分 $\displaystyle\int_0^{+\infty}[f'(x)]^2\,dx$ 收敛。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $\alpha\in\R_*^+$，试讨论广义积分 $\displaystyle\int_{\pi}^{+\infty}\frac{\sin x}{x^{\alpha}}\,dx$ 的绝对收敛性。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $P(x)=\dfrac{A(x)}{B(x)}$ 是定义在 $[a,+\infty[$ 上的任一有理分式。并且 $B(x)>0$。试研究广义积分
+	\[I=\int_a^{+\infty}P(x)\sin x\,dx\]
+	的收敛性与绝对收敛性。
+
+	（提示：设 $\deg P=\deg B-\deg A$，考虑以下情况：i) $\deg P\geqslant2$，ii) $\deg P=1$，iii) $\deg P\leqslant0$）。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 $f:]0,+\infty[\to\R$ 是在任一有限闭区间 $[a,b]\subset\ ]0,+\infty[$ 上可积的函数，$\alpha,\beta\in\R_*^+$，令
+	\[J(\alpha,\beta)=\int_0^{+\infty}\frac{f(\alpha x)-f(\beta x)}{x}\,dx.\]
+	\begin{enumerate}[label=\arabic*)]
+		\item 举例说明 $J(\alpha,\beta)$ 可以发散。
+		\item 若 $a=\displaystyle\lim_{x\to0^+}f(x)$，$b=\displaystyle\lim_{x\to+\infty}f(x)$，计算 $J(\alpha,\beta)$ 的值。
+		\item 若存在 $m,M\in\R$ 使得广义积分
+		\[\int_0^1\frac{f(x)-m}{x}\,dx\quad\text{与}\quad\int_1^{+\infty}\frac{f(x)-M}{x}\,dx\]
+		收敛，计算 $J(\alpha,\beta)$ 的值。
+		\item 设 $a=\displaystyle\lim_{x\to0^+}f(x)$ 并且存在 $M>0$ 使得
+		\[\forall\,c,d\in\R_*^+,\quad\left|\int_c^df(x)\,dx\right|\leqslant M,\]
+		计算 $J(\alpha,\beta)$ 的值。
+		\item 将上述结果应用到广义积分
+		\[\int_0^{+\infty}\frac{\operatorname{arctg}2x-\operatorname{arctg}x}{x}\,dx\quad\text{与}\quad\int_0^1\frac{x-1}{\log x}\,dx.\]
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 此题是要计算广义积分
+	\[I=\int_0^{+\infty}\frac{\sin x}{x}\,dx\]
+	的值。
+
+	\begin{enumerate}[label=\arabic*)]
+		\item 定义函数 $f:[0,\pi]\to\R$ 如下：
+		\[f(x)=\begin{cases} \dfrac{1}{x}-\dfrac{1}{2\sin(x/2)}, & x\in\ ]0,\pi];\\[1ex] 0, & x=0. \end{cases}\]
+		证明 $f\in C^1([0,\pi],\R)$。
+		\item 设 $n\in\N$，令
+		\[I_n=\int_0^{\pi}\frac{\sin\left(n+\dfrac{1}{2}\right)x}{2\sin\dfrac{x}{2}}\,dx.\]
+		证明：$I_n$ 的值与 $n$ 无关，并计算 $I_n$ 的值。
+		\item 设 $\varphi\in C^1([0,\pi],\R)$。证明：积分
+		\[J_n=\int_0^{\pi}\varphi(x)\sin\left(n+\frac{1}{2}\right)x\,dx\]
+		当 $n\to+\infty$ 时有极限 $0$。
+		\item 最后计算 $I=\displaystyle\int_0^{+\infty}\frac{\sin x}{x}\,dx$ 的值。
+		\item 利用 $I$ 的值证明：
+		\[J=\int_0^{+\infty}\frac{\sin x\cos x}{x}\,dx=\frac{\pi}{4}.\]
+		\item 对 $J$ 用分部积分法，证明：
+		\[K=\int_0^{+\infty}\frac{\sin^2x}{x^2}\,dx=\frac{\pi}{2}.\]
+		\item 应用恒等式 $\sin^2x+\cos^2x=1$，由 $K$ 的值证明：
+		\[L=\int_0^{+\infty}\frac{\sin^4x}{x^2}\,dx=\frac{\pi}{4}.\]
+		\item 再由 $L$ 的值证明：
+		\[M=\int_0^{+\infty}\frac{\sin^4x}{x^4}\,dx=\frac{\pi}{3}.\]
+	\end{enumerate}
+\end{exercise}

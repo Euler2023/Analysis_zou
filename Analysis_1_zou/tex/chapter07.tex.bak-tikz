@@ -1,0 +1,1977 @@
+\chapter{原 函 数}
+
+这一章我们介绍一元实值函数的原函数概念,讨论了 Riemann 积分与原函数的关系,给出了一系列计算原函数的实际方法.
+
+\section{Newton-Leibniz公式}
+
+\subsection{原函数定义}
+
+在第 5 章，我们系统地介绍了一元实值函数 \(f:[a,b]\to\R\) 的 Riemann 积分理论。但有一个很重要的问题没有解决：如何具体计算一个函数 \(f\) 的 Riemann 积分值 \(\displaystyle\int_a^b f(x)dx\)。
+
+当然，直接按积分定义或用 Riemann 和极限计算积分是一个办法，然而能够用这种方法去计算的函数毕竟是少数，而且计算起来也不方便。因此寻找计算积分 \(\displaystyle\int_a^b f(x)dx\) 的行之有效的方法就是这一章主要的研究内容。
+
+下面介绍的原函数概念就是计算积分的一个重要工具。
+
+\begin{mydef*}{}
+
+	设 \(I\subset\R\) 是任一非空区间，\(f:I\to\R\) 是任一函数，若存在函数 \(F:I\to\R\) 使得：
+
+	1) \(F\) 在 \(I\) 上可导，
+
+	2) \(F'(x)=f(x),\quad\forall\,x\in I\)，
+
+	则我们称 \(F\) 是函数 \(f\) 的一个原函数。
+
+\end{mydef*}
+
+这里有两个问题需要研究：其一，是否任一个函数 \(f:I\to\R\) 都有原函数存在？其二，若 \(f\) 有原函数存在，原函数是否唯一？
+
+我们先研究唯一性问题。
+
+\subsection{原函数的非唯一性}
+
+\begin{mythm}{}{antiderivative-plus-constant}
+
+	若函数 \(F:I\to\R\) 是 \(f:I\to\R\) 的一个原函数，则 \(\forall\,C\in\R\)，\(F+C\) 也是 \(f\) 的原函数。
+
+\end{mythm}
+
+\begin{proof}
+
+	因为 \(F\) 是 \(f\) 的原函数，故由定义有
+	\[
+	F'(x)=f(x),\quad\forall\,x\in I.
+	\]
+	显然 \(\forall\,C\in\R\)，\(F+C\) 在 \(I\) 上可导，并且
+	\[
+	(F(x)+C)'=F'(x)=f(x),\quad\forall\,x\in I.
+	\]
+	因此 \(F+C\) 也是 \(f\) 的一个原函数。
+
+\end{proof}
+
+此定理表明，若原函数存在，它就不是唯一的，下一定理指出了两个原函数之间的关系。
+
+\begin{mythm}{}{antiderivative-uniqueness}
+
+	若 \(F,G\) 是 \(f:I\to\R\) 的两个原函数，则存在常数 \(C\) 使得
+	\[
+	F=G+C.
+	\]
+
+\end{mythm}
+
+\begin{proof}
+
+	因为 \(F\) 与 \(G\) 是函数 \(f\) 的原函数，故 \(F\) 与 \(G\) 在 \(I\) 上可导，并且
+	\[
+	\forall\,x\in I,\quad F'(x)=f(x),\quad G'(x)=f(x).
+	\]
+	从而
+	\[
+	\forall\,x\in I,\quad F'(x)=G'(x).
+	\]
+	根据第 6 章 §3 的命题推论，存在常数 \(C\in\R\) 使得
+	\[
+	F-G=C\quad\text{或}\quad F=G+C.
+	\]
+
+\end{proof}
+
+\textbf{原函数的记法}\quad 根据上面两个定理，\(f\) 的所有原函数只能表示成 \(F+C\) 的形式，其中 \(F\) 是 \(f\) 的一个原函数。因此今后我们用符号 \(\displaystyle\int f(x)dx\) 表示函数 \(f\) 的任意一个原函数。通常 \(\displaystyle\int f(x)dx\) 也称为函数 \(f\) 的不定积分，而将 \(\displaystyle\int_a^b f(x)dx\) 称为函数 \(f\) 的定积分。
+
+现在我们来研究原函数的存在性。
+
+\subsection{原函数的存在性}
+
+\begin{mythm}{}{antiderivative-existence}
+
+	设 \(I\subset\R\) 是任一非空区间，\(f:I\to\R\) 是任一连续函数。那末下述结论成立。
+
+	1) \(f\) 的原函数存在，并且 \(\forall\,x_0\in I\)，函数
+	\[
+	x\longmapsto F(x)=\int_{x_0}^x f(t)dt
+	\]
+	是 \(f\) 的一个原函数。
+
+	2) \(\forall\,a,b\in I\)，\(\displaystyle\int_a^b f(x)dx=F(b)-F(a)\)。
+
+\end{mythm}
+
+\begin{proof}
+
+	1) 函数 \(F\) 是 \(f\) 的积分函数，在第 6 章 §1 的例 6 中我们已经证明了 \(F\) 在 \(I\) 上可导，并且 \(\forall\,x\in I\)，\(F'(x)=f(x)\)，因此 \(F\) 是 \(f\) 的一个原函数。
+
+	2) 利用积分的性质，我们有
+	\[
+	\int_a^b f(x)dx=\int_a^{x_0} f(x)dx+\int_{x_0}^b f(x)dx
+	\]
+	\[
+	=\int_{x_0}^b f(x)dx-\int_{x_0}^a f(x)dx=F(b)-F(a).
+	\]
+
+\end{proof}
+
+这个定理建立了连续函数 \(f\) 的原函数与 \(f\) 在 \([a,b]\) 上的 Riemann 积分之间的联系。下面一个定理把上述结论推广到了一般可积函数。
+
+\begin{mythm}{Newton-Leibniz公式}{newton-leibniz-formula}
+
+	设 \(f:[a,b]\to\R\) 是任一 Riemann 可积函数，若 \(F\) 是 \(f\) 的原函数，则
+	\[
+	\int_a^b f(x)dx=F(b)-F(a).
+	\]
+
+\end{mythm}
+
+\begin{proof}
+
+	首先由于 \(f\in\mathscr{R}[a,b]\)，故根据\rthm{thm:riemann-integrability-criterion} 知，\(\forall\,\varepsilon>0\)，存在两个阶梯函数 \(h,k:[a,b]\to\R\) 使得
+	\[
+	|f(x)-h(x)|\le k(x),\quad\forall\,x\in[a,b],\qquad\int_a^b k(x)dx<\frac{\varepsilon}{2}.
+	\]
+	现在设 \(\sigma=(a_0,a_1,\cdots,a_m)\) 是同时适合于 \(h\) 与 \(k\) 的 \([a,b]\) 的一个分割。因此 \(h\) 与 \(k\) 在开区间 \(]a_i,a_{i+1}[\) 上 \((i=0,1,\cdots,m-1)\) 取常数值。
+
+	另一方面，对此分割 \(\sigma\)，我们有
+	\[
+	F(b)-F(a)=F(a_1)-F(a_0)+F(a_2)-F(a_1)+\cdots+F(a_m)-F(a_{m-1}),
+	\]
+	\[
+	\int_a^b f(x)dx=\sum_{i=0}^{m-1}\int_{a_i}^{a_{i+1}}f(x)dx.
+	\]
+	由于 \(F\) 是 \(f\) 的原函数，故 \(F\) 在 \([a,b]\) 上可导，并且 \(F'(x)=f(x)\)，\(\forall\,x\in[a,b]\)。因此由 Lagrange 中值定理，我们有：\(\forall\,i=0,1,\cdots,m-1\)，
+	\[
+	F(a_{i+1})-F(a_i)=F'(\xi_i)(a_{i+1}-a_i)=f(\xi_i)(a_{i+1}-a_i),
+	\]
+	这里 \(a_i<\xi_i<a_{i+1}\)。从而
+	\[
+	\left|F(b)-F(a)-\int_a^b f(x)dx\right|
+	=\left|\sum_{i=0}^{m-1}\left[F(a_{i+1})-F(a_i)-\int_{a_i}^{a_{i+1}}f(x)dx\right]\right|
+	\]
+	\[
+	=\left|\sum_{i=0}^{m-1}f(\xi_i)(a_{i+1}-a_i)-\int_{a_i}^{a_{i+1}}f(x)dx\right|
+	\]
+	\[
+	=\left|\sum_{i=0}^{m-1}\int_{a_i}^{a_{i+1}}[f(\xi_i)-f(x)]dx\right|
+	\le\sum_{i=0}^{m-1}\int_{a_i}^{a_{i+1}}|f(\xi_i)-f(x)|dx.
+	\]
+	由于 \(h\) 与 \(k\) 在 \(]a_i,a_{i+1}[\) 上取常值，故
+	\[
+	|f(\xi_i)-f(x)|\le|f(\xi_i)-h(\xi_i)|+|h(x)-f(x)|\le k(\xi_i)+k(x)
+	\]
+	\[
+	=2k(x),\quad\forall\,x\in\ ]a_i,a_{i+1}[.
+	\]
+	因此
+	\[
+	\left|F(b)-F(a)-\int_a^b f(x)dx\right|\le2\sum_{i=0}^{m-1}\int_{a_i}^{a_{i+1}}k(x)dx
+	\]
+	\[
+	=2\int_a^b k(x)dx<\varepsilon.
+	\]
+	由 \(\varepsilon>0\) 的任意性，我们得到
+	\[
+	\int_a^b f(x)dx=F(b)-F(a).
+	\]
+
+\end{proof}
+
+\textbf{附注}\quad 1) 由上述 Newton-Leibniz 公式可以看出，计算函数 \(f:[a,b]\to\R\) 在 \([a,b]\) 上的 Riemann 积分值 \(\displaystyle\int_a^b f(x)dx\) 就转化为
+
+1) 找 \(f\) 的一个原函数 \(F\)。
+
+2) 计算 \(F\) 在 \(a,b\) 两点的值的差 \(F(b)-F(a)\)。因此下面几节的任务就是研究如何去求一个函数的原函数。
+
+2) 关于原函数与 Riemann 可积性的关系我们指出下面两点注意的地方。
+
+其一：并不是每一个 Riemann 可积函数 \(f\) 都有原函数存在。例如定义在 \([0,1]\) 上的 Riemann 函数 \(R\)，在第 5 章 §2 例 4 中我们证明了它在 \([0,1]\) 上是 Riemann 可积的，并且 \(\displaystyle\int_0^1 R(x)dx=0\)。
+
+从而 \(\forall\,x\in[0,1]\)，Riemann 函数 \(R\) 在 \([0,x]\) 上可积并且
+\[
+\int_0^x R(t)dt=0.
+\]
+如果 Riemann 函数 \(R:[0,1]\to\R\) 在 \([0,1]\) 上有原函数 \(F:[0,1]\to\R\) 存在，那末由定义知
+\[
+F'(x)=R(x),\quad\forall\,x\in[0,1].
+\]
+另一方面，由上述\rthm{thm:newton-leibniz-formula} 知：\(\forall\,x\in[0,1]\)，
+\[
+F(x)-F(0)=\int_0^x R(t)dt=0,
+\]
+从而
+\[
+F(x)=F(0)\quad\text{或}\quad F'(x)=0,\ \forall\,x\in[0,1].
+\]
+此矛盾说明 Riemann 函数 \(R:[0,1]\to\R\) 在 \([0,1]\) 上不存在任何的原函数。
+
+其二：并不是每一个具有原函数的有界函数都是 Riemann 可积的。这从原函数的定义 \((F'(x)=f(x))\) 应该可以明白这一点，但要具体构造出这样一个函数并非易事。
+
+\subsection*{习 题}
+
+\begin{exercise}
+	\item 考虑函数 \(F,G:\R_*^+\to\R\)，它定义为：
+	\[
+	\forall\,x\in\R_*^+,\quad F(x)=\int_1^x\frac1t dt,\quad G(x)=\int_b^{bx}\frac1t dt\ (b>0).
+	\]
+	\begin{enumerate}[label=\arabic*)]
+		\item 计算 \(F'(x)\)，\(G'(x)\)，\(\forall\,x\in\R_*^+\)。
+		\item 利用\rthm{thm:antiderivative-existence} 证明下述我们在\rthm{thm:natural-logarithm-properties} 中证明过的公式：
+		\[
+		\log a+\log b=\log ab\quad(a>0,\ b>0).
+		\]
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(f:[a,b]\to\R\) 在 \([a,b]\) 上连续。试利用\rthm{thm:antiderivative-existence} 及第 6 章 §3 的 Darboux 定理（\rthm{thm:darboux-theorem}）证明：\(f\) 取介于 \(f(a)\) 与 \(f(b)\) 之间的一切中间值。
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(f:I\to\R\) 在区间 \(I\) 上连续，函数 \(h,k:J\to I\) 在区间 \(J\) 上可导，定义函数 \(F:J\to\R\) 如下：
+	\[
+	\forall\,x\in J,\quad F(x)=\int_{h(x)}^{k(x)}f(t)dt.
+	\]
+	试利用\rthm{thm:antiderivative-existence} 证明：函数 \(F\) 在 \(J\) 上可导，并且
+	\[
+	F'(x)=f(k(x))k'(x)-f(h(x))h'(x),\quad\forall\,x\in J.
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 此题是 Newton-Leibniz 公式的推广。
+
+	设函数 \(f:[a,b]\to\R\) 在 \([a,b]\) 上 Riemann 可积，函数 \(F:[a,b]\to\R\) 在 \([a,b]\) 上连续，并且 \(\forall\,x\in[a,b]\)，\(F'(x^+)\) 与 \(F'(x^-)\) 中至少有一个存在，并且 \(F'(x^\varepsilon)=f(x)\)（这里 \(\varepsilon=\pm\)）。试利用第 6 章 §4 习题 5 的结论证明
+	\[
+	\int_a^b f(x)dx=F(b)-F(a).
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(f:[a,b]\to\R\) 在 \([a,b]\) 上 Riemann 可积，函数 \(F:[a,b]\to\R\) 在 \([a,b]\) 上连续，并且 \(\forall\,x\in\ ]a,b[\)，\(F\) 在 \(x\) 处的对称导数（见第 6 章 §1 习题 7）\(F'_s(x)=f(x)\)。证明
+	\[
+	\int_a^b f(x)dx=F(b)-F(a).
+	\]
+	利用此公式计算 \(\displaystyle\int_{-1}^2\operatorname{sgn}(x)dx\)。（取 \(F(x)=|x|\)，并证明 \(F'_s(x)=\operatorname{sgn}(x),\ \forall\,x\in\R\)。）
+\end{exercise}
+
+\section{求原函数的一般法则}
+
+首先我们介绍基本初等函数的原函数。
+
+\subsection{基本初等函数的原函数}
+
+直接从原函数的定义容易证明下列各公式成立。
+
+1) \(\displaystyle\int a\,dx=ax+C\ (a\in\R)\)。
+
+2) \(\displaystyle\int x^\alpha dx=\frac{x^{\alpha+1}}{\alpha+1}+C\ (\alpha\neq-1)\)。
+
+3) \(\displaystyle\int\frac1x\,dx=\log|x|+C\)。
+
+4) \(\displaystyle\int e^x dx=e^x+C\)。
+
+5) \(\displaystyle\int a^x dx=\frac{a^x}{\log a}+C\ (0<a\neq1)\)。
+
+6) \(\displaystyle\int\sin x\,dx=-\cos x+C\)。
+
+7) \(\displaystyle\int\cos x\,dx=\sin x+C\)。
+
+8) \(\displaystyle\int\operatorname{sh}x\,dx=\operatorname{ch}x+C\)。
+
+9) \(\displaystyle\int\operatorname{ch}x\,dx=\operatorname{sh}x+C\)。
+
+10) \(\displaystyle\int\frac1{1+x^2}\,dx=\operatorname{arctg}x+C\)。
+
+11) \(\displaystyle\int\frac1{\sqrt{1-x^2}}\,dx=\arcsin x+C\)。
+
+12) \(\displaystyle\int\frac1{\sqrt{x^2+1}}\,dx=\log\left(x+\sqrt{x^2+1}\right)+C=\operatorname{Arg}\operatorname{sh}x+C\)。
+
+13) \(\displaystyle\int\frac1{\sqrt{x^2-1}}\,dx=\log\left|x+\sqrt{x^2-1}\right|+C\)
+\[
+\left(=\operatorname{Arg}\operatorname{ch}x+C,\ \text{若}\ x>1\right).
+\]
+
+14) \(\displaystyle\int\frac1{1-x^2}\,dx=\frac12\log\left|\frac{1+x}{1-x}\right|+C\)
+\[
+\left(=\operatorname{Arg}\operatorname{th}x+C,\ \text{若}\ |x|<1\right).
+\]
+
+熟悉掌握上面所列举的这些基本初等函数的原函数将有益于我们计算更复杂的函数的原函数。
+
+\subsection{计算原函数的三个方法}
+
+\begin{mythm}{代数运算法}{antiderivative-algebraic-operations}
+
+	设函数 \(f,g:I\to\R\) 在区间 \(I\) 上有原函数存在。则
+
+	1) \(\forall\,\lambda\in\R\)，\(\lambda f\) 也有原函数存在，并且
+	\[
+	\int(\lambda f)(x)dx=\lambda\int f(x)dx+C.
+	\]
+
+	2) \(f+g\) 也有原函数存在，并且
+	\[
+	\int(f+g)(x)dx=\int f(x)dx+\int g(x)dx+C.
+	\]
+
+\end{mythm}
+
+\begin{proof}
+
+	1) 设 \(\lambda\in\R\)。由于 \(f\) 有原函数存在，故由原函数定义我们有
+	\[
+	\left(\int f(x)dx\right)'=f(x),\quad\forall\,x\in I.
+	\]
+	从而
+	\[
+	\left(\lambda\int f(x)dx\right)'=\lambda\left(\int f(x)dx\right)'=\lambda f(x)=(\lambda f)(x),\quad\forall\,x\in I.
+	\]
+	此即表明函数 \(\lambda f\) 有原函数 \(\lambda\int f(x)dx\)，因此
+	\[
+	\int(\lambda f)(x)dx=\lambda\int f(x)dx+C.
+	\]
+	2) 由于 \(g\) 有原函数，故
+	\[
+	\left(\int g(x)dx\right)'=g(x),\quad\forall\,x\in I.
+	\]
+	从而
+	\[
+	\left(\int f(x)dx+\int g(x)dx\right)'=\left(\int f(x)dx\right)'+\left(\int g(x)dx\right)'
+	\]
+	\[
+	=f(x)+g(x)=(f+g)(x),\quad\forall\,x\in I.
+	\]
+	此即表明 \(f+g\) 有原函数 \(\int f(x)dx+\int g(x)dx\)。因此
+	\[
+	\int(f+g)(x)dx=\int f(x)dx+\int g(x)dx+C.
+	\]
+
+\end{proof}
+
+\begin{sourceexample}{1}
+
+	证明：\(\forall\,n\in\N\)，
+	\[
+	\int(a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0)dx
+	\]
+	\[
+	=\frac{a_n}{n+1}x^{n+1}+\frac{a_{n-1}}nx^n+\cdots+\frac{a_1}2x^2+a_0x+C.
+	\]
+	事实上，\(\forall\,k\in\N\)，\(\displaystyle\int x^kdx=\frac1{k+1}x^{k+1}\)，因此由上述定理我们推得
+	\[
+	\int(a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0)dx
+	\]
+	\[
+	=\int a_nx^ndx+\int a_{n-1}x^{n-1}dx+\cdots+\int a_1xdx+\int a_0dx
+	\]
+	\[
+	=a_n\int x^ndx+a_{n-1}\int x^{n-1}dx+\cdots+a_1\int xdx+a_0\int 1\,dx
+	\]
+	\[
+	=\frac{a_n}{n+1}x^{n+1}+\frac{a_{n-1}}nx^n+\cdots+\frac{a_1}2x^2+a_0x+C.
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{2}
+
+	计算 \(\displaystyle\int\sin nx\cos mx\,dx\ (m,n\in\Z)\)。
+
+	直接从原函数定义容易证明：
+	\[
+	\forall\,a\in\R,\quad\int\sin ax\,dx=\begin{cases} -\dfrac1a\cos ax+C, & a\neq0, \\ C, & a=0. \end{cases}
+	\]
+	由于
+	\[
+	\sin nx\cos mx=\frac12\left[\sin(n+m)x+\sin(n-m)x\right],
+	\]
+	故
+	\[
+	\int\sin nx\cos mx\,dx=\begin{cases} -\dfrac12\left[\dfrac{\cos(n+m)x}{n+m}+\dfrac{\cos(n-m)x}{n-m}\right]+C, & n^2\neq m^2, \\[6pt] -\dfrac{\cos2mx}{4m}+C, & n=m, \\[6pt] \dfrac{\cos2mx}{4m}+C, & n=-m. \end{cases}
+	\]
+
+\end{sourceexample}
+
+\begin{mythm}{分部积分法}{integration-by-parts}
+
+	设 \(I\subset\R\) 是一非空区间，函数 \(u,v:I\to\R\) 在 \(I\) 上是 \(C^1\) 类的，则
+	\[
+	\int u(x)v'(x)dx=u(x)v(x)-\int u'(x)v(x)dx.
+	\]
+
+\end{mythm}
+
+\begin{proof}
+
+	由于函数 \(uv\) 在 \(I\) 上是 \(C^1\) 类的，并且
+	\[
+	[u(x)v(x)]'=u'(x)v(x)+u(x)v'(x),\quad\forall\,x\in I.
+	\]
+	故 \(uv\) 是函数 \(u'v+uv'\) 的一个原函数，因此
+	\[
+	u(x)v(x)=\int[u'(x)v(x)+u(x)v'(x)]dx+C.
+	\]
+	从而
+	\[
+	\int u(x)v'(x)dx=u(x)v(x)-\int u'(x)v(x)dx+C.
+	\]
+
+\end{proof}
+
+\textbf{推论}\quad \(\forall\,a,b\in I\)，
+\[
+\int_a^b u(x)v'(x)dx=\bigl[u(x)v(x)\bigr]_a^b-\int_a^b u'(x)v(x)dx.
+\]
+这里 \(\bigl[u(x)v(x)\bigr]_a^b=u(b)v(b)-u(a)v(a)\)。
+
+\textbf{证明}\quad 由于函数 \(u'v\) 的任意两个原函数只相差一个常数，并且 \(\displaystyle\int_a^x u'(t)v(t)dt\) 是 \(u'v\) 的一个原函数，故
+\[
+\int u'(x)v(x)dx=\int_a^x u'(t)v(t)dt+C'.
+\]
+从而
+\[
+\int u(x)v'(x)dx=u(x)v(x)-\int_a^x u'(t)v(t)dt+C-C'.
+\]
+因此由\rthm{thm:newton-leibniz-formula} 得到
+\[
+\int_a^b u(x)v'(x)dx=\left[u(b)v(b)-\int_a^b u'(t)v(t)dt+C-C'\right]
+\]
+\[
+-\left[u(a)v(a)-\int_a^a u'(t)v(t)dt+C-C'\right]
+\]
+\[
+=u(b)v(b)-u(a)v(a)-\int_a^b u'(x)v(x)dx=\bigl[u(x)v(x)\bigr]_a^b-\int_a^b u'(x)v(x)dx.
+\]
+
+从上述定理可知，对于给定的函数 \(f:I\to\R\)，要利用分部积分法计算它的原函数 \(\displaystyle\int f(x)dx\)，需要注意下面两点：
+
+1) 首先将 \(f(x)\) 表示成 \(u(x)v'(x)\) 的形式。
+
+2) 原函数 \(\displaystyle\int u'(x)v(x)dx\) 易于计算。
+
+\begin{sourceexample}{3}
+
+	计算 \(\displaystyle\int\log(1+x^2)dx\)。
+
+	由 \(\log(1+x^2)=\log(1+x^2)\cdot x'\)，及分部积分法有
+	\[
+	\int\log(1+x^2)dx=\int\log(1+x^2)\cdot x'dx
+	\]
+	\[
+	=x\log(1+x^2)-\int[\log(1+x^2)]'x\,dx
+	\]
+	\[
+	=x\log(1+x^2)-2\int\frac{x^2}{1+x^2}dx
+	\]
+	\[
+	=x\log(1+x^2)-2\int\frac{1+x^2-1}{1+x^2}dx
+	\]
+	\[
+	=x\log(1+x^2)-2\int dx+2\int\frac1{1+x^2}dx
+	\]
+	\[
+	=x\log(1+x^2)-2x+2\operatorname{arctg}x+C.
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{4}
+
+	计算 \(\displaystyle\int e^{ax}\sin bx\,dx\)，\(\displaystyle\int e^{ax}\cos bx\,dx\ (b\neq0)\)。
+
+	由 \(e^{ax}\sin bx=e^{ax}\left(-\dfrac{\cos bx}{b}\right)'\) 及分部积分法得到
+	\[
+	\int e^{ax}\sin bx\,dx=\int e^{ax}\left(-\frac{\cos bx}{b}\right)'dx
+	\]
+	\[
+	=-\frac{e^{ax}\cos bx}{b}-\int(e^{ax})'\left(-\frac{\cos bx}{b}\right)dx
+	\]
+	\[
+	=-\frac{e^{ax}\cos bx}{b}+\frac ab\int e^{ax}\cos bx\,dx. \tag{1}
+	\]
+	又 \(e^{ax}\cos bx=e^{ax}\left(\dfrac{\sin bx}{b}\right)'\)，
+	\[
+	\int e^{ax}\cos bx\,dx=\int\left(\frac{\sin bx}{b}\right)'e^{ax}dx
+	\]
+	\[
+	=\frac{e^{ax}\sin bx}{b}-\int\frac{\sin bx}{b}(e^{ax})'dx
+	\]
+	\[
+	=\frac{e^{ax}\sin bx}{b}-\frac ab\int e^{ax}\sin bx\,dx. \tag{2}
+	\]
+	将 (2) 式代入 (1) 式得到
+	\[
+	\int e^{ax}\sin bx\,dx=-\frac{e^{ax}\cos bx}{b}+\frac{ae^{ax}\sin bx}{b^2}-\frac{a^2}{b^2}\int e^{ax}\sin bx\,dx.
+	\]
+	或
+	\[
+	\int e^{ax}\sin bx\,dx=\frac1{a^2+b^2}e^{ax}(a\sin bx-b\cos bx)+C.
+	\]
+	同理将 (1) 式代入 (2) 式得到
+	\[
+	\int e^{ax}\cos bx\,dx=\frac1{a^2+b^2}e^{ax}(a\cos bx+b\sin bx)+C.
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{5}
+
+	计算 \(I_n=\displaystyle\int_0^{\pi/2}\cos^nx\,dx\ (n=0,1,2,\cdots)\)。
+
+	首先设 \(n\ge2\)。由于
+	\[
+	\cos^nx=\cos x\cos^{n-1}x=(\sin x)'\cos^{n-1}x,
+	\]
+	故由分部积分法得到
+	\[
+	I_n=\int_0^{\frac\pi2}\cos^nx\,dx=\int_0^{\frac\pi2}(\sin x)'\cos^{n-1}x\,dx
+	\]
+	\[
+	=\Bigl[\sin x\cos^{n-1}x\Bigr]_0^{\frac\pi2}-\int_0^{\frac\pi2}\sin x(\cos^{n-1}x)'dx
+	\]
+	\[
+	=(n-1)\int_0^{\frac\pi2}\cos^{n-2}x\sin^2x\,dx
+	\]
+	\[
+	=(n-1)\int_0^{\frac\pi2}\cos^{n-2}x(1-\cos^2x)dx
+	\]
+	\[
+	=(n-1)\int_0^{\frac\pi2}\cos^{n-2}x\,dx-(n-1)\int_0^{\frac\pi2}\cos^nx\,dx
+	\]
+	\[
+	=(n-1)I_{n-2}-(n-1)I_n.
+	\]
+	由此得到 \(I_n\) 的下述递推公式
+	\[
+	I_n=\frac{n-1}{n}I_{n-2}.
+	\]
+	从而
+	\[
+	I_{2k}=\frac{2k-1}{2k}I_{2(k-1)}=\frac{2k-1}{2k}\cdot\frac{2k-3}{2(k-1)}\cdot\cdots\cdot\frac12 I_0,
+	\]
+	\[
+	I_{2k+1}=\frac{2k}{2k+1}I_{2k-1}=\frac{2k}{2k+1}\cdot\frac{2k-2}{2k-1}\cdot\cdots\cdot\frac23 I_1.
+	\]
+	由于
+	\[
+	I_0=\int_0^{\frac\pi2}dx=\frac\pi2,\qquad I_1=\int_0^{\frac\pi2}\cos x\,dx=1,
+	\]
+	故最后我们得到
+	\[
+	I_n=\begin{cases} \dfrac{1\cdot3\cdot5\cdot\cdots\cdot(2k-1)}{2\cdot4\cdot6\cdot\cdots\cdot2k}\cdot\dfrac\pi2, & n=2k, \\[8pt] \dfrac{2\cdot4\cdot6\cdot\cdots\cdot2k}{1\cdot3\cdot5\cdot\cdots\cdot(2k+1)}, & n=2k+1. \end{cases}\quad(k\in\N)
+	\]
+	下面我们利用 \(I_n\) 的表达式推导出计算无理数 \(\pi\) 的著名 Wallis 公式。
+
+	首先由 \(I_{2n}\) 与 \(I_{2n+1}\) 的表达式得到
+	\[
+	\frac{I_{2n}}{I_{2n+1}}=\left[\frac{1\cdot3\cdot5\cdot\cdots\cdot(2n-1)}{2\cdot4\cdot6\cdot\cdots\cdot2n}\right]^2(2n+1)\cdot\frac\pi2.
+	\]
+	另一方面，在 \(\left[0,\dfrac\pi2\right]\) 内，下述不等式成立：
+	\[
+	0\le\cos^{2n+1}x\le\cos^{2n}x\le\cos^{2n-1}x\quad(\forall\,n\in\N).
+	\]
+	由此得到
+	\[
+	0<I_{2n+1}\le I_{2n}\le I_{2n-1}\quad(\forall\,n\in\N).
+	\]
+	从而
+	\[
+	1\le\frac{I_{2n}}{I_{2n+1}}\le\frac{I_{2n-1}}{I_{2n+1}}\quad(\forall\,n\in\N).
+	\]
+	但是
+	\[
+	\frac{I_{2n-1}}{I_{2n+1}}=\frac{2n+1}{2n}\to1\ (n\to+\infty),
+	\]
+	故我们得到 \(\displaystyle\lim_{n\to+\infty}\frac{I_{2n}}{I_{2n+1}}=1\)，或
+	\[
+	\lim_{n\to+\infty}\left[\frac{1\cdot3\cdot5\cdots(2n-1)}{2\cdot4\cdot6\cdots2n}\right]^2\cdot(2n+1)\cdot\frac\pi2=1.
+	\]
+	由此推得
+	\[
+	\lim_{n\to+\infty}\left[\frac{2\cdot4\cdot6\cdots2n}{1\cdot3\cdot5\cdots(2n-1)}\right]^2\cdot\frac1n=\pi.
+	\]
+	这就是著名的 Wallis 公式。
+
+\end{sourceexample}
+
+\begin{mythm}{变元替换法}{substitution-rule}
+
+	设 \(I,J\subset\R\) 是两个非空区间，函数 \(\varphi:J\to\R\) 在 \(J\) 上是 \(C^1\) 类的，函数 \(f:I\to\R\) 在 \(I\) 上连续，并且 \(\varphi(J)\subset I\)。
+
+	1) 若 \(F:I\to\R\) 是 \(f\) 的原函数，则
+	\[
+	\int f(\varphi(t))\varphi'(t)dt=F(\varphi(t))+C,\quad\forall\,t\in J.
+	\]
+
+	2) 若 \(\Phi:J\to\R\) 是函数 \(t\longmapsto f(\varphi(t))\varphi'(t),\ t\in J\) 的原函数，并且 \(\varphi'(t)\neq0,\ \forall\,t\in J\)（于是 \(\varphi\) 可逆），则
+	\[
+	\int f(x)dx=\Phi(\varphi^{-1}(x))+C,\quad\forall\,x\in\varphi(J).
+	\]
+
+\end{mythm}
+
+\begin{proof}
+
+	1) 因为 \(F\) 是 \(f\) 的原函数，所以
+	\[
+	F'(x)=f(x),\quad\forall\,x\in I.
+	\]
+	另一方面，由于 \(\varphi\) 在 \(J\) 上是 \(C^1\) 类的，故函数 \(F\circ\varphi\) 在 \(J\) 上是 \(C^1\) 类的，并且
+	\[
+	[F(\varphi(t))]'=F'(\varphi(t))\cdot\varphi'(t)=f(\varphi(t))\cdot\varphi'(t),\quad\forall\,t\in J.
+	\]
+	此即表明 \(F\circ\varphi\) 是函数 \(t\longmapsto f(\varphi(t))\cdot\varphi'(t),\ t\in J\) 的原函数，因此
+	\[
+	\int f(\varphi(t))\varphi'(t)dt=F(\varphi(t))+C,\quad\forall\,t\in J.
+	\]
+	2) 若 \(\Phi\) 是函数 \(t\longmapsto f(\varphi(t))\cdot\varphi'(t),\ t\in J\) 的原函数，则
+	\[
+	\Phi'(t)=f(\varphi(t))\cdot\varphi'(t),\quad\forall\,t\in J.
+	\]
+	由于 \(\varphi'(t)\neq0,\ \forall\,t\in J\)，故 \(\varphi\) 可逆，并且
+	\[
+	(\varphi^{-1})'(x)=\frac1{\varphi'(\varphi^{-1}(x))}=\frac1{\varphi'(t)},\quad\forall\,x\in\varphi(J).
+	\]
+	因此函数 \(\Phi\circ\varphi^{-1}\) 在 \(\varphi(J)\) 上可导，并且
+	\[
+	[\Phi(\varphi^{-1}(x))]'=\Phi'(\varphi^{-1}(x))\cdot(\varphi^{-1})'(x)
+	\]
+	\[
+	=\Phi'(t)\cdot\frac1{\varphi'(t)}\quad(t=\varphi^{-1}(x))
+	\]
+	\[
+	=f(\varphi(t))\cdot\varphi'(t)\cdot\frac1{\varphi'(t)}=f(x).\qquad(\forall\,x\in\varphi(J))
+	\]
+	此即表明 \(\Phi\circ\varphi^{-1}\) 是函数 \(f\) 在 \(\varphi(J)\) 上的原函数。故
+	\[
+	\int f(x)dx=\Phi(\varphi^{-1}(x))+C,\quad\forall\,x\in\varphi(J).
+	\]
+
+\end{proof}
+
+\textbf{推论}\quad 设 \(a,b\in I,\ \alpha,\beta\in J\) 使得 \(a=\varphi(\alpha),\ b=\varphi(\beta)\)，则
+\[
+\int_a^b f(x)dx=\int_\alpha^\beta f(\varphi(t))\cdot\varphi'(t)dt.
+\]
+
+\textbf{证明}\quad 根据上述定理的结论 1)，\(F\circ\varphi\) 是函数 \(t\longmapsto f(\varphi(t))\cdot\varphi'(t),\ t\in J\) 的原函数，故由\rthm{thm:newton-leibniz-formula} 有
+\[
+\int_\alpha^\beta f(\varphi(t))\varphi'(t)dt=F\circ\varphi(\beta)-F\circ\varphi(\alpha)=F(b)-F(a).
+\]
+另一方面，由于 \(F\) 是 \(f\) 的原函数，故
+\[
+\int_a^b f(x)dx=F(b)-F(a).
+\]
+因此
+\[
+\int_a^b f(x)dx=\int_\alpha^\beta f(\varphi(t))\varphi'(t)dt.
+\]
+
+\textbf{注意}\quad 此推论中，我们并不要求 \(\varphi\) 可逆或 \(\varphi'(t)\neq0,\ \forall\,t\in J\)。只需 \(\varphi\) 在 \(J\) 上是 \(C^1\) 类即可。
+
+\begin{sourceexample}{6}
+
+	计算 \(\displaystyle\int\sin^2t\cos t\,dt\)。
+
+	因为 \(\sin^2t\cos t=(\sin t)^2(\sin t)'\)，所以若令 \(f(x)=x^2\)，\(x\in\R\)，\(x=\sin t\)，\(t\in\R\)，则由变元替换公式 1) 有
+	\[
+	\int\sin^2t\cos t\,dt=\int(\sin t)^2(\sin t)'dt
+	\]
+	\[
+	=\int x^2dx\ (x=\sin t)=\frac13x^3+C\ (x=\sin t)=\frac13\sin^3t+C.
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{7}
+
+	计算 \(\displaystyle\int\frac{x}{(1+x^2)^2}dx\)。
+
+	因为 \(\displaystyle\frac{x}{(1+x^2)^2}=\frac1{2(1+x^2)^2}(1+x^2)'\)，所以若令 \(f(y)=\dfrac1{2y^2}\)，\(y\in\R_*^+\)，\(y=1+x^2\)，\(x\in\R\)，则利用变元替换公式 1) 得到
+	\[
+	\int\frac{x}{(1+x^2)^2}dx=\int\frac1{2(1+x^2)^2}(1+x^2)'dx
+	\]
+	\[
+	=\int\frac1{2y^2}dy\ (y=1+x^2)=-\frac1{2y}+C\ (y=1+x^2)=-\frac1{2(1+x^2)}+C.
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{8}
+
+	计算 \(\displaystyle\int\sqrt{a^2-x^2}\,dx\ (a>0)\)。
+
+	令 \(f(x)=\sqrt{a^2-x^2}\)，\(x\in\ ]-a,a[\)，\(x=\varphi(t)=a\sin t\)，\(t\in\left]-\dfrac\pi2,\dfrac\pi2\right[\)，则 \(f\) 在 \(]-a,a[\) 上连续，\(\varphi\) 在 \(\left]-\dfrac\pi2,\dfrac\pi2\right[\) 上是 \(C^1\) 类的，并且 \(\varphi'(t)=a\cos t\neq0\)，\(\forall\,t\in\left]-\dfrac\pi2,\dfrac\pi2\right[\)，故 \(\varphi^{-1}:\ ]-a,a[\to\left]-\dfrac\pi2,\dfrac\pi2\right[\) 存在。因此根据变元替换公式 2) 我们得到
+	\[
+	\int\sqrt{a^2-x^2}\,dx=\int\sqrt{a^2-(a\sin t)^2}\,(a\sin t)'dt\quad\left(t=\arcsin\frac xa\right)
+	\]
+	\[
+	=\int a^2\cos^2t\,dt=\frac{a^2}{2}\int(1+\cos2t)dt
+	\]
+	\[
+	=\frac{a^2}{2}\left[\int dt+\int\cos2t\,dt\right]=\frac{a^2}{2}\left[t+\frac12\sin2t\right]+C
+	\]
+	\[
+	=\frac{a^2}{2}\left[\arcsin\frac xa+\frac12\sin2\left(\arcsin\frac xa\right)\right]+C.
+	\]
+	由于 \(\sin2t=2\sin t\cos t=2\sin t\sqrt{1-\sin^2t},\ t\in\left]-\dfrac\pi2,\dfrac\pi2\right[\)，故
+	\[
+	\sin2\left(\arcsin\frac xa\right)=2\sin\left(\arcsin\frac xa\right)\cdot\sqrt{1-\sin^2\left(\arcsin\frac xa\right)}
+	\]
+	\[
+	=2\frac xa\sqrt{1-\frac{x^2}{a^2}}=\frac{2x\sqrt{a^2-x^2}}{a^2}.
+	\]
+	因此最后我们得到
+	\[
+	\int\sqrt{a^2-x^2}\,dx=\frac{a^2}{2}\left(\arcsin\frac xa+\frac{x\sqrt{a^2-x^2}}{a^2}\right)+C
+	\]
+	\[
+	=\frac12 x\sqrt{a^2-x^2}+\frac{a^2}{2}\arcsin\frac xa+C.
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{9}
+
+	计算 \(\displaystyle\int\sqrt{a^2+x^2}\,dx\) 与 \(\displaystyle\int_0^a\sqrt{a^2+x^2}\,dx\)。\((a>0)\)
+
+	令 \(f(x)=\sqrt{a^2+x^2}\)，\(x\in\R\)，\(x=\varphi(t)=a\operatorname{sh}t\)，\(t\in\R\)，则函数 \(f,\varphi\) 在 \(\R\) 上是 \(C^1\) 类的，并且 \(\varphi'(t)=a\operatorname{ch}t\neq0\)，\(\forall\,t\in\R\)，故 \(\varphi^{-1}:\R\to\R\) 存在。根据变元替换公式 2) 得到
+	\[
+	\int\sqrt{a^2+x^2}\,dx=\int\sqrt{a^2+(a\operatorname{sh}t)^2}\,(a\operatorname{sh}t)'dt\quad\left(t=\operatorname{Arg}\operatorname{sh}\frac xa\right)
+	\]
+	\[
+	=\int a^2\operatorname{ch}^2t\,dt=\frac{a^2}{2}\int(1+\operatorname{ch}2t)dt
+	\]
+	\[
+	=\frac{a^2}{2}\left[\int dt+\int\operatorname{ch}2t\,dt\right]=\frac{a^2}{2}\left[t+\frac12\operatorname{sh}2t\right]+C
+	\]
+	\[
+	=\frac{a^2}{2}\left[\operatorname{Arg}\operatorname{sh}\frac xa+\frac12\operatorname{sh}2\left(\operatorname{Arg}\operatorname{sh}\frac xa\right)\right]+C.
+	\]
+	由于 \(\operatorname{sh}2t=2\operatorname{sh}t\operatorname{ch}t=2\operatorname{sh}t\sqrt{1+\operatorname{sh}^2t}\quad(t\in\R)\)，故
+	\[
+	\operatorname{sh}2\left(\operatorname{Arg}\operatorname{sh}\frac xa\right)=2\operatorname{sh}\left(\operatorname{Arg}\operatorname{sh}\frac xa\right)\sqrt{1+\operatorname{sh}^2\left(\operatorname{Arg}\operatorname{sh}\frac xa\right)}
+	\]
+	\[
+	=\frac{2x}{a}\sqrt{1+\frac{x^2}{a^2}}=\frac2{a^2}x\sqrt{a^2+x^2}.
+	\]
+	因此
+	\[
+	\int\sqrt{a^2+x^2}\,dx=\frac{a^2}{2}\left[\operatorname{Arg}\operatorname{sh}\frac xa+\frac1{a^2}x\sqrt{a^2+x^2}\right]+C
+	\]
+	\[
+	=\frac12 x\sqrt{a^2+x^2}+\frac{a^2}{2}\operatorname{Arg}\operatorname{sh}\frac xa+C.
+	\]
+	为了计算 \(\displaystyle\int_0^a\sqrt{a^2+x^2}\,dx\)，我们现在只需利用\rthm{thm:antiderivative-existence}。于是
+	\[
+	\int_0^a\sqrt{a^2+x^2}\,dx=\left[\frac12x\sqrt{a^2+x^2}+\frac{a^2}{2}\operatorname{Arg}\operatorname{sh}\frac xa\right]_0^a
+	\]
+	\[
+	=\frac12a\sqrt{a^2+a^2}+\frac{a^2}{2}\operatorname{Arg}\operatorname{sh}1-\frac{a^2}{2}\operatorname{Arg}\operatorname{sh}0.
+	\]
+	由于 \(\operatorname{Arg}\operatorname{sh}x=\log\left(x+\sqrt{1+x^2}\right),\ \forall\,x\in\R\)，所以
+	\[
+	\operatorname{Arg}\operatorname{sh}1=\log(1+\sqrt2),\quad\operatorname{Arg}\operatorname{sh}0=0.
+	\]
+	因此
+	\[
+	\int_0^a\sqrt{a^2+x^2}\,dx=\frac{\sqrt2}{2}a^2+\frac{a^2}{2}\log(1+\sqrt2)=\frac{a^2}{2}\left[\sqrt2+\log(1+\sqrt2)\right].
+	\]
+
+\end{sourceexample}
+
+\textbf{附注}\quad 定积分 \(\displaystyle\int_0^a\sqrt{a^2+x^2}\,dx\) 也可以直接利用定积分的变元替换公式（即\rthm{thm:substitution-rule} 的推论）计算。
+
+首先和上面一样，令 \(x=\varphi(t)=a\operatorname{sh}t,\ t\in\R\)，则 \(t=\operatorname{Arg}\operatorname{sh}\dfrac xa=\log\left(\dfrac xa+\sqrt{1+\dfrac{x^2}{a^2}}\right)\)。由此得到
+\[
+x=0\ \text{时},\ \alpha=\operatorname{Arg}\operatorname{sh}\frac0a=\log1=0,
+\]
+\[
+x=a\ \text{时},\ \beta=\operatorname{Arg}\operatorname{sh}\frac aa=\log(1+\sqrt2).
+\]
+于是
+\[
+\int_0^a\sqrt{a^2+x^2}\,dx=\int_0^{\log(1+\sqrt2)}\sqrt{a^2+a^2\operatorname{sh}^2t}\;(a\operatorname{sh}t)'dt
+\]
+\[
+=a^2\int_0^{\log(1+\sqrt2)}\operatorname{ch}^2t\,dt
+\]
+\[
+=\frac{a^2}{2}\int_0^{\log(1+\sqrt2)}(1+\operatorname{ch}2t)dt
+\]
+\[
+=\frac{a^2}{2}\left[\int_0^{\log(1+\sqrt2)}dt+\int_0^{\log(1+\sqrt2)}\operatorname{ch}2t\,dt\right]
+\]
+\[
+=\frac{a^2}{2}\left[\log(1+\sqrt2)+\frac12\operatorname{sh}2(\log(1+\sqrt2))\right]
+\]
+\[
+=\frac{a^2}{2}\left[\log(1+\sqrt2)+\operatorname{sh}(\log(1+\sqrt2))\cdot\operatorname{ch}(\log(1+\sqrt2))\right]
+\]
+\[
+=\frac{a^2}{2}\left[\log(1+\sqrt2)+\operatorname{sh}(\operatorname{Arg}\operatorname{sh}1)\cdot\sqrt{1+\operatorname{sh}^2(\operatorname{Arg}\operatorname{sh}1)}\right]
+\]
+\[
+=\frac{a^2}{2}\left[\sqrt2+\log(1+\sqrt2)\right].
+\]
+
+\subsection*{习 题}
+
+\begin{exercise}
+	\item 设函数 \(f:\R\to\R\) 在 \(\R\) 上连续，\(a,b,c\in\R\)。证明下述等式成立：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\displaystyle\int_a^b f(x)dx=\int_{a+c}^{b+c}f(x-c)dx\)。
+		\item \(\displaystyle\int_a^b f(x)dx=\int_a^b f(a+b-x)dx\)。
+		\item \(\displaystyle\int_0^x\left[\int_0^u f(t)dt\right]du=\int_0^x f(u)(x-u)du\quad(x,u\in\R)\)。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(f:\R\to\R\) 在 \(\R\) 上连续，定义函数 \(F:[a,b]\to\R\) 如下：\((a,b\in\R)\)
+	\[
+	F(x)=\int_a^b f(x+t)\cos t\,dt,\quad\forall\,x\in[a,b].
+	\]
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：函数 \(F\) 在 \([a,b]\) 上可导；
+		\item 计算导数 \(F'(x)\)，\(\forall\,x\in[a,b]\)。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(f:\R\to\R\) 在 \(\R\) 上连续，并且以 \(T\) 为周期。定义函数 \(G:\R\to\R\) 如下：
+	\[
+	G(x)=\int_x^{x+T}f(t)dt,\quad\forall\,x\in\R.
+	\]
+	证明：\(G\) 是常值函数。
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(f,g:\R\to\R\) 在 \(\R\) 上连续，并有周期 \(T\)。定义函数 \(f*g:\R\to\R\) 如下：
+	\[
+	f*g(x)=\frac1T\int_0^T f(t)g(x-t)dt.
+	\]
+	函数 \(f*g\) 称为 \(f\) 与 \(g\) 的卷积。证明：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(f*g\) 是以 \(T\) 为周期的连续周期函数。
+		\item \(\displaystyle f*g(x)=\frac1T\int_a^{a+T}f(t)g(x-t)dt,\quad\forall\,x\in\R,\ \forall\,a\in\R\)。
+		\item \(f*g=g*f\)。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(f:\R\to\R\) 在 \(\R\) 上是 \(C^{n+1}\) 类的，试计算
+	\[
+	F_n(x)=\frac1{n!}\int_{x_0}^x(x-t)^n f^{(n+1)}(t)dt,\quad x,x_0\in\R.
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(a,b\in\R\)，\(a<b\)。假设函数 \(f,g:[a,b]\to\R\) 在 \(\R\) 上是 \(C^{n+1}\) 类的，证明下述等式成立：
+	\[
+	\int_a^x f(t)g^{(n+1)}(t)dt=\sum_{k=0}^n(-1)^k\left[f^{(k)}(x)g^{(n-k)}(x)-f^{(k)}(a)g^{(n-k)}(a)\right]
+	\]
+	\[
+	+(-1)^{n+1}\int_a^x f^{(n+1)}(t)g(t)dt.
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 证明 \(\displaystyle\int_0^{\frac\pi2}\sin^nx\,dx=\int_0^{\frac\pi2}\cos^nx\,dx\ (\forall\,n\in\N)\)。
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(f:[0,\pi]\to\R\) 在 \([0,\pi]\) 上连续。
+	\begin{enumerate}[label=\arabic*)]
+		\item 利用变元替换法证明
+		\[
+		\int_0^\pi xf(\sin x)dx=\frac\pi2\int_0^\pi f(\sin x)dx.
+		\]
+		\item 利用上述公式证明
+		\[
+		\int_0^\pi\frac{x\sin x}{1+\cos^2x}dx=\frac{\pi^2}{4}.
+		\]
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 利用 Cauchy 准则证明：实数序列 \(\langle u_n\rangle\)
+	\[
+	u_n=\int_0^n\frac{\sin x}{x}dx\quad(\forall\,n\in\N)
+	\]
+	收敛。
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(f:[0,1]\to\R\) 在 \([0,1]\) 上连续可导，并且 \(f(0)=f(1)=0\)。证明：
+	\[
+	\int_0^1 x^5[f'(x)]^2dx\ge\frac{25}{4}\int_0^1 x^4[f(x)]^2dx.
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 设函数 \(f,g:[0,+\infty[\to[0,+\infty[\) 在 \([0,+\infty[\) 上连续，并且满足不等式：
+	\[
+	f(x)\le A+\int_0^x f(t)g(t)dt,\quad\forall\,x\in[0,+\infty[,\ A>0.
+	\]
+	证明 Bellman 不等式：
+	\[
+	f(x)\le A e^{\int_0^x g(t)dt},\quad\forall\,x\in[0,+\infty[.
+	\]
+\end{exercise}
+
+\begin{exercise}
+	\item 令
+	\[
+	R(x)=\int_0^x\frac{dt}{\sqrt{1-k^2\sin^2t}},\qquad
+	S(x)=\int_0^x\frac{dt}{\sqrt{(1-t^2)(1-k^2t^2)}},
+	\]
+	\[
+	(0<k<1)
+	\]
+	（这两个积分都称为第一类椭圆积分）。
+	\begin{enumerate}[label=\arabic*)]
+		\item 证明：函数 \(R:\R\to\R\) 与 \(S:\ ]-1,1[\to\R\) 都是严格单调上升的连续函数。
+		\item 证明：\(R\) 与 \(S\) 的反函数 \(R^{-1}\) 与 \(S^{-1}\) 满足等式：
+		\[
+		S^{-1}(x)=\sin\left(R^{-1}(x)\right).
+		\]
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 利用分部积分法计算下列各原函数：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\displaystyle\int\operatorname{arctg}x\,dx\)；
+		\item \(\displaystyle\int\frac{x^2}{1+\operatorname{tg}^2x}\,dx\)；
+		\item \(\displaystyle\int x^n\log x\,dx\)；
+		\item \(\displaystyle\int\sin(\log x)dx\)；
+		\item \(\displaystyle\int x^2\arccos x\,dx\)；
+		\item \(\displaystyle\int x(\operatorname{arctg}x)^2dx\)；
+		\item \(\displaystyle\int\sec^3x\,dx\)；
+		\item \(\displaystyle\int\operatorname{Arg}\operatorname{sh}x\,dx\)；
+		\item \(\displaystyle\int\frac{x\log\left(x+\sqrt{1+x^2}\right)}{\sqrt{1+x^2}}dx\)；
+		\item \(\displaystyle\int\frac{xe^{\operatorname{arctg}x}}{\sqrt{(1+x^2)^3}}dx\)。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设 \(m,n\in\Z\)，\(x\ge0\)。令
+	\[
+	I_{m,n}(x)=\int_1^x t^m(\log t)^n dt\quad(x\ge1).
+	\]
+	\begin{enumerate}[label=\arabic*)]
+		\item 计算 \(I_{-1,n}(x)\)。
+		\item 找出 \(I_{m,n}(x)\) 与 \(I_{m,n-1}(x)\) 之间的关系。
+		\item 由此推出 \(I_{m,n}(x)\) 的值 \((m\neq-1)\)。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 计算下列各不定（定）积分：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\displaystyle\int\frac{x^2+1}{x^4+1}dx\)；
+		\item \(\displaystyle\int\frac1{\sin x}dx\)；
+		\item \(\displaystyle\int\frac{x^2-1}{x^4+1}dx\)；
+		\item \(\displaystyle\int\frac{\sin x\cos x}{\sin^4x+\cos^4x}dx\)；
+		\item \(\displaystyle\int\frac1{\sqrt{(a^2+x^2)^3}}dx\)；
+		\item \(\displaystyle\int\frac1{\sqrt{(x-a)(b-x)}}dx\ (a<b)\)；
+		\item \(\displaystyle\int_1^a\frac1{x\sqrt{e^x-1}}dx\ (a>0)\)；
+		\item \(\displaystyle\int_a^b\frac1{\sqrt{x(1-x)}}dx\ (0<a<b<1)\)；
+		\item \(\displaystyle\int_a^b\frac{\arcsin x}{x^2}dx\ (0<a<b<1)\)；
+		\item \(\displaystyle\int_0^{\frac\pi2}\frac1{\sin x+2\cos x+3}dx\)。
+	\end{enumerate}
+\end{exercise}
+
+\section{有理分式的原函数}
+
+设 \(P_n(x)\) 与 \(Q_m(x)\) 分别为 \(n\) 次与 \(m\) 次的实系数多项式，这里我们要研究有理分式 \(\dfrac{P_n(x)}{Q_m(x)}\) 的原函数
+\[
+\int\frac{P_n(x)}{Q_m(x)}dx
+\]
+的计算问题。
+
+根据多项式理论，若 \(n\ge m\)，则存在唯一的多项式 \(R_{n-m}(x)\) 与 \(s_k(x)\) 使得
+\[
+P_n(x)=R_{n-m}(x)Q_m(x)+s_k(x),
+\]
+这里多项式 \(R_{n-m}(x)\) 的次数为 \(n-m\)，多项式 \(s_k(x)\) 的次数为 \(k<m\)。于是我们得到
+\[
+\frac{P_n(x)}{Q_m(x)}=R_{n-m}(x)+\frac{s_k(x)}{Q_m(x)}.
+\]
+因此
+\[
+\int\frac{P_n(x)}{Q_m(x)}dx=\int R_{n-m}(x)dx+\int\frac{s_k(x)}{Q_m(x)}dx.
+\]
+由于多项式 \(R_{n-m}(x)\) 的原函数 \(\displaystyle\int R_{n-m}(x)dx\) 我们已经会计算了，故我们只需研究原函数 \(\displaystyle\int\frac{s_k(x)}{Q_m(x)}dx\) 的计算。
+
+根据上述分析，以下我们假设 \(n<m\)。
+
+首先我们介绍有理分式的分解。
+
+\subsection{有理分式 \(\dfrac{P_n(x)}{Q_m(x)}\) 的分解}
+
+首先我们注意到以下事实：
+
+若 \(\alpha+i\beta\) 是 \(Q_m(x)=0\) 的一个复根，则 \(\alpha-i\beta\) 也是 \(Q_m(x)=0\) 的根。因此 \(Q_m(x)=0\) 的复数根是以共轭对形式出现的，于是每一对共轭复根 \(\alpha+i\beta\)，\(\alpha-i\beta\) 对应于一个二次三项式
+\[
+[x-(\alpha+i\beta)][x-(\alpha-i\beta)]=x^2+px+q\quad(p,q\in\R).
+\]
+现在我们假设
+
+1) \(Q_m(x)=0\) 总共有 \(k\) 个不同实根 \(\alpha_1,\alpha_2,\cdots,\alpha_k\)，它们的重数分别为 \(n_1,n_2,\cdots,n_k\)。
+
+2) \(Q_m(x)=0\) 总共有 \(s\) 对不同共轭复根，与它们相对应的 \(s\) 个二次三项式为
+\[
+x^2+p_ix+q_i\quad i=1,2,\cdots,s,\ p_i,q_i\in\R.
+\]
+它们的重数分别为 \(m_1,m_2,\cdots,m_s\)。
+
+因此 \(Q_m(x)\) 有下述形式的分解式：
+\[
+Q_m(x)=(x-\alpha_1)^{n_1}(x-\alpha_2)^{n_2}\cdots(x-\alpha_k)^{n_k}(x^2+p_1x+q_1)^{m_1}
+\]
+\[
+\cdot(x^2+p_2x+q_2)^{m_2}\cdots(x^2+p_sx+q_s)^{m_s}.
+\]
+代数学里已经证明，有理分式 \(\dfrac{P_n(x)}{Q_m(x)}\) 可唯一地分解成下述形式的简单分式的和：
+\[
+\frac{P_n(x)}{Q_m(x)}=\left[\frac{A_{11}}{x-\alpha_1}+\frac{A_{12}}{(x-\alpha_1)^2}+\cdots+\frac{A_{1n_1}}{(x-\alpha_1)^{n_1}}\right]
+\]
+\[
++\left[\frac{A_{21}}{x-\alpha_2}+\frac{A_{22}}{(x-\alpha_2)^2}+\cdots+\frac{A_{2n_2}}{(x-\alpha_2)^{n_2}}\right]
+\]
+\[
++\cdots\cdots\cdots\cdots+
+\]
+\[
++\left[\frac{A_{k1}}{x-\alpha_k}+\frac{A_{k2}}{(x-\alpha_k)^2}+\cdots+\frac{A_{kn_k}}{(x-\alpha_k)^{n_k}}\right]
+\]
+\[
++\left[\frac{B_{11}x+C_{11}}{x^2+p_1x+q_1}+\frac{B_{12}x+C_{12}}{(x^2+p_1x+q_1)^2}+\cdots+\frac{B_{1m_1}x+C_{1m_1}}{(x^2+p_1x+q_1)^{m_1}}\right]
+\]
+\[
++\left[\frac{B_{21}x+C_{21}}{x^2+p_2x+q_2}+\frac{B_{22}x+C_{22}}{(x^2+p_2x+q_2)^2}+\cdots+\frac{B_{2m_2}x+C_{2m_2}}{(x^2+p_2x+q_2)^{m_2}}\right]
+\]
+\[
++\cdots\cdots\cdots
+\]
+\[
++\left[\frac{B_{s1}x+C_{s1}}{x^2+p_sx+q_s}+\frac{B_{s2}x+C_{s2}}{(x^2+p_sx+q_s)^2}+\cdots+\frac{B_{sm_s}x+C_{sm_s}}{(x^2+p_sx+q_s)^{m_s}}\right],
+\]
+这里
+\[
+A_{ij}\in\R,\quad(i=1,2,\cdots,k,\ j=1,2,\cdots,n_i)
+\]
+\[
+B_{lh},C_{lh}\in\R,\quad(l=1,2,\cdots,s,\ h=1,2,\cdots,m_l).
+\]
+
+\subsection{原函数 \(\displaystyle\int\frac{P_n(x)}{Q_m(x)}dx\) 的计算}
+
+由有理分式 \(\dfrac{P_n(x)}{Q_m(x)}\) 的上述分解式知，计算原函数 \(\displaystyle\int\frac{P_n(x)}{Q_m(x)}dx\) 就化为计算分解式的每一个和项的原函数，由于这些和项只有下面两种最基本的类型：
+\[
+\frac{A}{(x-a)^k}\ (k\in\N)\quad\text{与}\quad\frac{Bx+C}{(x^2+px+q)^k}\quad(k\in\N).
+\]
+因此我们只需研究原函数
+\[
+\int\frac{A}{(x-a)^k}dx\quad\text{与}\quad\int\frac{Bx+C}{(x^2+px+q)^k}dx\ (k\in\N)
+\]
+的计算问题。
+
+\textbf{1) \(\displaystyle\int\frac{A}{(x-a)^k}dx\) 的计算}
+
+这可由 §2 的基本初等函数的原函数表推得
+\[
+\int\frac{A}{(x-a)^k}dx=\begin{cases} A\log|x-a|+C, & k=1, \\[6pt] \dfrac{A}{(1-k)(x-a)^{k-1}}+C, & k>1. \end{cases}
+\]
+
+\textbf{2) \(\displaystyle\int\frac{Bx+C}{(x^2+px+q)^k}dx\) 的计算}
+
+首先，我们将二次三项式 \(x^2+px+q\) 写成下述形式：
+\[
+x^2+px+q=\left(x+\frac p2\right)^2+\left(q-\frac{p^2}{4}\right)=\left(x+\frac p2\right)^2+a^2,
+\]
+\[
+\left(a^2=q-\frac{p^2}{4}>0\right)
+\]
+因此
+\[
+\int\frac{Bx+C}{(x^2+px+q)^k}dx=\int\frac{B\left(x+\dfrac p2\right)+C-\dfrac{Bp}{2}}{\left[\left(x+\dfrac p2\right)^2+a^2\right]^k}dx
+\]
+\[
+=\int\frac{B\left(x+\dfrac p2\right)}{\left[\left(x+\dfrac p2\right)^2+a^2\right]^k}dx+\int\frac{C-\dfrac{Bp}{2}}{\left[\left(x+\dfrac p2\right)^2+a^2\right]^k}dx.
+\]
+作变元替换 \(x+\dfrac p2=at\)，则我们得到
+\[
+\int\frac{Bx+C}{(x^2+px+q)^k}dx=\int\frac{Dt}{(t^2+1)^k}dt+\int\frac{E}{(t^2+1)^k}dt,\quad(*)
+\]
+这里 \(D,E\in\R\) 是两个新的常数。
+
+对于 \((*)\) 式右边第一个不定积分，我们有
+\[
+\int\frac{Dt}{(t^2+1)^k}dt=\frac D2\int\frac1{(t^2+1)^k}(t^2+1)'dt
+\]
+\[
+=\frac D2\int\frac1{y^k}dy\quad(y=t^2+1)
+\]
+\[
+=\begin{cases} \dfrac D2\log(t^2+1)+C, & k=1, \\[6pt] \dfrac{D}{2(1-k)(t^2+1)^{k-1}}+C, & k>1. \end{cases}
+\]
+为了计算 \((*)\) 式右边第二个原函数，我们只需计算
+\[
+I_k=\int\frac1{(t^2+1)^k}dt\quad(k\in\N).
+\]
+若 \(k=1\)，则 \(I_1=\displaystyle\int\frac1{t^2+1}dt=\operatorname{arctg}t+C\)。
+
+若 \(k>1\)，则由分部积分法我们有
+\[
+I_k=\int\frac1{(t^2+1)^k}dt=\int(t)'\cdot\frac1{(t^2+1)^k}dt
+\]
+\[
+=\frac{t}{(t^2+1)^k}-\int t\left[\frac1{(t^2+1)^k}\right]'dt
+\]
+\[
+=\frac{t}{(t^2+1)^k}+2k\int\frac{t^2}{(t^2+1)^{k+1}}dt
+\]
+\[
+=\frac{t}{(t^2+1)^k}+2k\int\left[\frac{t^2+1}{(t^2+1)^{k+1}}-\frac1{(t^2+1)^{k+1}}\right]dt
+\]
+\[
+=\frac{t}{(t^2+1)^k}+2k\left[\int\frac1{(t^2+1)^k}dt-\int\frac1{(t^2+1)^{k+1}}dt\right]
+\]
+\[
+=\frac{t}{(t^2+1)^k}+2k(I_k-I_{k+1}).
+\]
+由此得到 \(I_k\) 的递推公式
+\[
+I_{k+1}=\frac{t}{2k(t^2+1)^k}+\frac{2k-1}{2k}I_k\quad(k\in\N).
+\]
+根据此递推公式及 \(I_1=\operatorname{arctg}t+C\)，我们就可以逐次计算出任意的 \(I_n\)。
+
+至此，有理分式 \(\dfrac{P_n(x)}{Q_m(x)}\) 的原函数 \(\displaystyle\int\dfrac{P_n(x)}{Q_m(x)}dx\) 的计算就完全解决了。
+
+\begin{sourceexample}{1}
+
+	计算 \(\displaystyle\int\frac{x^7-2x^6+2x^5-4x^4+x^3+2x+13}{(x-2)(x^2+1)^2}dx\)。
+
+	这是一个有理分式的不定积分。由于分子的次数高于分母的次数。利用多项式的带余除法得到
+	\[
+	\frac{x^7-2x^6+2x^5-4x^4+x^3+2x+13}{(x-2)(x^2+1)^2}=x^3+\frac{2x^2+2x+13}{(x-2)(x^2+1)^2}.
+	\]
+	因此
+	\[
+	\int\frac{x^7-2x^6+2x^5-4x^4+x^3+2x+13}{(x-2)(x^2+1)^2}dx
+	\]
+	\[
+	=\int x^3dx+\int\frac{2x^2+2x+13}{(x-2)(x^2+1)^2}dx=\frac{x^4}{4}+\int\frac{2x^2+2x+13}{(x-2)(x^2+1)^2}dx.
+	\]
+	下面我们来计算 \(\displaystyle\int\frac{2x^2+2x+13}{(x-2)(x^2+1)^2}dx\)。根据上面的有理分式的分解公式，我们有
+	\[
+	\frac{2x^2+2x+13}{(x-2)(x^2+1)^2}=\frac{A}{x-2}+\frac{Bx+C}{x^2+1}+\frac{Dx+E}{(x^2+1)^2}.
+	\]
+	两边同乘以 \((x-2)(x^2+1)^2\) 得到
+	\[
+	2x^2+2x+13=A(x^2+1)^2+(Bx+C)(x^2+1)(x-2)+(Dx+E)(x-2).
+	\]
+	比较两边 \(x\) 的同次幂的系数，我们得到确定常数 \(A,B,C,D,E\) 的方程组
+	\[
+	\begin{cases} A+B=0, \\ -2B+C=0, \\ 2A+B-2C+D=2, \\ -2B+C-2D+E=2, \\ A-2C-2E=13. \end{cases}
+	\]
+	解之得到
+	\[
+	A=1,\quad B=-1,\quad C=-2,\quad D=-3,\quad E=-4.
+	\]
+	因此
+	\[
+	\frac{2x^2+2x+13}{(x-2)(x^2+1)^2}=\frac1{x-2}-\frac{x+2}{x^2+1}-\frac{3x+4}{(x^2+1)^2}.
+	\]
+	从而
+	\[
+	\int\frac{2x^2+2x+13}{(x-2)(x^2+1)^2}dx=\int\frac1{x-2}dx-\int\frac{x+2}{x^2+1}dx-\int\frac{3x+4}{(x^2+1)^2}dx
+	\]
+	\[
+	=\log|x-2|-\int\frac2{x^2+1}dx-\int\frac{x}{x^2+1}dx-3\int\frac{x}{(x^2+1)^2}dx-4\int\frac1{(x^2+1)^2}dx
+	\]
+	\[
+	=\log|x-2|-2\operatorname{arctg}x-\int\frac{x}{x^2+1}dx-3\int\frac{x}{(x^2+1)^2}dx-4\int\frac1{(x^2+1)^2}dx.
+	\]
+	由于
+	\[
+	\int\frac{x}{x^2+1}dx\xlongequal{x^2+1=y}\frac12\int\frac1y dy=\frac12\log(x^2+1)+C,
+	\]
+	\[
+	\int\frac{x}{(x^2+1)^2}dx\xlongequal{x^2+1=y}\frac12\int\frac1{y^2}dy=-\frac1{2(x^2+1)}+C,
+	\]
+	\[
+	\int\frac1{(x^2+1)^2}dx=\frac{x}{2(x^2+1)}+\frac12\int\frac1{x^2+1}dx=\frac{x}{2(x^2+1)}+\frac12\operatorname{arctg}x+C,
+	\]
+	因此
+	\[
+	\int\frac{2x^2+2x+13}{(x-2)(x^2+1)^2}dx=\log|x-2|-2\operatorname{arctg}x-\frac12\log(x^2+1)
+	\]
+	\[
+	+\frac3{2(x^2+1)}-\frac{2x}{x^2+1}-2\operatorname{arctg}x+C
+	\]
+	\[
+	=\frac12\log\frac{(x-2)^2}{x^2+1}-4\operatorname{arctg}x+\frac{3-4x}{2(x^2+1)}+C.
+	\]
+	最后我们得到
+	\[
+	\int\frac{x^7-2x^6+2x^5-4x^4+x^3+2x+13}{(x-2)(x^2+1)^2}dx
+	\]
+	\[
+	=\frac{x^4}{4}+\frac12\log\frac{(x-2)^2}{x^2+1}-4\operatorname{arctg}x+\frac{3-4x}{2(x^2+1)}+C.
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{2}
+
+	计算 \(\displaystyle\int\frac1{x(x+1)(x^2+x+1)^2}dx\)。
+
+	对于有理分式 \(\displaystyle\frac1{x(x+1)(x^2+x+1)^2}\)，我们可以按有理分式一般分解公式，首先将它表示为下述形式
+	\[
+	\frac1{x(x+1)(x^2+x+1)^2}=\frac Ax+\frac B{x+1}+\frac{Cx+D}{x^2+x+1}+\frac{Ex+F}{(x^2+x+1)^2}.
+	\]
+	但更好的是采用下面的方法：由于
+	\[
+	x(x+1)(x^2+x+1)^2=(x^2+x)(x^2+x+1)^2=(x^2+x+1-1)(x^2+x+1)^2,
+	\]
+	故若令 \(h=x^2+x+1\)，则
+	\[
+	x(x+1)(x^2+x+1)^2=(h-1)h^2,
+	\]
+	从而
+	\[
+	\frac1{x(x+1)(x^2+x+1)^2}=\frac1{(h-1)h^2}=\frac{1-h+h}{(h-1)h^2}=-\frac1{h^2}+\frac1{(h-1)h}
+	\]
+	\[
+	=-\frac1{h^2}+\frac1{h-1}-\frac1h=\frac1{x^2+x}-\frac1{x^2+x+1}-\frac1{(x^2+x+1)^2}
+	\]
+	\[
+	=\frac1x-\frac1{x+1}-\frac1{x^2+x+1}-\frac1{(x^2+x+1)^2}.
+	\]
+	因此
+	\[
+	\int\frac1{x(x+1)(x^2+x+1)^2}dx=\int\frac1x dx-\int\frac1{x+1}dx
+	\]
+	\[
+	-\int\frac1{x^2+x+1}dx-\int\frac1{(x^2+x+1)^2}dx
+	\]
+	\[
+	=\log|x|-\log|x+1|-\int\frac1{x^2+x+1}dx-\int\frac1{(x^2+x+1)^2}dx.
+	\]
+	由于
+	\[
+	\int\frac1{x^2+x+1}dx=\int\frac1{\left(x+\dfrac12\right)^2+\left(\dfrac{\sqrt3}{2}\right)^2}dx
+	\]
+	\[
+	=\frac2{\sqrt3}\int\frac1{t^2+1}dt\quad\left(x+\frac12=\frac{\sqrt3}{2}t\right)
+	\]
+	\[
+	=\frac2{\sqrt3}\operatorname{arctg}t+C=\frac2{\sqrt3}\operatorname{arctg}\frac{2x+1}{\sqrt3}+C,
+	\]
+	\[
+	\int\frac1{(x^2+x+1)^2}dx=\int\frac1{\left[\left(x+\dfrac12\right)^2+\left(\dfrac{\sqrt3}{2}\right)^2\right]^2}dx
+	\]
+	\[
+	=\frac{8\sqrt3}{9}\int\frac1{(t^2+1)^2}dt\quad\left(x+\frac12=\frac{\sqrt3}{2}t\right)
+	\]
+	\[
+	=\frac{8\sqrt3}{9}\left[\frac{t}{2(t^2+1)}+\frac12\int\frac1{t^2+1}dt\right]
+	\]
+	\[
+	=\frac{8\sqrt3}{9}\left[\frac{t}{2(t^2+1)}+\frac12\operatorname{arctg}t\right]+C
+	\]
+	\[
+	=\frac{2x+1}{3(x^2+x+1)}+\frac{4\sqrt3}{9}\operatorname{arctg}\frac{2x+1}{\sqrt3}+C,
+	\]
+	故
+	\[
+	\int\frac1{x(x+1)(x^2+x+1)^2}dx=\log\left|\frac{x}{x+1}\right|-\frac2{\sqrt3}\operatorname{arctg}\frac{2x+1}{\sqrt3}
+	\]
+	\[
+	-\frac{4\sqrt3}{9}\operatorname{arctg}\frac{2x+1}{\sqrt3}-\frac{2x+1}{3(x^2+x+1)}+C
+	\]
+	\[
+	=-\frac{2x+1}{3(x^2+x+1)}+\log\left|\frac{x}{x+1}\right|-\frac{10\sqrt3}{9}\operatorname{arctg}\frac{2x+1}{\sqrt3}+C.
+	\]
+
+\end{sourceexample}
+
+有时候，在求某些函数的原函数时，经过适当的变元替换后就化为求有理分式的原函数。下面我们来研究这种情形。
+
+\subsection{可化为有理分式求原函数的情形 I}
+
+设 \(f\) 是两个变元 \(X,Y\) 的实系数有理分式，即
+\[
+f(X,Y)=\frac{P(X,Y)}{Q(X,Y)},
+\]
+其中 \(P(X,Y)\) 与 \(Q(X,Y)\) 是关于 \(X,Y\) 的多项式。
+
+这里我们研究的是下述形式的原函数
+\[
+I=\int f(\sin x,\cos x)dx
+\]
+的计算问题。
+
+我们对 \(f\) 分以下四种情形讨论。
+
+1) \(f(\sin x,\cos x)=g(\cos x)\sin x\)（\(g\) 为有理分式）；
+
+这时，可作变换 \(t=\cos x\)，于是
+\[
+I=\int f(\sin x,\cos x)dx=\int g(\cos x)\sin x\,dx
+\]
+\[
+=-\int g(\cos x)(\cos x)'dx=-\int g(t)dt.
+\]
+因此 \(I\) 的计算就化为有理分式 \(g\) 的原函数计算。
+
+\textbf{附注}\quad 我们可以证明 \(f(\sin x,\cos x)=g(\cos x)\sin x\) 的充分必要条件是：函数
+\[
+x\longmapsto f(\sin x,\cos x),\quad x\in E\ \text{是奇函数}.
+\]
+在证明这个结论之前，我们首先注意到，对任意两个变元的有理分式 \(R(X,Y)=\dfrac{P(X,Y)}{Q(X,Y)}\)，若将 \(P,Q\) 分别表示为含 \(X\) 的偶次幂与奇次幂的多项式之和，则我们可以把 \(R\) 表示成下述形式
+\[
+R(X,Y)=\frac{P_1(X^2,Y)+XP_2(X^2,Y)}{Q_1(X^2,Y)+XQ_2(X^2,Y)}.
+\]
+这里 \(P_1,P_2,Q_1,Q_2\) 都是关于 \(X^2,Y\) 的多项式。
+
+对 \(R(X,Y)\) 的右端的分子分母同乘以 \(Q_1(X^2,Y)-XQ_2(X^2,Y)\) 得到
+\[
+R(X,Y)=\frac{[P_1(X^2,Y)+XP_2(X^2,Y)][Q_1(X^2,Y)-XQ_2(X^2,Y)]}{Q_1^2(X^2,Y)-X^2Q_2^2(X^2,Y)}
+\]
+\[
+=\frac{[P_1(X^2,Y)Q_1(X^2,Y)-X^2P_2(X^2,Y)Q_2(X^2,Y)]}{Q_1^2(X^2,Y)-X^2Q_2^2(X^2,Y)}
+\]
+\[
++\frac{X[P_2(X^2,Y)Q_1(X^2,Y)-P_1(X^2,Y)Q_2(X^2,Y)]}{Q_1^2(X^2,Y)-X^2Q_2^2(X^2,Y)}
+\]
+令
+\[
+R_1(X^2,Y)=\frac{P_1(X^2,Y)Q_1(X^2,Y)-X^2P_2(X^2,Y)Q_2(X^2,Y)}{Q_1^2(X^2,Y)-X^2Q_2^2(X^2,Y)},
+\]
+\[
+R_2(X^2,Y)=\frac{P_2(X^2,Y)Q_1(X^2,Y)-P_1(X^2,Y)Q_2(X^2,Y)}{Q_1^2(X^2,Y)-X^2Q_2^2(X^2,Y)},
+\]
+则 \(R_1,R_2\) 都是 \(X^2,Y\) 的有理分式，于是
+\[
+R(X,Y)=R_1(X^2,Y)+XR_2(X^2,Y).
+\]
+对 \(f(\sin x,\cos x)\)，我们有
+\[
+f(\sin x,\cos x)=f_1(\sin^2x,\cos x)+\sin x f_2(\sin^2x,\cos x)
+\]
+\[
+=f_1(1-\cos^2x,\cos x)+\sin x f_2(1-\cos^2x,\cos x)=g_*(\cos x)+\sin x\,g(\cos x),\qquad(*)
+\]
+这里 \(g_*,g\) 都是一个变元的有理分式。
+
+现在我们来证明上述附注。
+
+i) \textbf{必要性} 设 \(f(\sin x,\cos x)=\sin x\,g(\cos x)\)。显然，函数 \(x\longmapsto f(\sin x,\cos x),\ x\in E\) 是奇函数。
+
+ii) \textbf{充分性} 设函数 \(x\longmapsto f(\sin x,\cos x),\ x\in E\) 是奇函数。那末由上述 \((*)\) 式我们有
+\[
+f(\sin(-x),\cos(-x))=g_*(\cos(-x))+\sin(-x)g(\cos(-x)).
+\]
+另一方面，由假设，我们有
+\[
+f(\sin x,\cos x)=-f(\sin(-x),\cos(-x)).
+\]
+由此推得
+\[
+2f(\sin x,\cos x)=g_*(\cos x)+\sin x\,g(\cos x)-[g_*(\cos(-x))+\sin(-x)g(\cos(-x))]
+\]
+\[
+=2\sin x\,g(\cos x).
+\]
+从而
+\[
+f(\sin x,\cos x)=g(\cos x)\sin x.
+\]
+
+\begin{sourceexample}{3}
+
+	计算 \(\displaystyle\int\sin^3x\cos^3x\,dx\)。
+
+	由于 \(\sin^3x\cos^3x=(1-\cos^2x)\cos^3x\sin x\)，故
+	\[
+	\int\sin^3x\cos^3x\,dx=\int(1-\cos^2x)\cos^3x\sin x\,dx
+	\]
+	\[
+	=-\int(1-\cos^2x)\cos^3x(\cos x)'dx=\int(t^2-1)t^3dt\quad(t=\cos x)
+	\]
+	\[
+	=\int(t^5-t^3)dt=\frac{t^6}{6}-\frac{t^4}{4}+C=\frac16\cos^6x-\frac14\cos^4x+C.
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{4}
+
+	计算 \(\displaystyle\int\frac1{\sin x\cos2x}dx\)。
+
+	因为函数 \(\displaystyle x\longmapsto\frac1{\sin x\cos2x}\)，\(x\in E\) 是奇函数，所以 \(\displaystyle\frac1{\sin x\cos2x}\) 一定可以表示成 \(g(\cos x)\sin x\) 的形式。事实上，我们有
+	\[
+	\frac1{\sin x\cos2x}=\frac{\sin x}{\sin^2x(2\cos^2x-1)}=\frac{\sin x}{(1-\cos^2x)(2\cos^2x-1)}.
+	\]
+	因此
+	\[
+	\int\frac1{\sin x\cos2x}dx=\int\frac{\sin x}{(1-\cos^2x)(2\cos^2x-1)}dx
+	\]
+	\[
+	=-\int\frac1{(1-\cos^2x)(2\cos^2x-1)}(\cos x)'dx=\int\frac1{(t^2-1)(2t^2-1)}dt\quad(t=\cos x)
+	\]
+	\[
+	=\int\left[\frac1{t^2-1}-\frac2{2t^2-1}\right]dt
+	\]
+	\[
+	=\frac12\log\left|\frac{t-1}{t+1}\right|-\frac{\sqrt2}{2}\log\left|\frac{\sqrt2\,t-1}{\sqrt2\,t+1}\right|+C
+	\]
+	\[
+	=\frac12\log\left|\frac{\cos x-1}{\cos x+1}\right|-\frac{\sqrt2}{2}\log\left|\frac{\sqrt2\cos x-1}{\sqrt2\cos x+1}\right|+C.
+	\]
+
+\end{sourceexample}
+
+2) \(f(\sin x,\cos x)=h(\sin x)\cos x\)（\(h\) 为有理分式）
+
+这时，可作变换 \(t=\sin x\)，于是
+\[
+I=\int f(\sin x,\cos x)dx=\int h(\sin x)\cos x\,dx
+\]
+\[
+=\int h(\sin x)(\sin x)'dx=\int h(t)dt.
+\]
+因此 \(I\) 的计算化为有理分式 \(h\) 的原函数计算。
+
+\textbf{附注}\quad 与上面的附注类似地可证：
+
+\(f(\sin x,\cos x)=h(\sin x)\cos x\) 的充分必要条件是：\(F(x)=f(\sin x,\cos x)\) 满足条件：
+\[
+F(\pi-x)=-F(x).
+\]
+
+\begin{sourceexample}{5}
+
+	计算 \(\displaystyle\int\sin^2x\cos^3x\,dx\)。
+
+	因为 \(\sin^2x\cos^3x=\sin^2x\cos^2x\cos x=\sin^2x(1-\sin^2x)\cos x\)，所以
+	\[
+	\int\sin^2x\cos^3x\,dx=\int\sin^2x(1-\sin^2x)\cos x\,dx
+	\]
+	\[
+	=\int\sin^2x(1-\sin^2x)(\sin x)'dx=\int t^2(1-t^2)dt\quad(t=\sin x)
+	\]
+	\[
+	=\frac{t^3}{3}-\frac{t^5}{5}+C=\frac13\sin^3x-\frac15\sin^5x+C.
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{6}
+
+	计算 \(\displaystyle\int\frac{\sin x\cos x}{1+\sin^4x}dx\)。
+
+	因为 \(\displaystyle\frac{\sin x\cos x}{1+\sin^4x}=\frac{\sin x}{1+\sin^4x}\cos x\)，所以
+	\[
+	\int\frac{\sin x\cos x}{1+\sin^4x}dx=\int\frac{\sin x}{1+\sin^4x}(\sin x)'dx
+	\]
+	\[
+	=\int\frac{t}{1+t^4}dt\quad(t=\sin x)=\frac12\int\frac{(t^2)'}{1+(t^2)^2}dt
+	\]
+	\[
+	=\frac12\int\frac1{1+u^2}du\quad(u=t^2)=\frac12\operatorname{arctg}u+C
+	\]
+	\[
+	=\frac12\operatorname{arctg}(\sin x)^2+C.
+	\]
+
+\end{sourceexample}
+
+3) \(f(\sin x,\cos x)=k(\operatorname{tg}x)\)（\(k\) 为有理分式）
+
+这时，可作变换 \(t=\operatorname{tg}x\)。于是
+\[
+I=\int f(\sin x,\cos x)dx=\int k(\operatorname{tg}x)dx
+\]
+\[
+=\int\frac{k(\operatorname{tg}x)}{1+\operatorname{tg}^2x}(1+\operatorname{tg}^2x)dx
+\]
+\[
+=\int\frac{k(\operatorname{tg}x)}{1+\operatorname{tg}^2x}(\operatorname{tg}x)'dx=\int\frac{k(t)}{1+t^2}dt.
+\]
+因此 \(I\) 的计算化为有理分式 \(\dfrac{k(t)}{1+t^2}\) 的原函数计算。
+
+\textbf{附注}\quad 仿照第一个附注的证明方法，我们可以证明：
+
+\(f(\sin x,\cos x)=k(\operatorname{tg}x)\) 的充分必要条件是：\(F(x)=f(\sin x,\cos x)\) 满足条件
+\[
+F(\pi+x)=F(x).
+\]
+
+\begin{sourceexample}{7}
+
+	计算 \(\displaystyle\int\frac1{\sin^4x\cos^2x}dx\)。
+
+	因为 \(F(x)=\dfrac1{\sin^4x\cos^2x}\) 满足 \(F(\pi+x)=F(x)\)，所以我们可以作变换 \(t=\operatorname{tg}x\)。于是
+	\[
+	\int\frac1{\sin^4x\cos^2x}dx=\int\frac1{\dfrac{\sin^4x}{\cos^4x}\cdot\cos^4x}\cdot\frac1{\cos^2x}dx
+	\]
+	\[
+	=\int\frac1{\operatorname{tg}^4x}\cdot\left(\frac{\sin^2x+\cos^2x}{\cos^2x}\right)^2(\operatorname{tg}x)'dx
+	\]
+	\[
+	=\int\frac{(1+\operatorname{tg}^2x)^2}{\operatorname{tg}^4x}(\operatorname{tg}x)'dx=\int\frac{(1+t^2)^2}{t^4}dt\quad(t=\operatorname{tg}x)
+	\]
+	\[
+	=\int\left(1+\frac2{t^2}+\frac1{t^4}\right)dt=t-\frac2t-\frac1{3t^3}+C
+	\]
+	\[
+	=\operatorname{tg}x-2\operatorname{ctg}x-\frac13\operatorname{ctg}^3x+C.
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{8}
+
+	计算 \(\displaystyle\int\frac{\sin x-\cos x}{\sin x+2\cos x}dx\)。
+
+	因为 \(\dfrac{\sin x-\cos x}{\sin x+2\cos x}=\dfrac{\operatorname{tg}x-1}{\operatorname{tg}x+2}\)，所以
+	\[
+	\int\frac{\sin x-\cos x}{\sin x+2\cos x}dx=\int\frac{\operatorname{tg}x-1}{(\operatorname{tg}x+2)(1+\operatorname{tg}^2x)}(1+\operatorname{tg}^2x)dx
+	\]
+	\[
+	=\int\frac{\operatorname{tg}x-1}{(\operatorname{tg}x+2)(1+\operatorname{tg}^2x)}(\operatorname{tg}x)'dx=\int\frac{t-1}{(t+2)(1+t^2)}dt\quad(t=\operatorname{tg}x)
+	\]
+	\[
+	=\int\left[-\frac35\frac1{t+2}+\frac{\frac35t-\frac15}{1+t^2}\right]dt
+	\]
+	\[
+	=-\frac35\int\frac1{t+2}dt+\frac35\int\frac{t}{1+t^2}dt-\frac15\int\frac1{1+t^2}dt
+	\]
+	\[
+	=-\frac35\log|t+2|+\frac3{10}\log(1+t^2)-\frac15\operatorname{arctg}t+C
+	\]
+	\[
+	=\frac3{10}\log\frac{1+\operatorname{tg}^2x}{(2+\operatorname{tg}x)^2}-\frac15x+C.
+	\]
+
+\end{sourceexample}
+
+4) \(f(\sin x,\cos x)\) 为一般形式
+
+这时我们可作变换 \(t=\operatorname{tg}\dfrac x2\)，\(x\in\ ]-\pi,\pi[\)。于是 \(x=2\operatorname{arctg}t\)。
+
+由此得到
+\[
+\sin x=\frac{2t}{1+t^2},\quad\cos x=\frac{1-t^2}{1+t^2},\quad(2\operatorname{arctg}t)'=\frac2{1+t^2}.
+\]
+根据不定积分的变元替换法我们有
+\[
+I=\int f(\sin x,\cos x)dx
+\]
+\[
+=\int f\left(\frac{2t}{1+t^2},\frac{1-t^2}{1+t^2}\right)\cdot(2\operatorname{arctg}t)'dt\quad\left(t=\operatorname{tg}\frac x2\right)
+\]
+\[
+=\int f\left(\frac{2t}{1+t^2},\frac{1-t^2}{1+t^2}\right)\frac2{1+t^2}dt.
+\]
+因此 \(I\) 的计算化为有理分式 \(f\left(\dfrac{2t}{1+t^2},\dfrac{1-t^2}{1+t^2}\right)\dfrac2{1+t^2}\) 的原函数计算。
+
+\begin{sourceexample}{9}
+
+	计算 Poisson 积分
+	\[
+	\int\frac{1-r^2}{1-2r\cos x+r^2}dx\quad(0<r<1).
+	\]
+	令 \(t=\operatorname{tg}\dfrac x2,\ x\in\ ]-\pi,\pi[\)，则我们有
+	\[
+	\int\frac{1-r^2}{1-2r\cos x+r^2}dx
+	\]
+	\[
+	=\int\frac{1-r^2}{1-2r\cdot\dfrac{1-t^2}{1+t^2}+r^2}\cdot\frac2{1+t^2}dt
+	\]
+	\[
+	=2(1-r^2)\int\frac1{(1-r)^2+(1+r)^2t^2}dt
+	\]
+	\[
+	=2\operatorname{arctg}\left(\frac{1+r}{1-r}t\right)+C
+	\]
+	\[
+	=2\operatorname{arctg}\left(\frac{1+r}{1-r}\operatorname{tg}\frac x2\right)+C.
+	\]
+	注意，这里计算出来的函数
+	\[
+	x\longmapsto F(x)=2\operatorname{arctg}\left(\frac{1+r}{1-r}\operatorname{tg}\frac x2\right),\quad x\in\ ]-\pi,\pi[
+	\]
+	只是函数
+	\[
+	x\longmapsto f(x)=\frac{1-r^2}{1-2r\cos x+r^2},\quad x\in\R
+	\]
+	在 \(]-\pi,\pi[\) 上的一个原函数。由于函数 \(f\) 在整个 \(\R\) 上连续，故 \(f\) 应该有在 \(\R\) 上定义的原函数存在。
+
+	下面我们来求 \(f\) 的定义在 \(\R\) 上的原函数 \(G\)，使得 \(G\) 在 \(]-\pi,\pi[\) 上的限制等于 \(F\)。
+
+	首先我们注意到 \(G\) 在 \(\R\) 上是 \(C^1\) 类的，并且
+	\[
+	\lim_{x\to\pi^-}F(x)=\pi,\qquad\lim_{x\to-\pi^+}F(x)=-\pi.
+	\]
+	故
+	\[
+	G(\pi)=\lim_{x\to\pi^-}G(x)=\lim_{x\to\pi^-}F(x)=\pi,
+	\]
+	\[
+	G(-\pi)=\lim_{x\to-\pi^+}G(x)=\lim_{x\to-\pi^+}F(x)=-\pi.
+	\]
+	现在我们分别令
+	\[
+	G(x)=F(x-2\pi)+C_1,\quad x\in\ ]\pi,3\pi[,
+	\]
+	\[
+	G(x)=F(x+2\pi)+C_2,\quad x\in\ ]-3\pi,-\pi[.
+	\]
+	选择适当的常数 \(C_1,C_2\) 使得 \(G\) 在 \(x=\pm\pi\) 处连续。为此我们应该有
+	\[
+	\pi=G(\pi)=\lim_{x\to\pi^+}G(x)=\lim_{x\to\pi^+}[F(x-2\pi)+C_1]=-\pi+C_1,
+	\]
+	\[
+	-\pi=G(-\pi)=\lim_{x\to-\pi^-}G(x)=\lim_{x\to-\pi^-}[F(x+2\pi)+C_2]=\pi+C_2.
+	\]
+	由此得到 \(C_1=2\pi,\ C_2=-2\pi\)，因此
+	\[
+	G(x)=F(x-2\pi)+2\pi,\quad x\in\ ]\pi,3\pi[,
+	\]
+	\[
+	G(x)=F(x+2\pi)-2\pi,\quad x\in\ ]-3\pi,-\pi[.
+	\]
+	\[
+	G(3\pi)=\lim_{x\to3\pi^-}[F(x-2\pi)+2\pi]=\lim_{x\to\pi^-}F(x)+2\pi=3\pi,
+	\]
+	\[
+	G(-3\pi)=\lim_{x\to-3\pi^+}[F(x+2\pi)-2\pi]=\lim_{x\to-\pi^+}F(x)-2\pi=-3\pi.
+	\]
+	逐步地用上述方法可以确定出 \(G\) 在所有开区间 \(]-\pi+2k\pi,\pi+2k\pi[\ (k\in\Z)\) 上的表达式及 \(G\) 在 \(x=\pi+2k\pi\)，及 \(x=-\pi-2k\pi\ (k=0,1,2,\cdots)\) 上的值：
+	\[
+	G(x)=F(x-2k\pi)+2k\pi,\quad x\in\ ]-\pi+2k\pi,\pi+2k\pi[,\ k\in\Z,
+	\]
+	\[
+	G(\pi+2k\pi)=(2k+1)\pi,\qquad k=0,1,2,\cdots
+	\]
+	\[
+	G(-\pi-2k\pi)=-(2k+1)\pi,\qquad k=0,1,2,\cdots.
+	\]
+	最后证明 \(G\) 在 \(\R\) 上是 \(C^1\) 类的。直接计算得
+	\[
+	G'(x)=(F(x-2k\pi)+2k\pi)'=f(x-2k\pi)=f(x),\quad\forall\,x\in\ ]-\pi+2k\pi,\pi+2k\pi[.
+	\]
+	\[
+	G'(\pi^-)=\lim_{x\to\pi^-}\frac{G(x)-G(\pi)}{x-\pi}=\lim_{x\to\pi^-}\frac{F(x)-\pi}{x-\pi}
+	\]
+	\[
+	=\lim_{x\to\pi^-}f(x)=\frac{1-r}{1+r}=f(\pi).
+	\]
+	\[
+	G'(-\pi^+)=\lim_{x\to-\pi^+}\frac{G(x)-G(-\pi)}{x+\pi}=\lim_{x\to-\pi^+}\frac{F(x)+\pi}{x+\pi}
+	\]
+	\[
+	=\lim_{x\to-\pi^+}f(x)=\frac{1-r}{1+r}=f(-\pi).
+	\]
+	由此可知，\(\forall\,k=0,1,2,\cdots\)
+	\[
+	G'(\pi+2k\pi)=G'(-\pi-2k\pi)=\frac{1-r}{1+r}=f(\pm\pi\pm2k\pi).
+	\]
+	因此 \(G\) 就是我们所求的定义在 \(\R\) 上的 \(f\) 的原函数，它在 \(]-\pi,\pi[\) 上的限制等于 \(F\)。
+
+	从几何上来看，原函数 \(G\) 的图形就是逐步将函数 \(F\) 的图形先向右（左）平移 \(2k\pi\)，然后向上（下）平移 \(2k\pi\) 而得到的图形。
+
+	
+
+\end{sourceexample}
+
+\begin{figure}[htbp]
+		\centering
+		\includegraphics[
+		width=.82\linewidth,
+		height=.72\textheight,
+		keepaspectratio
+		]{_page_378_Figure_9.jpeg}
+		\caption{}
+		\label{fig:7-1}
+	\end{figure}
+
+
+\subsection{可化为有理分式求原函数的情形 II}
+
+设 \(f(X,Y)\) 是 \(X,Y\) 的有理分式。这里我们研究下述形式的原函数
+\[
+I=\int f\left(x,\sqrt[m]{\frac{ax+b}{cx+d}}\right)dx
+\]
+的计算问题。（\(a,b,c,d\in\R,\ m\in\N\)）
+
+作变换 \(t=\sqrt[m]{\dfrac{ax+b}{cx+d}}\)，于是
+\[
+t^m=\frac{ax+b}{cx+d},\qquad x=\frac{dt^m-b}{-ct^m+a},
+\]
+\[
+x'(t)=\frac{m(ad-bc)t^{m-1}}{(a-ct^m)^2}.
+\]
+根据不定积分的变元替换法得到
+\[
+I=\int f\left(x,\sqrt[m]{\frac{ax+b}{cx+d}}\right)dx
+\]
+\[
+=\int f\left(\frac{dt^m-b}{-ct^m+a},t\right)\frac{m(ad-bc)t^{m-1}}{(a-ct^m)^2}dt.
+\]
+因此 \(I\) 的计算化为关于 \(t\) 的有理分式的原函数的计算。
+
+\begin{sourceexample}{10}
+
+	计算 \(\displaystyle\int\frac1{\sqrt{x}\sqrt[3]{1+\sqrt[4]{x}}}dx\)。
+
+	首先作变换 \(y=\sqrt[4]{x}\)，则 \(x=y^4,\ \sqrt{x}=y^2\)，于是
+	\[
+	\int\frac1{\sqrt{x}\sqrt[3]{1+\sqrt[4]{x}}}dx=\int\frac1{y^2\sqrt[3]{1+y}}(y^4)'dy\quad(y=\sqrt[4]{x})
+	\]
+	\[
+	=4\int\frac{y}{\sqrt[3]{1+y}}dy.
+	\]
+	再作变换 \(t=\sqrt[3]{1+y}\)，则 \(y=t^3-1\)，从而
+	\[
+	\int\frac{y}{\sqrt[3]{1+y}}dy=\int\frac{t^3-1}{t}(t^3-1)'dt\quad\left(t=\sqrt[3]{1+y}\right)
+	\]
+	\[
+	=3\int t(t^3-1)dt=3\int(t^4-t)dt=\frac35t^5-\frac32t^2+C.
+	\]
+	因此
+	\[
+	\int\frac1{\sqrt{x}\sqrt[3]{1+\sqrt[4]{x}}}dx=\frac{12}{5}t^5-6t^2+C\quad\left(t=\sqrt[3]{1+y}\right)
+	\]
+	\[
+	=\frac{12}{5}\sqrt[3]{(1+y)^5}-6\sqrt[3]{(1+y)^2}+C\quad(y=\sqrt[4]{x})
+	\]
+	\[
+	=\frac{12}{5}\sqrt[3]{\left(1+\sqrt[4]{x}\right)^5}-6\sqrt[3]{\left(1+\sqrt[4]{x}\right)^2}+C.
+	\]
+
+\end{sourceexample}
+
+\subsection{可化为有理分式求原函数的情形 III}
+
+设 \(f(X,Y)\) 是 \(X,Y\) 的有理分式，我们来研究下述形式的原函数
+\[
+I=\int f\left(x,\sqrt{ax^2+bx+c}\right)dx
+\]
+的计算问题。（\(a,b,c\in\R,\ a\neq0\)）
+
+显然我们只能在集合 \(E=\{x\in\R\mid ax^2+bx+c\ge0\}\) 上来讨论上述原函数的计算。由于
+\[
+ax^2+bx+c=a\left(x^2+\frac bax+\frac ca\right)=a\left(x+\frac b{2a}\right)^2+\frac{4ac-b^2}{4a},
+\]
+若令 \(y=x+\dfrac b{2a}\)，则
+\[
+ax^2+bx+c=ay^2+\frac{4ac-b^2}{4a}.
+\]
+所以不失一般性，我们可以只讨论下述不定积分
+\[
+I=\int f(x,\sqrt{ax^2+c})dx\qquad(a\neq0,\ c\in\R).
+\]
+我们不妨假设 \(c\neq0\)，否则上述不定积分就是 \(x\) 的有理分式的不定积分。这我们已经讨论过了。
+
+下面对 \(a,c\) 的符号分三种情况来讨论：
+\[
+a>0,\ c>0;\qquad a>0,\ c<0;\qquad a<0,\ c>0.
+\]
+1) \(a>0,\ c>0\)：
+
+因为 \(f(x,\sqrt{ax^2+c})=f\left(x,\sqrt{a\left(x^2+\dfrac ca\right)}\right)\)。所以我们可作变换 \(x=\sqrt{\dfrac ca}\operatorname{sh}\theta\)。于是
+\[
+I=\int f(x,\sqrt{ax^2+c})dx
+\]
+\[
+=\int f\left(\sqrt{\frac ca}\operatorname{sh}\theta,\sqrt c\operatorname{ch}\theta\right)\sqrt{\frac ca}\operatorname{ch}\theta\,d\theta
+\]
+\[
+\left(\theta=\operatorname{Arg}\operatorname{sh}\sqrt{\frac ac}\,x\right)
+\]
+\[
+=\int f\left(\sqrt{\frac ca}\frac{e^\theta-e^{-\theta}}2,\sqrt c\frac{e^\theta+e^{-\theta}}2\right)\cdot\sqrt{\frac ca}\frac{e^\theta+e^{-\theta}}2\,d\theta
+\]
+\[
+=\int f\left(\sqrt{\frac ca}\frac{e^{2\theta}-1}{2e^\theta},\sqrt c\frac{e^{2\theta}+1}{2e^\theta}\right)\cdot\sqrt{\frac ca}\frac{e^{2\theta}+1}{2e^\theta}\,d\theta
+\]
+\[
+=\frac12\sqrt{\frac ca}\int f\left(\sqrt{\frac ca}\frac{t^2-1}{2t},\sqrt c\frac{t^2+1}{2t}\right)\cdot\frac{t^2+1}{t^2}dt\quad(t=e^\theta).
+\]
+因此 \(I\) 的计算化为关于 \(t\) 的有理分式的原函数的计算。
+
+2) \(a>0,\ c<0\)：
+
+这时 \(f(x,\sqrt{ax^2+c})=f\left(x,\sqrt{a\left(x^2-\dfrac{|c|}{a}\right)}\right)\)。作变换 \(x=\sqrt{\dfrac{|c|}{a}}\operatorname{ch}\theta\)，则
+\[
+I=\int f(x,\sqrt{ax^2+c})dx
+\]
+\[
+=\int f\left(\sqrt{\frac{|c|}{a}}\operatorname{ch}\theta,\sqrt{|c|}\operatorname{sh}\theta\right)\sqrt{\frac{|c|}{a}}\operatorname{sh}\theta\,d\theta
+\]
+\[
+\left(\theta=\operatorname{Arg}\operatorname{ch}\sqrt{\frac a{|c|}}\,x\right)
+\]
+\[
+=\frac12\sqrt{\frac{|c|}{a}}\int f\left(\sqrt{\frac{|c|}{a}}\frac{t^2+1}{2t},\sqrt{|c|}\frac{t^2-1}{2t}\right)\frac{t^2-1}{t^2}dt\quad(t=e^\theta).
+\]
+因此 \(I\) 的计算也化为关于 \(t\) 的有理分式的原函数的计算。
+
+3) \(a<0,\ c>0\)：
+
+这时 \(f(x,\sqrt{ax^2+c})=f\left(x,\sqrt{|a|\left(\dfrac c{|a|}-x^2\right)}\right)\)。作变换 \(x=\sqrt{\dfrac c{|a|}}\sin\theta\)，则
+\[
+I=\int f(x,\sqrt{ax^2+c})dx
+\]
+\[
+=\int f\left(\sqrt{\frac c{|a|}}\sin\theta,\sqrt c\cos\theta\right)\sqrt{\frac c{|a|}}\cos\theta\,d\theta
+\]
+\[
+=\sqrt{\frac c{|a|}}\int f\left(\sqrt{\frac c{|a|}}\sin\theta,\sqrt c\cos\theta\right)\cos\theta\,d\theta.
+\]
+因此 \(I\) 的计算也最终化为有理分式的原函数的计算。
+
+\begin{sourceexample}{11}
+
+	计算 \(\displaystyle\int\sqrt{x^2+x+1}\,dx\)。
+
+	\[
+	I=\int\sqrt{x^2+x+1}\,dx=\int\sqrt{\left(x+\frac12\right)^2+\frac34}\,dx
+	\]
+	\[
+	=\int\sqrt{y^2+\frac34}\,dy\quad\left(y=x+\frac12\right)
+	\]
+	\[
+	=\int\frac{\sqrt3}{2}\sqrt{\operatorname{sh}^2\theta+1}\cdot\frac{\sqrt3}{2}\operatorname{ch}\theta\,d\theta\quad\left(y=\frac{\sqrt3}{2}\operatorname{sh}\theta\right)
+	\]
+	\[
+	=\frac34\int\operatorname{ch}^2\theta\,d\theta=\frac34\int\left(\frac{e^\theta+e^{-\theta}}2\right)^2d\theta
+	\]
+	\[
+	=\frac34\int\frac{(e^{2\theta}+1)^2}{4e^{2\theta}}d\theta=\frac3{16}\int\frac{t^4+2t^2+1}{t^3}dt\quad(t=e^\theta)
+	\]
+	\[
+	=\frac3{16}\left[\int t\,dt+2\int\frac1t dt+\int\frac1{t^3}dt\right]
+	\]
+	\[
+	=\frac3{32}t^2+\frac38\log t-\frac3{32t^2}+C
+	\]
+	\[
+	=\frac3{32}\exp\left(2\operatorname{Arg}\operatorname{sh}\frac{2x+1}{\sqrt3}\right)+\frac38\operatorname{Arg}\operatorname{sh}\frac{2x+1}{\sqrt3}
+	\]
+	\[
+	-\frac3{32}\exp\left(-2\operatorname{Arg}\operatorname{sh}\frac{2x+1}{\sqrt3}\right)+C.
+	\]
+
+\end{sourceexample}
+
+\begin{sourceexample}{12}
+
+	计算 \(\displaystyle\int\frac1{\sqrt{a^2-x^2}}dx\quad(a>0)\)。
+
+	作变换 \(x=a\sin\theta\)，\(\theta\in\left]-\dfrac\pi2,\dfrac\pi2\right[\)，则
+	\[
+	\int\frac1{\sqrt{a^2-x^2}}dx=\int\frac1{\sqrt{a^2-a^2\sin^2\theta}}(a\sin\theta)'d\theta\quad\left(\theta=\arcsin\frac xa\right)
+	\]
+	\[
+	=\int\frac{a\cos\theta}{a\cos\theta}d\theta=\int d\theta=\theta+C=\arcsin\frac xa+C.
+	\]
+
+\end{sourceexample}
+
+\subsection*{习 题}
+
+\begin{exercise}
+	\item 计算下列各有理分式的原函数：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\displaystyle\int\frac1{(x-a)(x-b)(x-c)}dx\)；
+		\item \(\displaystyle\int\frac{x^3+2x^2+2x+1}{x(x^2+1)}dx\)；
+		\item \(\displaystyle\int\frac1{x^4-1}dx\)；
+		\item \(\displaystyle\int\frac{x^2}{(1+x^2)^2}dx\)；
+		\item \(\displaystyle\int\frac1{(x^2+2x+2)(x^2+2x+5)}dx\)；
+		\item \(\displaystyle\int\frac1{x^4+x^2+1}dx\)；
+		\item \(\displaystyle\int\frac{x^2}{(x^2+x+1)^2}dx\)；
+		\item \(\displaystyle\int\frac{x^4+x^2-1}{(x-2)^5}dx\)；
+		\item \(\displaystyle\int\frac{x^5+1}{(x^2+x+1)^2}dx\)；
+		\item \(\displaystyle\int\frac1{(x+1)^7-x^7-1}dx\)。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 设
+	\[
+	f(x)=\frac{ax^2+bx+c}{(x^2+k^2)^2}\quad(a,b,c,k\in\R,\ a\neq0,\ k\neq0).
+	\]
+	试问常数 \(a,b,c\) 取何值时，可以保证 \(f\) 的原函数 \(\displaystyle\int f(x)dx\) 是一个有理分式？
+\end{exercise}
+
+\begin{exercise}
+	\item 计算下列各原函数：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\displaystyle\int\sin^2x\cos^3x\,dx\)；
+		\item \(\displaystyle\int\frac1{\sin^2x\cos^4x}dx\)；
+		\item \(\displaystyle\int\frac{\cos x}{(1-\cos x)^2}dx\)；
+		\item \(\displaystyle\int\frac{\sin x}{(1-\cos x)^{n+1}}dx\quad(n\in\N)\)；
+		\item \(\displaystyle\int\frac{\cos x}{1+\cos x}dx\)；
+		\item \(\displaystyle\int\frac{\cos^4x-\sin^4x}{\cos^4x+\sin^4x}dx\)；
+		\item \(\displaystyle\int\frac{\cos^3x}{\sin^2x+\sin x+1}dx\)；
+		\item \(\displaystyle\int\frac{(1+\tan^2x)\sin^2x}{\cos^2x+2\cos x+2}dx\)；
+		\item \(\displaystyle\int\frac{\cos^2x}{(\sin x-2)(\sin x+2)}dx\)；
+		\item \(\displaystyle\int\frac1{2\sin x-\cos x+5}dx\)。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 计算下列各原函数：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\displaystyle\int\frac1{1+\sqrt{x}}dx\)；
+		\item \(\displaystyle\int\frac{\sqrt[3]{1+\sqrt[4]{x}}}{\sqrt{x}}dx\)；
+		\item \(\displaystyle\int\frac{\sqrt{x}-1}{\sqrt[3]{x}+1}dx\)；
+		\item \(\displaystyle\int\frac{1-\sqrt{x+1}}{1+\sqrt[3]{x+1}}dx\)；
+		\item \(\displaystyle\int\frac1{\sqrt{x}(1+\sqrt[4]{x})^3}dx\)；
+		\item \(\displaystyle\int\frac{\sqrt{x-1}+2}{\sqrt{(x-1)^4}-(x-1)}dx\)；
+		\item \(\displaystyle\int\frac1x\sqrt{\frac{1+x}{x}}dx\)；
+		\item \(\displaystyle\int\frac{2x+1}{x^2\sqrt{2x+1}}dx\)；
+		\item \(\displaystyle\int\frac1{(2+x)\sqrt{x+1}}dx\)；
+		\item \(\displaystyle\int\frac1{\sqrt[3]{(x-1)(x+1)^2}}dx\)。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 计算下列各原函数：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\displaystyle\int\frac1{\sqrt{x^2+2x+3}}dx\)；
+		\item \(\displaystyle\int\frac{3x+2}{(x+1)\sqrt{x^2+3x+3}}dx\)；
+		\item \(\displaystyle\int\frac{\sqrt{x^2+x+1}}{2x+1}dx\)；
+		\item \(\displaystyle\int\frac{x^2-x+1}{x\sqrt{x^2+2x+2}}dx\)；
+		\item \(\displaystyle\int\frac{5x-3}{\sqrt{2x^2+8x+1}}dx\)；
+		\item \(\displaystyle\int\frac{3x+1}{\sqrt{-x^2+6x-8}}dx\)；
+		\item \(\displaystyle\int\frac1{(x-1)\sqrt{-x^2+2x+3}}dx\)；
+		\item \(\displaystyle\int x^2\sqrt{1-x^2}\,dx\)；
+		\item \(\displaystyle\int\frac1{x+\sqrt{x^2-x+1}}dx\)；
+		\item \(\displaystyle\int\sqrt{e^{2x}+2e^x+2}\,dx\)。
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\item 计算下列各原函数：
+	\begin{enumerate}[label=\arabic*)]
+		\item \(\displaystyle\int\frac{1-\operatorname{tg}x}{1+\operatorname{tg}x}dx\)；
+		\item \(\displaystyle\int\frac{\sin\sqrt{x}+\cos\sqrt{x}}{\sqrt{x}\sin^2\sqrt{x}}dx\)；
+		\item \(\displaystyle\int\frac{x}{\operatorname{ch}^2x}dx\)；
+		\item \(\displaystyle\int\frac{\operatorname{ch}\sqrt{1+x}}{\sqrt{1+x}}dx\)；
+		\item \(\displaystyle\int\frac1{1+\operatorname{ch}^2x}dx\)；
+		\item \(\displaystyle\int\frac1{\operatorname{sh}x+2\operatorname{ch}x}dx\)；
+		\item \(\displaystyle\int\frac{\operatorname{ch}^3x}{1+\operatorname{sh}x}dx\)；
+		\item \(\displaystyle\int\operatorname{sh}^4x\,dx\)；
+		\item \(\displaystyle\int\sqrt{\operatorname{th}x}\,dx\)；
+		\item \(\displaystyle\int\operatorname{cth}^2x\,dx\)。
+	\end{enumerate}
+\end{exercise}
+
